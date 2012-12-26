@@ -1,0 +1,233 @@
+!!!
+/ paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+/[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en">
+/[if IE 7] <html class="no-js lt-ie9 lt-ie8" lang="en">
+/[if IE 8] <html class="no-js lt-ie9" lang="en">
+:plain
+  <!--[if gt IE 8] -->
+%html{:lang => "en"}
+  /<![endif]
+  %head
+    %meta{:charset => "utf-8"}/
+    / Set the viewport width to device width for mobile
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %title DPLA
+    /[if lt IE 9]
+      = javascript_include_tag "html5shiv"
+    = javascript_include_tag "application"
+    = stylesheet_link_tag    "application", :media => "all"
+    = csrf_meta_tags
+  %body
+    .row.header
+      .twelve.columns
+        %ul.button-group.even.right.login-buttons
+          %li
+            %a.button.small.outline{"data-reveal-id" => "login-modal", :href => "#"} Log In
+          %li
+            %a.button.small.outline{"data-reveal-id" => "signup-modal", :href => "#"} Sign Up
+        %ul.nav-bar.ancillary.right
+          %li.has-flyout
+            %a.outline{:href => "about.html"} About
+            %a.support.attribute.flyout-toggle{:href => "#"}
+            %ul.flyout
+              %li
+                %a.outline{:href => "about.html"} Overview
+              %li
+                %a{:href => "#"} Leadership
+              %li
+                %a{:href => "#"} Workstreams
+              %li
+                %a{:href => "#"} Workstreams
+              %li
+                %a{:href => "#"} For Developers
+              %li
+                %a{:href => "#"} Get Involved
+          %li
+            %a{:href => "#"} News
+          %li
+            %a{:href => "#"} Contact
+        %h2
+          %a{:href => "home.html"}= image_tag 'logo-gray.png', alt: 'DPLA'
+        / Entire Navbar Code
+        %ul.nav-bar
+          %li
+            %a.outline{:href => "home.html"} Home
+          %li
+            %a.outline{:href => "subjects.html"} Subjects
+          %li
+            %a.outline{:href => "collections.html"} Collections
+          %li
+            %a.outline{:href => "exhibitions.html"} Exhibitions
+          %li
+            %a.outline{:href => "map.html"} Map
+          %li
+            %a.outline{:href => "timeline.html"} Timeline
+          %li
+            %a.outline{:href => "applib.html"} App Library
+          %li.right
+            %a{:href => "#"} Help
+    .row
+      .twelve.columns
+        .panel.big-search
+          %h1.subheader
+            Discover a Wealth of Knowledge
+            %span.tip.has-tip{"data-width" => "210", :title => "Summarizes the DPLA's purpose in a few words."} &raquo;
+          %h5.subheader
+            Search over
+            %strong 70 million
+            records from libraries, archives, and museums all over the country lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          %form
+            .row.collapse
+              .ten.mobile-three.columns
+                %input{:placeholder => "Search the Library", :type => "text"}/
+              .two.mobile-one.columns
+                %a.button.expand.postfix.outline{:href => "search-results.html"} GO
+    .row
+      .nine.columns
+        .apps.row
+          .four.columns
+            .panel
+              %h4 Exhibitions
+              .medium
+              %p
+                %a{:href => ""}
+                  %strong Latest exhibit title
+              %a.outline{:href => "exhibitions.html"} Browse All &raquo;
+          .four.columns
+            .panel
+              %h4 Explore by Place
+              %a.outline{:href => "map.html"} View Map &raquo;
+              %span.tip.has-tip{"data-width" => "210", :title => "A big graphic of the map."} &raquo;
+          .four.columns
+            .panel
+              %h4 Explore by Time
+              %a.outline{:href => "timeline.html"} View Timeline &raquo;
+              %span.tip.has-tip{"data-width" => "210", :title => "A big graphic of the timeline."} &raquo;
+        .apps.row
+          .columns
+            %h3 Apps
+            %h5.subheader
+              Explore the DPLA through many apps lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              %span.tip.has-tip{"data-width" => "210", :title => "Summarizes the app concept in a few words."} &raquo;
+        .apps.row
+          .four.columns
+            .panel
+              %h5
+                %a.outline{:href => "applib-detail.html"} App
+                %span.tip.has-tip{"data-width" => "210", :title => "Links to the detail pages of a few current apps."} &raquo;
+          .four.columns
+            .panel
+              %h5
+                %a{:href => "#"} App
+          .four.columns
+            .panel
+              %h5
+                %a{:href => "#"} App
+        .apps.row
+          .four.columns
+            .panel
+              %h5
+                %a{:href => "#"} App
+          .four.columns
+            .panel
+              %h5
+                %a{:href => "#"} App
+          .four.columns
+            .panel
+              %h5
+                %a{:href => "#"} App
+        .row
+          .twelve.columns
+            %a.outline{:href => "applib.html"} More in the App Library
+      .three.columns.news
+        .panel
+          %h4 News
+          .social.right
+            = image_tag "facebook.png"
+            = image_tag "twitter.png"
+            = image_tag "rss.png"
+          %h5.subheader
+            The latest developments in building the DPLA.
+            %span.tip.has-tip{"data-width" => "210", :title => "This column is for 'about' content."} &raquo;
+          %p
+            %a{:href => "#"} Press: Toby Graham interview about the DPLA on WGAU.
+            %br/
+            %strong Nov 15
+          %p
+            %a{:href => "#"} Rijksmusem Launches 125,000 Image Digital Collection
+            %br/
+            %strong Nov 13
+          %p
+            %a{:href => "#"} All Posts &raquo;
+    %footer.row
+      .twelve.columns
+        %hr/
+        .row
+          .twelve.columns
+            .social.right
+              = image_tag "facebook.png"
+              = image_tag "twitter.png"
+            %ul.link-list.left
+              %li
+                %a{:href => "#"} Home
+              %li
+                %a{:href => "#"} Subjects
+              %li
+                %a{:href => "#"} Collections
+              %li
+                %a{:href => "#"} Exhibitions
+              %li
+                %a{:href => "#"} Map
+              %li
+                %a{:href => "#"} Timeline
+              %li
+                %a{:href => "#"} App Library
+              %li
+                %a{:href => "#"} Help
+              %li
+                %a{:href => "#"} About
+              %li
+                %a{:href => "#"} News
+              %li
+                %a{:href => "#"} Contact
+              %li
+                %a{:href => "#"} Accessibility
+    #login-modal.reveal-modal
+      %h3 Log In
+      %form{:action => "home-loggedin.html"}
+        %label Username
+        %input{:type => "text"}/
+        %label Password
+        %input{:type => "password"}/
+        %input.postfix.button.outline{:type => "submit", :value => "Log In"}/
+        %p
+          %a.right{:href => "#"} Forgot password?
+    #signup-modal.reveal-modal
+      %h3 Sign Up
+      %p Text about benefits of creating an account. Text about benefits of creating an account.
+      %p
+        %span.red *
+        \= required
+      %form{:action => "home-loggedin.html"}
+        %label
+          Email address
+          %span.red *
+        %input{:type => "text"}/
+        %label
+          Choose a username
+          %span.red *
+        %input{:type => "text"}/
+        %label
+          Choose a password
+          %span.red *
+        %input.no-marg-bot{:type => "password"}/
+        %p.gray Must be at least 8 characters.
+        %label
+          Repeat password
+          %span.red *
+        %input{:type => "password"}/
+        %input.postfix.button.outline{:type => "submit", :value => "Sign Up"}/
+    :javascript
+      $(window).load(function(){
+        $("#featured").orbit();
+      });
