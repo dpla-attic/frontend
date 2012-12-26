@@ -41,13 +41,13 @@
 
     $('#refine-location-modal .states, #refine-location-modal .cities').hide();
 
-    $('#refine-location-modal .countries a.drill.outline').click(function() {
+    $('#refine-location-modal .countries a.drill').click(function() {
       $('#refine-location-modal .countries').fadeOut(function() {
         $('#refine-location-modal .states').fadeIn();
       });
       return false;
     });
-    $('#refine-location-modal .states a.drill.outline').click(function() {
+    $('#refine-location-modal .states a.drill').click(function() {
       $('#refine-location-modal .states').fadeOut(function() {
         $('#refine-location-modal .cities').fadeIn();
       });
