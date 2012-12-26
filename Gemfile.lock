@@ -102,6 +102,8 @@ GEM
       tilt (~> 1.3)
     sassy-math (1.2)
       compass (~> 0.11)
+    simple-navigation (3.9.0)
+      activesupport (>= 2.3.2)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -134,5 +136,6 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.9)
   sass-rails (~> 3.2.3)
+  simple-navigation
   uglifier (>= 1.0.3)
   zurb-foundation

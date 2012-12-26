@@ -5,154 +5,51 @@
 /[if IE 8] <html class="no-js lt-ie9" lang="en">
 :plain
   <!--[if gt IE 8] -->
-%html{:lang => "en"}
+%html{lang: "en"}
   /<![endif]
   %head
-    %meta{:charset => "utf-8"}/
-    / Set the viewport width to device width for mobile
-    %meta{:content => "width=device-width", :name => "viewport"}/
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width", name: "viewport"}
     %title DPLA
     /[if lt IE 9]
       = javascript_include_tag "html5shiv"
     = javascript_include_tag "application"
-    = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag    "application", media: "all"
     = csrf_meta_tags
   %body
     .row.header
       .twelve.columns
         %ul.button-group.even.right.login-buttons
           %li
-            %a.button.small{"data-reveal-id" => "login-modal", :href => "#"} Log In
+            %a.button.small{href: "#", "data-reveal-id" => "login-modal"} Log In
           %li
-            %a.button.small{"data-reveal-id" => "signup-modal", :href => "#"} Sign Up
+            %a.button.small{href: "#", "data-reveal-id" => "signup-modal"} Sign Up
         %ul.nav-bar.ancillary.right
           %li.has-flyout
-            %a{:href => "about.html"} About
-            %a.support.attribute.flyout-toggle{:href => "#"}
+            %a{href: "about.html"} About
+            %a.support.attribute.flyout-toggle{href: "#"}
             %ul.flyout
               %li
-                %a{:href => "about.html"} Overview
+                %a{href: "about.html"} Overview
               %li
-                %a{:href => "#"} Leadership
+                %a{href: "#"} Leadership
               %li
-                %a{:href => "#"} Workstreams
+                %a{href: "#"} Workstreams
               %li
-                %a{:href => "#"} Workstreams
+                %a{href: "#"} Workstreams
               %li
-                %a{:href => "#"} For Developers
+                %a{href: "#"} For Developers
               %li
-                %a{:href => "#"} Get Involved
+                %a{href: "#"} Get Involved
           %li
-            %a{:href => "#"} News
+            %a{href: "#"} News
           %li
-            %a{:href => "#"} Contact
+            %a{href: "#"} Contact
         %h2
-          %a{:href => "home.html"}= image_tag 'logo-gray.png', alt: 'DPLA'
-        / Entire Navbar Code
-        %ul.nav-bar
-          %li
-            %a{:href => "home.html"} Home
-          %li
-            %a{:href => "subjects.html"} Subjects
-          %li
-            %a{:href => "collections.html"} Collections
-          %li
-            %a{:href => "exhibitions.html"} Exhibitions
-          %li
-            %a{:href => "map.html"} Map
-          %li
-            %a{:href => "timeline.html"} Timeline
-          %li
-            %a{:href => "applib.html"} App Library
-          %li.right
-            %a{:href => "#"} Help
-    .row
-      .twelve.columns
-        .panel.big-search
-          %h1.subheader
-            Discover a Wealth of Knowledge
-          %h5.subheader
-            Search over
-            %strong 70 million
-            records from libraries, archives, and museums all over the country lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          %form
-            .row.collapse
-              .ten.mobile-three.columns
-                %input{:placeholder => "Search the Library", :type => "text"}/
-              .two.mobile-one.columns
-                %a.button.expand.postfix{:href => "search-results.html"} GO
-    .row
-      .nine.columns
-        .apps.row
-          .four.columns
-            .panel
-              %h4 Exhibitions
-              .medium
-              %p
-                %a{:href => ""}
-                  %strong Latest exhibit title
-              %a{:href => "exhibitions.html"} Browse All &raquo;
-          .four.columns
-            .panel
-              %h4 Explore by Place
-              %a{:href => "map.html"} View Map &raquo;
-          .four.columns
-            .panel
-              %h4 Explore by Time
-              %a{:href => "timeline.html"} View Timeline &raquo;
-        .apps.row
-          .columns
-            %h3 Apps
-            %h5.subheader
-              Explore the DPLA through many apps lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        .apps.row
-          .four.columns
-            .panel
-              %h5
-                %a{:href => "applib-detail.html"} App
-          .four.columns
-            .panel
-              %h5
-                %a{:href => "#"} App
-          .four.columns
-            .panel
-              %h5
-                %a{:href => "#"} App
-        .apps.row
-          .four.columns
-            .panel
-              %h5
-                %a{:href => "#"} App
-          .four.columns
-            .panel
-              %h5
-                %a{:href => "#"} App
-          .four.columns
-            .panel
-              %h5
-                %a{:href => "#"} App
-        .row
-          .twelve.columns
-            %a{:href => "applib.html"} More in the App Library
-      .three.columns.news
-        .panel
-          %h4 News
-          .social.right
-            = image_tag "facebook.png"
-            = image_tag "twitter.png"
-            = image_tag "rss.png"
-          %h5.subheader
-            The latest developments in building the DPLA.
-          %p
-            %a{:href => "#"} Press: Toby Graham interview about the DPLA on WGAU.
-            %br/
-            %strong Nov 15
-          %p
-            %a{:href => "#"} Rijksmusem Launches 125,000 Image Digital Collection
-            %br/
-            %strong Nov 13
-          %p
-            %a{:href => "#"} All Posts &raquo;
+          = link_to root_path, title: 'Digital Public Library of America' do
+            - image_tag 'logo-gray.png', alt: 'DPLA'
+        = render_navigation context: :main, html: {class: "nav-bar"}
+    = yield
     %footer.row
       .twelve.columns
         %hr/
@@ -163,64 +60,64 @@
               = image_tag "twitter.png"
             %ul.link-list.left
               %li
-                %a{:href => "#"} Home
+                %a{href: "#"} Home
               %li
-                %a{:href => "#"} Subjects
+                %a{href: "#"} Subjects
               %li
-                %a{:href => "#"} Collections
+                %a{href: "#"} Collections
               %li
-                %a{:href => "#"} Exhibitions
+                %a{href: "#"} Exhibitions
               %li
-                %a{:href => "#"} Map
+                %a{href: "#"} Map
               %li
-                %a{:href => "#"} Timeline
+                %a{href: "#"} Timeline
               %li
-                %a{:href => "#"} App Library
+                %a{href: "#"} App Library
               %li
-                %a{:href => "#"} Help
+                %a{href: "#"} Help
               %li
-                %a{:href => "#"} About
+                %a{href: "#"} About
               %li
-                %a{:href => "#"} News
+                %a{href: "#"} News
               %li
-                %a{:href => "#"} Contact
+                %a{href: "#"} Contact
               %li
-                %a{:href => "#"} Accessibility
+                %a{href: "#"} Accessibility
     #login-modal.reveal-modal
       %h3 Log In
-      %form{:action => "home-loggedin.html"}
+      %form{action: "home-loggedin.html"}
         %label Username
-        %input{:type => "text"}/
+        %input{type: "text"}/
         %label Password
-        %input{:type => "password"}/
-        %input.postfix.button{:type => "submit", :value => "Log In"}/
+        %input{type: "password"}/
+        %input.postfix.button{type: "submit", value: "Log In"}/
         %p
-          %a.right{:href => "#"} Forgot password?
+          %a.right{href: "#"} Forgot password?
     #signup-modal.reveal-modal
       %h3 Sign Up
       %p Text about benefits of creating an account. Text about benefits of creating an account.
       %p
         %span.red *
         \= required
-      %form{:action => "home-loggedin.html"}
+      %form{action: "home-loggedin.html"}
         %label
           Email address
           %span.red *
-        %input{:type => "text"}/
+        %input{type: "text"}/
         %label
           Choose a username
           %span.red *
-        %input{:type => "text"}/
+        %input{type: "text"}/
         %label
           Choose a password
           %span.red *
-        %input.no-marg-bot{:type => "password"}/
+        %input.no-marg-bot{type: "password"}/
         %p.gray Must be at least 8 characters.
         %label
           Repeat password
           %span.red *
-        %input{:type => "password"}/
-        %input.postfix.button{:type => "submit", :value => "Sign Up"}/
+        %input{type: "password"}/
+        %input.postfix.button{type: "submit", value: "Sign Up"}/
     :javascript
       $(window).load(function(){
         $("#featured").orbit();
