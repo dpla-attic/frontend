@@ -3,11 +3,7 @@
     %ul.button-group.radius.right
       %li
         %a.button.small{:href => "#"} Share
-    %ul.breadcrumbs
-      %li
-        %a{:href => "about.html"} About
-      %li.current
-        %a{:href => "#"} Overview
+    =render_breadcrumbs builder: BreadcrumbsBuilder
     %h2 About
 .row.exhibit
   .three.columns

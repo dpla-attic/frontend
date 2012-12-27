@@ -15,5 +15,6 @@ gem 'html5shiv-rails'
 gem 'quiet_assets'
 gem 'haml'
 gem 'simple-navigation'
+gem 'breadcrumbs_on_rails'
 
 gem 'thin'
