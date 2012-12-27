@@ -106,25 +106,24 @@ input.no-marg-bot {
 }
 
 /* Site header */
+.header {
+  .ancillary-nav {
+    .nav-bar {
+      margin-top: .7em;
+      background: transparent;
 
-.header .nav-bar {
-  margin: 0;
-}
-.header .ancillary {
-  margin-top: .7em;
-  background: transparent;
-}
-.header .ancillary.user {
-  margin-left: 2em;
-}
-.header .ancillary li {
-  border: none;
-}
-.header .ancillary li a {
-  color: #2795B6;
-}
-.header .ancillary li:hover {
-  background-color: #fff;
+      li {
+        border: none;
+
+        &:hover {
+          background-color: #fff;
+        }
+        a {
+          color: #2795B6;
+        }
+      }
+    }
+  }
 }
 
 .header .nav-bar .wide .flyout {

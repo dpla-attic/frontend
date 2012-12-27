@@ -1,18 +1,12 @@
-.row
-  .twelve.columns
-    .panel.big-search
-      %h1.subheader
-        Discover a Wealth of Knowledge
-      %h5.subheader
-        Search over
-        %strong 70 million
-        records from libraries, archives, and museums all over the country lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      %form
-        .row.collapse
-          .ten.mobile-three.columns
-            %input{placeholder: "Search the Library", type: "text"}/
-          .two.mobile-one.columns
-            %a.button.expand.postfix{href: "search-results.html"} GO
+- content_for :big_search do
+  %h1.subheader
+    Discover a Wealth of Knowledge
+  %h5.subheader
+    Search over
+    %strong 70 million
+    records from libraries, archives, and museums all over the country lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  = render partial: 'shared/search_box'
+
 .row
   .nine.columns
     .apps.row

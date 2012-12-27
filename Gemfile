@@ -15,3 +15,5 @@ gem 'html5shiv-rails'
 gem 'quiet_assets'
 gem 'haml'
 gem 'simple-navigation'
+
+gem 'thin'

@@ -5,7 +5,7 @@
 /[if IE 8] <html class="no-js lt-ie9" lang="en">
 :plain
   <!--[if gt IE 8] -->
-%html{lang: "en"}
+%html{lang: I18n.locale}
   /<![endif]
   %head
     %meta{charset: "utf-8"}
@@ -24,31 +24,20 @@
             %a.button.small{href: "#", "data-reveal-id" => "login-modal"} Log In
           %li
             %a.button.small{href: "#", "data-reveal-id" => "signup-modal"} Sign Up
-        %ul.nav-bar.ancillary.right
-          %li.has-flyout
-            %a{href: "about.html"} About
-            %a.support.attribute.flyout-toggle{href: "#"}
-            %ul.flyout
-              %li
-                %a{href: "about.html"} Overview
-              %li
-                %a{href: "#"} Leadership
-              %li
-                %a{href: "#"} Workstreams
-              %li
-                %a{href: "#"} Workstreams
-              %li
-                %a{href: "#"} For Developers
-              %li
-                %a{href: "#"} Get Involved
-          %li
-            %a{href: "#"} News
-          %li
-            %a{href: "#"} Contact
+        .ancillary-nav
+          = render_navigation context: :ancillary, expand_all: true, renderer: :ancillary
         %h2
           = link_to root_path, title: 'Digital Public Library of America' do
-            - image_tag 'logo-gray.png', alt: 'DPLA'
-        = render_navigation context: :main, html: {class: "nav-bar"}
+            - image_tag 'logo-gray.png', size: '358x43', alt: 'DPLA'
+        .main-nav
+          = render_navigation context: :main
+    .row
+      .twelve.columns
+        .panel.big-search
+          - if content_for? :big_search
+            = yield :big_search
+          - else
+            = render partial: 'shared/search_box'
     = yield
     %footer.row
       .twelve.columns
@@ -58,31 +47,8 @@
             .social.right
               = image_tag "facebook.png"
               = image_tag "twitter.png"
-            %ul.link-list.left
-              %li
-                %a{href: "#"} Home
-              %li
-                %a{href: "#"} Subjects
-              %li
-                %a{href: "#"} Collections
-              %li
-                %a{href: "#"} Exhibitions
-              %li
-                %a{href: "#"} Map
-              %li
-                %a{href: "#"} Timeline
-              %li
-                %a{href: "#"} App Library
-              %li
-                %a{href: "#"} Help
-              %li
-                %a{href: "#"} About
-              %li
-                %a{href: "#"} News
-              %li
-                %a{href: "#"} Contact
-              %li
-                %a{href: "#"} Accessibility
+            = render_navigation context: :footer
+
     #login-modal.reveal-modal
       %h3 Log In
       %form{action: "home-loggedin.html"}
@@ -118,6 +84,7 @@
           %span.red *
         %input{type: "password"}/
         %input.postfix.button{type: "submit", value: "Sign Up"}/
+
     :javascript
       $(window).load(function(){
         $("#featured").orbit();
