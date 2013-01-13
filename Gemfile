@@ -8,6 +8,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'compass-rails'
   gem 'zurb-foundation'
+  gem 'therubyracer'
 end
 
 gem 'jquery-rails'
