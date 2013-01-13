@@ -18,4 +18,6 @@ gem 'haml'
 gem 'simple-navigation'
 gem 'breadcrumbs_on_rails'
 
+gem 'httparty'
+
 gem 'thin'
