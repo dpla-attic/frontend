@@ -1,4 +1,4 @@
-require 'dpla/items'
+require 'dpla/item'
 
 module DPLA
 end

@@ -9,4 +9,8 @@ DplaPortal::Application.routes.draw do
     match 'get-involved',   to: 'pages#get_involved',   as: 'get_involved'
     root to: redirect('/about/overview')
   end
+
+  resources :items, path: 'item', only: :show do
+    get :search, on: :collection
+  end
 end
