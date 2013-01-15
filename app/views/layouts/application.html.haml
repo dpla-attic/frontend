@@ -31,17 +31,18 @@
             - image_tag 'logo-gray.png', size: '358x43', alt: 'DPLA'
         .main-nav
           = render_navigation context: :main
-    .row
-      .twelve.columns
-        .panel.big-search
-          - if content_for? :big_search
-            = yield :big_search
-          - else
-            = render partial: 'shared/search_box'
+    - unless /^devise/ =~ params[:controller]
+      .row
+        .twelve.columns
+          .panel.big-search
+            - if content_for? :big_search
+              = yield :big_search
+            - else
+              = render partial: 'shared/search_box'
     = yield
     %footer.row
       .twelve.columns
-        %hr/
+        %hr
         .row
           .twelve.columns
             .social.right
@@ -53,10 +54,10 @@
       %h3 Log In
       %form{action: "home-loggedin.html"}
         %label Username
-        %input{type: "text"}/
+        %input{type: "text"}
         %label Password
-        %input{type: "password"}/
-        %input.postfix.button{type: "submit", value: "Log In"}/
+        %input{type: "password"}
+        %input.postfix.button{type: "submit", value: "Log In"}
         %p
           %a.right{href: "#"} Forgot password?
     #signup-modal.reveal-modal
@@ -69,21 +70,21 @@
         %label
           Email address
           %span.red *
-        %input{type: "text"}/
+        %input{type: "text"}
         %label
           Choose a username
           %span.red *
-        %input{type: "text"}/
+        %input{type: "text"}
         %label
           Choose a password
           %span.red *
-        %input.no-marg-bot{type: "password"}/
+        %input.no-marg-bot{type: "password"}
         %p.gray Must be at least 8 characters.
         %label
           Repeat password
           %span.red *
-        %input{type: "password"}/
-        %input.postfix.button{type: "submit", value: "Sign Up"}/
+        %input{type: "password"}
+        %input.postfix.button{type: "submit", value: "Sign Up"}
 
     :javascript
       $(window).load(function(){
