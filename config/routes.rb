@@ -1,5 +1,5 @@
 DplaPortal::Application.routes.draw do
-  root to: 'pages#home'
+  devise_for :users
 
   scope 'about', as: :about do
     match 'overview',       to: 'pages#overview'
@@ -13,4 +13,6 @@ DplaPortal::Application.routes.draw do
   resources :items, path: 'item', only: :show do
     get :search, on: :collection
   end
+
+  root to: 'pages#home'
 end
