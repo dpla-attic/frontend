@@ -1,0 +1,12 @@
+%ul.button-group.even.right.login-buttons
+  - if current_user.present?
+    %li= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'button small'
+  - else
+    %li= link_to 'Log In', new_user_session_path, class: 'button small'
+    %li= link_to 'Sign Up', new_user_registration_path, class: 'button small'
+- if current_user.present?
+  %ul.nav-bar.ancillary.right.user
+    %li
+      %span
+        Welcome
+        = link_to current_user.name, edit_user_registration_path

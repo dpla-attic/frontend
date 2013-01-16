@@ -1,0 +1,5 @@
+url:
+  host: portal.dp.la
+  port: 80
+notifications:
+  from: welcome@portal.dp.la

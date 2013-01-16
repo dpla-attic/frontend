@@ -1,0 +1,12 @@
+.row
+  .twelve.columns
+    %h2 Sign up
+    = simple_form_for resource, as: resource_name, url: registration_path(resource_name), html: { class: 'narrowform' } do |f|
+      .form-inputs
+        = f.input :email, required: true, autofocus: true
+        = f.input :name, required: true
+        = f.input :password, required: true
+        = f.input :password_confirmation, required: true
+      .form-actions
+        = f.button :submit, "Sign up"
+    = render "devise/shared/links"

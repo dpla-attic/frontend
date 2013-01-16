@@ -19,12 +19,8 @@
   %body
     .row.header
       .twelve.columns
-        %ul.button-group.even.right.login-buttons
-          %li
-            %a.button.small{href: "#", "data-reveal-id" => "login-modal"} Log In
-          %li
-            %a.button.small{href: "#", "data-reveal-id" => "signup-modal"} Sign Up
         .ancillary-nav
+          = render partial: 'shared/user_sign_in'
           = render_navigation context: :ancillary, expand_all: true, renderer: :ancillary
         %h2
           = link_to root_path, title: 'Digital Public Library of America' do
@@ -38,10 +34,17 @@
             = yield :big_search
           - else
             = render partial: 'shared/search_box'
+    .row
+      .twelve.columns
+        - flash.each do |key, value|
+          .alert-box{class: key}
+            = value
+            %a.close{href:'#'}×
+
     = yield
     %footer.row
       .twelve.columns
-        %hr/
+        %hr
         .row
           .twelve.columns
             .social.right
@@ -53,10 +56,10 @@
       %h3 Log In
       %form{action: "home-loggedin.html"}
         %label Username
-        %input{type: "text"}/
+        %input{type: "text"}
         %label Password
-        %input{type: "password"}/
-        %input.postfix.button{type: "submit", value: "Log In"}/
+        %input{type: "password"}
+        %input.postfix.button{type: "submit", value: "Log In"}
         %p
           %a.right{href: "#"} Forgot password?
     #signup-modal.reveal-modal
@@ -69,21 +72,21 @@
         %label
           Email address
           %span.red *
-        %input{type: "text"}/
+        %input{type: "text"}
         %label
           Choose a username
           %span.red *
-        %input{type: "text"}/
+        %input{type: "text"}
         %label
           Choose a password
           %span.red *
-        %input.no-marg-bot{type: "password"}/
+        %input.no-marg-bot{type: "password"}
         %p.gray Must be at least 8 characters.
         %label
           Repeat password
           %span.red *
-        %input{type: "password"}/
-        %input.postfix.button{type: "submit", value: "Sign Up"}/
+        %input{type: "password"}
+        %input.postfix.button{type: "submit", value: "Sign Up"}
 
     :javascript
       $(window).load(function(){
