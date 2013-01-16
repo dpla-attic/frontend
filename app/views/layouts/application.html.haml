@@ -19,26 +19,21 @@
   %body
     .row.header
       .twelve.columns
-        %ul.button-group.even.right.login-buttons
-          %li
-            = link_to 'Log In', new_user_session_path, class: 'button small'
-          %li
-            = link_to 'Sign Up', new_user_registration_path, class: 'button small'
         .ancillary-nav
+          = render partial: 'shared/user_sign_in'
           = render_navigation context: :ancillary, expand_all: true, renderer: :ancillary
         %h2
           = link_to root_path, title: 'Digital Public Library of America' do
             - image_tag 'logo-gray.png', size: '358x43', alt: 'DPLA'
         .main-nav
           = render_navigation context: :main
-    - unless /^devise/ =~ params[:controller]
-      .row
-        .twelve.columns
-          .panel.big-search
-            - if content_for? :big_search
-              = yield :big_search
-            - else
-              = render partial: 'shared/search_box'
+    .row
+      .twelve.columns
+        .panel.big-search
+          - if content_for? :big_search
+            = yield :big_search
+          - else
+            = render partial: 'shared/search_box'
     .row
       .twelve.columns
         - flash.each do |key, value|

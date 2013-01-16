@@ -1,7 +1,31 @@
+@import 'foundation/settings';
+
+.row {
+  .alert-box {
+    padding: 9px;
+
+    a.close {
+      top: 4px;
+    }
+  }
+}
+
+.header {
+  .main-nav {
+    .nav-bar {
+      margin: 0;
+    }
+  }
+}
+
 form {
   .form-inputs {
     abbr {
       border-bottom: none;
+      color: red;
+    }
+    p.gray {
+      margin-top: -($formSpacing) - 1;
     }
   }
 }
