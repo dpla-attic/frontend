@@ -21,9 +21,9 @@
       .twelve.columns
         %ul.button-group.even.right.login-buttons
           %li
-            %a.button.small{href: "#", "data-reveal-id" => "login-modal"} Log In
+            = link_to 'Log In', new_user_session_path, class: 'button small'
           %li
-            %a.button.small{href: "#", "data-reveal-id" => "signup-modal"} Sign Up
+            = link_to 'Sign Up', new_user_registration_path, class: 'button small'
         .ancillary-nav
           = render_navigation context: :ancillary, expand_all: true, renderer: :ancillary
         %h2
@@ -39,6 +39,13 @@
               = yield :big_search
             - else
               = render partial: 'shared/search_box'
+    .row
+      .twelve.columns
+        - flash.each do |key, value|
+          .alert-box{class: key}
+            = value
+            %a.close{href:'#'}×
+
     = yield
     %footer.row
       .twelve.columns

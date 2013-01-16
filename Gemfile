@@ -22,7 +22,14 @@ gem 'breadcrumbs_on_rails'
 
 gem 'httparty'
 gem 'devise'
+gem 'rails_config', :git => 'git://github.com/railsjedi/rails_config.git'
 
 gem 'thin'
 
-gem 'mysql2'
+group :development do
+	gem 'sqlite3'
+end
+
+group :production do
+	gem 'pg', :require => 'pg'
+end

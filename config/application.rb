@@ -60,6 +60,10 @@ module DplaPortal
       g.template_engine :haml
     end
 
+    config.after_initialize do
+      config.action_mailer.default_url_options = { host: Settings.url.host, port: Settings.url.port }
+    end
+
     # Enable the asset pipeline
     config.assets.enabled = true
 
