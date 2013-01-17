@@ -13,7 +13,7 @@ stage :development do
   set :user, 'capistrano'
   set :use_sudo, false
   set :deploy_to, "/var/www/frontend"
-  set :branch, "capistrano"
+  set :branch, "master"
 
   use_recipe :passenger
 end
@@ -26,6 +26,6 @@ after 'deploy:update', 'deploy:assets:precompile'
 
 namespace :deploy do
   task :database_config do
-    run 'cd #{deploy_to} && cp config/database.yml.example config/database.yml'
+    run "cd #{deploy_to} && cp config/database.yml.example config/database.yml"
   end
 end
