@@ -17,9 +17,7 @@ class Item
   end
 
   def self.where(conditions)
-    api.where(conditions).tap do |response|
-      response[:docs].map! { |doc| self.new doc }
-    end
+    Item::Result.new api.where(conditions)
   end
 
   private

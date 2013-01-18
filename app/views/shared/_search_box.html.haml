@@ -1,6 +1,6 @@
-%form
+= form_tag(search_items_path, method: :get, authenticity_token: false) do
   .row.collapse
     .ten.mobile-three.columns
-      %input{placeholder: "Search the Library", type: "text"}/
+      = text_field_tag :q, nil, placeholder: 'Search the Library'
     .two.mobile-one.columns
-      %a.button.expand.postfix{href: ""} GO
+      = submit_tag 'GO', class: 'button expand postfix'

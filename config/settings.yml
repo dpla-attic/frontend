@@ -3,3 +3,7 @@ url:
   port: 80
 notifications:
   from: welcome@portal.dp.la
+api:
+  url: http://content1.qa.dp.la/api/v1
+  params:
+    page_size: 10
