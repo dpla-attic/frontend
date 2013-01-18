@@ -9,11 +9,10 @@ group :assets do
   gem 'compass-rails'
   gem 'zurb-foundation'
   gem 'therubyracer'
+  gem 'jquery-rails'
+  gem 'html5shiv-rails'
 end
 
-gem 'jquery-rails'
-gem 'html5shiv-rails'
-gem 'quiet_assets'
 gem 'haml'
 gem 'haml-rails'
 gem 'simple_form'
@@ -24,10 +23,11 @@ gem 'httparty'
 gem 'devise'
 gem 'rails_config', :git => 'git://github.com/railsjedi/rails_config.git'
 
-gem 'thin'
-
 group :development do
-	gem 'sqlite3'
+  gem 'thin'
+  gem 'sqlite3'
+  gem 'capistrano-deploy', :require => false
+  gem 'quiet_assets'
 end
 
 group :production do
