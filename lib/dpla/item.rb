@@ -6,8 +6,6 @@ module DPLA
 
     VALID_API_PARAMS = {
       q:               true,
-      page:            true,
-      page_size:       true,
       title:           true,
       description:     true,
       subject:         true,
@@ -28,7 +26,13 @@ module DPLA
       temporal: {
         before: true,
         after:  true
-      }
+      },
+      facets: {
+      },
+      page:            true,
+      page_size:       true,
+      sort_by:         true,
+      sort_order:      true,
     }
 
     def find(ids)
@@ -49,6 +53,11 @@ module DPLA
         if response.code == 200
           parsed = response.parsed_response
           [:count, :start, :limit, :docs, :facets].each { |key| result[key] = parsed[key.to_s] if parsed[key.to_s].present? }
+        else
+          Rails.logger.info [
+            "Error while processing API request #{response.request.uri}",
+            response.body
+          ].join "\n"
         end
       end
     end

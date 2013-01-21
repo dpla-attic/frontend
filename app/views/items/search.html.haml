@@ -1,16 +1,35 @@
 .row
   .twelve.columns
-    %p
-      Params:
-      = params
-    %p
-      Count:
-      = @items.count
-    %p
-      Start:
-      = @items.start
-    %p
-      Limit:
-      = @items.limit
-
-    = @items
+    %h2 Search Results
+.row
+  .twelve.columns
+    %h5.subheader
+      Your search for
+      %strong= params[:q]
+      returned
+      = number_with_delimiter @items.count, delimiter: '.'
+      results.
+- if @items.present?
+  .row.search-options
+    .twelve.columns
+      = render 'paginator'
+.row
+  .twelve.columns
+    - @items.each do |item|
+      -unless @items.first.eql? item
+        %hr
+      - if item.format.present?
+        %span.secondary.label= item.format
+      -if item.source.present?
+        .right
+          %p.right= link_to 'Visit Source', item.source, class: 'button tiny'
+      %h4= link_to item.title, item_path(item.id)
+      %p
+        - if item.creator.present?
+          %strong= item.creator
+          %br
+        = item.description
+- if @items.present?
+  .row.search-options
+    .twelve.columns
+      = render 'paginator'
