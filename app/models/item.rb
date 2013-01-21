@@ -2,7 +2,7 @@ class Item
   FIELDS = [
     :_id, :title, :description, :subject, :creator, :type, :publisher,
     :format, :rights, :contributor, :created, :spatial, :temporal,
-    :source, :isPartOf
+    :language, :source, :isPartOf
   ]
     .each { |field| attr_accessor field }
 
@@ -10,6 +10,9 @@ class Item
 
   def initialize(doc)
     FIELDS.each { |f| self.send "#{f}=", doc[f.to_s] }
+    if doc['dplaSourceRecord'].present?
+      self.language = doc['dplaSourceRecord']['language']
+    end
   end
 
   def self.find(ids)

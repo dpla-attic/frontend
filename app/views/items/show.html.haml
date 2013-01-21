@@ -1,0 +1,56 @@
+.row
+  .twelve.columns
+    %h2.space-below= @item.title
+.row
+  .twelve.columns
+    %p= @item.description
+.row
+  .twelve.columns
+    = link_to 'Visit source', @item.source, class: 'button'
+    %hr
+.row
+  .twelve.columns
+    .row
+      .three.columns
+        %strong Creator
+      .nine.columns= @item.creator
+    %hr
+    .row
+      .three.columns
+        %strong Publisher
+      .nine.columns= @item.publisher
+    %hr
+    .row
+      .three.columns
+        %strong Date created
+      .nine.columns= @item.created
+    %hr
+    .row
+      .three.columns
+        %strong Type
+      .nine.columns= @item.type
+    %hr
+    .row
+      .three.columns
+        %strong Format
+      .nine.columns= @item.format
+    %hr
+    .row
+      .three.columns
+        %strong Language
+      .nine.columns= @item.language
+    %hr
+    .row
+      .three.columns
+        %strong Subject
+      .nine.columns= @item.subject
+    %hr
+    .row
+      .three.columns
+        %strong Rights
+      .nine.columns= @item.rights
+    %hr
+    .row
+      .three.columns
+        %strong Spatial
+      .nine.columns= @item.spatial
