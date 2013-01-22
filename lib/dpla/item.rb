@@ -4,35 +4,15 @@ module DPLA
     format :json
     base_uri Settings.api.url
 
-    VALID_API_PARAMS = {
-      q:               true,
-      title:           true,
-      description:     true,
-      subject:         true,
-      dplaContributor: true,
-      creator:         true,
-      type:            true,
-      publisher:       true,
-      format:          true,
-      rights:          true,
-      contributor:     true,
-      isPartOf:        true,
-      spatial: {
-        city:           true,
-        state:          true,
-        coordinates:    true,
-        :'iso3166-2' => true
-      },
-      temporal: {
-        before: true,
-        after:  true
-      },
-      facets: {
-      },
-      page:            true,
-      page_size:       true,
-      sort_by:         true,
-      sort_order:      true,
+    VALID_CONDITIONS = {
+      simple: [
+        :q, :title, :description, :subject, :dplaContributor, :creator, :type,
+        :publisher, :format, :rights, :contributor, :isPartOf, :page, :page_size],
+      spatial:    [:city, :state, :coordinates, :'iso3166-2'],
+      temporal:   [:before, :after],
+      facets:     [:'subject.name', :format],
+      sort_by:    [:created],
+      sort_order: [:asc, :desc]
     }
 
     def find(ids)
@@ -65,17 +45,20 @@ module DPLA
     private
 
     def prepare_conditions(conditions)
-      reject_disallowed = -> hash,allowed {
-        hash.reject { |k| !(allowed.has_key?(k) || allowed.has_key?(k.to_sym)) }
-      }
       {}.tap do |result|
-        reject_disallowed.call(conditions, VALID_API_PARAMS).each do |key, value|
-          if value.is_a? Hash
-            reject_disallowed.call(value, VALID_API_PARAMS[key.to_sym]).each do |subkey, value|
-              result["#{key}.#{subkey}".to_sym] = value
-            end
-          else
+        conditions.each do |key, value|
+          if VALID_CONDITIONS[:simple].include? key.to_sym
             result[key] = value
+          elsif [:spatial, :temporal].include? key.to_sym and value.is_a? Hash
+            parent = key.to_sym
+            value
+              .select { |k, v| VALID_CONDITIONS[parent].include? k }
+              .each   { |k, v| result[:"#{parent}.#{k}"] = v }
+          elsif [:sort_by, :sort_order].include? key.to_sym
+            result[key.to_sym] = value if VALID_CONDITIONS[key.to_sym].include? value.to_sym
+          elsif key.to_sym == :facets and value.is_a? Array
+            facets = value.select { |v| VALID_CONDITIONS[:facets].include? v }
+            result[:facets] = facets.join(',') if facets.present?
           end
         end
       end

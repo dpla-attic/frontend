@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   def search
-    @items = Item.where params
+    facets = {facets: [:'subject.name']}
+    @items = Item.where params.merge(facets)
   end
 
   def show

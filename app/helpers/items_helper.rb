@@ -23,7 +23,7 @@ module ItemsHelper
       {
         relevance: { sort_by: nil, sort_order: nil },
         a2z:       { sort_by: 'title', sort_order: 'asc' },
-        z2a:       { sort_by: 'title', sort_order: 'asc' },
+        z2a:       { sort_by: 'title', sort_order: 'desc' },
         old2new:   { sort_by: 'created', sort_order: 'asc' },
         new2old:   { sort_by: 'created', sort_order: 'desc' }
       }
