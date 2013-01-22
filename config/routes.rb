@@ -10,7 +10,7 @@ DplaPortal::Application.routes.draw do
     root to: redirect('/about/overview')
   end
 
-  resources :items, path: 'item', only: :show do
+  resources :items, only: :show, path: 'item', id: /.*/ do
     get :search, on: :collection
   end
 
