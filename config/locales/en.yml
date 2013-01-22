@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  paginator:
+    relevance:
+    a2z: A-Z
+    z2a: Z-A
+    old2new: Oldest to Newest
+    new2old: Newest to Oldest
