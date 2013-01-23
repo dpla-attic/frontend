@@ -14,4 +14,18 @@
           = link_to name, refine_path(:subject, name)
           %span.count= count
           %br
-
+- if @search.facets[:format].present?
+  %ul.accordion
+    %li.active
+      .title By format
+      .content
+        - if @search.refine[:format].present?
+          - @search.refine[:format].each do |refine|
+            .alert-box.secondary.term
+              = refine
+              = link_to '×', refine_path(:format, refine, remove: true)
+          %br
+        - @search.facets[:format].each do |name, count|
+          = link_to name, refine_path(:format, name)
+          %span.count= count
+          %br

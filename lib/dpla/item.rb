@@ -6,11 +6,12 @@ module DPLA
 
     def find(ids)
       ids = ids.join ',' if ids.is_a? Array
-      response = self.class.get('/items/' + ids.to_s).parsed_response
+      response = self.class.get('/items/' + ids.to_s)
+      parsed = response.parsed_response
       Rails.logger.debug "Processing API request #{response.request.uri}"
       [].tap do |a|
-        if response.is_a? Hash and response['docs'].is_a? Array
-          response['docs'].each do |doc|
+        if parsed.is_a? Hash and parsed['docs'].is_a? Array
+          parsed['docs'].each do |doc|
             a.push doc unless doc['error'].present?
           end
         end

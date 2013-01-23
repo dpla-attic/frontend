@@ -40,9 +40,9 @@ module ItemsHelper
   end
 
   def refine_path(area, value, options = {})
-    existing_refine = (params[:refine] && params[:refine][area]) || []
+    existing_refine = params[area] || []
     existing_refine = [existing_refine] unless existing_refine.is_a? Array
     refine_params = options[:remove] ? existing_refine - [value] : existing_refine + [value]
-    params.deep_merge({refine: {area => refine_params}})
+    params.deep_merge(area => refine_params)
   end
 end
