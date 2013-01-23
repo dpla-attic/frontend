@@ -31,6 +31,12 @@ group :development do
   gem 'quiet_assets'
 end
 
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+  gem 'shoulda'
+  gem 'shoulda-matchers'
+end
+
 group :production do
 	gem 'pg', :require => 'pg'
 end

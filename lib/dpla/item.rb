@@ -4,17 +4,6 @@ module DPLA
     format :json
     base_uri Settings.api.url
 
-    VALID_CONDITIONS = {
-      simple: [
-        :q, :title, :description, :subject, :dplaContributor, :creator, :type,
-        :publisher, :format, :rights, :contributor, :isPartOf, :page, :page_size],
-      spatial:    [:city, :state, :coordinates, :'iso3166-2'],
-      temporal:   [:before, :after],
-      facets:     [:'subject.name', :format],
-      sort_by:    [:created],
-      sort_order: [:asc, :desc]
-    }
-
     def find(ids)
       ids = ids.join ',' if ids.is_a? Array
       response = self.class.get('/items/' + ids.to_s).parsed_response
@@ -42,23 +31,15 @@ module DPLA
       end
     end
 
-    private
-
     def prepare_conditions(conditions)
       {}.tap do |result|
         conditions.each do |key, value|
-          if VALID_CONDITIONS[:simple].include? key.to_sym
+          if value.is_a? Hash
+            value.each { |subkey,value| result["#{key}.#{subkey}".to_sym] = value }
+          elsif value.is_a? Array
+            result[key] = value.join ','
+          elsif value.is_a? Numeric or value.is_a? String
             result[key] = value
-          elsif [:spatial, :temporal].include? key.to_sym and value.is_a? Hash
-            parent = key.to_sym
-            value
-              .select { |k, v| VALID_CONDITIONS[parent].include? k }
-              .each   { |k, v| result[:"#{parent}.#{k}"] = v }
-          elsif [:sort_by, :sort_order].include? key.to_sym
-            result[key.to_sym] = value if VALID_CONDITIONS[key.to_sym].include? value.to_sym
-          elsif key.to_sym == :facets and value.is_a? Array
-            facets = value.select { |v| VALID_CONDITIONS[:facets].include? v }
-            result[:facets] = facets.join(',') if facets.present?
           end
         end
       end
