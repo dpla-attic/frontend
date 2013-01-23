@@ -60,9 +60,7 @@ class Item
     private
 
     def fetch
-      if valid?
-        @results = Item.where(conditions)
-      end
+      @results = Item.where(conditions)
     end
   end
 end
