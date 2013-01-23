@@ -42,6 +42,6 @@ module ItemsHelper
   def refine_path(area, value)
     existing_refine = (params[:refine] && params[:refine][area]) || []
     existing_refine = [existing_refine] unless existing_refine.is_a? Array
-    params.deep_merge({refine: {area => existing_refine.push(value)}})
+    params.deep_merge({refine: {area => existing_refine + [value]}})
   end
 end
