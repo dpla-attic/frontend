@@ -4,6 +4,12 @@
     %li.active
       .title By Subject
       .content
+        - if @search.refine[:subject].present?
+          - @search.refine[:subject].each do |refine|
+            .alert-box.secondary.term
+              = refine
+              = link_to '×', refine_path(:subject, refine, remove: true)
+          %br
         - @search.facets[:subject].each do |name, count|
           = link_to name, refine_path(:subject, name)
           %span.count= count

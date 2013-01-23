@@ -19,7 +19,9 @@ class Item
     end
 
     def refine
-      params[:refine] || {}
+      {}.tap do |refine|
+        params[:refine].each { |k,v| refine[k.to_sym] = v.is_a?(Array) ? v : [v] } if params[:refine]
+      end
     end
 
     def facets
