@@ -11,16 +11,13 @@
           Your search for
           %strong= params[:q]
           returned
-          = number_with_delimiter @items.count, delimiter: '.'
+          = number_with_delimiter @search.results.count, delimiter: '.'
           results.
-    - if @items.present?
-      .row.search-options
-        .twelve.columns
-          = render 'items/search/paginator'
+      = render 'items/search/paginator'
     .row
       .twelve.columns
-        - @items.each do |item|
-          -unless @items.first.eql? item
+        - @search.results.each do |item|
+          -unless @search.results.first.eql? item
             %hr
           - if item.format.present?
             %span.secondary.label= item.format
@@ -33,7 +30,4 @@
               %strong= item.creator
               %br
             = item.description
-    - if @items.present?
-      .row.search-options
-        .twelve.columns
-          = render 'items/search/paginator'
+      = render 'items/search/paginator'

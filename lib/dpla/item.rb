@@ -7,6 +7,7 @@ module DPLA
     def find(ids)
       ids = ids.join ',' if ids.is_a? Array
       response = self.class.get('/items/' + ids.to_s).parsed_response
+      Rails.logger.debug "Processing API request #{response.request.uri}"
       [].tap do |a|
         if response.is_a? Hash and response['docs'].is_a? Array
           response['docs'].each do |doc|
@@ -21,6 +22,7 @@ module DPLA
       { count: 0, start: 0, limit: 10, docs: [], facets: [] }.tap do |result|
         if response.code == 200
           parsed = response.parsed_response
+          Rails.logger.debug "Processing API request #{response.request.uri}"
           [:count, :start, :limit, :docs, :facets].each { |key| result[key] = parsed[key.to_s] if parsed[key.to_s].present? }
         else
           Rails.logger.info [

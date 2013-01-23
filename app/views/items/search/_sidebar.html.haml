@@ -1,11 +1,11 @@
 %h4 Refine
-- if @items.facets[:'subject.name'].present?
+- if @search.facets[:subject].present?
   %ul.accordion
     %li.active
       .title By Subject
       .content
-        - @items.facets[:'subject.name'].each do |name, count|
-          = link_to name
+        - @search.facets[:subject].each do |name, count|
+          = link_to name, refine_path(:subject, name)
           %span.count= count
           %br
 

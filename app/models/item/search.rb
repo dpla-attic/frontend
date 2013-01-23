@@ -1,13 +1,16 @@
 class Item
   class Search < ActiveRecord::Base
-    ACCEPTABLE_PARAMS  = [:q, :page, :page_size, :sort_by, :sort_order, :refine]
-    DEFAULT_CONDITIONS = {q: [], facets: %w(subject.name)}
+    ACCEPTABLE_PARAMS = [:q, :page, :page_size, :sort_by, :sort_order, :refine]
     FIELD_ALIASES     = {:'subject.name' => :subject}
 
     serialize :params, Hash
 
     def self.build(params)
-      params = params.select { |key, value| ACCEPTABLE_PARAMS.include? key }
+      params = {}.tap do |p|
+        params.each do |key, value|
+          p[key.to_sym] = value if ACCEPTABLE_PARAMS.include? key.to_sym
+        end
+      end
       self.new params: params
     end
 
@@ -32,7 +35,8 @@ class Item
     end
 
     def conditions
-      DEFAULT_CONDITIONS.dup.tap do |result|
+      defaults = {q: [], facets: %w(subject.name)}
+      defaults.tap do |result|
         params.each do |key, value|
           case key
           when :q
