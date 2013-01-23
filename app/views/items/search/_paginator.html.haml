@@ -1,8 +1,10 @@
-.panel
-  %form
-    Items per page:
-    = select_tag 'page_size', page_size_options
-  %form
-    Sort by:
-    = select_tag 'sort_by', sort_by_options
-  = paginate @items
+.row.search-options
+  .twelve.columns
+    .panel
+      %form
+        Items per page:
+        = select_tag 'page_size', page_size_options
+      %form
+        Sort by:
+        = select_tag 'sort_by', sort_by_options
+      = paginate @search.results
