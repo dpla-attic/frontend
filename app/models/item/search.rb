@@ -21,7 +21,9 @@ class Item
     def refine
       {}.tap do |refine|
         if params[:subject]
-          refine[:subject] = params[:subject].is_a?(Array) ? params[:subject] : [params[:subject]]
+          refine[:subject] = Array(params[:subject])
+        elsif params[:mime]
+          refine[:format] = Array(params[:mime])
         end
       end
     end
@@ -33,6 +35,9 @@ class Item
           when :'subject.name'
             refines = params[:subject] || []
             facets[:subject] = values.reject { |k,v| refines.include? k }
+          when :format
+            refines = params[:mime] || []
+            facets[:format] = values.reject { |k,v| refines.include? k }
           else
             refines = params[key] || []
             facets[key] = values.reject { |k,v| refines.include? k }
