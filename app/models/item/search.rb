@@ -20,11 +20,8 @@ class Item
 
     def refine
       {}.tap do |refine|
-        if params[:subject]
-          refine[:subject] = Array(params[:subject])
-        elsif params[:mime]
-          refine[:format] = Array(params[:mime])
-        end
+        refine[:subject] = Array(params[:subject]) if params[:subject]
+        refine[:format] = Array(params[:mime]) if params[:mime]
       end
     end
 
