@@ -1,15 +1,14 @@
 class Item
   class Search < ActiveRecord::Base
-    ACCEPTABLE_PARAMS = [
-      :q, :subject, :page, :page_size, :sort_by, :sort_order]
-    FIELD_ALIASES     = {:'subject.name' => :subject}
+    ACCEPLABLE_PARAMS  = [:q, :subject, :mime, :page, :page_size, :sort_by, :sort_order].freeze
+    DEFAULT_CONDITIONS = {facets: %w(subject.name format)}.freeze
 
     serialize :params, Hash
 
     def self.build(params)
       params = {}.tap do |p|
         params.each do |key, value|
-          p[key.to_sym] = value if ACCEPTABLE_PARAMS.include? key.to_sym
+          p[key.to_sym] = value if ACCEPLABLE_PARAMS.include? key.to_sym
         end
       end
       self.new params: params
@@ -30,20 +29,23 @@ class Item
     def facets
       {}.tap do |facets|
         results.facets.each do |key, values|
-          refine_key = FIELD_ALIASES.has_key?(key) ? FIELD_ALIASES[key] : key
-          refines = params[refine_key] || []
-          facets[refine_key] = values.reject { |k,v| refines.include? k }
+          case key
+          when :'subject.name'
+            refines = params[:subject] || []
+            facets[:subject] = values.reject { |k,v| refines.include? k }
+          else
+            refines = params[key] || []
+            facets[key] = values.reject { |k,v| refines.include? k }
+          end
         end
       end
     end
 
     def conditions
-      defaults = {subject: [], facets: %w(subject.name format)}
-      defaults.tap do |result|
+      DEFAULT_CONDITIONS.dup.tap do |result|
         params.each do |key, value|
-          case key
-          when :subject
-            result[:subject] = value.is_a?(Array) ? value.join('+AND+') : value
+          if :mime == key
+            result[:format] = value
           else
             result[key] = value
           end
