@@ -1,0 +1,30 @@
+.row
+  .three.columns.refine
+    = render 'items/search/sidebar'
+  .nine.columns
+    .row
+      .twelve.columns
+        %h5.subheader
+          Your search for
+          %strong= params[:q]
+          returned
+          = number_with_delimiter @search.results.count, delimiter: '.'
+          results.
+      = render 'items/search/paginator'
+    .row
+      .twelve.columns
+        - @search.results.each do |item|
+          -unless @search.results.first.eql? item
+            %hr
+          - if item.format.present?
+            %span.secondary.label= item.format
+          -if item.source.present?
+            .right
+              %p.right= link_to 'Visit Source', item.source, class: 'button tiny'
+          %h4= link_to item.title, item_path(item.id)
+          %p
+            - if item.creator.present?
+              %strong= item.creator
+              %br
+            = item.description
+      = render 'items/search/paginator'
