@@ -23,9 +23,9 @@
           - @search.refine[:format].each do |refine|
             .alert-box.secondary.term
               = refine
-              = link_to '×', refine_path(:format, refine, remove: true)
+              = link_to '×', refine_path(:mime, refine, remove: true)
           %br
         - @search.facets[:format].each do |name, count|
-          = link_to name, refine_path(:format, name)
+          = link_to name, refine_path(:mime, name)
           %span.count= count
           %br
