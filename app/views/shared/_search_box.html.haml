@@ -1,4 +1,5 @@
 = form_tag(search_items_path, method: :get, authenticity_token: false) do
+  = preserved_search_fields
   .row.collapse
     .ten.mobile-three.columns
       = text_field_tag :q, params[:q], placeholder: 'Search the Library'

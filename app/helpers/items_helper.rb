@@ -45,4 +45,16 @@ module ItemsHelper
     refine_params = options[:remove] ? existing_refine - [value] : existing_refine + [value]
     params.deep_merge(area => refine_params.uniq)
   end
+
+  def preserved_search_fields
+    ''.tap do |html|
+      [:subject, :mime, :page_size, :sort_by, :sort_order].each do |field|
+        if params[field].is_a? Array
+          params[field].each { |value| html << hidden_field_tag("#{field}[]", value) }
+        elsif params[field]
+          html << hidden_field_tag(field, params[field])
+        end
+      end
+    end.html_safe
+  end
 end
