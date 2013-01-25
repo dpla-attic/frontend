@@ -1,7 +1,7 @@
 class Item
   class Search < ActiveRecord::Base
-    ACCEPLABLE_PARAMS  = [:q, :subject, :mime, :page, :page_size, :sort_by, :sort_order].freeze
-    DEFAULT_CONDITIONS = {facets: %w(subject.name format)}.freeze
+    ACCEPLABLE_PARAMS  = [:q, :subject, :mime, :language, :page, :page_size, :sort_by, :sort_order].freeze
+    DEFAULT_CONDITIONS = {facets: %w(subject.name language.name format)}.freeze
 
     serialize :params, Hash
 
@@ -20,8 +20,9 @@ class Item
 
     def refine
       {}.tap do |refine|
-        refine[:subject] = Array(params[:subject]) if params[:subject]
-        refine[:format] = Array(params[:mime]) if params[:mime]
+        refine[:subject] = Array(params[:subject])
+        refine[:language] = Array(params[:language])
+        refine[:format] = Array(params[:mime])
       end
     end
 
@@ -30,14 +31,11 @@ class Item
         results.facets.each do |key, values|
           case key
           when :'subject.name'
-            refines = params[:subject] || []
-            facets[:subject] = values.reject { |k,v| refines.include? k }
+            facets[:subject] = values.reject { |k,v| refine[:subject].include? k }
+          when :'language.name'
+            facets[:language] = values.reject { |k,v| refine[:language].include? k }
           when :format
-            refines = params[:mime] || []
-            facets[:format] = values.reject { |k,v| refines.include? k }
-          else
-            refines = params[key] || []
-            facets[key] = values.reject { |k,v| refines.include? k }
+            facets[:format] = values.reject { |k,v| refine[:format].include? k }
           end
         end
       end

@@ -1,29 +1,43 @@
 %h4 Refine
-%ul.accordion
-  %li.active
-    .title By Subject
-    .content
-      - if @search.refine[:subject].present?
+- if @search.refine[:subject].present? or @search.facets[:subject].present?
+  %ul.accordion
+    %li.active
+      .title By Subject
+      .content
         - @search.refine[:subject].each do |refine|
           .alert-box.secondary.term
             = refine
             = link_to '×', refine_path(:subject, refine, remove: true)
-        %br
-      - @search.facets[:subject].each do |name, count|
-        = link_to name, refine_path(:subject, name)
-        %span.count= count
-        %br
-%ul.accordion
-  %li.active
-    .title By format
-    .content
-      - if @search.refine[:format].present?
+          %br
+        - @search.facets[:subject].each do |name, count|
+          = link_to name, refine_path(:subject, name)
+          %span.count= count
+          %br
+- if @search.refine[:format].present? or @search.facets[:format].present?
+  %ul.accordion
+    %li.active
+      .title By Format
+      .content
         - @search.refine[:format].each do |refine|
           .alert-box.secondary.term
             = refine
             = link_to '×', refine_path(:mime, refine, remove: true)
-        %br
-      - @search.facets[:format].each do |name, count|
-        = link_to name, refine_path(:mime, name)
-        %span.count= count
-        %br
+          %br
+        - @search.facets[:format].each do |name, count|
+          = link_to name, refine_path(:mime, name)
+          %span.count= count
+          %br
+- if @search.refine[:language].present? or @search.facets[:language].present?
+  %ul.accordion
+    %li.active
+      .title By Language
+      .content
+        - @search.refine[:language].each do |refine|
+          .alert-box.secondary.term
+            = refine
+            = link_to '×', refine_path(:language, refine, remove: true)
+          %br
+        - @search.facets[:language].each do |name, count|
+          = link_to name, refine_path(:language, name)
+          %span.count= count
+          %br
