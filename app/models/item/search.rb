@@ -1,6 +1,6 @@
 class Item
   class Search < ActiveRecord::Base
-    ACCEPLABLE_PARAMS  = [:q, :subject, :mime, :language, :page, :page_size, :sort_by, :sort_order].freeze
+    ACCEPLABLE_PARAMS  = [:q, :subject, :mime, :after, :before, :language, :page, :page_size, :sort_by, :sort_order].freeze
     DEFAULT_CONDITIONS = {facets: %w(subject.name language.name format)}.freeze
 
     serialize :params, Hash
@@ -23,6 +23,8 @@ class Item
         refine[:subject] = Array(params[:subject])
         refine[:language] = Array(params[:language])
         refine[:format] = Array(params[:mime])
+        refine[:after] = get_valid_date(params[:after])
+        refine[:before] = get_valid_date(params[:before])
       end
     end
 
@@ -46,6 +48,9 @@ class Item
         params.each do |key, value|
           if :mime == key
             result[:format] = value
+          elsif [:after, :before].include? key
+            result[:created] ||= {}
+            result[:created][key] = get_valid_date(value)
           else
             result[key] = value
           end
@@ -57,6 +62,14 @@ class Item
 
     def fetch
       @results = Item.where(conditions)
+    end
+
+    def get_valid_date(date, options = {})
+      if date.present? && date[:year].present?
+        month = date[:month].present? ? date[:month] : (options[:before] ? '12' : '1')
+        day   = date[:day].present?   ? date[:day]   : (options[:before] ? '31' : '1')
+        "#{date[:year]}-#{month}-#{day}"
+      end
     end
   end
 end

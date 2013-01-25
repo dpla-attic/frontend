@@ -27,6 +27,39 @@
           = link_to name, refine_path(:mime, name)
           %span.count= count
           %br
+%ul.accordion
+  %li.active
+    .title By Date
+    .content
+      - if @search.refine[:after]
+        .alert-box.secondary.term
+          After
+          = @search.refine[:after]
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :after }
+        %br
+      - if @search.refine[:before]
+        .alert-box.secondary.term
+          Before
+          = @search.refine[:before]
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :before }
+        %br
+      = form_tag(search_items_path, method: :get, authenticity_token: false) do
+        = preserved_search_fields
+        From
+        %br
+        - after = params[:after] || {}
+        = select_month after[:month].to_i, {prompt: 'Month'}, name: 'after[month]', class: 'daterange month', id: :after_month
+        = select_day   after[:day].to_i, {prompt: 'Day'}, name: 'after[day]', class: 'daterange day', id: :after_day
+        = text_field nil, nil, value: after[:year], name: 'after[year]', placeholder: 'Year', class: 'daterange', id: :after_year
+        %br
+        To
+        %br
+        - before = params[:before] || {}
+        = select_month before[:month].to_i, {prompt: 'Month'}, name: 'before[month]', class: 'daterange month', id: :before_month
+        = select_day   before[:day].to_i, {prompt: 'Day'}, name: 'before[day]', class: 'daterange day', id: :before_day
+        = text_field nil, nil, value: before[:year], name: 'before[year]', placeholder: 'Year', class: 'daterange', id: :before_year
+        %br
+        = submit_tag 'Update', class: 'small button radius', name: nil
 - if @search.refine[:language].present? or @search.facets[:language].present?
   %ul.accordion
     %li.active
