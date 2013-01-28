@@ -1,7 +1,72 @@
-.row
-  .twelve.columns
-    %h2 Search Results
-- if @search.results.present?
-  = render partial: 'items/search/results'
-- else
-  = render partial: 'items/search/not_found'
+.layoutTwo
+  %section.searchRow
+    .searchRowLeft
+    .searchRowRight
+      .searchViews
+        %span View:
+        %ul
+          %li.active
+            %a{:href => ""}
+              %span.icon-view-list{"aria-hidden" => "true"}
+          %li
+            %a.viewTwo{:href => ""}
+              %span.icon-view-map{"aria-hidden" => "true"}
+          %li
+            %a.viewThree{:href => ""}
+              %span.icon-view-time{"aria-hidden" => "true"}
+      %a.search-btn{:href => ""} Search
+      = form_tag(search_items_path, method: :get, authenticity_token: false) do
+        = preserved_search_fields without: :q
+        = text_field_tag :q, params[:q], placeholder: 'Search the Library'
+        = submit_tag 'Search', class: 'searchBtn', name: nil
+  %ul.shareSave
+    %li.btn
+      %a{:href => ""} Save
+    %li.btn
+      %a{:href => ""} Share
+  #toggle
+    %span.icon-arrow-thin-left{"aria-hidden" => "true"}
+    Refine
+  %h1 Search Results
+  .searchResults
+    %h4
+      Your search for
+      %span= params[:q]
+      returned 
+      = number_with_delimiter @search.results.count, delimiter: ','
+      results.
+    .refine
+      %p Refined by:
+      %ul
+        %li
+          America
+          %a{:href => ""} &times;
+  .slidePopOut
+    #resultsBarTop.resultsBar
+      = render partial: 'items/search/paginator'
+    %article
+      .matches
+        %section
+          %h4 Subject Matches
+          %a{:href => ""} Civil War, American
+        %section
+          %h4 Collection Matches
+          %a{:href => ""} Smithsonian Civil War Collection
+          %a.Viewmore{:href => ""} 23 more »
+      .search
+        - @search.results.each do |item|
+          %section
+            .searchLeft
+              %h6= item.format
+              %h4= link_to item.title, item_path(item.id)
+              %p
+                %span= item.creator
+              %p= item.description
+              = link_to item.source, class: 'ViewObject' do
+                View Object
+                %span.icon-view-object{"aria-hidden" => "true"}
+            .searchRight
+              = image_tag "search-img.jpg", :alt => "search img"
+  = render partial: 'items/search/sidebar'
+  #resultsBarBottom.resultsBar
+    = render partial: 'items/search/paginator'
