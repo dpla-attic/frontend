@@ -124,7 +124,8 @@ select.day { width: 20.735786%; margin: 0 3% 0 3.6789298%; }
 
 label { font: 0.867em/1.200em 'source_sans_pro_semiboldRg', arial, sans-serif; display: block; }
 
-input[type="submit"] {
+/* FIXED */
+.searchBtn {
     background: url("/assets/search-btn.png") no-repeat scroll center 0 transparent;
     border: medium none;
     display: inline-block;

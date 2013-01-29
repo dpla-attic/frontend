@@ -23,7 +23,7 @@
       .searchForm
         %h2 A Wealth of Knowledge
         %p from libraries, archives, and museums
-        = form_tag(search_items_path, method: :get, authenticity_token: false) do
+        = form_tag(search_items_path(trailing_slash: true), method: :get, authenticity_token: false) do
           = preserved_search_fields without: :q
           = text_field_tag :q, params[:q], placeholder: 'Search the Library'
           = submit_tag 'Search', class: 'searchBtn', name: nil

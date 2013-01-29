@@ -1,0 +1,27 @@
+- refines_presented = @search.refine.map {|k,v| v.present?}.select(&:present?).present?
+- if refines_presented
+  .refine
+    %p Refined by:
+    %ul
+      - @search.refine[:subject].each do |refine|
+        %li
+          = refine
+          = link_to '×', refine_path(:subject, refine, remove: true)
+      - if @search.refine[:before].present?
+        %li
+          Before
+          = @search.refine[:before]
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :before } 
+      - if @search.refine[:after].present?
+        %li
+          After
+          = @search.refine[:after]
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :after }
+      - @search.refine[:format].each do |refine|
+        %li
+          = refine
+          = link_to '×', refine_path(:mime, refine, remove: true)
+      - @search.refine[:language].each do |refine|
+        %li
+          = refine
+          = link_to '×', refine_path(:language, refine, remove: true)

@@ -15,13 +15,10 @@
             %a.viewThree{:href => ""}
               %span.icon-view-time{"aria-hidden" => "true"}
       %a.search-btn{:href => ""} Search
-      = form_tag(search_items_path, method: :get, authenticity_token: false) do
+      = form_tag(search_items_path(trailing_slash: true), method: :get, authenticity_token: false) do
         = preserved_search_fields without: :q
         = text_field_tag :q, params[:q], placeholder: 'Search the Library'
         = submit_tag 'Search', class: 'searchBtn', name: nil
-  #toggle
-    %span.icon-arrow-thin-left{"aria-hidden" => "true"}
-    Refine
   %h1 Search Results
   .searchResults
     %h4
@@ -32,28 +29,28 @@
       returned 
       = number_with_delimiter @search.results.count, delimiter: ','
       results.
-    .refine
-      %p Refined by:
-      %ul
-        %li
-          America
-          %a{:href => ""} &times;
-  .slidePopOut
-    #resultsBarTop.resultsBar
+    = render partial: 'items/search/refined_by'
+  - if @search.results.present?
+    .slidePopOut
+      #resultsBarTop.resultsBar
+        = render partial: 'items/search/paginator'
+      %article
+        .search
+          - @search.results.each do |item|
+            %section
+              .searchLeft
+                %h6= item.format
+                - if item.id.present?
+                  %h4= link_to item.title, item_path(item.id)
+                - else
+                  %h4= item.title
+                %p
+                  %span= item.creator
+                %p= item.description
+                - if item.source.present?
+                  = link_to item.source, class: 'ViewObject' do
+                    View Object
+                    %span.icon-view-object{"aria-hidden" => "true"}
+    = render partial: 'items/search/sidebar'
+    #resultsBarBottom.resultsBar
       = render partial: 'items/search/paginator'
-    %article
-      .search
-        - @search.results.each do |item|
-          %section
-            .searchLeft
-              %h6= item.format
-              %h4= link_to item.title, item_path(item.id)
-              %p
-                %span= item.creator
-              %p= item.description
-              = link_to item.source, class: 'ViewObject' do
-                View Object
-                %span.icon-view-object{"aria-hidden" => "true"}
-  = render partial: 'items/search/sidebar'
-  #resultsBarBottom.resultsBar
-    = render partial: 'items/search/paginator'
