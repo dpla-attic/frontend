@@ -1,12 +1,10 @@
 class Item
   FIELDS = [
-    :_id, :title, :description, :subject, :creator, :type, :publisher,
+    :id, :title, :description, :subject, :creator, :type, :publisher,
     :format, :rights, :contributor, :created, :spatial, :temporal,
     :language, :source, :isPartOf
   ]
     .each { |field| attr_accessor field }
-
-  alias id _id
 
   def initialize(doc)
     FIELDS.each { |f| self.send "#{f}=", doc[f.to_s] }
