@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-# Configures your navigation
 SimpleNavigation::Configuration.run do |navigation|
   navigation.autogenerate_item_ids = false
+  navigation.active_leaf_class = nil
+  navigation.selected_class = 'active'
 
   navigation.items do |primary|
-    primary.dom_class = 'nav-bar'
+    primary.dom_class = ''
 
     primary.item :home, 'Home', root_path
     primary.item :subjects, 'Subjects', '#'
@@ -13,7 +13,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :map, 'Map', '#'
     primary.item :timeline, 'Timeline', '#'
     primary.item :applib, 'App Library', '#'
-    primary.item :help, 'Help', '#', class: 'right'
+    primary.item :help, 'Help', '#'
   end
 
 end

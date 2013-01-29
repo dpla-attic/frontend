@@ -1,7 +1,7 @@
 module ItemsHelper
   def page_size_options
     options = [].tap do |result|
-      [10, 50, 100].tap do |counts|
+      [10, 20, 50, 100].tap do |counts|
         page_size = params[:page_size].to_i
         if page_size > 0 and ! counts.include? page_size
           counts.push page_size
