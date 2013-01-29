@@ -45,14 +45,6 @@
     #resultsBarTop.resultsBar
       = render partial: 'items/search/paginator'
     %article
-      .matches
-        %section
-          %h4 Subject Matches
-          %a{:href => ""} Civil War, American
-        %section
-          %h4 Collection Matches
-          %a{:href => ""} Smithsonian Civil War Collection
-          %a.Viewmore{:href => ""} 23 more »
       .search
         - @search.results.each do |item|
           %section
@@ -65,8 +57,6 @@
               = link_to item.source, class: 'ViewObject' do
                 View Object
                 %span.icon-view-object{"aria-hidden" => "true"}
-            .searchRight
-              = image_tag "search-img.jpg", :alt => "search img"
   = render partial: 'items/search/sidebar'
   #resultsBarBottom.resultsBar
     = render partial: 'items/search/paginator'

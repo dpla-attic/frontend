@@ -19,9 +19,4 @@
     %option Online Publication Date - Old to Recent
     %option Online Publication Date - Recent to Old
 .pagination
-  .t-data-grid-pager
-    %span.current 1
-    %a{:href => "#", :title => "Go to page 2"} 2
-    %a{:href => "#", :title => "Go to page 3"} 3
-    \...
-    %a{:href => "#", :title => "Go to page 21"} 21
+  = paginate @search.results
