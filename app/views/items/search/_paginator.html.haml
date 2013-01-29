@@ -1,22 +1,9 @@
 %form#pageSizeForm{:method => "post", :name => "pageSizeForm"}
   .items
-    %label{:for => "pageSize"} Items per page:
-    %select.countList{:name => "pageSize"}
-      %option{:selected => "selected", :value => "10"} 10
-      %option{:value => "20"} 20
-      %option{:value => "50"} 50
-      %option{:value => "100"} 100
+    %label{:for => "page_size"} Items per page:
+    = select_tag 'page_size', page_size_options, class: 'countList'
 %form.sortControl
-  %label{:for => "sortBy"} Sort by:
-  %select#sortBy.sortList{:name => "sortBy"}
-    %option{:selected => "selected"} Relevance
-    %option Title - A to Z
-    %option Title - Z to A
-    %option Author/Editor - A to Z
-    %option Author/Editor - Z to A
-    %option Print Publication Date - Old to Recent
-    %option Print Publication Date - Recent to Old
-    %option Online Publication Date - Old to Recent
-    %option Online Publication Date - Recent to Old
+  %label{:for => "sort_by"} Sort by:
+  = select_tag 'sort_by', sort_by_options
 .pagination
   = paginate @search.results

@@ -14,7 +14,7 @@
     = javascript_include_tag "application"
     = stylesheet_link_tag    "application", media: "all"
     = csrf_meta_tags
-  %body
+  %body{class: "#{params[:controller]}-controller"}
     .container
       %header
         = link_to root_path, class: :logo do

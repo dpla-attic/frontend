@@ -125,7 +125,7 @@ select.day { width: 20.735786%; margin: 0 3% 0 3.6789298%; }
 label { font: 0.867em/1.200em 'source_sans_pro_semiboldRg', arial, sans-serif; display: block; }
 
 input[type="submit"] {
-    background: url("search-btn.png") no-repeat scroll center 0 transparent;
+    background: url("/assets/search-btn.png") no-repeat scroll center 0 transparent;
     border: medium none;
     display: inline-block;
     height: 41px;
@@ -201,7 +201,7 @@ h4 span { font-family: 'source_sans_pro_semiboldRg', arial, sans-serif; }
    LAYOUT
    ========================================================================== */
 body {
-    background: url('background.jpg') repeat-x left top #fff;
+    background: url('/assets/background.jpg') repeat-x left top #fff;
     font: 0.938em/1.250em 'source_sans_proregular', arial, sans-serif;
 }
 
@@ -686,11 +686,11 @@ aside .module h6 {
     margin: 0 0 0.9em;
 }
 h6.open {
-    background: url(../img/arrowOpen.png) no-repeat right center;
+    background: url(/assets/arrowOpen.png) no-repeat right center;
     cursor: pointer;
 }
 h6.close {
-    background: url(../img/arrowClose.png) no-repeat right center;
+    background: url(/assets/arrowClose.png) no-repeat right center;
     cursor: pointer;
 }
 .module .locations {
@@ -2075,7 +2075,7 @@ footer .social.icons li { border: 1px solid #494949; background: #fff; }
 
 
 .menu-btn {
-    background: url(menu-btn.jpg) no-repeat center center #DD4E00;
+    background: url(/assets/menu-btn.jpg) no-repeat center center #DD4E00;
     height: 14%;
     position: absolute;
     right: 0;
