@@ -13,6 +13,16 @@ stage :development do
   set :user, 'capistrano'
   set :use_sudo, false
   set :deploy_to, "/var/www/frontend"
+  set :branch, "develop"
+
+  use_recipe :passenger
+end
+
+stage :staging do
+  server '54.245.164.12', :app, :db, :primary => true
+  set :user, 'capistrano'
+  set :use_sudo, false
+  set :deploy_to, "/var/www/frontend"
   set :branch, "master"
 
   use_recipe :passenger
