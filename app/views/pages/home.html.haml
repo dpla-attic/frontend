@@ -1,81 +1,122 @@
-- content_for :big_search do
-  %h1.subheader
-    Discover a Wealth of Knowledge
-  %h5.subheader
-    Search over
-    %strong 70 million
-    records from libraries, archives, and museums all over the country lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  = render partial: 'shared/search_box'
-
-.row
-  .nine.columns
-    .apps.row
-      .four.columns
-        .panel
-          %h4 Exhibitions
-          .medium
-          %p
-            %a{href: ""}
-              %strong Latest exhibit title
-          %a{href: ""} Browse All &raquo;
-      .four.columns
-        .panel
-          %h4 Explore by Place
-          %a{href: ""} View Map &raquo;
-      .four.columns
-        .panel
-          %h4 Explore by Time
-          %a{href: ""} View Timeline &raquo;
-    .apps.row
-      .columns
-        %h3 Apps
-        %h5.subheader
-          Explore the DPLA through many apps lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    .apps.row
-      .four.columns
-        .panel
-          %h5
-            %a{href: ""} App
-      .four.columns
-        .panel
-          %h5
-            %a{href: ""} App
-      .four.columns
-        .panel
-          %h5
-            %a{href: ""} App
-    .apps.row
-      .four.columns
-        .panel
-          %h5
-            %a{href: ""} App
-      .four.columns
-        .panel
-          %h5
-            %a{href: ""} App
-      .four.columns
-        .panel
-          %h5
-            %a{href: ""} App
-    .row
-      .twelve.columns
-        %a{href: ""} More in the App Library
-  .three.columns.news
-    .panel
-      %h4 News
-      .social.right
-        = image_tag "facebook.png"
-        = image_tag "twitter.png"
-        = image_tag "rss.png"
-      %h5.subheader
-        The latest developments in building the DPLA.
-      %p
-        %a{href: ""} Press: Toby Graham interview about the DPLA on WGAU.
-        %br/
-        %strong Nov 15
-      %p
-        %a{href: ""} Rijksmusem Launches 125,000 Image Digital Collection
-        %br/
-        %strong Nov 13
-      %p
-        %a{href: ""} All Posts &raquo;
+%article
+  .content
+    %section.left
+      .slide-container
+        .flexslider.homeslide
+          %ul.slides
+            %li
+              = image_tag "slide/slide1.jpg"
+              .slideOverlay
+              .slideText
+                %p SLIDE ONE Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO »
+            %li
+              = image_tag "slide/slide1.jpg"
+              .slideOverlay
+              .slideText
+                %p SLIDE TWO Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO »
+            %li
+              = image_tag "slide/slide1.jpg"
+              .slideOverlay
+              .slideText
+                %p SLIDE THREE Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO »
+          %span.moreInfo Info
+      .searchForm
+        %h2 A Wealth of Knowledge
+        %p from libraries, archives, and museums
+        = form_tag(search_items_path, method: :get, authenticity_token: false) do
+          = preserved_search_fields without: :q
+          = text_field_tag :q, params[:q], placeholder: 'Search the Library'
+          = submit_tag 'Search', class: 'searchBtn', name: nil
+    %section.right
+      .row.yellow
+        .box
+          %h2 Exhibitions
+          %a{:href => ""} View All »
+        .image
+          = image_tag "row-1.jpg"
+      .row.blue
+        .box
+          %h2
+            Explore
+            %span by Place
+          %a{:href => ""} Map »
+        .image
+          = image_tag "row-1.jpg"
+      .row
+        .box
+          %h2
+            Explore
+            %span by Date
+          %a{:href => ""} Timeline »
+        .image
+          = image_tag "row-2.jpg"
+  .content.bottom
+    %section.left
+      %h2 Apps
+      %h4
+        The DPLA is a platform. Developers make apps that use the library’s data in many different ways. Here are just a few.
+        %span
+          %a{:href => "#"} App Library »
+      .moduleContainer
+        .module
+          .icon
+            = image_tag "icon-1.png"
+          .text
+            %h5
+              %a{:href => ""} Catalog the Whole Earth
+            %p By Jeff Goldenson, Jessica Yurkofsky
+          %p It allows anyone to catalog the world around them really easily. They email a picture of whatever they want to catalog to the webapp, and then log online to edit metadata and submit.
+          %a{:href => "#"} App Home Page »
+        .module.yellow
+          .icon
+            = image_tag "icon-2.png"
+          .text
+            %h5
+              %a{:href => ""} Cuttr
+            %p By Cecily Walker, Jessica Keyes, Andromeda Yelton, Nandhita Kumar, Ashley K. Worley
+          %p Crowdsourced question and answer service. The service allows users to ask and answer questions, vote on relevance of questions, and earn reputation points based on answers.
+          %a{:href => "#"} App Home Page »
+    %section.right
+      %h2 News
+      %ul.social
+        %li.facebook
+          %a{:href => ""}
+            %span.icon-facebook{"aria-hidden" => "true"}
+        %li.twitter
+          %a{:href => ""}
+            %span.icon-twitter{"aria-hidden" => "true"}
+        %li.RSS
+          %a{:href => ""}
+            %span.icon-rss{"aria-hidden" => "true"}
+      .news
+        %ul
+          %li
+            %a{:href => ""} Press: Toby Graham interview about the DPLA on WGAU.
+            %p
+              %span Nov 15
+          %li
+            %a{:href => ""} Rijksmusem Launches 125,000 Image Digital Collection
+            %p
+              %span Nov 13
+        %a{:href => ""} All News »
+      .twiiter
+        %h2
+          %a{:href => ""} @digpublib
+          on Twitter
+        %ul
+          %li
+            %p John Palfrey delivers TEDx Talk
+            %a{:href => ""} http://hvrd.me/X9Hdn7
+            %p
+              %span 8 hours ago
+          %li
+            %p
+              RT
+              = succeed ":" do
+                %a{:href => ""} @metalabharvard
+              New post by Yanni Loukissas on Chattanooga
+              %a{:href => ""} #DPLA
+              appfest at
+              %a{:href => ""} http://bit.ly/W6XWpT
+            %p
+              %span Yesterday

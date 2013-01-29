@@ -1,76 +1,116 @@
-%h4 Refine
-- if @search.refine[:subject].present? or @search.facets[:subject].present?
-  %ul.accordion
-    %li.active
-      .title By Subject
-      .content
-        - @search.refine[:subject].each do |refine|
-          .alert-box.secondary.term
-            = refine
-            = link_to '×', refine_path(:subject, refine, remove: true)
-          %br
-        - @search.facets[:subject].each do |name, count|
-          = link_to name, refine_path(:subject, name)
-          %span.count= count
-          %br
-- if @search.refine[:format].present? or @search.facets[:format].present?
-  %ul.accordion
-    %li.active
-      .title By Format
-      .content
-        - @search.refine[:format].each do |refine|
-          .alert-box.secondary.term
-            = refine
-            = link_to '×', refine_path(:mime, refine, remove: true)
-          %br
-        - @search.facets[:format].each do |name, count|
-          = link_to name, refine_path(:mime, name)
-          %span.count= count
-          %br
-%ul.accordion
-  %li.active
-    .title By Date
-    .content
-      - if @search.refine[:after]
-        .alert-box.secondary.term
-          After
-          = @search.refine[:after]
-          = link_to '×', params.reject { |k,v| k.to_sym.eql? :after }
-        %br
-      - if @search.refine[:before]
-        .alert-box.secondary.term
-          Before
-          = @search.refine[:before]
-          = link_to '×', params.reject { |k,v| k.to_sym.eql? :before }
-        %br
-      = form_tag(search_items_path, method: :get, authenticity_token: false) do
-        = preserved_search_fields
-        From
-        %br
-        - after = params[:after] || {}
-        = select_month after[:month].to_i, {prompt: 'Month'}, name: 'after[month]', class: 'daterange month', id: :after_month
-        = select_day   after[:day].to_i, {prompt: 'Day'}, name: 'after[day]', class: 'daterange day', id: :after_day
-        = text_field nil, nil, value: after[:year], name: 'after[year]', placeholder: 'Year', class: 'daterange', id: :after_year
-        %br
-        To
-        %br
-        - before = params[:before] || {}
-        = select_month before[:month].to_i, {prompt: 'Month'}, name: 'before[month]', class: 'daterange month', id: :before_month
-        = select_day   before[:day].to_i, {prompt: 'Day'}, name: 'before[day]', class: 'daterange day', id: :before_day
-        = text_field nil, nil, value: before[:year], name: 'before[year]', placeholder: 'Year', class: 'daterange', id: :before_year
-        %br
-        = submit_tag 'Update', class: 'small button radius', name: nil
-- if @search.refine[:language].present? or @search.facets[:language].present?
-  %ul.accordion
-    %li.active
-      .title By Language
-      .content
-        - @search.refine[:language].each do |refine|
-          .alert-box.secondary.term
-            = refine
-            = link_to '×', refine_path(:language, refine, remove: true)
-          %br
-        - @search.facets[:language].each do |name, count|
-          = link_to name, refine_path(:language, name)
-          %span.count= count
-          %br
+%aside
+  %h5 Refine
+  .module.yellow
+    %h6.open By Subject
+    .slidingDiv
+      .locations
+        %ul
+          %li
+            %a{:href => ""} Subject 1
+            %span 98
+          %li
+            %a{:href => ""} Subject 2
+            %span 72
+          %li
+            %a{:href => ""} Subject 3
+            %span 45
+          %li
+            %a{:href => ""} Subject 4
+            %span 41
+          %li
+            %a{:href => ""} Subject 5
+            %span 38
+    .more
+      %a.inline.cboxElement{:href => "#inline_content"} More »
+  .module.yellow
+    %h6.open By Location
+    .slidingDiv
+      .refineResult
+        %span America
+        %a{:href => ""} &times;
+      .locations
+        %ul
+          %li
+            %a{:href => ""} Location 2
+            %span 72
+          %li
+            %a{:href => ""} Location 3
+            %span 45
+          %li
+            %a{:href => ""} Location 4
+            %span 41
+          %li
+            %a{:href => ""} Location 5
+            %span 38
+    .more
+      %a.inline.cboxElement{:href => "#inline_content"} More »
+  .module.yellow
+    %h6.open By Date
+    .slidingDiv
+      %form.moduleForm
+        .formRow
+          %label From
+          %select{:name => "month"}
+            %option{:value => "month"} Month
+            %option{:value => "month"} 2
+            %option{:value => "month"} 3
+            %option{:value => "month"} 4
+          %select.day{:name => "day"}
+            %option{:value => "day"} Day
+            %option{:value => "day"} 2
+            %option{:value => "day"} 3
+            %option{:value => "day"} 4
+          %input{:name => "year", :placeholder => "Year", :type => "text"}/
+        .formRow
+          %label To
+          %select{:name => "month"}
+            %option{:value => "month"} Month
+            %option{:value => "month"} 2
+            %option{:value => "month"} 3
+            %option{:value => "month"} 4
+          %select.day{:name => "day"}
+            %option{:value => "day"} Day
+            %option{:value => "day"} 2
+            %option{:value => "day"} 3
+            %option{:value => "day"} 4
+          %input{:name => "year", :placeholder => "Year", :type => "text"}/
+      %a.btn.blue{:href => ""} Update
+  .module.yellow
+    %h6.open By Format
+    .slidingDiv
+      .locations
+        %ul
+          %li
+            %a{:href => ""} Texts
+            %span 72
+          %li
+            %a{:href => ""} Images
+            %span 45
+          %li
+            %a{:href => ""} Videos
+            %span 41
+          %li
+            %a{:href => ""} Sounds
+            %span 38
+  .module.yellow
+    %h6.open By Language
+    .slidingDiv
+      .locations
+        %ul
+          %li
+            %a{:href => ""} English
+            %span 11245
+          %li
+            %a{:href => ""} French
+            %span 788
+          %li
+            %a{:href => ""} German
+            %span 156
+          %li
+            %a{:href => ""} Italian
+            %span 102
+          %li
+            %a{:href => ""} Spanish
+            %span 99
+    .more
+      %a.inline.cboxElement{:href => "#inline_content"} More »

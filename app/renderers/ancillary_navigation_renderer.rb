@@ -6,7 +6,6 @@ class AncillaryNavigationRenderer < SimpleNavigation::Renderer::List
 
     list_content = item_container.items.inject([]) do |list, item|
       li_options = item.html_options.reject {|k, v| k == :link}
-      item.html_options[:class] = 'asdhaksdh'
       li_content = tag_for(item)
       if include_sub_navigation?(item)
         li_content << '<a class="support attribute flyout-toggle"><span></span></a>'.html_safe

@@ -1,7 +1,0 @@
-= form_tag(search_items_path, method: :get, authenticity_token: false) do
-  = preserved_search_fields without: :q
-  .row.collapse
-    .ten.mobile-three.columns
-      = text_field_tag :q, params[:q], placeholder: 'Search the Library'
-    .two.mobile-one.columns
-      = submit_tag 'GO', class: 'button expand postfix', name: nil
