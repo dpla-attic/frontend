@@ -19,19 +19,16 @@
         = preserved_search_fields without: :q
         = text_field_tag :q, params[:q], placeholder: 'Search the Library'
         = submit_tag 'Search', class: 'searchBtn', name: nil
-  %ul.shareSave
-    %li.btn
-      %a{:href => ""} Save
-    %li.btn
-      %a{:href => ""} Share
   #toggle
     %span.icon-arrow-thin-left{"aria-hidden" => "true"}
     Refine
   %h1 Search Results
   .searchResults
     %h4
-      Your search for
-      %span= params[:q]
+      Your search
+      - if params[:q].present?
+        for
+        %span= params[:q]
       returned 
       = number_with_delimiter @search.results.count, delimiter: ','
       results.
