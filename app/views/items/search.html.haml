@@ -15,7 +15,7 @@
             %a.viewThree{:href => ""}
               %span.icon-view-time{"aria-hidden" => "true"}
       %a.search-btn{:href => ""} Search
-      = form_tag(search_items_path(trailing_slash: true), method: :get, authenticity_token: false) do
+      = form_tag(search_items_path(trailing_slash: true), method: :get, authenticity_token: false, id: :searchBox) do
         = preserved_search_fields without: :q
         = text_field_tag :q, params[:q], placeholder: 'Search the Library'
         = submit_tag 'Search', class: 'searchBtn', name: nil
