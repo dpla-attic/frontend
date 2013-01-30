@@ -26,58 +26,59 @@
   %article
     .FeatureContent
       .contentBox
-        = image_tag("http://54.245.27.141:3000/dpla-html-130125/img/image.jpg")
+        = image_tag "image.jpg"
       .table
-        %ul
-          %li
-            %h6 Creator
-          %li= @item.creator
-        %ul
-          %li
-            %h6 Created date
-          %li= @item.created
-        %ul
-          %li
-            %h6 Owning institution
-          %li
-        %ul
-          %li
-            %h6 Provider
-          %li
-        %ul
-          %li
-            %h6 Publisher
-          %li= @item.publisher
+        -if @item.creator.present?
+          %ul
+            %li
+              %h6 Creator
+            %li= @item.creator
+        - if @item.created.present?
+          %ul
+            %li
+              %h6 Created date
+            %li= @item.created
+        - if @item.publisher.present?
+          %ul
+            %li
+              %h6 Publisher
+            %li= @item.publisher
 
       .detail-bottom
         %h6 Description
         %p= @item.description
 
     .table
-      %ul
-        %li
-          %h6 Location
-        %li= @item.spatial
-      %ul
-        %li
-          %h6 Format
-        %li= @item.format
-      %ul
-        %li
-          %h6 Type
-        %li= @item.type
-      %ul
-        %li
-          %h6 Subject
-        %li= @item.subject
-      %ul
-        %li
-          %h6 Rights
-        %li= @item.rights
-      %ul
-        %li
-          %h6 URL
-        %li= link_to @item.source, @item.source
+      - if @item.spatial.present?
+        %ul
+          %li
+            %h6 Location
+          %li= @item.spatial
+      - if @item.format.present?
+        %ul
+          %li
+            %h6 Format
+          %li= @item.format
+      - if @item.type.present?
+        %ul
+          %li
+            %h6 Type
+          %li= @item.type
+      - if @item.subject.present?
+        %ul
+          %li
+            %h6 Subject
+          %li= @item.subject
+      - if @item.rights.present?
+        %ul
+          %li
+            %h6 Rights
+          %li= @item.rights
+      - if @item.source.present?
+        %ul
+          %li
+            %h6 URL
+          %li= link_to @item.source, @item.source
 
   %aside
     .module.yellow
@@ -87,14 +88,14 @@
           %p= @item.created
           %a View on timeline »
         .moduleRight
-          = image_tag("http://54.245.27.141:3000/dpla-html-130125/img/image.jpg")
+          = image_tag "image.jpg"
       .moduleSection
         .moduleLeft
           %h6 Location
           %p= @item.spatial
           %a View on map »
         .moduleRight
-          = image_tag("http://54.245.27.141:3000/dpla-html-130125/img/image.jpg")
+          = image_tag "image.jpg"
     .module
       %h6 From the colection
       %h5
