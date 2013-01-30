@@ -112,6 +112,8 @@ GEM
       sassy-math (>= 1.5)
     multi_json (1.5.0)
     multi_xml (0.5.2)
+    navigasmic (1.0.4)
+      railties (~> 3.2)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -175,8 +177,6 @@ GEM
     shoulda-matchers (1.4.2)
       activesupport (>= 3.0.0)
       bourne (~> 1.1.2)
-    simple-navigation (3.9.0)
-      activesupport (>= 2.3.2)
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -225,6 +225,7 @@ DEPENDENCIES
   httparty
   jquery-rails
   kaminari
+  navigasmic
   pg
   quiet_assets
   rails
@@ -233,7 +234,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   shoulda
   shoulda-matchers
-  simple-navigation
   simple_form
   sqlite3
   therubyracer
