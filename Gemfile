@@ -16,7 +16,6 @@ end
 gem 'haml'
 gem 'haml-rails'
 gem 'simple_form'
-gem 'simple-navigation'
 gem 'breadcrumbs_on_rails'
 gem 'kaminari'
 gem 'navigasmic'
