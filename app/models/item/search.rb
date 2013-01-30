@@ -36,8 +36,8 @@ class Item
             facets[:subject] = values.reject { |k,v| refine[:subject].include? k }
           when :'language.name'
             facets[:language] = values.reject { |k,v| refine[:language].include? k }
-          when :type
-            facets[:type] = values.reject { |k,v| refine[:type].include? k }
+          else
+            facets[key] = values.reject { |k,v| refine[key].include? k }
           end
         end
       end
