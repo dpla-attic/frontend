@@ -1511,7 +1511,7 @@ aside .module.first { margin: 0; }
     position: relative;
 }
 .moreInfo {
-    background: url("slide/moreInfo.png") no-repeat scroll 0 0 transparent;
+    background: url("/assets/slide/moreInfo.png") no-repeat scroll 0 0 transparent;
     bottom: 12px;
     display: block;
     height: 31px;
@@ -1610,7 +1610,7 @@ html[xmlns] .slides {display: block;}
 
 /* Direction Nav */
 .flex-direction-nav {*height: 0;}
-.flex-direction-nav a {width: 31px; height: 31px; margin: 0; display: block; background: url(navigation.png) no-repeat left 0; position: absolute; top: 85%; z-index: 10; cursor: pointer; text-indent: -9999px; }
+.flex-direction-nav a {width: 31px; height: 31px; margin: 0; display: block; background: url(/assets/navigation.png) no-repeat left 0; position: absolute; top: 85%; z-index: 10; cursor: pointer; text-indent: -9999px; }
 .flex-direction-nav .flex-next {background-position: right 0; right: 17px; }
 .flex-direction-nav .flex-prev {right: 48px;}
 .flex-direction-nav .flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
