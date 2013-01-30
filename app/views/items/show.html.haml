@@ -25,8 +25,9 @@
   %h1= @item.title
   %article
     .FeatureContent
-      .contentBox
-        = image_tag "image.jpg"
+      - if @item.preview_source_url.present?
+        .contentBox
+          = image_tag @item.preview_source_url
       .table
         -if @item.creator.present?
           %ul
@@ -79,25 +80,3 @@
           %li
             %h6 URL
           %li= link_to @item.source, @item.source
-
-  %aside
-    .module.yellow
-      .moduleSection
-        .moduleLeft
-          %h6 Created date
-          %p= @item.created
-          %a View on timeline »
-        .moduleRight
-          = image_tag "image.jpg"
-      .moduleSection
-        .moduleLeft
-          %h6 Location
-          %p= @item.spatial
-          %a View on map »
-        .moduleRight
-          = image_tag "image.jpg"
-    .module
-      %h6 From the colection
-      %h5
-        %a
-      %p Description of this collection
