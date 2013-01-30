@@ -39,7 +39,7 @@
           - @search.results.each do |item|
             %section
               .searchLeft
-                %h6= item.format
+                %h6= item.type
                 - if item.id.present?
                   %h4= link_to item.title, item_path(item.id)
                 - else

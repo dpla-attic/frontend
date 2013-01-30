@@ -17,10 +17,10 @@
           After
           = @search.refine[:after]
           = link_to '×', params.reject { |k,v| k.to_sym.eql? :after }
-      - @search.refine[:format].each do |refine|
+      - @search.refine[:type].each do |refine|
         %li
           = refine
-          = link_to '×', refine_path(:mime, refine, remove: true)
+          = link_to '×', refine_path(:type, refine, remove: true)
       - @search.refine[:language].each do |refine|
         %li
           = refine

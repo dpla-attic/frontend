@@ -50,27 +50,27 @@
         .formRow
           = submit_tag 'Update', class: 'button', name: nil
 
-  - if @search.refine[:format].present? or @search.facets[:format].present?
+  - if @search.refine[:type].present? or @search.facets[:type].present?
     .module.yellow
-      %h6.open By Subject
-      - if @search.refine[:format].present?
+      %h6.open By Format
+      - if @search.refine[:type].present?
         .slidingDiv
-          - @search.refine[:format].each do |refine|
+          - @search.refine[:type].each do |refine|
             .refineResult
               %span= refine
-              = link_to '×', refine_path(:mime, refine, remove: true)
-      - if @search.facets[:format].present?
+              = link_to '×', refine_path(:type, refine, remove: true)
+      - if @search.facets[:type].present?
         .slidingDiv
           .locations
             %ul
-              - @search.facets[:format].each do |name, count|
+              - @search.facets[:type].each do |name, count|
                 %li
-                  = link_to name, refine_path(:mime, name)
+                  = link_to name, refine_path(:type, name)
                   %span= count
 
   - if @search.refine[:language].present? or @search.facets[:language].present?
     .module.yellow
-      %h6.open By Subject
+      %h6.open By Language
       - if @search.refine[:language].present?
         .slidingDiv
           - @search.refine[:language].each do |refine|

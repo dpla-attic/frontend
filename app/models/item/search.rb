@@ -1,7 +1,7 @@
 class Item
   class Search < ActiveRecord::Base
-    ACCEPLABLE_PARAMS  = [:q, :subject, :mime, :after, :before, :language, :page, :page_size, :sort_by, :sort_order].freeze
-    DEFAULT_CONDITIONS = {facets: %w(subject.name language.name format)}.freeze
+    ACCEPLABLE_PARAMS  = [:q, :subject, :type, :after, :before, :language, :page, :page_size, :sort_by, :sort_order].freeze
+    DEFAULT_CONDITIONS = {facets: %w(subject.name language.name type)}.freeze
 
     serialize :params, Hash
 
@@ -22,7 +22,7 @@ class Item
       {}.tap do |refine|
         refine[:subject] = Array(params[:subject])
         refine[:language] = Array(params[:language])
-        refine[:format] = Array(params[:mime])
+        refine[:type] = Array(params[:type])
         refine[:after] = get_valid_date(params[:after])
         refine[:before] = get_valid_date(params[:before])
       end
@@ -36,8 +36,8 @@ class Item
             facets[:subject] = values.reject { |k,v| refine[:subject].include? k }
           when :'language.name'
             facets[:language] = values.reject { |k,v| refine[:language].include? k }
-          when :format
-            facets[:format] = values.reject { |k,v| refine[:format].include? k }
+          when :type
+            facets[:type] = values.reject { |k,v| refine[:type].include? k }
           end
         end
       end
@@ -46,9 +46,7 @@ class Item
     def conditions
       DEFAULT_CONDITIONS.dup.tap do |result|
         params.each do |key, value|
-          if :mime == key
-            result[:format] = value
-          elsif [:after, :before].include? key
+          if [:after, :before].include? key
             result[:created] ||= {}
             result[:created][key] = get_valid_date(value)
           else
