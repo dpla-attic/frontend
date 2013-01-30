@@ -112,6 +112,8 @@ GEM
       sassy-math (>= 1.5)
     multi_json (1.5.0)
     multi_xml (0.5.2)
+    navigasmic (1.0.4)
+      railties (~> 3.2)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -225,6 +227,7 @@ DEPENDENCIES
   httparty
   jquery-rails
   kaminari
+  navigasmic
   pg
   quiet_assets
   rails

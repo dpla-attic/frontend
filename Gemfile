@@ -19,6 +19,7 @@ gem 'simple_form'
 gem 'simple-navigation'
 gem 'breadcrumbs_on_rails'
 gem 'kaminari'
+gem 'navigasmic'
 
 gem 'httparty'
 gem 'devise'

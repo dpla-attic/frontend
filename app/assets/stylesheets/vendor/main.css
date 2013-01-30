@@ -279,6 +279,7 @@ header li { float: left; font-size: 1.200em; line-height: 0.900em;  }
 
 header a { color: #2b2b2b; text-decoration: none; }
 header .active a { color: #dd4e00; border-bottom: 3px solid #dd4e00; }
+footer .active a { color: #dd4e00; border-bottom: 3px solid #dd4e00; }
 
 .topNav { overflow: hidden; }
 
