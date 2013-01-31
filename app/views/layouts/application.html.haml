@@ -20,37 +20,11 @@
         = link_to root_path, class: :logo do
           = image_tag "logo.jpg", :alt => "DPLA: Digital Public Library of America"
         %a.menu-btn{:href => ""} Menu
-        %nav.topNav= render_navigation context: :top, level: 1
-        %nav.MainNav= render_navigation context: :main
+        %nav.topNav= render partial: 'shared/top_navigation'
+        %nav.MainNav= render partial: 'shared/main_navigation'
       = yield
       %footer
-        %nav
-          %ul
-            %li
-              %a{:href => ""} Home
-            %li
-              %a{:href => ""} Subjects
-            %li
-              %a{:href => ""} Collections
-            %li
-              %a{:href => ""} Exhibitions
-            %li
-              %a{:href => ""} Map
-            %li
-              %a{:href => ""} Timeline
-            %li
-              %a{:href => ""} App library
-          %ul.footer-navTwo
-            %li
-              %a{:href => ""} Help
-            %li
-              %a{:href => ""} About
-            %li
-              %a{:href => ""} News
-            %li
-              %a{:href => ""} Contact
-            %li
-              %a{:href => ""} Accessibility
+        %nav= render partial: 'shared/footer_navigation'
         .footerBottom
           %ul.social.icons
             %li.facebook

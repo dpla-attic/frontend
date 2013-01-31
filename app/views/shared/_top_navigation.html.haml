@@ -1,0 +1,8 @@
+= semantic_navigation config: :bootstrap do |n|
+  - n.item 'About', about_root_path
+  - n.item 'News', '#'
+  - n.item 'Contact', '#'
+  - n.item 'Login', new_user_session_path, class: 'bg'
+  - n.item 'Sign Up', new_user_registration_path, class: 'bg last'
+  -if current_user.present? 
+    - n.item 'Sign Out', new_user_registration_path, class: 'bg last'
