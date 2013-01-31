@@ -1,5 +1,5 @@
 DplaPortal::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => "registrations", :confirmations => "confirmations" }
 
   scope 'about', as: :about do
     match 'overview',       to: 'pages#overview'
@@ -15,4 +15,6 @@ DplaPortal::Application.routes.draw do
   end
 
   root to: 'pages#home'
+  match '/welcome' => 'pages#welcome'
+  
 end

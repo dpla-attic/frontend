@@ -1,4 +1,8 @@
 %article
+  - unless flash[:notice].blank?
+    %p{ :class => "flash" }= flash[:notice]
+  - unless flash[:alert].blank?
+    %p{ :class => "flash" }= flash[:alert]
   .content
     %section.left
       .slide-container
