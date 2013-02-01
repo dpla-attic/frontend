@@ -40,7 +40,7 @@ module DPLA
           if value.is_a? Hash
             value.each { |subkey,value| query << "#{key}.#{subkey}=#{encode_uri(value)}" }
           else
-            separator = :facets == key.to_sym ? ',' : '+AND+'
+            separator = [:facets, :fields].include?(key.to_sym) ? ',' : '+AND+'
             value = Array(value).map { |v| encode_uri(v) }.join(separator)
             query << "#{key}=#{value}"
           end

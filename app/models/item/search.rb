@@ -1,7 +1,11 @@
 class Item
   class Search < ActiveRecord::Base
-    ACCEPLABLE_PARAMS  = [:q, :subject, :type, :after, :before, :language, :page, :page_size, :sort_by, :sort_order].freeze
-    DEFAULT_CONDITIONS = {facets: %w(subject.name language.name type)}.freeze
+    ACCEPLABLE_PARAMS  = [
+      :q, :subject, :type, :after, :before, :language, :page, :page_size, :sort_by, :sort_order
+    ]
+    DEFAULT_CONDITIONS = {
+      facets: %w(subject.name language.name type)
+    }
 
     serialize :params, Hash
 
@@ -44,7 +48,7 @@ class Item
     end
 
     def conditions
-      DEFAULT_CONDITIONS.dup.tap do |result|
+      {}.merge(DEFAULT_CONDITIONS).tap do |result|
         params.each do |key, value|
           if [:after, :before].include? key
             result[:created] ||= {}

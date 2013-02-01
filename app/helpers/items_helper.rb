@@ -22,10 +22,10 @@ module ItemsHelper
     options = [].tap do |result|
       {
         relevance: { sort_by: nil, sort_order: nil },
-        a2z:       { sort_by: 'title', sort_order: 'asc' },
-        z2a:       { sort_by: 'title', sort_order: 'desc' },
-        old2new:   { sort_by: 'created', sort_order: 'asc' },
-        new2old:   { sort_by: 'created', sort_order: 'desc' }
+        a2z:       { sort_by: 'subject.name', sort_order: 'asc' },
+        z2a:       { sort_by: 'subject.name', sort_order: 'desc' },
+        old2new:   { sort_by: 'created.start', sort_order: 'asc' },
+        new2old:   { sort_by: 'created.start', sort_order: 'desc' }
       }
         .each do |key, conditions|
           selected = conditions.all? { |k,v| params[k].eql? v }
