@@ -1,7 +1,7 @@
 DplaPortal::Application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations", :confirmations => "confirmations" }
 
-  scope 'about', as: :about do
+  scope 'about', as: :about, via: :get do
     match 'overview',       to: 'pages#overview'
     match 'leadership',     to: 'pages#leadership'
     match 'workstreams',    to: 'pages#workstreams'
@@ -10,9 +10,10 @@ DplaPortal::Application.routes.draw do
     root to: redirect('/about/overview')
   end
 
-  resources :items, only: :show, path: 'item', id: /.*/ do
-    get :search, on: :collection
-  end
+  get '/item/:id',       to: 'items#show', as: 'item'
+  get '/search',         to: 'items#search', as: 'search_items'
+  get '/timeline',       to: 'timeline#decades', as: 'timeline_decades'
+  get '/timeline/:year', to: 'timeline#year', as: 'timeline_year', year: /\d{1,4}/
 
   root to: 'pages#home'
   match '/welcome' => 'users#welcome'
