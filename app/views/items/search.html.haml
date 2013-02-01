@@ -52,7 +52,8 @@
                     View Object
                     %span.icon-view-object{"aria-hidden" => "true"}
               .searchRight
-                = image_tag item.preview_source_url
+                - if item.preview_source_url
+                  = image_tag item.preview_source_url
     = render partial: 'items/search/sidebar'
     #resultsBarBottom.resultsBar
       = render partial: 'items/search/paginator'
