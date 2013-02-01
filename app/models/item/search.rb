@@ -1,6 +1,6 @@
 class Item
   class Search < ActiveRecord::Base
-    ACCEPLABLE_PARAMS  = [
+    ACCEPTABLE_PARAMS  = [
       :q, :subject, :type, :after, :before, :language, :page, :page_size, :sort_by, :sort_order
     ]
     DEFAULT_CONDITIONS = {
@@ -12,7 +12,7 @@ class Item
     def self.build(params)
       params = {}.tap do |p|
         params.each do |key, value|
-          p[key.to_sym] = value if ACCEPLABLE_PARAMS.include? key.to_sym
+          p[key.to_sym] = value if ACCEPTABLE_PARAMS.include? key.to_sym
         end
       end
       self.new params: params
