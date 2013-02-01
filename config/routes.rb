@@ -15,6 +15,6 @@ DplaPortal::Application.routes.draw do
   end
 
   root to: 'pages#home'
-  match '/welcome' => 'pages#welcome'
+  match '/welcome' => 'users#welcome'
   
 end

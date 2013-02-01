@@ -8,6 +8,5 @@ class User < ActiveRecord::Base
 
   def active_for_authentication?
     true
-    #confirmed? || confirmation_period_valid?
   end
 end

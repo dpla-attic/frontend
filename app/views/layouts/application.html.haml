@@ -22,6 +22,8 @@
         %a.menu-btn{:href => ""} Menu
         %nav.topNav= render partial: 'shared/top_navigation'
         %nav.MainNav= render partial: 'shared/main_navigation'
+      - unless flash[:notice].blank?
+        %p{ :class => "flash" }= flash[:notice]
       = yield
       %footer
         %nav= render partial: 'shared/footer_navigation'
