@@ -1,7 +1,7 @@
 class Item
   class Search < ActiveRecord::Base
     ACCEPTABLE_PARAMS  = [
-      :q, :subject, :type, :after, :before, :language, :page, :page_size, :sort_by, :sort_order
+      :q, :subject, :type, :start, :end, :language, :page, :page_size, :sort_by, :sort_order
     ]
     DEFAULT_CONDITIONS = {
       facets: %w(subject.name language.name type)
@@ -27,8 +27,8 @@ class Item
         refine[:subject] = Array(params[:subject])
         refine[:language] = Array(params[:language])
         refine[:type] = Array(params[:type])
-        refine[:after] = get_valid_date(params[:after])
-        refine[:before] = get_valid_date(params[:before])
+        refine[:start] = date_from_params(params[:start])
+        refine[:end] = date_from_params(params[:end])
       end
     end
 
@@ -50,9 +50,9 @@ class Item
     def conditions
       {}.merge(DEFAULT_CONDITIONS).tap do |result|
         params.each do |key, value|
-          if [:after, :before].include? key
+          if [:start, :end].include? key
             result[:created] ||= {}
-            result[:created][key] = get_valid_date(value)
+            result[:created][key] = date_from_params(value).to_s
           else
             result[key] = value
           end
@@ -66,11 +66,13 @@ class Item
       @results = Item.where(conditions)
     end
 
-    def get_valid_date(date, options = {})
-      if date.present? && date[:year].present?
-        month = date[:month].present? ? date[:month] : (options[:before] ? '12' : '1')
-        day   = date[:day].present?   ? date[:day]   : (options[:before] ? '31' : '1')
-        "#{date[:year]}-#{month}-#{day}"
+    def date_from_params(date, options = {})
+      if date.is_a? Hash
+        month = date[:month].present? ? date[:month] : (options[:start] ? '12' : '1')
+        day   = date[:day].present?   ? date[:day]   : (options[:start] ? '31' : '1')
+        Date.new date[:year], month, day
+      elsif date.present?
+        Date.new *date.split('-').map(&:to_i)
       end
     end
   end

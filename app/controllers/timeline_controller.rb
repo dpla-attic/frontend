@@ -3,5 +3,6 @@ class TimelineController < ApplicationController
   end
 
   def year
+    @search = Item::Search.build params.deep_merge(start: params[:year])
   end
 end
