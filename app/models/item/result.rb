@@ -10,8 +10,11 @@ class Item
       @facets = {}
       response[:facets].map do |key, value|
         @facets[key.to_sym] ||= {}
-        value['terms'].each do |term|
-          @facets[key.to_sym][term['term']] = term['count']
+        case value['_type']
+        when 'terms'
+          value['terms'].each { |term| @facets[key.to_sym][term['term']] = term['count'] }
+        when 'date_histogram'
+          value['entries'].each { |entry| @facets[key.to_sym][entry['time']] = entry['count'] }
         end
       end
     end

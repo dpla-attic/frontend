@@ -3,11 +3,9 @@ class Item
     ACCEPTABLE_PARAMS  = [
       :q, :subject, :type, :start, :end, :language, :page, :page_size, :sort_by, :sort_order
     ]
-    DEFAULT_CONDITIONS = {
-      facets: %w(subject.name language.name type)
-    }
 
     serialize :params, Hash
+    attr_reader :results
 
     def self.build(params)
       params = {}.tap do |p|
@@ -36,6 +34,8 @@ class Item
             facets[:subject] = values.reject { |k,v| refine[:subject].include? k }
           when :'language.name'
             facets[:language] = values.reject { |k,v| refine[:language].include? k }
+          when :'created.start.year'
+            facets[:start] = values
           else
             facets[key] = values.reject { |k,v| refine[key].include? k }
           end
@@ -43,8 +43,10 @@ class Item
       end
     end
 
-    def conditions
-      {}.merge(DEFAULT_CONDITIONS).tap do |result|
+    # Get conditions from params
+    #
+    def conditions_from_params(options = {})
+      {}.tap do |result|
         params.each do |key, value|
           if [:start, :end].include? key
             result[:created] ||= {}
@@ -56,25 +58,52 @@ class Item
       end
     end
 
-    # Results for normally search page
+    # Common method for retrieving results.
+    # Returns last fetched result if exists
+    # or fetch result_list if not nothing fetched yet
     def results
-      @results ||= fetch
+      return @response if @response.present?
+      results_list
+    end
+
+    # Results for normally search page
+    def results_list
+      return @response if fetched_for?(__method__)
+      conditions = conditions_from_params.merge(
+        facets: ['subject.name', 'language.name', 'type']
+      )
+      fetch conditions, __method__
     end
 
     # Results for timeline page
-    def timeline
-      @results ||= fetch(conditions)
+    def results_timeline
+      return @response if fetched_for?(__method__)
+      conditions = conditions_from_params.merge(
+        page_size: 1,
+        fields: 'id',
+        facets: 'created.start.year'
+      )
+      fetch conditions, __method__
     end
 
     # Results for map page
-    def spatial
+    def results_spatial
       raise 'Not implemented yet'
     end
 
     private
 
-    def fetch
-      @results = Item.where(conditions)
+    def fetch(cond, mode = nil)
+      fetched! mode if mode
+      @response = Item.where cond
+    end
+
+    def fetched_for?(mode)
+      @last_fetched_mode.eql? mode
+    end
+
+    def fetched!(mode)
+      @last_fetched_mode = mode
     end
 
     def date_from_params(date, options = {})
