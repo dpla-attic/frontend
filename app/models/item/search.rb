@@ -18,10 +18,6 @@ class Item
       self.new params: params
     end
 
-    def results
-      @results ||= fetch
-    end
-
     def refine
       {}.tap do |refine|
         refine[:subject] = Array(params[:subject])
@@ -60,6 +56,21 @@ class Item
       end
     end
 
+    # Results for normally search page
+    def results
+      @results ||= fetch
+    end
+
+    # Results for timeline page
+    def timeline
+      @results ||= fetch(conditions)
+    end
+
+    # Results for map page
+    def map
+      raise 'Not implemented yet'
+    end
+
     private
 
     def fetch
@@ -67,12 +78,12 @@ class Item
     end
 
     def date_from_params(date, options = {})
-      if date.is_a? Hash
+      if date.is_a? Hash and date[:year].present?
         month = date[:month].present? ? date[:month] : (options[:start] ? '12' : '1')
         day   = date[:day].present?   ? date[:day]   : (options[:start] ? '31' : '1')
-        Date.new date[:year], month, day
-      elsif date.present?
-        Date.new *date.split('-').map(&:to_i)
+        Date.new *[date[:year], month, day].map(&:to_i) rescue nil
+      elsif date.is_a?(String) and date.present?
+        Date.new *date.split('-').map(&:to_i) rescue nil
       end
     end
   end

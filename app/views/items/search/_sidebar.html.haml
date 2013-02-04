@@ -22,31 +22,31 @@
   .module.yellow
     %h6.open By Date
     .slidingDiv
-      - if @search.refine[:before].present?
+      - if @search.refine[:end].present?
         .refineResult
           %span Before
-          = @search.refine[:before]
-          = link_to '×', params.reject { |k,v| k.to_sym.eql? :before } 
-      - if @search.refine[:after].present?
+          = @search.refine[:end]
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :end } 
+      - if @search.refine[:start].present?
         .refineResult
           %span After
-          = @search.refine[:after]
-          = link_to '×', params.reject { |k,v| k.to_sym.eql? :after }  
+          = @search.refine[:start]
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :start }  
     .slidingDiv
       = form_tag(search_items_path, method: :get, authenticity_token: false, class: 'moduleForm') do
         = preserved_search_fields
         .formRow
           %label From
-          - after = params[:after] || {}
-          = select_month after[:month].to_i, {prompt: 'Month'}, name: 'after[month]', class: 'daterange month', id: :after_month
-          = select_day   after[:day].to_i, {prompt: 'Day'}, name: 'after[day]', class: 'daterange day', id: :after_day
-          = text_field nil, nil, value: after[:year], name: 'after[year]', placeholder: 'Year', class: 'daterange', id: :after_year
+          - start_date = params[:start] || {}
+          = select_month start_date[:month].to_i, {prompt: 'Month'}, name: 'start[month]', class: 'daterange month', id: :start_month
+          = select_day   start_date[:day].to_i, {prompt: 'Day'}, name: 'start[day]', class: 'daterange day', id: :start_day
+          = text_field nil, nil, value: start_date[:year], name: 'start[year]', placeholder: 'Year', class: 'daterange', id: :start_year
         .formRow
           %label To
-          - before = params[:before] || {}
-          = select_month before[:month].to_i, {prompt: 'Month'}, name: 'before[month]', class: 'daterange month', id: :before_month
-          = select_day   before[:day].to_i, {prompt: 'Day'}, name: 'before[day]', class: 'daterange day', id: :before_day
-          = text_field nil, nil, value: before[:year], name: 'before[year]', placeholder: 'Year', class: 'daterange', id: :before_year
+          - end_date = params[:end] || {}
+          = select_month end_date[:month].to_i, {prompt: 'Month'}, name: 'end[month]', class: 'daterange month', id: :end_month
+          = select_day   end_date[:day].to_i, {prompt: 'Day'}, name: 'end[day]', class: 'daterange day', id: :end_day
+          = text_field nil, nil, value: end_date[:year], name: 'end[year]', placeholder: 'Year', class: 'daterange', id: :end_year
         .formRow
           = submit_tag 'Update', class: 'button', name: nil
 
