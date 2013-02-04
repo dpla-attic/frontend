@@ -67,7 +67,7 @@ class Item
     end
 
     # Results for map page
-    def map
+    def spatial
       raise 'Not implemented yet'
     end
 
