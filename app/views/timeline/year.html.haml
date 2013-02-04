@@ -1,10 +1,116 @@
-%p
-  Start
-  = @search.results.start
-%p
-  Count
-  = @search.results.count
-%p
-  Limit
-  = @search.results.limit
-%p= @search.results
+.layoutTwo.timeline
+  %section.searchRow
+    .searchRowLeft
+    .searchRowRight
+      .searchViews
+        %span View:
+        %ul
+          %li.active
+            %a{:href => ""}
+              %span.icon-view-list{"aria-hidden" => "true"}
+          %li
+            %a.viewTwo{:href => ""}
+              %span.icon-view-map{"aria-hidden" => "true"}
+          %li
+            %a.viewThree{:href => ""}
+              %span.icon-view-time{"aria-hidden" => "true"}
+      %a.search-btn{:href => ""} Search
+      = form_tag('', method: :get, authenticity_token: false, id: :searchBox) do
+        = preserved_search_fields without: :q
+        = text_field_tag :q, params[:q], placeholder: 'Search the Library'
+        = submit_tag 'Search', class: 'searchBtn', name: nil
+
+  %h1 Timeline
+  .searchResults
+    %h4
+      Your search
+      - if params[:q].present?
+        for
+        %span= params[:q]
+      returned 
+      = number_with_delimiter @search.results.count, delimiter: ','
+      results.
+
+  .controls
+    #toggle
+      %span.icon-arrow-thin-left{"aria-hidden" => "true"} Refine
+    #toggle.mobile.Marticle
+      %span.icon-arrow-thin-left{"aria-hidden" => "true"} Refine
+    #toggle.mobile.Maside
+      Timeline
+      %span.icon-arrow-thin-right{"aria-hidden" => "true"}
+
+  .timeContainer
+    %article.timeline
+      .timelineModuleOuter
+        .timelineModule
+
+          .scrubber
+            %span.arrow
+          %ul.centuries
+            %li 1000
+            %li 1100
+            %li 1200
+            %li 1300
+            %li 1400
+            %li 1500
+            %li 1600
+            %li 1700
+            %li 1800
+            %li 1900
+            %li 2000
+          %ul.bars
+            - 110.times do
+              %li{style: "height: #{[5,10,15,20].sample}px;"}
+
+      .timelineView
+        View:
+        %a.DecadesTab{href:"#"} Decades
+        %a.selected.yearTab{href:"#"} Years
+
+      / .Decades
+
+      .timelineContainer
+        .timeline-row
+          %span.next
+          %span.prev
+
+          .timelineContent
+            .timelineResults
+
+        .timeline-row
+          %span.next
+          %span.prev
+          .year
+            %h3= params[:year]
+          .timelineContent
+            .timelineResults
+              %h2
+                = number_with_delimiter @search.results.count, delimiter: ','
+                items
+              - @search.results.each do |item|
+                %section
+                  .sectionLeft
+                    %h6= item.type
+                    - if item.id.present?
+                      %h4= link_to item.title, item_path(item.id)
+                    - else
+                      %h4= item.title
+                    %p
+                      %span= item.creator
+                    %p= item.description
+                    - if item.source.present?
+                      = link_to item.source, class: 'ViewObject' do
+                        View Object
+                        %span.icon-view-object{"aria-hidden" => "true"}
+                  .sectionRight
+                    - if item.preview_source_url
+                      = image_tag item.preview_source_url
+        .timeline-row
+          %span.next
+          %span.prev
+
+          .timelineContent
+            .timelineResults
+
+  = render partial: 'items/search/sidebar'
