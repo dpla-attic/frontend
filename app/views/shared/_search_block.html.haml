@@ -1,0 +1,20 @@
+%section.searchRow
+  .searchRowLeft
+  .searchRowRight
+    .searchViews
+      %span View:
+      %ul
+        %li.active
+          %a{:href => ""}
+            %span.icon-view-list{"aria-hidden" => "true"}
+        %li
+          %a.viewTwo{:href => ""}
+            %span.icon-view-map{"aria-hidden" => "true"}
+        %li
+          %a.viewThree{:href => ""}
+            %span.icon-view-time{"aria-hidden" => "true"}
+    %a.search-btn{:href => ""} Search
+    = form_tag('', method: :get, authenticity_token: false, id: :searchBox) do
+      = preserved_search_fields without: :q
+      = text_field_tag :q, params[:q], placeholder: 'Search the Library'
+      = submit_tag 'Search', class: 'searchBtn', name: nil

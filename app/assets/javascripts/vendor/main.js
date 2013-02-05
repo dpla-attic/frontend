@@ -26,13 +26,13 @@ $(window).load(function() {
       $('.flex-direction-nav a').removeClass('hover');
 	});
 
-  $('.DecadesTab').click(function() {
-    $(this).addClass('selected');
-    $('.yearTab').removeClass('selected');
-    $('.timelineContainer').hide();
-    $('.Decades').show();
-    return false;
-  });
+  // $('.DecadesTab').click(function() {
+  //   $(this).addClass('selected');
+  //   $('.yearTab').removeClass('selected');
+  //   $('.timelineContainer').hide();
+  //   $('.Decades').show();
+  //   return false;
+  // });
 
   $('.search-btn').click(function() {
     $('.searchViews, .search-btn').hide();
@@ -56,13 +56,13 @@ $(window).load(function() {
     }
   );
 
-  $('.yearTab').click(function() {
-    $(this).addClass('selected');
-    $('.DecadesTab').removeClass('selected');
-    $('.Decades').hide();
-    $('.timelineContainer').show();
-    return false;
-  });
+  // $('.yearTab').click(function() {
+  //   $(this).addClass('selected');
+  //   $('.DecadesTab').removeClass('selected');
+  //   $('.Decades').hide();
+  //   $('.timelineContainer').show();
+  //   return false;
+  // });
 
 	$('.next').click(function() {
 		if($(this).parent().next().hasClass('timeline-row')) {
