@@ -15,6 +15,15 @@ class Search < ActiveRecord::Base
     self.new params: params
   end
 
+  def for(mode)
+    @fetch_mode = mode
+    self
+  end
+
+  def fetch_mode
+    @fetch_mode || :list
+  end
+
   def refine
     {}.tap do |refine|
       refine[:subject] = Array(params[:subject])
@@ -42,60 +51,39 @@ class Search < ActiveRecord::Base
     end
   end
 
-  # Get conditions from params
-  #
-  def conditions_from_params(options = {})
-    {}.tap do |result|
+  # Get conditions from params in accordance with
+  # current fetch mode
+  def conditions(options = {})
+    {}.tap do |c|
       params.each do |key, value|
-        if [:start, :end].include? key
-          result[:created] ||= {}
-          result[:created][key] = date_from_params(value).to_s
+        if [:start, :end, :before, :after].include? key
+          c[:created] ||= {}
+          c[:created][key] = date_from_params(value).to_s
         else
-          result[key] = value
+          c[key] = value
         end
+      end
+
+      case fetch_mode
+      when :timeline
+        c[:page_size] = 1
+        c[:fields] = 'id'
+        c[:facets] = 'created.start.year'
+      else
+        c[:facets] = ['subject.name', 'language.name', 'type']
       end
     end
   end
 
   # Common method for retrieving results.
   # Returns last fetched result if exists
-  # or fetch result_list if not nothing fetched yet
+  # or fetch if not fetched yet
   def results
-    return @response if @response.present?
-    results_list
-  end
-
-  # Results for normally search page
-  def results_list
-    return @response if fetched_for?(__method__)
-    conditions = conditions_from_params.merge(
-      facets: ['subject.name', 'language.name', 'type']
-    )
-    fetch conditions, __method__
-  end
-
-  # Results for timeline page
-  def results_timeline
-    return @response if fetched_for?(__method__)
-    conditions = conditions_from_params.merge(
-      page_size: 1,
-      fields: 'id',
-      facets: 'created.start.year'
-    )
-    fetch conditions, __method__
-  end
-
-  # Results for map page
-  def results_spatial
-    raise 'Not implemented yet'
+    return @results if fetched_for? fetch_mode
+    fetch conditions, fetch_mode
   end
 
   private
-
-  def fetch(cond, mode = nil)
-    fetched! mode if mode
-    @response = Item.where cond
-  end
 
   def fetched_for?(mode)
     @last_fetched_mode.eql? mode
@@ -103,6 +91,13 @@ class Search < ActiveRecord::Base
 
   def fetched!(mode)
     @last_fetched_mode = mode
+  end
+
+  # Retrieve data from API by condition
+  # Save current fetch mode(kind of conditions) if present
+  def fetch(cond, mode = nil)
+    fetched! mode if mode
+    @results = Item.where cond
   end
 
   def date_from_params(date, options = {})
