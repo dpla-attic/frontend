@@ -133,7 +133,7 @@ label { font: 0.867em/1.200em 'source_sans_pro_semiboldRg', arial, sans-serif; d
     font-size: 20px;
     float: right;
 }
-#searchBox input[type="text"] {
+input[type="text"] {
     border: medium none;
     color: #222;
     font: 16px/18px arial;

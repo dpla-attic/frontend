@@ -45,7 +45,7 @@
         = select_day   end_date[:day].to_i, {prompt: 'Day'}, name: 'end[day]', class: 'daterange day', id: :end_day
         = text_field nil, nil, value: end_date[:year], name: 'end[year]', placeholder: 'Year', class: 'daterange', id: :end_year
       .formRow
-        = submit_tag 'Update', class: 'button', name: nil
+        = submit_tag 'Update', class: 'btn orange', name: nil
 
 - if @search.refine[:type].present? or @search.facets[:type].present?
   .module.yellow
