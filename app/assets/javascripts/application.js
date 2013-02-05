@@ -12,6 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require search.js.coffee
+
 //= require vendor/jquery.mobile-1.2.0.min.js
 //= require vendor/jquery.jcarousel.min.js
 //= require vendor/jquery.galleriffic.js
