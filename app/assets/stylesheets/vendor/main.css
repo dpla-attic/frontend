@@ -122,7 +122,7 @@ select.day { width: 20.735786%; margin: 0 3% 0 3.6789298%; }
 label { font: 0.867em/1.200em 'source_sans_pro_semiboldRg', arial, sans-serif; display: block; }
 
 input[type="submit"] {
-    background: url("../img/search-btn.png") no-repeat scroll center 0 transparent;
+    background: url("/assets/search-btn.png") no-repeat scroll center 0 transparent;
     border: medium none;
     display: inline-block;
     height: 41px;
@@ -209,7 +209,7 @@ a:hover { text-decoration: underline; color: #2b2b2b; }
    LAYOUT
    ========================================================================== */
 body {
-    background: url('../img/background.jpg') repeat-x left top #fff;
+    background: url('/assets/background.jpg') repeat-x left top #fff;
     font: 0.938em/1.4em 'source_sans_proregular', arial, sans-serif;
 }
 
@@ -547,7 +547,7 @@ aside .module.yellow {
     border-color: #e6a425;
 }
 aside .module.line {
-    background: url("../img/line.jpg") repeat-x scroll center center #EDEDED;
+    background: url("/assets/line.jpg") repeat-x scroll center center #EDEDED;
 }
 .map aside .module {
     margin: 10px 0 0 0;
@@ -715,11 +715,11 @@ aside .module h6 {
     margin: 0 0 0.9em;
 }
 h6.open {
-    background: url(../img/yellow-close.png) no-repeat right center;
+    background: url(/assets/yellow-close.png) no-repeat right center;
     cursor: pointer;
 }
 h6.close {
-    background: url(../img/yellow-open.png) no-repeat right center;
+    background: url(/assets/yellow-open.png) no-repeat right center;
     cursor: pointer;
     display: block;
 }
@@ -882,7 +882,7 @@ aside .moduleSection p { margin: 0 0 10px; }
     float: left;
     list-style: none;
     font-size: 0.867em;
-    background: url(../img/slash.jpg) no-repeat left center;
+    background: url(/assets/slash.jpg) no-repeat left center;
     padding: 0 0 0 15px;
 }
 .breadCrumbs li:first-child {
@@ -915,7 +915,7 @@ aside .moduleSection p { margin: 0 0 10px; }
     float: left;
     list-style: none;
     font-size: 1.400em;
-    background: url("../img/yearBar.jpg") no-repeat scroll center bottom #6592A6;
+    background: url("/assets/yearBar.jpg") no-repeat scroll center bottom #6592A6;
     padding: 0 0 10px;
     margin: 0 0 0 0.48%;
 }
@@ -961,7 +961,7 @@ aside .moduleSection p { margin: 0 0 10px; }
     width: 9.27%;
     float: left;
     text-align: center;
-    background: url(../img/timlineLine.jpg) no-repeat center bottom;
+    background: url(/assets/timlineLine.jpg) no-repeat center bottom;
 }
 
 .centuries li:first-child {
@@ -980,7 +980,7 @@ aside .moduleSection p { margin: 0 0 10px; }
     position: absolute;
     top: -3px;
     cursor: pointer;
-    background: url(../img/slideBG.png) repeat;
+    background: url(/assets/slideBG.png) repeat;
 }
 
 
@@ -1425,7 +1425,7 @@ aside .module.first { margin: 0; }
     padding: 22px 0 0 0;
 }
 .year h3 {
-    background: url("../img/yearBar.jpg") no-repeat scroll center bottom #6592A6;
+    background: url("/assets/yearBar.jpg") no-repeat scroll center bottom #6592A6;
     color: #FFFFFF;
     font: 1.86em/0.79em 'source_sans_pro_semiboldRg', arial, sans-serif;
     padding: 0 0 10px;
@@ -1487,7 +1487,7 @@ aside .module.first { margin: 0; }
 }
 
 .next {
-    background: url("../img/arrows.png") no-repeat scroll right 0 transparent;
+    background: url("/assets/arrows.png") no-repeat scroll right 0 transparent;
     display: block;
     height: 30px;
     width: 30px;
@@ -1498,7 +1498,7 @@ aside .module.first { margin: 0; }
 }
 
 .prev {
-    background: url("../img/arrows.png") no-repeat scroll left 0 transparent;
+    background: url("/assets/arrows.png") no-repeat scroll left 0 transparent;
     cursor: pointer;
     display: block;
     height: 30px;
@@ -1673,7 +1673,7 @@ aside .module.first { margin: 0; }
     position: relative;
 }
 .moreInfo {
-    background: url("../img/slide/moreInfo.png") no-repeat scroll 0 0 transparent;
+    background: url("/assets/slide/moreInfo.png") no-repeat scroll 0 0 transparent;
     bottom: 4%;
     display: block;
     height: 31px;
@@ -1685,13 +1685,13 @@ aside .module.first { margin: 0; }
     z-index: 1;
 }
 .moreInfo.hover {
-    background: url("../img/slide-hovers.png") no-repeat scroll left 0 transparent;
+    background: url("/assets/slide-hovers.png") no-repeat scroll left 0 transparent;
 }
 .flex-direction-nav a.hover {
-    background: url("../img/slide-hovers.png") no-repeat scroll right 0 transparent;
+    background: url("/assets/slide-hovers.png") no-repeat scroll right 0 transparent;
 }
 .flex-direction-nav a.flex-prev.hover {
-    background: url("../img/slide-hovers.png") no-repeat scroll -40px 0 transparent;
+    background: url("/assets/slide-hovers.png") no-repeat scroll -40px 0 transparent;
 }
 
 
@@ -1782,7 +1782,7 @@ html[xmlns] .slides {display: block;}
 
 /* Direction Nav */
 .flex-direction-nav {*height: 0;}
-.flex-direction-nav a {width: 31px; height: 31px; margin: 0; display: block; background: url(../img/navigation.png) no-repeat left 0; position: absolute; bottom: 4%; z-index: 10; cursor: pointer; text-indent: -9999px; }
+.flex-direction-nav a {width: 31px; height: 31px; margin: 0; display: block; background: url(/assets/navigation.png) no-repeat left 0; position: absolute; bottom: 4%; z-index: 10; cursor: pointer; text-indent: -9999px; }
 .flex-direction-nav .flex-next {background-position: right 0; right: 17px; }
 .flex-direction-nav .flex-prev {right: 48px;}
 .flex-direction-nav .flex-disabled {opacity: .3!important; filter:alpha(opacity=30); cursor: default;}
@@ -1948,7 +1948,7 @@ body #cboxLoadedContent { width: 100%!important; }
     padding: 0;
 }
 .pop-columns .pop-open {
-    background: url("../img/popPlus.jpg") no-repeat scroll 0 0 transparent;
+    background: url("/assets/popPlus.jpg") no-repeat scroll 0 0 transparent;
     display: inline-block;
     float: left;
     height: 11px;
@@ -2047,7 +2047,7 @@ body #cboxLoadedContent { width: 100%!important; }
     width: 12%;
 }
 .thumbs li.active, .thumbs li:hover {
-    background: url("../img/activeThumb.png") no-repeat scroll center top transparent;
+    background: url("/assets/activeThumb.png") no-repeat scroll center top transparent;
 }
 .thumbs li.active img, .thumbs li:hover img {
     border: 2px solid #DD4E00;
@@ -2094,10 +2094,10 @@ body #cboxLoadedContent { width: 100%!important; }
     color: #DD4E00;
     display: block;
     margin: 2.5% 7.89474% 0 7.89474%; 
-    background: url(../img/arrowOpen.png) no-repeat right 7px;
+    background: url(/assets/arrowOpen.png) no-repeat right 7px;
 }
 .sideNav .head.close {
-    background: url(../img/arrowClose.png) no-repeat right 5px;
+    background: url(/assets/arrowClose.png) no-repeat right 5px;
 }
 .upper-section .sideNav ul { display: none; }
 
@@ -2136,7 +2136,7 @@ div.timeline-year {
     /*background: #ededed;*/
     height: 68px;
     width: 100%;
-    background: url(../img/timeline.jpg) no-repeat;
+    background: url(/assets/timeline.jpg) no-repeat;
 }
 #timeline-navigation li.year-active {
     color: #2b2b2b;
