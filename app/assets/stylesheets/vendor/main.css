@@ -121,7 +121,7 @@ select.day { width: 20.735786%; margin: 0 3% 0 3.6789298%; }
 
 label { font: 0.867em/1.200em 'source_sans_pro_semiboldRg', arial, sans-serif; display: block; }
 
-input[type="submit"] {
+#searchBox input[type="submit"] {
     background: url("/assets/search-btn.png") no-repeat scroll center 0 transparent;
     border: medium none;
     display: inline-block;
@@ -133,7 +133,7 @@ input[type="submit"] {
     font-size: 20px;
     float: right;
 }
-input[type="text"] {
+#searchBox input[type="text"] {
     border: medium none;
     color: #222;
     font: 16px/18px arial;

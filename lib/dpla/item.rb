@@ -39,17 +39,17 @@ module DPLA
         conditions.each do |key, value|
           if value.is_a? Hash
             value.each { |subkey,value| query << "#{key}.#{subkey}=#{encode_uri(value)}" }
-          else
+          elsif value.present?
             commasep = [:facets, :fields].include?(key.to_sym)
             separator = commasep ? ',' : '+AND+'
-            value = Array(value).map { |v| ['"', v, '"'].join } unless commasep
-            value = Array(value).map { |v| encode_uri(v) }
+            value = Array(value).reject { |v| v.empty? }
+            value.map! { |v| ['"', v, '"'].join } unless commasep
+            value.map! { |v| encode_uri(v) }
             value = value.join(separator)
             query << "#{key}=#{value}"
           end
         end
       end
-      puts query.join '&'
       query.join '&'
     end
 
