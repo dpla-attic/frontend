@@ -1,30 +1,30 @@
 $(window).load(function() {
 
-  $('.homeslide').flexslider({
-      animation: "slide",
-      pauseOnHover: true
-  });
+	$('.homeslide').flexslider({
+	    animation: "slide",
+	    pauseOnHover: true
+	});
 
-  $('.moreInfo').mouseover(function () {
+	$('.moreInfo').mouseover(function () {
       $(this).addClass('hover');
       $('.flex-direction-nav a').addClass('hover');
-      $('.flex-active-slide .slideOverlay').addClass('on');
-      $('.flex-active-slide .slideText').addClass('on');
-  });
+	    $('.flex-active-slide .slideOverlay').addClass('on');
+	    $('.flex-active-slide .slideText').addClass('on');
+	});
 
-  $('.homeslide').mouseleave(function () {
-      $('.slideOverlay').removeClass('on');
-      $('.slideText').removeClass('on');
+	$('.homeslide').mouseleave(function () {
+	    $('.slideOverlay').removeClass('on');
+	    $('.slideText').removeClass('on');
       $('.moreInfo').removeClass('hover');
       $('.flex-direction-nav a').removeClass('hover');
-   });
+	 });
 
-  $('.flex-direction-nav a').click(function () {
-      $('.slideOverlay').removeClass('on');
-      $('.slideText').removeClass('on');
+	$('.flex-direction-nav a').click(function () {
+	    $('.slideOverlay').removeClass('on');
+	    $('.slideText').removeClass('on');
       $('.moreInfo').removeClass('hover');
       $('.flex-direction-nav a').removeClass('hover');
-  });
+	});
 
   $('.DecadesTab').click(function() {
     $(this).addClass('selected');
@@ -64,25 +64,25 @@ $(window).load(function() {
     return false;
   });
 
-  $('.next').click(function() {
-    if($(this).parent().next().hasClass('timeline-row')) {
-      $('.prev, .next').hide();
-      $('.timelineContainer').animate({ right: '+=100.1%' }, 500, function() { $('.prev, .next').show(); });
+	$('.next').click(function() {
+		if($(this).parent().next().hasClass('timeline-row')) {
+			$('.prev, .next').hide();
+			$('.timelineContainer').animate({ right: '+=100.1%' }, 500, function() { $('.prev, .next').show(); });
 
-    } else {
-      //DON'T MOVE
-    }
-  });
+		} else {
+			//DON'T MOVE
+		}
+	});
 
-  $('.prev').click(function() {
-    if($(this).parent().prev().hasClass('timeline-row')) {
-      $('.prev, .next').hide();
-      $('.timelineContainer').animate({ right: '-=100.1%' }, 500, function() { $('.prev, .next').show(); });
-    } else {
-      //DON'T MOVE
-    }
-  });
-  
+	$('.prev').click(function() {
+		if($(this).parent().prev().hasClass('timeline-row')) {
+			$('.prev, .next').hide();
+			$('.timelineContainer').animate({ right: '-=100.1%' }, 500, function() { $('.prev, .next').show(); });
+		} else {
+			//DON'T MOVE
+		}
+	});
+	
   $('#toggle').toggle(function() {
       $('aside').addClass('moveIn');
       $('.slidePopOut').addClass('moveOut');
@@ -196,3 +196,4 @@ $(window).load(function() {
 
        
 });
+
