@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def search
-    @search = Item::Search.build params
+    @search = Search.build params
     session[:last_query] = request.url
   end
 
