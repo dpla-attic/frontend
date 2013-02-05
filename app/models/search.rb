@@ -1,6 +1,6 @@
 class Search < ActiveRecord::Base
   ACCEPTABLE_PARAMS  = [
-    :q, :subject, :type, :start, :end, :language, :page, :page_size, :sort_by, :sort_order
+    :q, :subject, :type, :start, :before, :after, :end, :language, :page, :page_size, :sort_by, :sort_order
   ]
 
   serialize :params, Hash
@@ -29,8 +29,8 @@ class Search < ActiveRecord::Base
       refine[:subject] = Array(params[:subject])
       refine[:language] = Array(params[:language])
       refine[:type] = Array(params[:type])
-      refine[:start] = date_from_params(params[:start])
-      refine[:end] = date_from_params(params[:end])
+      refine[:after] = date_from_params(params[:after])
+      refine[:before] = date_from_params(params[:before])
     end
   end
 

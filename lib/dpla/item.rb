@@ -38,14 +38,16 @@ module DPLA
       query = [].tap do |query|
         conditions.each do |key, value|
           if value.is_a? Hash
-            value.each { |subkey,value| query << "#{key}.#{subkey}=#{encode_uri(value)}" }
+            value
+              .select { |subkey,value| value.present? }
+              .each { |subkey,value| query << "#{key}.#{subkey}=#{encode_uri(value)}" }
           elsif value.present?
-            commasep = [:facets, :fields].include?(key.to_sym)
-            separator = commasep ? ',' : '+AND+'
+            comma_separated = [:facets, :fields].include?(key.to_sym)
+            no_wrap = [:sort_by, :sort_order].include?(key.to_sym)
             value = Array(value).reject { |v| v.empty? }
-            value.map! { |v| ['"', v, '"'].join } unless commasep
+            value.map! { |v| ['"', v, '"'].join } if !comma_separated and !no_wrap
             value.map! { |v| encode_uri(v) }
-            value = value.join(separator)
+            value = value.join(comma_separated ? ',' : '+AND+')
             query << "#{key}=#{value}"
           end
         end

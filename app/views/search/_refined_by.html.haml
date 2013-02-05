@@ -7,16 +7,16 @@
         %li
           = refine
           = link_to '×', refine_path(:subject, refine, remove: true)
-      - if @search.refine[:start].present?
-        %li
-          Before
-          = @search.refine[:start]
-          = link_to '×', params.reject { |k,v| k.to_sym.eql? :start } 
-      - if @search.refine[:end].present?
+      - if @search.refine[:after].present?
         %li
           After
-          = @search.refine[:end]
-          = link_to '×', params.reject { |k,v| k.to_sym.eql? :end }
+          = @search.refine[:after].strftime('%b %-d, %Y')
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :after } 
+      - if @search.refine[:before].present?
+        %li
+          Before
+          = @search.refine[:before].strftime('%b %-d, %Y')
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :before }
       - @search.refine[:type].each do |refine|
         %li
           = refine
