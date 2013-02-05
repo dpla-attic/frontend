@@ -122,7 +122,7 @@ Navigasmic.setup do |config|
     # For groups, we adjust the markup so they'll be clickable and be picked up by the javascript.
     builder.label_generator = proc do |label, options, has_link, has_nested|
       if !has_nested || has_link
-        "<span>#{label}</span>"
+        "#{label}"
       else
         link_to("#{label}<b class='caret'></b>".html_safe, '#', class: 'dropdown-toggle', data: {toggle: 'dropdown'})
       end

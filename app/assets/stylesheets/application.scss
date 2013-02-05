@@ -11,5 +11,5 @@
  *= require vendor/normalize.css
  *= require vendor/main.css
  *= require vendor/fonts.css
- *= require_tree .
+ *= require vendor_overrides.scss
  */

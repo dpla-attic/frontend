@@ -11,7 +11,6 @@
     %title DPLA
     %meta{:content => "", :name => "description"}
     %meta{:content => "width=device-width", :name => "viewport"}
-    = javascript_include_tag "application"
     = stylesheet_link_tag    "application", media: "all"
     = csrf_meta_tags
   %body{class: "#{params[:controller]}-controller"}
@@ -38,4 +37,7 @@
             %li.RSS
               %a{:href => ""}
                 %span.icon-rss{"aria-hidden" => "true"}
-          = image_tag "footer-logo.jpg", :alt => "DPLA: Digital Public Library of America"
+          = image_tag "footer-logo.jpg", :alt => "DPLA: Digital Public Library of America", class: 'logo'
+
+    = javascript_include_tag "application"
+    /[if lte IE 7] <script src="/assets/vendor/lte-ie7.js"></script>
