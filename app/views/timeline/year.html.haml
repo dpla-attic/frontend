@@ -79,8 +79,10 @@
             .timelineResults
 
         .timeline-row
-          %span.next
-          %span.prev
+          = link_to timeline_year_path(params.merge(year: params[:year].to_i+1)) do
+            %span.next
+          = link_to timeline_year_path(params.merge(year: params[:year].to_i-1)) do
+            %span.prev
           .year
             %h3= params[:year]
           .timelineContent
