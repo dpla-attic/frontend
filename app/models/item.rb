@@ -13,8 +13,8 @@ class Item
     end
   end
 
-  def self.find(ids)
-    api.find(ids).map { |doc| self.new doc }
+  def self.find(id)
+    self.new api.find(id).first
   end
 
   def self.where(conditions)

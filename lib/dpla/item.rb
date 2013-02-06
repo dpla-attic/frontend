@@ -4,6 +4,10 @@ module DPLA
     format :json
     base_uri Settings.api.url
 
+    def self.test
+      123
+    end
+
     def find(ids)
       ids = Array(ids).map { |v| encode_uri(v) }.join(',')
       response = self.class.get('/items/' + ids)
@@ -43,7 +47,7 @@ module DPLA
               .each { |subkey,value| query << "#{key}.#{subkey}=#{encode_uri(value)}" }
           elsif value.present?
             comma_separated = [:facets, :fields].include?(key.to_sym)
-            no_wrap = [:sort_by, :sort_order].include?(key.to_sym)
+            no_wrap = [:sort_by, :sort_order, :page, :page_size].include?(key.to_sym)
             value = Array(value).reject { |v| v.empty? }
             value.map! { |v| ['"', v, '"'].join } if !comma_separated and !no_wrap
             value.map! { |v| encode_uri(v) }
