@@ -48,7 +48,7 @@
           %ul
             %li
               %h6 Publisher
-            %li= @item.publisher
+            %li= raw Array(@item.publisher).join('<br />')
 
       .detail-bottom
         %h6 Description
@@ -84,7 +84,7 @@
         %ul
           %li
             %h6 URL
-          %li= link_to @item.source, @item.source
+          %li= link_to @item.source, @item.source, target: :_blank
   %aside
     .module.yellow.line
       .moduleSection

@@ -61,7 +61,7 @@
                   %span= item.creator
                 %p= item.description
                 - if item.source.present?
-                  = link_to item.source, class: 'ViewObject' do
+                  = link_to item.source, class: 'ViewObject', target: :_blank do
                     View Object
                     %span.icon-view-object{"aria-hidden" => "true"}
               .searchRight
