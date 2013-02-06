@@ -33,13 +33,16 @@
       - if @item.preview_source_url.present?
         .contentBox
           = image_tag @item.preview_source_url
+          = link_to @item.source, target: :_blank, class:'ViewObject' do
+            View Object
+            %span.icon-view-object{"aria-hidden" => "true"}
       .table
         -if @item.creator.present?
           %ul
             %li
               %h6 Creator
             %li= @item.creator
-        - if @item.created['displayDate'].present?
+        - if @item.created.present?
           %ul
             %li
               %h6 Created date
