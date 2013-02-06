@@ -22,6 +22,11 @@
         = text_field_tag :q, params[:q], placeholder: 'Search the Library'
         = submit_tag 'Search', class: 'searchBtn', name: nil
 
+  %ul.shareSave
+    %li.btn
+      %a{:href => ""} Save to...
+    %li.btn
+      %a{:href => ""} Share
   %h1= @item.title
   %article
     .FeatureContent
@@ -34,11 +39,11 @@
             %li
               %h6 Creator
             %li= @item.creator
-        - if @item.created.present?
+        - if @item.created['displayDate'].present?
           %ul
             %li
               %h6 Created date
-            %li= @item.created
+            %li= @item.created['displayDate']
         - if @item.publisher.present?
           %ul
             %li
@@ -80,3 +85,24 @@
           %li
             %h6 URL
           %li= link_to @item.source, @item.source
+  %aside
+    .module.yellow.line
+      .moduleSection
+        .moduleLeft
+          %h6 Created Date
+          %p 1966-06
+          %a{:href => ""} View on timeline »
+        .moduleRight
+          %img{:alt => "Timeline", :src => "/assets/moduleImg1.jpg"}/
+      .moduleSection
+        .moduleLeft
+          %h6 Location
+          %p Minneapolis, Hennepin County, Minnesota
+          %a{:href => ""} View on map »
+        .moduleRight
+          %img{:alt => "Map", :src => "/assets/moduleImg2.jpg"}/
+    .module
+      %h6 From the Collection
+      %h5
+        %a{:href => ""} Smithsonian Civil War Collection
+      %p Description of this collection lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac est leo. Cras sollicitudin volutpat nibh in blandit. Morbi ornare quam quis tortor pretium at hendrerit magna molestie. Cras facilisis, nulla non lobortis varius, tellus nibh elementum nibh, non accumsan augue augue ut augue.
