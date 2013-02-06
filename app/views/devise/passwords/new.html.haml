@@ -1,10 +1,9 @@
-.row
-  .twelve.columns
-    %h2 Forgot your password?
-    = simple_form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'narrowform' } do |f|
-      = f.error_notification
-      .form-inputs
+.layout.fullWidth
+  %article
+    %h1 Forgot your password?
+    .account
+      = simple_form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post } do |f|
+        = f.error_notification
         = f.input :email, required: true, autofocus: true
-      .form-actions
         = f.button :submit, "Send me reset password instructions"
-    = render "devise/shared/links"
+      = render "devise/shared/links"

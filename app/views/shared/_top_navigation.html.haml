@@ -1,9 +1,16 @@
-= semantic_navigation config: :bootstrap do |n|
-  - n.item 'About', about_root_path
-  - n.item 'News', '#'
-  - n.item 'Contact', '#'
-  - n.item 'Login', new_user_session_path, class: 'bg'
-  -if current_user.present? 
-    - n.item 'Sign Out', destroy_user_session_path, class: 'bg last'
-  -else
-    - n.item 'Sign Up', new_user_registration_path, class: 'bg last'
+%ul
+  %li{class: [current_page?(action: 'overview') && :active]}
+    = link_to about_root_path do
+      About
+      %span.icon-arrow-thin-down{"aria-hidden" => "true"} 
+  %li= link_to 'News', "#"
+  %li= link_to 'Contact', "#"
+  - if user_signed_in?
+    %li
+      Welcome 
+      = link_to edit_user_registration_path do
+        %strong= current_user.name
+    %li.bg.last= link_to "Sign out", destroy_user_session_path
+  - else
+    %li.bg= link_to 'Login', new_user_session_path
+    %li.bg.last= link_to 'Sign Up', new_user_registration_path

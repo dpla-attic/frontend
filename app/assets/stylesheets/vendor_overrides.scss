@@ -1,1 +1,14 @@
+form {
+  input[type="password"] {
+      color: #222;
+      font: 16px/18px arial;
+      padding-left: 3%;
+  }
+  
+  input.btn {
+    display: block;
+    text-decoration: none;
+    background: none repeat scroll 0 0 #DD4E00;
+  }
 
+}

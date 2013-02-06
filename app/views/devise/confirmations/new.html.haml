@@ -1,10 +1,9 @@
-.row
-  .twelve.columns
-    %h2 Resend confirmation instructions
-    = simple_form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post } do |f|
-      = f.full_error :confirmation_token
-      .form-inputs
+.layout.fullWidth
+  %article
+    %h1 Resend confirmation instructions
+    .account
+      = simple_form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post } do |f|
+        = f.full_error :confirmation_token
         = f.input :email, required: true, autofocus: true
-      .form-actions
         = f.button :submit, "Resend confirmation instructions"
-    = render "devise/shared/links"
+      = render "devise/shared/links"

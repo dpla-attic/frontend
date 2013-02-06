@@ -45,17 +45,23 @@ SimpleForm.setup do |config|
     b.use :hint,  :wrap_with => { :tag => :p, :class => :gray }
   end
 
+  config.wrappers :dpla, :tag => false do |b|
+    b.use :label_input
+    b.use :hint, :tag => :h6
+    b.use :error, :tag => :span
+  end 
+
   # The default wrapper to be used by the FormBuilder.
-  config.default_wrapper = :default
+  config.default_wrapper = :dpla
 
   # Define the way to render check boxes / radio buttons with labels.
   # Defaults to :nested for bootstrap config.
   #   :inline => input + label
   #   :nested => label > input
-  config.boolean_style = :nested
+  config.boolean_style = :inline
 
   # Default class for buttons
-  config.button_class = 'button'
+  config.button_class = 'btn'
 
   # Method used to tidy up errors. Specify any Rails Array method.
   # :first lists the first message for each field.
@@ -95,7 +101,7 @@ SimpleForm.setup do |config|
   config.label_text = lambda { |label, required| "#{label} #{required}" }
 
   # You can define the class to use on all labels. Default is nil.
-  config.label_class = 'control-label'
+  config.label_class = nil
 
   # You can define the class to use on all forms. Default is simple_form.
   config.form_class = :nice

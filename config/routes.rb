@@ -17,5 +17,4 @@ DplaPortal::Application.routes.draw do
 
   root to: 'pages#home'
   match '/welcome' => 'users#welcome'
-  
 end
