@@ -1,19 +1,4 @@
-- if @search.refine[:subject].present? or @search.facets[:subject].present?
-  .module.yellow
-    %h6.open By Subject
-    .slidingDiv
-      - if @search.refine[:subject].present?
-        - @search.refine[:subject].each do |refine|
-          .refineResult
-            %span= refine
-            = link_to '×', refine_path(:subject, refine, remove: true)
-      - if @search.facets[:subject].present?
-        .locations
-          %ul
-            - @search.facets[:subject].each do |name, count|
-              %li
-                = link_to name, refine_path(:subject, name)
-                %span= count
+= render partial: 'search/sidebar/refine_by_subject'
 
 .module.yellow
   %h6.open By Date

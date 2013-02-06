@@ -141,14 +141,14 @@ $(window).load(function() {
     }
   );
 
-  $('.pop-columns li').toggle(
-    function(){
-      $(this).children('ul').slideDown();
-    },
-    function(){
-      $(this).children('ul').slideUp();
-    }
-  );
+  // $('.pop-columns li').toggle(
+  //   function(){
+  //     $(this).children('ul').slideDown();
+  //   },
+  //   function(){
+  //     $(this).children('ul').slideUp();
+  //   }
+  // );
 
   $('.menu-btn').toggle(
     function(){

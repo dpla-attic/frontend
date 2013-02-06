@@ -1986,15 +1986,15 @@ body #cboxLoadedContent { width: 100%!important; }
 }
 .pop-columns section:first-child { margin: 0; }
 .pop-columns span { float: right; }
-#inline_content { padding: 20px 24px!important; overflow: hidden;}
+.inline_content { padding: 20px 24px!important; overflow: hidden;}
 
-#inline_content .tabs { border: none; margin: 0 0 3%;}
-#inline_content .tabs a {
+.inline_content .tabs { border: none; margin: 0 0 3%;}
+.inline_content .tabs a {
     background: none;
     border: none;
 }
 
-#inline_content .tabs .active a {
+.inline_content .tabs .active a {
     background: #dd4e00;
     color: #fff;
 }
