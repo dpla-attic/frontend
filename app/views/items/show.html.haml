@@ -62,7 +62,7 @@
         %ul
           %li
             %h6 Location
-          %li= raw @item.spatial.map{|l| l.fetch("name")}.join("<br />")
+          %li= raw @item.spatial.map{|l| l["name"]}.join("<br />")
       - if @item.format.present?
         %ul
           %li
@@ -77,7 +77,7 @@
         %ul
           %li
             %h6 Subject
-          %li= raw @item.subject.map{|l| l.fetch("name")}.join("<br />")
+          %li= raw @item.subject.map{|l| l["name"]}.join("<br />")
       - if @item.rights.present?
         %ul
           %li
