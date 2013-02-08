@@ -18,7 +18,8 @@
       %header
         = link_to root_path, class: :logo do
           = image_tag "logo.jpg", :alt => "DPLA: Digital Public Library of America"
-        %a.menu-btn{:href => ""} Menu
+        %a.menu-btn{:href => ""}
+          %span.icon-arrow-thin-down{"aria-hidden" => "true"}
         %nav.topNav= render partial: 'shared/top_navigation'
         %nav.MainNav= render partial: 'shared/main_navigation'
       - unless flash[:notice].blank?

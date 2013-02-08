@@ -14,7 +14,8 @@
           %li
             %a.viewThree{:href => ""}
               %span.icon-view-time{"aria-hidden" => "true"}
-      %a.search-btn{:href => ""} Search
+      %a.search-btn{:href => ""}
+        %span.icon-mag-glass{"aria-hidden" => "true"}
       = form_tag(search_items_path, method: :get, authenticity_token: false, id: :searchBox) do
         = preserved_search_fields without: :q
         = text_field_tag :q, params[:q], placeholder: 'Search the Library'
@@ -24,6 +25,9 @@
       %a{:href => ""} Save
     %li.btn
       %a{:href => ""} Share
+  #toggle
+    %span.icon-arrow-thin-left{"aria-hidden" => "true"}
+    Refine
   %h1 Search Results
   .searchResults
     %h4
@@ -51,6 +55,9 @@
         .search
           - @search.results.each do |item|
             %section
+              .searchRight
+                - if item.preview_source_url
+                  = image_tag item.preview_source_url
               .searchLeft
                 %h6= item.type
                 - if item.id.present?
@@ -64,9 +71,6 @@
                   = link_to item.source, class: 'ViewObject', target: :_blank do
                     View Object
                     %span.icon-view-object{"aria-hidden" => "true"}
-              .searchRight
-                - if item.preview_source_url
-                  = image_tag item.preview_source_url
     %aside
       %h5 Refine
       = render partial: 'sidebar'
