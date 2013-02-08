@@ -32,7 +32,7 @@
       .formRow
         = submit_tag 'Update', class: 'btn orange', name: nil
 
-- if @search.refine[:type].present? or @search.facets[:type].present?
+- if @search.refine[:type].present? or @search.types.present?
   .module.yellow
     %h6.open By Format
     .slidingDiv
@@ -41,15 +41,15 @@
           .refineResult
             %span= refine
             = link_to '×', refine_path(:type, refine, remove: true)
-      - if @search.facets[:type].present?
+      - if @search.types.present?
         .locations
           %ul
-            - @search.facets[:type].each do |name, count|
+            - @search.types.each do |name, count|
               %li
                 = link_to name, refine_path(:type, name)
                 %span= count
 
-- if @search.refine[:language].present? or @search.facets[:language].present?
+- if @search.refine[:language].present? or @search.languages.present?
   .module.yellow
     %h6.open By Language
     .slidingDiv
@@ -58,10 +58,10 @@
           .refineResult
             %span= refine
             = link_to '×', refine_path(:language, refine, remove: true)
-      - if @search.facets[:language].present?
+      - if @search.languages.present?
         .locations
           %ul
-            - @search.facets[:language].each do |name, count|
+            - @search.languages.each do |name, count|
               %li
                 = link_to name, refine_path(:language, name)
                 %span= count

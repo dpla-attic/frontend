@@ -1,6 +1,6 @@
-- if @search.refine[:subject].present? or @search.facets[:subject].present?
+- if @search.refine[:subject].present? or @search.subjects.present?
   - refined_by = @search.refine[:subject]
-  - facets = @search.facets[:subject].to_a
+  - facets = @search.subjects.to_a
   - extra_facets = facets.slice! 5..-1
   .module.yellow.subject
     %h6.open By Subject
