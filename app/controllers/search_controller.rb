@@ -1,3 +1,5 @@
+require_dependency 'dpla/search'
+
 class SearchController < ApplicationController
   def list
     @search = DPLA::Search.new *search_params

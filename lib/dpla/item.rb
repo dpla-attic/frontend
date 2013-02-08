@@ -4,10 +4,6 @@ module DPLA
     format :json
     base_uri Settings.api.url
 
-    def self.test
-      123
-    end
-
     def find(ids)
       ids = Array(ids).map { |v| encode_uri(v) }.join(',')
       response = self.class.get('/items/' + ids)
