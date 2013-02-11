@@ -1,32 +1,29 @@
-- if @search.refine[:subject].present? or @search.facets[:subject].present?
-  - refined_by = @search.refine[:subject]
-  - facets = @search.facets[:subject].to_a
-  - extra_facets = facets.slice! 5..-1
+- if subject_refines.present? or subject_facets.present?
   .module.yellow.subject
     %h6.open By Subject
     .slidingDiv
-      - if refined_by.present?
-        - refined_by.each do |refine|
+      - if subject_refines.present?
+        - subject_refines.each do |refine|
           .refineResult
             %span= refine
             = link_to '×', refine_path(:subject, refine, remove: true)
-      - if facets.present?
+      - if subject_facets.present?
         .locations
           %ul
-            - facets.each do |facet|
+            - subject_facets.slice(0,5).each do |facet|
               - name, count = facet.shift, facet.shift
               - if name.present?
                 %li
                   = link_to name, refine_path(:subject, name)
                   %span= count
-    - if extra_facets.present?
+    - if subject_facets.present? and subject_facets.count > 5
       .more= link_to 'More »', '#more_subjects', class: 'inline'
       - content_for :colorbox do
         #more_subjects.inline_content{:style => "padding:10px; background:#fff;"}
           #cboxClose.pclose &times;
           %h1 Subjects
           .pop-columns
-            - extra_facets.in_groups(3).each do |facets_group|
+            - subject_facets.in_groups(3).each do |facets_group|
               %section
                 %ul
                   - facets_group.reject(&:nil?).each do |facet|
