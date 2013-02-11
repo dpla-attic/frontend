@@ -3,7 +3,7 @@ module RefineHelper
     existing_refine = params[area] || []
     existing_refine = Array(existing_refine)
     refine_params = options[:remove] ? existing_refine - [value] : existing_refine + [value]
-    params.deep_merge(area => refine_params.uniq)
+    params.deep_merge(area => refine_params.uniq, page: nil)
   end
 
   def subject_facets

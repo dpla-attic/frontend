@@ -10,7 +10,7 @@ module ResultManipulationHelper
       end.each do |size|
         result.push [
           size,
-          url_for(params.merge(page_size: size)),
+          url_for(params.merge(page_size: size, page: nil)),
           size.to_s == params[:page_size] ? {selected: :selected} : {}
         ]
       end
