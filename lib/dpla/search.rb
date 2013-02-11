@@ -1,8 +1,8 @@
 module DPLA
   class Search
-    @args, @filters = nil
+    DEFAULT_FACETS = ['subject.name', 'language.name', 'type']
 
-    attr_writer :args
+    attr_reader :term, :filters, :args, :facets
 
     # Kaminari expected methods
 
@@ -10,27 +10,29 @@ module DPLA
     # - filters is hash with refines
     #    {subject: 'Ships', type: ['image', 'text']}
     def initialize(term, filters = {})
+      @term    = term 
+      @filters = {}.tap { |result| filters.each { |k,v| result[k.to_sym] = Array(v) } }
+      @facets  = DEFAULT_FACETS
+      @args    = {}
     end
 
-    def result
-      
-    end
-
-    # - args is search result manipulation conditions
-    #    {sort_by: :created, sort_order: :desc, page: 2, page_size: 10}
-    def items(args = {})
-      conditions = @args.merge args
-      # Array of DPLA::Items
+    def result(args = {})
+      conditions = { facets: @facets }.merge(@filters).merge(@args)
+      @result || @result = Items.by_conditions(conditions)
     end
     
     # name is field e.g. :subject, :type, :lang, :before, :after, etc.
-    def filters(name)
-      # Array|Data|nil
+    def filters(name = nil)
+      if name.present?
+        @filters[name.to_sym].present? ? @filters[name.to_sym] : []
+      else
+        @filters
+      end
     end
 
     # subject facets
     def subjects
-      # Hash {'Ships' => 512}
+      result.facets.subject
     end
     
     # languages facets
@@ -41,6 +43,16 @@ module DPLA
     # types facets
     def types
       # Hash {'image' => 512}
-    end    
+    end
+
+    def args=(args)
+      @args = args
+      @result = nil
+    end
+
+    def facets=(facets)
+      @facets = facets
+      @result = nil
+    end
   end
 end
