@@ -1,19 +1,17 @@
 module DPLA
   class Item
-    # attr_accesstors here
+    FIELDS = [
+      :id, :title, :description, :subject, :creator, :type, :publisher,
+      :format, :rights, :contributor, :created, :spatial, :temporal,
+      :language, :source, :isPartOf, :preview_source_url
+    ]
+      .each { |field| attr_accessor field }
 
-    def initialize(document)
-    end
-
-    # - id is DPLA API Item UUID
-    def self.by_id(id)
-      # DPLA::Item
-    end
-
-    # - options is hash with conditions
-    #     {q: 'civil war', subject: 'Ships', page: 3, facets}
-    def self.by_conditions(conditions = {})
-      # DPLA::Result
+    def initialize(doc)
+      FIELDS.each { |f| self.send "#{f}=", doc[f.to_s] }
+      if doc['dplaSourceRecord'].present?
+        self.language = doc['dplaSourceRecord']['language']
+      end
     end
   end
 end

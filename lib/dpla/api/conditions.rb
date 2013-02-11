@@ -13,16 +13,12 @@ module DPLA
 
       def transform(conditions)
         if conditions.is_a? Array
-          array(conditions)
+          conditions.map { |i| encode_uri(i) }.join('/')
         elsif conditions.is_a? Hash
           hash(conditions)
         else
           encode_uri(conditions)
         end
-      end
-
-      def array(conditions)
-        conditions.map { |i| encode_uri(i) }.join('/')
       end
 
       def hash(conditions)
