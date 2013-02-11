@@ -1,0 +1,31 @@
+.module.yellow
+  %h6.open By Date
+  .slidingDiv
+    - if after_refine.present?
+      .refineResult
+        %span
+          After
+          = after_refine.strftime('%b %-d, %Y')
+        = link_to '×', params.reject { |k,v| k.to_sym.eql? :after }
+    - if before_refine.present?
+      .refineResult
+        %span
+          Before
+          = before_refine.strftime('%b %-d, %Y')
+        = link_to '×', params.reject { |k,v| k.to_sym.eql? :before }
+    = form_tag(search_items_path, method: :get, authenticity_token: false, class: 'moduleForm') do
+      = preserved_search_fields
+      .formRow
+        %label From
+        - after = params[:after] || {}
+        = select_month after[:month].to_i, {prompt: 'Month'}, name: 'after[month]', class: 'daterange month', id: :after_month
+        = select_day   after[:day].to_i, {prompt: 'Day'}, name: 'after[day]', class: 'daterange day', id: :after_day
+        = text_field nil, nil, value: after[:year], name: 'after[year]', placeholder: 'Year', class: 'daterange', id: :after_year
+      .formRow
+        %label To
+        - before = params[:before] || {}
+        = select_month before[:month].to_i, {prompt: 'Month'}, name: 'before[month]', class: 'daterange month', id: :before_month
+        = select_day   before[:day].to_i, {prompt: 'Day'}, name: 'before[day]', class: 'daterange day', id: :before_day
+        = text_field nil, nil, value: before[:year], name: 'before[year]', placeholder: 'Year', class: 'daterange', id: :before_year
+      .formRow
+        = submit_tag 'Update', class: 'btn orange', name: nil

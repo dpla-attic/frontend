@@ -12,7 +12,7 @@ class PermittedParams < Struct.new(:params)
     filters = params.map do |key, value|
       case key
       when *(%w(before after))
-        date = date_from_params(value).to_s
+        date = date_from_params(value)
         [key, date] unless date.nil?
       when *(%w(type language subject))
         [key, value]

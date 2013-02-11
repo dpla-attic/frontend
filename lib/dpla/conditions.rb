@@ -11,9 +11,10 @@ module DPLA
     private
 
     def transform(conditions)
-      if conditions.is_a? Array
+      case conditions
+      when Array
         conditions.map { |i| encode_uri(i) }.join('/')
-      elsif conditions.is_a? Hash
+      when Hash
         conditions = convert_conditions(conditions)
         transform_hash(conditions)
       else
@@ -25,10 +26,22 @@ module DPLA
     def convert_conditions(conditions)
       {}.tap do |result|
         conditions.each do |key, value|
-          if 'subject' == key.to_s
+          case key.to_s
+          when 'subject'
             result['subject.name'] = value
+          when 'before'
+            result['created.before'] = value
+          when 'after'
+            result['created.after'] = value
+          when 'sort_by'
+            case value.to_s
+            when 'subject'
+              result[key] = 'subject.name'
+            when 'created'
+              result[key] = 'created.start'
+            end
           else
-            result[key] = value
+            result[key] = value if value.present?
           end
         end
       end
@@ -37,10 +50,11 @@ module DPLA
     def transform_hash(conditions)
       [].tap do |query|
         conditions.each do |key, value|
+          next unless value.present?
           comma_separated = [:facets, :fields].include?(key.to_sym)
-          no_wrap = [:sort_by, :sort_order, :page, :page_size, :title].include?(key.to_sym)
+          wrap = ['subject.name'].include?(key.to_s)
           value = Array(value).select { |v| v.present? }
-          value.map! { |v| ['"', v, '"'].join } if !comma_separated and !no_wrap
+          value.map! { |v| ['"', v, '"'].join } if !comma_separated and wrap
           value.map! { |v| encode_uri(v) }
           value = value.join(comma_separated ? ',' : '+AND+')
           query << "#{key}=#{value}"

@@ -32,10 +32,10 @@
         for
         %span= params[:q]
       returned 
-      = number_with_delimiter @search.documents.count, delimiter: ','
+      = number_with_delimiter @items.count, delimiter: ','
       results.
     = render partial: 'refined_by'
-  - if @documents.present?
+  - if @items.present?
     .slidePopOut
       #resultsBarTop.resultsBar
         = render partial: 'paginator'
@@ -49,7 +49,7 @@
             %a{:href => ""} Smithsonian Civil War Collection
             %a.Viewmore{:href => ""} 23 more »
         .search
-          - @search.documents.each do |item|
+          - @items.each do |item|
             %section
               .searchLeft
                 %h6= item.type

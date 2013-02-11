@@ -1,27 +1,26 @@
-- refines_presented = @search.refine.map {|k,v| v.present?}.select(&:present?).present?
-- if refines_presented
+- if @search.filters.present?
   .refine
     %p Refined by:
     %ul
-      - @search.refine[:subject].each do |refine|
+      - subject_refines.each do |refine|
         %li
           = refine
           = link_to '×', refine_path(:subject, refine, remove: true)
-      - if @search.refine[:after].present?
+      - if after_refine.present?
         %li
           After
-          = @search.refine[:after].strftime('%b %-d, %Y')
+          = after_refine.strftime('%b %-d, %Y')
           = link_to '×', params.reject { |k,v| k.to_sym.eql? :after } 
-      - if @search.refine[:before].present?
+      - if before_refine.present?
         %li
           Before
-          = @search.refine[:before].strftime('%b %-d, %Y')
+          = before_refine.strftime('%b %-d, %Y')
           = link_to '×', params.reject { |k,v| k.to_sym.eql? :before }
-      - @search.refine[:type].each do |refine|
+      - type_refines.each do |refine|
         %li
           = refine
           = link_to '×', refine_path(:type, refine, remove: true)
-      - @search.refine[:language].each do |refine|
+      - language_refines.each do |refine|
         %li
           = refine
           = link_to '×', refine_path(:language, refine, remove: true)

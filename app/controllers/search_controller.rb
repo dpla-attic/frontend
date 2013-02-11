@@ -3,7 +3,7 @@ require_dependency 'dpla/search'
 class SearchController < ApplicationController
   def list
     @search = DPLA::Search.new *permitted_params.search
-    @documents = @search.documents permitted_params.args
+    @items = @search.result permitted_params.args
     session[:last_query] = request.url
   end
 

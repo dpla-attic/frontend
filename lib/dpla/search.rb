@@ -2,20 +2,21 @@ module DPLA
   class Search
     DEFAULT_FACETS = ['subject.name', 'language.name', 'type']
 
-    attr_reader :term, :filters, :args, :facets
+    attr_reader :term, :filters, :facets
 
     # - term is search query
     # - filters is hash with refines
     #    {subject: 'Ships', type: ['image', 'text']}
     def initialize(term, filters = {})
       @term    = term 
-      @filters = {}.tap { |result| filters.each { |k,v| result[k.to_sym] = Array(v) } }
+      @filters = filters
       @facets  = DEFAULT_FACETS
       @args    = {}
+      self
     end
 
     def result(args = {})
-      conditions = { facets: @facets }.merge(@filters).merge(@args)
+      conditions = { q: @term, facets: @facets }.merge(@filters).merge(args)
       @result || @result = Items.by_conditions(conditions)
     end
     
@@ -35,22 +36,12 @@ module DPLA
     
     # languages facets
     def languages
-      # Hash {'English' => 512}
+      result.facets.language
     end
     
     # types facets
     def types
-      # Hash {'image' => 512}
-    end
-
-    def args=(args)
-      @args = args
-      @result = nil
-    end
-
-    def facets=(facets)
-      @facets = facets
-      @result = nil
+      result.facets.type
     end
   end
 end
