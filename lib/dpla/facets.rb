@@ -1,6 +1,6 @@
 module DPLA
   class Facets
-    attr_reader :subject
+    attr_reader :subject, :language, :type
 
     def initialize(facets)
       facets.each do |key, value|
@@ -9,11 +9,11 @@ module DPLA
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end
         elsif 'language.name' == key and value['terms'].is_a? Array
-          @subject = {}.tap do |subject|
+          @language = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end
         elsif 'type' == key and value['terms'].is_a? Array
-          @subject = {}.tap do |subject|
+          @type = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end
         end

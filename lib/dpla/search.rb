@@ -4,8 +4,6 @@ module DPLA
 
     attr_reader :term, :filters, :args, :facets
 
-    # Kaminari expected methods
-
     # - term is search query
     # - filters is hash with refines
     #    {subject: 'Ships', type: ['image', 'text']}
