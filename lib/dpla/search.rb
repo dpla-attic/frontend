@@ -12,6 +12,10 @@ module DPLA
     def initialize(term, filters = {})
     end
 
+    def result
+      
+    end
+
     # - args is search result manipulation conditions
     #    {sort_by: :created, sort_order: :desc, page: 2, page_size: 10}
     def items(args = {})
