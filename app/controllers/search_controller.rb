@@ -8,11 +8,13 @@ class SearchController < ApplicationController
   end
 
   def timeline
-  	@search = Search.build params.deep_merge(start: params[:year])
+    @search = DPLA::Search.new *permitted_params.search
   end
 
   def timeline_year
-  	@search = Search.build params.deep_merge(start: params[:year])
+    @search = DPLA::Search.new permitted_params.term, 
+                               permitted_params.filters.deep_merge(start: params[:year])
+    @items = @search.result
   end
 
   private

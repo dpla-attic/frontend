@@ -10,7 +10,7 @@
         for
         %span= params[:q]
       returned 
-      = number_with_delimiter @search.results.count, delimiter: ','
+      = number_with_delimiter @search.result.count, delimiter: ','
       results.
 
   / Control block
@@ -71,9 +71,9 @@
           .timelineContent
             .timelineResults
               %h2
-                = number_with_delimiter @search.results.count, delimiter: ','
+                = number_with_delimiter @search.result.count, delimiter: ','
                 items
-              - @search.results.each do |item|
+              - @items.each do |item|
                 %section
                   .sectionLeft
                     %h6= item.type
