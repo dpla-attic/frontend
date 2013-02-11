@@ -112,7 +112,7 @@ module DPLA
     end
 
     def conditions
-      {title: term}.merge(filters).merge(facets: facets_list)
+      {q: term}.merge(filters).merge(args).merge(facets: facets_list)
     end
 
     def prepare_query
