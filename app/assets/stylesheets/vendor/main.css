@@ -682,16 +682,22 @@ article .shareSave { margin: 0 0 3% 74.286%; }
     padding: 1% 0 2% 0;
 }
 .map .pagination { padding: 0; }
-.pagination span {
+.pagination span, .pagination a.current {
     background: none repeat scroll 0 0 #EDEDED;
     border: 1px solid #CFCFCF;
     padding: 2px 7px;
 }
-.pagination span { background: #fff; }
+.pagination span, .pagination a.current { background: #fff; }
 .pagination a {
     color: #4691b9;
     display: inline-block;
     margin: 0 10px 2px 5px;
+}
+.pagination a.current {
+    color: black;
+    cursor: default;
+    text-decoration: none;
+    margin: 0;
 }
 
 .locations ul {
@@ -2052,15 +2058,15 @@ footer .social.icons li { border: 1px solid #494949; background: #fff; }
 }
 .pop-columns section:first-child { margin: 0; }
 .pop-columns span { float: right; }
-#inline_content { padding: 20px 24px!important; overflow: hidden;}
+.inline_content { padding: 20px 24px!important; overflow: hidden;}
 
-#inline_content .tabs { border: none; margin: 0 0 1%;}
-#inline_content .tabs a {
+.inline_content .tabs { border: none; margin: 0 0 1%;}
+.inline_content .tabs a {
     background: none;
     border: none;
 }
 
-#inline_content .tabs .active a {
+.inline_content .tabs .active a {
     background: #dd4e00;
     color: #fff;
 }

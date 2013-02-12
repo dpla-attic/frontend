@@ -22,13 +22,25 @@
         #more_subjects.inline_content{:style => "padding:10px; background:#fff;"}
           #cboxClose.pclose &times;
           %h1 Subjects
-          .pop-columns
-            - subject_facets.in_groups(3).each do |facets_group|
-              %section
-                %ul
-                  - facets_group.reject(&:nil?).each do |facet|
-                    - name, count = facet.shift, facet.shift
-                    - if name.present?
-                      %li
-                        = link_to name, refine_path(:subject, name)
-                        %span= count
+          .popBar
+            %h6 Countries
+            .pagination
+              .t-data-grid-pager
+                - if subject_facets.count > 30
+                  - pages = (subject_facets.count.to_f / 30).ceil
+                  - (1..pages).to_a.each do |page|
+                    - current_class = page == 1 ? 'current' : ''
+                    %a{href: '#', data: {page: page}, class: "#{current_class}"}= page
+          = subject_facets.each_slice(30).with_index do |section, page|
+            - page = page + 1
+            - hidden_style = page != 1 ? 'display:none' : ''
+            .pop-columns{data: {page: page}, style: "#{hidden_style}"}
+              - section.in_groups(3).each do |column|
+                %section
+                  %ul
+                    - column.reject(&:nil?).each do |facet|
+                      - name, count = facet.shift, facet.shift
+                      - if name.present?
+                        %li
+                          = link_to name, refine_path(:subject, name)
+                          %span= count
