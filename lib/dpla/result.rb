@@ -31,7 +31,7 @@ module DPLA
     end
 
     def total_pages
-      count / limit
+      (count / limit.to_f).ceil
     end
   end
 end
