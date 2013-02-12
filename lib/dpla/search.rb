@@ -10,7 +10,7 @@ module DPLA
     def initialize(term, filters = {})
       @term    = term 
       @filters = filters
-      @facets  = DEFAULT_FACETS
+      @facets  = DEFAULT_FACETS + ['created.start.year', 'created.start.decade']
       @args    = {}
       self
     end
@@ -42,6 +42,14 @@ module DPLA
     # types facets
     def types
       result.facets.type
+    end
+
+    def years
+      result.facets.created_year
+    end
+
+    def decades
+      result.facets.created_decade
     end
   end
 end

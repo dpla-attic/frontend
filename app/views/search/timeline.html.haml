@@ -29,24 +29,7 @@
       / Century timeline
       .timelineModuleOuter
         .timelineModule
-
-          .scrubber
-            %span.arrow
-          %ul.centuries
-            %li 1000
-            %li 1100
-            %li 1200
-            %li 1300
-            %li 1400
-            %li 1500
-            %li 1600
-            %li 1700
-            %li 1800
-            %li 1900
-            %li 2000
-          %ul.bars
-            - 110.times do
-              %li{style: "height: #{[5,10,15,20].sample}px;"}
+          = timeline @search.decades
 
       .timelineView
         View:
@@ -58,19 +41,10 @@
         %span.next
         %span.prev
         .DecadesDates
-          %ul
-            - century = 1900
-            %li.century= century
-            - (1..11).each do |i|
-              %li= century + i*10
+          = graph_dates
 
         .graph
-          %ul
-            - 110.times do
-              %li{style:"height: #{(5..300).to_a.sample}px;"}
-                .info
-                  %h3 1985
-                  %span 785 items
+          = graph @graph.years
 
   %aside
     = render partial: 'sidebar'

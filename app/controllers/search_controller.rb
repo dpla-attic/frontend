@@ -9,6 +9,7 @@ class SearchController < ApplicationController
 
   def timeline
     @search = DPLA::Search.new *permitted_params.search
+    @graph  = DPLA::Search.new *permitted_params.search # TODO: slice 1900..2010
   end
 
   def timeline_year
