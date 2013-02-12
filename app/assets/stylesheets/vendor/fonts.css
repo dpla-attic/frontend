@@ -2,11 +2,11 @@
 
 @font-face {
     font-family: 'source_sans_proregular';
-    src: url('../fonts/sourcesanspro-regular-webfont.eot');
-    src: url('../fonts/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/sourcesanspro-regular-webfont.woff') format('woff'),
-         url('../fonts/sourcesanspro-regular-webfont.ttf') format('truetype'),
-         url('../fonts/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
+    src: url('/assets/sourcesanspro-regular-webfont.eot');
+    src: url('/assets/sourcesanspro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/sourcesanspro-regular-webfont.woff') format('woff'),
+         url('/assets/sourcesanspro-regular-webfont.ttf') format('truetype'),
+         url('/assets/sourcesanspro-regular-webfont.svg#source_sans_proregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -14,11 +14,11 @@
 
 @font-face {
     font-family: 'source_sans_pro_semiboldRg';
-    src: url('../fonts/sourcesanspro-semibold-webfont.eot');
-    src: url('../fonts/sourcesanspro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/sourcesanspro-semibold-webfont.woff') format('woff'),
-         url('../fonts/sourcesanspro-semibold-webfont.ttf') format('truetype'),
-         url('../fonts/sourcesanspro-semibold-webfont.svg#source_sans_pro_semiboldRg') format('svg');
+    src: url('/assets/sourcesanspro-semibold-webfont.eot');
+    src: url('/assets/sourcesanspro-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/sourcesanspro-semibold-webfont.woff') format('woff'),
+         url('/assets/sourcesanspro-semibold-webfont.ttf') format('truetype'),
+         url('/assets/sourcesanspro-semibold-webfont.svg#source_sans_pro_semiboldRg') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -26,11 +26,11 @@
 
 @font-face {
     font-family: 'source_sans_pro_semiboldIt';
-    src: url('../fonts/sourcesanspro-semiboldit-webfont.eot');
-    src: url('../fonts/sourcesanspro-semiboldit-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/sourcesanspro-semiboldit-webfont.woff') format('woff'),
-         url('../fonts/sourcesanspro-semiboldit-webfont.ttf') format('truetype'),
-         url('../fonts/sourcesanspro-semiboldit-webfont.svg#source_sans_pro_semiboldIt') format('svg');
+    src: url('/assets/sourcesanspro-semiboldit-webfont.eot');
+    src: url('/assets/sourcesanspro-semiboldit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/sourcesanspro-semiboldit-webfont.woff') format('woff'),
+         url('/assets/sourcesanspro-semiboldit-webfont.ttf') format('truetype'),
+         url('/assets/sourcesanspro-semiboldit-webfont.svg#source_sans_pro_semiboldIt') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -38,11 +38,11 @@
 
 @font-face {
     font-family: 'source_sans_proitalic';
-    src: url('../fonts/sourcesanspro-it-webfont.eot');
-    src: url('../fonts/sourcesanspro-it-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/sourcesanspro-it-webfont.woff') format('woff'),
-         url('../fonts/sourcesanspro-it-webfont.ttf') format('truetype'),
-         url('../fonts/sourcesanspro-it-webfont.svg#source_sans_proitalic') format('svg');
+    src: url('/assets/sourcesanspro-it-webfont.eot');
+    src: url('/assets/sourcesanspro-it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/sourcesanspro-it-webfont.woff') format('woff'),
+         url('/assets/sourcesanspro-it-webfont.ttf') format('truetype'),
+         url('/assets/sourcesanspro-it-webfont.svg#source_sans_proitalic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -50,11 +50,11 @@
 
 @font-face {
     font-family: 'icomoon';
-    src:url('../fonts/icomoon.eot');
-    src:url('../fonts/icomoon.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/icomoon.svg#icomoon') format('svg'),
-        url('../fonts/icomoon.woff') format('woff'),
-        url('../fonts/icomoon.ttf') format('truetype');
+    src:url('/assets/icomoon.eot');
+    src:url('/assets/icomoon.eot?#iefix') format('embedded-opentype'),
+        url('/assets/icomoon.svg#icomoon') format('svg'),
+        url('/assets/icomoon.woff') format('woff'),
+        url('/assets/icomoon.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
