@@ -10,7 +10,7 @@
         for
         %span= params[:q]
       returned 
-      = number_with_delimiter @search.result.count, delimiter: ','
+      = number_with_delimiter @search.count, delimiter: ','
       results.
 
   / Control block
@@ -29,24 +29,7 @@
       / Century timeline
       .timelineModuleOuter
         .timelineModule
-
-          .scrubber
-            %span.arrow
-          %ul.centuries
-            %li 1000
-            %li 1100
-            %li 1200
-            %li 1300
-            %li 1400
-            %li 1500
-            %li 1600
-            %li 1700
-            %li 1800
-            %li 1900
-            %li 2000
-          %ul.bars
-            - 110.times do
-              %li{style: "height: #{[5,10,15,20].sample}px;"}
+          = timeline @search.decades
 
       .timelineView
         View:
@@ -71,7 +54,7 @@
           .timelineContent
             .timelineResults
               %h2
-                = number_with_delimiter @search.result.count, delimiter: ','
+                = number_with_delimiter @search.items.count, delimiter: ','
                 items
               - @items.each do |item|
                 %section

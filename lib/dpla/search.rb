@@ -2,22 +2,31 @@ module DPLA
   class Search
     DEFAULT_FACETS = ['subject.name', 'language.name', 'type']
 
-    attr_reader :term, :filters, :facets
+    attr_reader :term, :filters, :args, :facets
 
     # - term is search query
     # - filters is hash with refines
     #    {subject: 'Ships', type: ['image', 'text']}
-    def initialize(term, filters = {})
+    #
+    def initialize(term, filters, options = {})
       @term    = term 
-      @filters = filters
-      @facets  = DEFAULT_FACETS + ['created.start.year', 'created.start.decade']
-      @args    = {}
+      @filters = filters.is_a?(Hash) ? filters : {}
+
+      @args = options[:graph] ? { page_size: 0 } : {}
+      if options[:facets].is_a?(Array)
+        self.facets = options[:facets]
+      end
       self
     end
 
+    # Returns search results
+    def items(args = {})
+      @args = args
+      results
+    end
+
     def result(args = {})
-      conditions = { q: @term, facets: @facets }.merge(@filters).merge(args)
-      @result || @result = Items.by_conditions(conditions)
+      items(args)
     end
     
     # name is field e.g. :subject, :type, :lang, :before, :after, etc.
@@ -31,25 +40,34 @@ module DPLA
 
     # subject facets
     def subjects
-      result.facets.subject
+      results.facets.subject
     end
     
     # languages facets
     def languages
-      result.facets.language
+      results.facets.language
     end
     
     # types facets
     def types
-      result.facets.type
+      results.facets.type
     end
 
     def years
-      result.facets.created_year
+      results.facets.year
     end
 
     def decades
-      result.facets.created_decade
+      results.facets.decade
     end
+
+    private
+
+      def results
+        @facets  = DEFAULT_FACETS + ['created.start.year', 'created.start.decade']
+        conditions = { q: @term, facets: @facets }.merge(@filters).merge(@args)
+        @result || @result = Items.by_conditions(conditions)
+      end
+
   end
 end
