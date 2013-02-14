@@ -1,6 +1,6 @@
 module DPLA
   class Facets
-    attr_reader :subject, :language, :type, :created_year, :created_decade
+    attr_reader :subject, :language, :type, :year, :decade
 
     def initialize(facets)
       facets.each do |key, value|
@@ -17,11 +17,11 @@ module DPLA
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end
         elsif 'created.start.year' == key and value['entries'].is_a? Array
-          @created_year = {}.tap do |subject|
+          @year = {}.tap do |subject|
             value['entries'].each { |entry| subject[entry['time']] = entry['count'] }
           end
         elsif 'created.start.decade' == key and value['entries'].is_a? Array
-          @created_decade = {}.tap do |subject|
+          @decade = {}.tap do |subject|
             value['entries'].each { |entry| subject[entry['time']] = entry['count'] }
           end
         end

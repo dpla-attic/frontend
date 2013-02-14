@@ -10,7 +10,7 @@
         for
         %span= params[:q]
       returned 
-      = number_with_delimiter @search.result.count, delimiter: ','
+      = number_with_delimiter @search.count, delimiter: ','
       results.
 
   / Control block
@@ -44,7 +44,7 @@
           = graph_dates
 
         .graph
-          = graph @graph.years
+          = graph @search.years
 
   %aside
     = render partial: 'sidebar'
