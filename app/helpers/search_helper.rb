@@ -1,6 +1,6 @@
 module SearchHelper
   def preserved_search_fields(options = {})
-    preservable = [:q, :subject, :type, :start, :end, :page_size, :sort_by, :sort_order]
+    preservable = [:q, :subject, :type, :after, :before, :page_size, :sort_by, :sort_order]
     to_preserve = preservable - Array(options[:without])
     ''.tap do |html|
       to_preserve.each do |field|
