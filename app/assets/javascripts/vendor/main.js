@@ -1,4 +1,4 @@
-$(window).load(function() {
+$(document).ready(function() {
 
 
   var resizeTimer;
@@ -211,7 +211,7 @@ $(window).load(function() {
 
 
   //LIGHT BOX
-  $(".inline").colorbox({inline:true, width:"100%", maxWidth: "1000px", transition: "none"});
+  $(".inline").colorbox({inline:true, top: '20px', width:"100%", maxWidth: "1000px", transition: "none"});
 
   $('.pop-open').click(function() {
     $('.pop-columns.country').fadeOut(function() {

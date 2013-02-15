@@ -1,5 +1,5 @@
 %ul
-  %li{class: [current_page?(action: 'overview') && :active]}
+  %li
     = link_to about_root_path do
       About
       %span.icon-arrow-thin-down{"aria-hidden" => "true"} 
@@ -7,9 +7,9 @@
   %li= link_to 'Contact', "#"
   - if user_signed_in?
     %li
-      Welcome 
       = link_to edit_user_registration_path do
-        %strong= current_user.name
+        Welcome,
+        = current_user.name
     %li.bg.last= link_to "Sign out", destroy_user_session_path
   - else
     %li.bg= link_to 'Login', new_user_session_path
