@@ -40,6 +40,7 @@ GEM
     better_errors (0.3.2)
       coderay (>= 1.0.0)
       erubis (>= 2.7.0)
+    binding_of_caller (0.6.8)
     bourne (1.1.2)
       mocha (= 0.10.5)
     breadcrumbs_on_rails (2.3.0)
@@ -198,6 +199,7 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  binding_of_caller
   breadcrumbs_on_rails
   capistrano-deploy
   coffee-rails (~> 3.2.1)
