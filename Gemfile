@@ -26,6 +26,7 @@ group :development do
   gem 'sqlite3'
   gem 'capistrano-deploy', :require => false
   gem 'quiet_assets'
+  gem 'better_errors'
 end
 
 group :test, :development do
