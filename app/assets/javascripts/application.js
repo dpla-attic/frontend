@@ -24,3 +24,4 @@
 //
 //= require jquery_ujs
 //= require search.js.coffee
+//= require timeline.js.coffee
