@@ -9,11 +9,7 @@ class SearchController < ApplicationController
 
   def timeline
     @search = Timeline.new permitted_params.term, permitted_params.filters
-  end
-
-  def timeline_year
-    @search = Timeline.new permitted_params.term, permitted_params.filters
-    @items = @search.items(2000)
+    render 'timeline/index'
   end
 
   private

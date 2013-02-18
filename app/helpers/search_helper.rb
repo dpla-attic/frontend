@@ -16,15 +16,7 @@ module SearchHelper
   end
 
   def timeline(decades, height = 30)
-    h = {}
     max_count = decades.sort{|a,b| a[1] <=> b[1]}.last.last unless decades.empty?
-    (1000..Time.now.year).step(10).each do |year|
-      if decades[year.to_s]
-        h["#{year}"] = decades[year.to_s].to_i / max_count.to_f * height
-      else
-        h["#{year}"] = 0
-      end
-    end
 
     content_tag(:div, '', class: 'scrubber').html_safe +
 
@@ -35,8 +27,8 @@ module SearchHelper
     end.html_safe +
 
     content_tag(:ul, class: 'bars') do
-      h.collect do |key, value|
-        content_tag(:li, "", style: "height: #{5+value}px;")
+      (1000..Time.now.year).step(10).collect do |year|
+        content_tag(:li, "", style: "height: #{1+decades[year.to_s].to_i / max_count.to_f * height}px;")
       end.join.html_safe
     end.html_safe
   end

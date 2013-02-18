@@ -1,0 +1,13 @@
+.timeline-row
+  = link_to timeline_path(year: @year+1), remote: true do
+    %span.next
+  = link_to timeline_path(year: @year-1), remote: true do
+    %span.prev
+  .year
+    %h3= @year
+  .timelineContent
+    .timelineResults
+      %h2
+        = number_with_delimiter @items.count, delimiter: ','
+        items
+      = render partial: 'timeline/item', collection: @items, as: :item

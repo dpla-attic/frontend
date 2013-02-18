@@ -1,0 +1,48 @@
+.layoutTwo.timeline
+  = render partial: 'shared/search_block'
+
+  %h1 Timeline
+  = render 'timeline/search_results_count', query: params[:q], count: @search.count
+  = render 'timeline/controls'
+
+  / Main container
+  .timeContainer
+    %article.timeline
+      / Century timeline
+      = render 'timeline/timeline_module'
+
+      .timelineView
+        View:
+        %a.selected.DecadesTab{href:"#"} Decades
+        %a.yearTab{href:"#"} Years
+
+      / Decades
+      .Decades
+        %span.next
+        %span.prev
+        .DecadesDates
+          = graph_dates
+
+        .graph
+          = graph @search.years
+
+      / Years
+      .timelineContainer
+        .timeline-row
+          %span.next
+          %span.prev
+
+          .timelineContent
+            .timelineResults
+
+        = render partial: 'timeline/items'
+
+        .timeline-row
+          %span.next
+          %span.prev
+
+          .timelineContent
+            .timelineResults
+
+  %aside
+    = render partial: 'search/sidebar'
