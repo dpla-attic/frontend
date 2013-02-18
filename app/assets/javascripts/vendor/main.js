@@ -1,15 +1,11 @@
-$(document).ready(function() {
-
-
-  var resizeTimer;
-  var TIMELINE_VIEW_WIDTH;
-  var SCRUBBER_WIDTH;
-
+$(window).load(function() {
 
 
 	$('.homeslide').flexslider({
 	    animation: "slide",
-	    pauseOnHover: true
+	    pauseOnHover: true,
+      prevText: '<span class="icon-arrow-left" aria-hidden="true"></span>',
+      nextText: '<span class="icon-arrow-right" aria-hidden="true"></span>' 
 	});
 
 	$('.moreInfo').mouseover(function () {
@@ -18,6 +14,21 @@ $(document).ready(function() {
 	    $('.flex-active-slide .slideOverlay').addClass('on');
 	    $('.flex-active-slide .slideText').addClass('on');
 	});
+
+
+  $('.moreInfo').toggle(function() {
+      $(this).addClass('hover');
+      $('.flex-direction-nav a').addClass('hover');
+      $('.flex-active-slide .slideOverlay').addClass('on');
+      $('.flex-active-slide .slideText').addClass('on');
+    }, 
+    function() {
+      $(this).removeClass('hover');
+      $('.flex-direction-nav a').removeClass('hover');
+      $('.flex-active-slide .slideOverlay').removeClass('on');
+      $('.flex-active-slide .slideText').removeClass('on');
+    }
+  );
 
 	$('.homeslide').mouseleave(function () {
 	    $('.slideOverlay').removeClass('on');
@@ -33,55 +44,26 @@ $(document).ready(function() {
       $('.flex-direction-nav a').removeClass('hover');
 	});
 
-  $('.DecadesTab').click(function() {
-    $(this).addClass('selected');
-    $('.yearTab').removeClass('selected');
-    $('.timelineContainer').hide();
-    $('.Decades').show();
-    return false;
+  $('.pop-open').click(function() {
+    $('.breadCrumbs li').removeClass('current');
+    $(this).next('a').clone().appendTo('.breadCrumbs ul').wrap('<li class="current"></li>');
   });
-
-
-
-
-
-
-
-
-
 
 
   $('.search-btn').click(function() {
     $('.searchViews, .search-btn').addClass('off');
-    $('.searchRowRight form').show().animate({width: '98%'}, 500);
-    $('.search-form input[type="text"]').focus();
-
-    $('.searchRowRight form, .searchViews, .search-btn').removeClass('on');
+	$('.searchRowRight form input[type="submit"]').hide();
+    $('.searchRowRight form').show().animate({width: '98%'}, 500, function() {
+	  $('.searchRowRight form input[type="submit"]').fadeIn(200);
+	});
+	$('.searchRowRight form input[type="text"]').focus();
     return false;
   });
 
-
-
-  $('.search-form input[type="text"]').blur(function() {
-    $('.search-btn').addClass('on', function() {
-      $('.searchViews').addClass('on');
-    });
-
-    $('.searchRowRight form').addClass('on');
+  $('.searchRowRight form input[type="text"]').blur(function() {
+    $('.search-btn, .searchViews').removeClass('off');
+	$('.searchRowRight form').attr('style', '');
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   $('.head').toggle(function() {
       $(this).next().slideDown();
@@ -92,15 +74,6 @@ $(document).ready(function() {
       $(this).removeClass('close');
     }
   );
-
-  $('.yearTab').click(function() {
-    $(this).addClass('selected');
-    $('.DecadesTab').removeClass('selected');
-    $('.Decades').hide();
-    $('.timelineContainer').show();
-    return false;
-  });
-
 
   ///// REFINE SIDEBAR TOGGLE
   $('#toggle').toggle(function() {
@@ -170,14 +143,16 @@ $(document).ready(function() {
     }
   );
 
-  // $('.pop-columns li').toggle(
-  //   function(){
-  //     $(this).children('ul').slideDown();
-  //   },
-  //   function(){
-  //     $(this).children('ul').slideUp();
-  //   }
-  // );
+  $('.pop-columns li').toggle(
+    function(){
+      $(this).children('ul').slideDown();
+    },
+    function(){
+      $(this).children('ul').slideUp();
+    }
+  );
+
+
 
   $('.menu-btn').toggle(
     function(){
@@ -190,9 +165,13 @@ $(document).ready(function() {
     }
   );
 
+  $('#inline_content .tabs a').click(function() {
+    return false;
+  });
+
   /// REFRESH once the width is 680
   var ww = $(window).width();
-  var limit = 640;
+  var limit = 680;
 
   function refresh() {
     ww = $(window).width();
@@ -211,7 +190,7 @@ $(document).ready(function() {
 
 
   //LIGHT BOX
-  $(".inline").colorbox({inline:true, top: '20px', width:"100%", maxWidth: "1000px", transition: "none"});
+  $(".inline").colorbox({inline:true, width:"100%", maxWidth: "1000px", transition: "none"});
 
   $('.pop-open').click(function() {
     $('.pop-columns.country').fadeOut(function() {
@@ -219,7 +198,138 @@ $(document).ready(function() {
     });
   });
 
+
+/////TIMELINE SETUP
+
+  var slideDistance;
+  var endPoint;
+  var windowWidth;
+  var selectedYear;
+  
+  // Set defaults
+  function initTimeline() {
+	  windowWidth = window.innerWidth || document.documentElement.clientWidth;
+	  if ($('.decadesView').length) {
+		if (windowWidth > 980) {
+			//for thin bars
+			slideDistance = 8.341;
+			endPoint = 91.659;
+			initScrub();
+		} else {
+			//for fat bars
+			slideDistance = 0.667;
+			endPoint = 99.333;
+			initScrub();
+		}
+	  } else if ($('.yearsView').length) {
+		  endPoint = 100;
+		  initScrub();
+	  }
+  }
+  initTimeline();
+  
+  
+/////TIMELINE MODULE: SCRUBBER
+  function initScrub() {
+	if ($('.decadesView').length) {
+	  $('.scrubber').slider({
+		value: endPoint*1000,
+		min: 0,
+		max: endPoint*1000,
+		slide: function( event, ui ) {
+		  var move = ui.value/1000;
+		  $('.DecadesDates, .graph').css({ right: move + '%' });
+		  if (ui.value == endPoint*1000) {
+		  	$('.Decades .next').hide();
+		  } else if (ui.value == 0) {
+		  	$('.Decades .prev').hide();
+		  } else {
+			  $('.Decades .prev, .Decades .next').show();
+		  };
+		},
+		change: function( event, ui ) {
+          var move = ui.value/1000;
+		  if (ui.value == endPoint*1000) {
+		  	$('.Decades .next').hide();
+		  } else if (ui.value == 0) {
+		  	$('.Decades .prev').hide();
+		  } else {
+			  $('.Decades .prev, .Decades .next').show();
+		  };
+        }
+	  });
+	} else if ($('.yearsView').length) {
+	  $('.scrubber').slider({
+		value: (selectedYear*100000)/1020,
+		min: 0,
+		max: endPoint*1000
+	  });
+	  console.log($('.scrubber').slider('value'));
+	}
+  }
+  initScrub();
+
+  $('.scrubber a').append('<span class="arrow"></span>');
+  
+
+/////TIMELINE VIEWS
+  $('.DecadesTab').click(function() {
+    $('.timeContainer').removeClass('yearsView').addClass('decadesView');
+	$('.DecadesDates, .graph').attr('style', '');
+    $('.timelineContainer').hide();
+    $('.Decades').show();
+	initTimeline();
+    return false;
+  });
+  $('.yearTab').click(function() {
+    return false;
+  });
+  
+  $('.graph li').click(function() {
+    $('.timeContainer').removeClass('decadesView').addClass('yearsView');
+    $('.Decades').hide();
+    $('.timelineContainer').show();
+	selectedYear = $(this).index();
+	console.log(selectedYear);
+	initTimeline();
+    return false;
+  });
+
+
+/////TIMELINE MODULE: DECADES
+
+  var moving = false;
+  $('.Decades .prev').click(function() {
+	if (moving == false) {
+	  moving = true;
+	  var moveDistance = Math.abs($('article.timeline').offset().left - $('.graph').offset().left);
+	  if (moveDistance < $('.graph').width() * (slideDistance/100)) {
+		$('.DecadesDates, .graph').animate({ right: '0' }, function() { moving = false; });
+		$('.scrubber').slider('value', 0);
+	  } else {
+		$('.DecadesDates, .graph').animate({ right: '-=' +slideDistance+ '%' }, function() { moving = false; });
+		$('.scrubber').slider('value', $('.scrubber').slider('value') - (slideDistance*1000));
+	  }
+	}
+  });
+
+  $('.Decades .next').click(function() {
+	if (moving == false) {
+	  moving = true;
+	  var moveDistance = Math.abs($('.graph').offset().left + $('.graph').outerWidth() - ($('article.timeline').outerWidth() + $('article.timeline').offset().left));
+	  if (moveDistance < $('.graph').width() * (slideDistance/100)) {
+		$('.DecadesDates, .graph').animate({ right: endPoint + '%' }, function() { moving = false; });
+		$('.scrubber').slider('value', endPoint*1000);
+	  } else {
+		$('.DecadesDates, .graph').animate({ right: '+=' +slideDistance+ '%' }, function() { moving = false; });
+		$('.scrubber').slider('value', $('.scrubber').slider('value') + (slideDistance*1000));
+	  }
+	}
+  });
+  
+  
 /////TIMELINE MODULE: YEARS
+
   $('.timeline-row .next').click(function() {
     if($(this).parent().next().hasClass('timeline-row')) {
       $('.prev, .next').hide();
@@ -237,75 +347,58 @@ $(document).ready(function() {
       });
     }
   });
-
-
-/////TIMELINE MODULE: SCRUBBER
-  $('.scrubber').slider({
-    value: 1000,
-    min: 0,
-    max: 1000,
-    slide: function( event, ui ) {
-      var move = ui.value / 10.91 + '%';
-      $('.DecadesDates, .graph').css({ right: move });
-    }
-  });
-
-  $('.scrubber a').append('<span class="arrow"></span>');
-
-/////TIMELINE MODULE: DECADES
-
-  var timelineDistance;
-  var windowWidth = window.innerWidth || document.documentElement.clientWidth;
   
-  // Calculate the screen width
-  function getScreenWidth() {
-	  if (windowWidth > 980) {
-		  slideDistance = 6.85;
-	  } else {
-		  slideDistance = 0.56;
-	  }
+  
+// Fix subpixel rounding on timeline for proper alignment of years and bars. Delete when full browser support exists.
+  if ($('.timeline').length) {
+	var barsCount = 0;
+	$('.bars li').each(function() {
+	  $(this).css({'margin-right': '-100%','margin-left': (0.906343*barsCount) + '%'});
+	  barsCount = barsCount + 1;
+	});
+	var graphCount = 0;
+	$('.graph li').each(function() {
+	  $(this).css({'margin-right': '-100%','margin-left': (0.098038*graphCount) + '%'});
+	  graphCount = graphCount + 1;
+	});
+	var decadesCount = 0;
+	$('.DecadesDates li').each(function() {
+	  $(this).css({'margin-right': '-100%','margin-left': (0.980392*decadesCount - 0.47) + '%'});
+	  decadesCount = decadesCount + 1;
+	});
   }
-  $(window).bind('resize',function(){
-	getScreenWidth();
-  });
-  getScreenWidth();
 
-  var moving = false;
-  $('.Decades .prev').click(function() {
-	if (moving == false) {
-	  moving = true;
-	  var moveDistance = Math.abs($('article.timeline').offset().left - $('.graph').offset().left);
-	  if (moveDistance < $('.graph').width() * (slideDistance/100)) {
-		  $('.DecadesDates, .graph').animate({ right: '0' }, function() { moving = false; });
-		  $('.scrubber a').animate({ left: '0' });
-		  $('.Decades .prev').hide();
-	  } else {
-		  $('.DecadesDates, .graph').animate({ right: '-=' +slideDistance+ '%' }, function() { moving = false; });
-		  $('.scrubber a').animate({ left: '-=' +slideDistance+ '%' });
-		  $('.Decades .prev').show();
-		  $('.Decades .next').show();
-	  }
-	}
-  });
 
-  $('.Decades .next').click(function() {
-	if (moving == false) {
-	  moving = true;
-	  var moveDistance = Math.abs($('.graph').offset().left + $('.graph').outerWidth() - ($('article.timeline').outerWidth() + $('article.timeline').offset().left));
-	  if (moveDistance < $('.graph').width() * (slideDistance/100)) {
-		$('.DecadesDates, .graph').animate({ right: '91.659%' }, function() { moving = false; });
-		$('.scrubber a').animate({ left: '100%' });
-		$('.Decades .next').hide();
-	
-	  } else {
-		$('.DecadesDates, .graph').animate({ right: '+=' +slideDistance+ '%' }, function() { moving = false; });
-		$('.scrubber a').animate({ left: '+=' +slideDistance+ '%' });
-		$('.Decades .next').show();
-		$('.Decades .prev').show();
-	  }
-	}
-  });
+
+////////////IE8 TO FIX PLACE HOLDER
+
+  if (!Modernizr.input.placeholder) {
+    $('[placeholder]').focus(function() {
+      var input = $(this);
+        if (input.val() == input.attr('placeholder')) {
+            input.val('');
+            input.removeClass('placeholder');
+          }
+      }).blur(function() {
+        var input = $(this);
+          if (input.val() == '' || input.val() == input.attr('placeholder')) {
+           input.addClass('placeholder');
+           input.val(input.attr('placeholder'));
+         }
+      }).blur();
+
+      $('[placeholder]').parents('form').submit(function() {
+        $(this).find('[placeholder]').each(function() {
+          var input = $(this);
+          if (input.val() == input.attr('placeholder')) {
+            input.val('');
+        }
+      })
+    });
+  }
 
        
 });
+
+
 
