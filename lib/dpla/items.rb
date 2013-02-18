@@ -3,6 +3,7 @@ module DPLA
     include HTTParty
     format :json
     base_uri Settings.api.url
+    basic_auth Settings.api.username, Settings.api.password
 
     def self.by_ids(ids)
       query = Conditions.new(ids)
