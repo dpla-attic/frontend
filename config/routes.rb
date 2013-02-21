@@ -13,8 +13,7 @@ DplaPortal::Application.routes.draw do
   get '/item/:id',       to: 'items#show', as: 'item'
   get '/search',         to: 'search#list', as: 'search_items'
   get '/timeline',       to: 'timeline#index', as: 'timeline'
-  match '/timeline/:year', to: 'timeline#show', as: 'timeline_year', year: /\d{1,4}/
-
+  post '/timeline/items_by_year', to: 'timeline#items_by_year'
 
   root to: 'pages#home'
   match '/welcome' => 'users#welcome'

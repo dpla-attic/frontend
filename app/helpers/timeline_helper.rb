@@ -33,11 +33,9 @@ module TimelineHelper
         if year <= Time.now.year
           count = years[year.to_s] || 0
           content_tag(:li,
-              if count > 0
               content_tag(:div, 
                 content_tag(:div, "<h3>#{year}</h3><span>#{count} items</span>".html_safe, class: "info"),
-                class: "infoOuter")
-              end,
+                class: "infoOuter"),
             style: "height: #{25+count/max_count.to_f*height}px;")
         else
           content_tag(:li, "", style: "visibility: hidden;")
