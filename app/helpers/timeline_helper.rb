@@ -12,7 +12,8 @@ module TimelineHelper
 
     content_tag(:ul, class: 'bars') do
       (1000..Time.now.year).step(10).collect do |year|
-        content_tag(:li, "", style: "height: #{1+decades[year.to_s].to_i / max_count.to_f * height}px;")
+        col_height = 1 + Math.log10(decades[year.to_s].to_i) / Math.log10(max_count) * height
+        content_tag(:li, "", style: "height: #{col_height}px;")
       end.join.html_safe
     end.html_safe
   end
@@ -32,11 +33,12 @@ module TimelineHelper
       (1000..2019).collect do |year|
         if year <= Time.now.year
           count = years[year.to_s] || 0
+          col_height = (count > 0 ? 25 : 1) + Math.log10(count)/Math.log10(max_count) * height
           content_tag(:li,
-              content_tag(:div, 
+              content_tag(:div,
                 content_tag(:div, "<h3>#{year}</h3><span>#{count} items</span>".html_safe, class: "info"),
                 class: "infoOuter"),
-            style: "height: #{25+count/max_count.to_f*height}px;")
+            style: "height: #{col_height}px;")
         else
           content_tag(:li, "", style: "visibility: hidden;")
         end
