@@ -1,7 +1,7 @@
 require_dependency 'dpla/search'
 
 class TimelineController < ApplicationController
-  def index
+  def show
     @search = Timeline.new permitted_params.term, permitted_params.filters
   end
 
