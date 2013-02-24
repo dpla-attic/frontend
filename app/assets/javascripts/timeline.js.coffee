@@ -22,60 +22,48 @@ jQuery ->
       $('.Decades').hide()
       $('.timelineContainer').show()
     return false
+    
+  # Previous / next page
+  fetchPage = (year, page) ->
+    $.ajax
+      url: "/timeline/items_by_year",
+      type: "POST",
+      data:
+        year: year,
+      beforeSend: ->
+        $('.prev, .next').hide()
+        page.find('.year h3').text year
+        page.find('.timelineResults').html "<span>Fetching page</span>"
+      success: (html) ->
+        page.find('.timelineResults').html html
 
   $('.timelineContainer').on 'click', '.timeline-row', (event) ->
     current_year = parseInt $(this).find('.year h3').text()
+    page = container.find(".timeline-row:nth-child("+ current_page + ")")
+    
+    # If this is a last page or first page we need move
+    if current_page >= total_pages
+      container.append(container.find('.timeline-row:first-child'))
+      current_page = current_page-1
+      container.animate { right: '-=100%' }, 0
+    else if current_page <= 1
+      container.prepend(container.find('.timeline-row:last-child'))
+      current_page = current_page+1
+      container.animate { right: '+=100%' }, 0
+    
     if event.target.className == 'next'
-      year = current_year + 1
-      page = container.find(".timeline-row:nth-child("+ current_page + ")")
-
-      # If this is a last page or first page we need move
-      if current_page >= total_pages
-        container.append(container.find('.timeline-row:first-child'))
-        current_page = current_page-1
-        container.animate { right: '-=100%' }, 0
-
-      $.ajax
-        url: "/timeline/items_by_year",
-        type: "POST",
-        data:
-          year: year,
-        beforeSend: ->
-          $('.prev, .next').hide()
-          page.next().find('.year h3').text year
-          page.next().find('.timelineResults').html "<span>Fetching page</span>"
-        success: (html) ->
-          page.next().find('.timelineResults').html html
-
-        container.animate { right: '+=100%' }, 500, -> 
-          $('.prev, .next').show()
-        current_page = current_page + 1
+      fetchPage current_year+1, page.next()
+      container.animate { right: '+=100%' }, 500, -> 
+        $('.prev, .next').show()
+      current_page = current_page + 1
 
     else if event.target.className == 'prev'
-      year = current_year - 1
-      page = container.find(".timeline-row:nth-child("+ current_page + ")")
-      
-      if current_page <= 1
-        container.prepend(container.find('.timeline-row:last-child'))
-        current_page = current_page+1
-        container.animate { right: '+=100%' }, 0
-      
-      $.ajax
-        url: "/timeline/items_by_year",
-        type: "POST",
-        data: 
-          year: year,
-        beforeSend: ->
-          $('.prev, .next').hide()
-          page.prev().find('.year h3').text year
-          page.prev().find('.timelineResults').html "<span>Fetching page</span>"
-        success: (html) ->
-          page.prev().find('.timelineResults').html html
+      fetchPage current_year-1, page.prev()
+      container.animate { right: '-=100%' }, 500, -> 
+        $('.prev, .next').show()
+      current_page = current_page - 1
 
-        container.animate { right: '-=100%' }, 500, -> 
-          $('.prev, .next').show()
-        current_page = current_page - 1
-        
+  # Infinite scroll
   $('.timelineResults').on 'scroll', (event) ->
     $holder = $(this)
     url = $(this).find('.pagination a').attr('href')
