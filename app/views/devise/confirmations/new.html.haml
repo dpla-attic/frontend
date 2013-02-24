@@ -5,5 +5,6 @@
       = simple_form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post } do |f|
         = f.full_error :confirmation_token
         = f.input :email, required: true, autofocus: true
-        = f.button :submit, "Resend confirmation instructions"
+        %br
+        %a.btn{:href => ""} Resend confirmation instructions
       = render "devise/shared/links"

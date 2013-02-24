@@ -7,6 +7,7 @@
         = f.input :name, required: true
         = f.input :password, required: true
         = f.input :password_confirmation, required: true
-        = f.button :submit, "Sign up"
+        %br
+        %a.btn{:href => ""} Sign up
 
       = render "devise/shared/links"

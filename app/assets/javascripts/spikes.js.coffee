@@ -1,4 +1,4 @@
 jQuery ->
-  $('form').on 'click', 'a.btn.orange', ->
+  $('form').on 'click', 'a.btn', ->
     $(this).parents('form').submit()
     false

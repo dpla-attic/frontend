@@ -14,4 +14,5 @@
             = f.input :password, autocomplete: "off", hint: "Leave it blank if you don't want to change it", required: false
             = f.input :password_confirmation, required: false
             = f.input :current_password, hint: "We need your current password to confirm your changes", required: false
-            = f.button :submit, "Save"
+            %br
+            %a.btn{:href => ""} Save

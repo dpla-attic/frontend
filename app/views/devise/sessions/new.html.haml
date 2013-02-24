@@ -7,7 +7,8 @@
         = f.input :password, required: false
         - if devise_mapping.rememberable?
           %br
-          = f.input :remember_me, as: :boolean, label: false
-          Remember me
-        = f.button :submit, "Sign in"
+          %p
+            = f.input :remember_me, as: :boolean, label: false
+            Remember me
+        %a.btn{:href => ""} Sign in
       = render "devise/shared/links"
