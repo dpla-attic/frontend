@@ -15,18 +15,6 @@ jQuery ->
         $('.timelineContainer').show()
     return false
 
-  fetchPage = (year, page) ->
-    if page > current_page
-      updated_page = container.find(".timeline-row:nth-child("+ current_page + ")")
-    $.post("/timeline/items_by_year", year: year).done (html) ->
-      page.next().find('.timelineResults').replaceWith html
-      page.next().find('.year h3').text year
-
-      container.animate { right: '+=100%' }, 500, -> 
-        $('.prev, .next').show()
-      $('.timelineContainer').append $('.timelineContainer .timeline-row:nth-child(1)')
-      $('.timelineContainer').animate { right: '-=100%' }, 0
-
   $('.timelineContainer').on 'click', '.timeline-row', (event) ->
     current_year = parseInt $(this).find('.year h3').text()
     if event.target.className == 'next'
@@ -63,19 +51,12 @@ jQuery ->
         container.animate { right: '-=100%' }, 500, -> 
           $('.prev, .next').show()
         current_page = current_page - 1
-
-  # page = 0;
-  # $('.timelineContainer').on 'scroll', '.timelineResults', (event) ->
-  #   alert "scroll"
-  #   if $(this).scrollTop() > $(this).height() - $(this).scrollHeight() - 50
-  #     current_year = parseInt($(this).parent().parent().find('.year h3').text())
-  #     $.post("/timeline/items_by_year", year: current_year, page: page++).done (html) ->
-  #       $(this).append html
-  #$('.timelineContainer .timeline-row:nth-child(2) .timelineResults').scroll
-
-#   $(window).scroll ->
-#     url = $('.pagination .next_page').attr('href')
-#     if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
-#       $('.pagination').text("Fetching more items...")
-#       $.getScript(url)
-#   $(window).scroll()
+        
+  $('.timelineResults').on 'scroll', (event) ->
+    $holder = $(this)
+    url = $(this).find('.pagination a').attr('href')
+    if url && $(this).scrollTop() > this.scrollHeight - $(this).height() - 500
+      $holder.find('.pagination').text("Fetching more items...")
+      $.post(url).done (html) ->
+        $holder.find('.pagination').remove()
+        $holder.append html

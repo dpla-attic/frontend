@@ -1,4 +1,10 @@
-%h2
-  = number_with_delimiter @items.count, delimiter: ','
-  items
+- unless params[:page]
+  %h2
+    = number_with_delimiter @items.count, delimiter: ','
+    items
+
 = render partial: 'timeline/item', collection: @items, as: :item
+
+- unless @items.last_page?
+  .pagination
+    = link_to "next", params.merge(:page => @items.current_page + 1)

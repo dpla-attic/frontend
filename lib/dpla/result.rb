@@ -33,5 +33,9 @@ module DPLA
     def total_pages
       (count / limit.to_f).ceil
     end
+
+    def last_page?
+      current_page == total_pages
+    end
   end
 end

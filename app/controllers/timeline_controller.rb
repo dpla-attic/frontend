@@ -10,11 +10,7 @@ class TimelineController < ApplicationController
     page = params[:page].to_i if params[:page]
     @year = params[:year] ? params[:year].to_i : Time.now.year
     @items = @search.items(@year, page || 0)
-    unless params[:page]
-      render partial: "timeline/items", locals: { items: @items }, layout: false
-    else
-      render partial: 'timeline/item', collection: @items, as: :item, layout: false
-    end
+    render partial: "timeline/items", locals: { items: @items }, layout: false
   end
 
   private
