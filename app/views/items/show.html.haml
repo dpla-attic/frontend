@@ -1,27 +1,5 @@
 .layout
-  %section.searchRow
-    .searchRowLeft
-      - unless session[:last_query].nil?
-        = link_to "« back to searh results", session[:last_query]
-    .searchRowRight
-      .searchViews
-        %span View:
-        %ul
-          %li.active
-            %a{:href => ""}
-              %span.icon-view-list{"aria-hidden" => "true"}
-          %li
-            %a.viewTwo{:href => ""}
-              %span.icon-view-map{"aria-hidden" => "true"}
-          %li
-            %a.viewThree{:href => ""}
-              %span.icon-view-time{"aria-hidden" => "true"}
-      %a.search-btn{:href => ""} Search
-      = form_tag(search_items_path, method: :get, authenticity_token: false, id: :searchBox) do
-        = preserved_search_fields without: :q
-        = text_field_tag :q, params[:q], placeholder: 'Search the Library'
-        = submit_tag 'Search', class: 'searchBtn', name: nil
-
+  = render 'shared/search_panel'
   %ul.shareSave
     %li.btn
       %a{:href => ""} Save to...
