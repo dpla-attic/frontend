@@ -1,11 +1,4 @@
-.timeline-row{data: {year: @year}}
-  %span.next
-  %span.prev
-  .year
-    %h3= @year
-  .timelineContent
-    .timelineResults
-      %h2
-        = number_with_delimiter @items.count, delimiter: ','
-        items
-      = render partial: 'timeline/item', collection: @items, as: :item
+%h2
+  = number_with_delimiter @items.count, delimiter: ','
+  items
+= render partial: 'timeline/item', collection: @items, as: :item

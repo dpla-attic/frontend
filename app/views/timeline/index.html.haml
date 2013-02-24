@@ -28,21 +28,8 @@
 
       / Years
       .timelineContainer
-        .timeline-row
-          .year
-            .h3
-          .timelineContent
-            .timelineResults
-        .timeline-row
-          .year
-            .h3
-          .timelineContent
-            .timelineResults
-        .timeline-row
-          .year
-            .h3
-          .timelineContent
-            .timelineResults
+        - 5.times do 
+          = render 'page'
 
   %aside
     = render partial: 'search/sidebar'
