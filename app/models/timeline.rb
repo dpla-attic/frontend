@@ -69,7 +69,7 @@ class Timeline
 
     def fetch_results(year, page)
       facets = []
-      filters = @filters.merge({after: year, before: year+1})
+      filters = @filters.merge({after: year, before: year})
       conditions = { q: @term, facets: facets }.merge(filters).merge(page: page)
       @data = DPLA::Items.by_conditions(conditions)
       @results = @data

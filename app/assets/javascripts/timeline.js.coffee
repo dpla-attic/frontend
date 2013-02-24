@@ -6,13 +6,21 @@ jQuery ->
   $('.graph').on 'click', 'li', (event) ->
     requested_year = parseInt $(this).find('h3').text()
     if requested_year
-      $.post("/timeline/items_by_year", year: requested_year).done (html) ->
-        el = container.find(".timeline-row:nth-child("+ current_page + ")")
-        el.find('.year h3').text requested_year
-        el.find('.timelineResults').html html
-        $('.timeContainer').removeClass('decadesView').addClass('yearsView')
-        $('.Decades').hide()
-        $('.timelineContainer').show()
+      el = container.find(".timeline-row:nth-child("+ current_page + ")")
+      el.find('.year h3').text requested_year
+      $.ajax
+        url: "/timeline/items_by_year",
+        type: "POST",
+        data:
+          year: requested_year,
+        beforeSend: ->
+          el.find('.timelineResults').html "<span>Fetching page</span>"
+        success: (html) ->
+          el.find('.timelineResults').html html
+
+      $('.timeContainer').removeClass('decadesView').addClass('yearsView')
+      $('.Decades').hide()
+      $('.timelineContainer').show()
     return false
 
   $('.timelineContainer').on 'click', '.timeline-row', (event) ->
@@ -26,11 +34,19 @@ jQuery ->
         container.append(container.find('.timeline-row:first-child'))
         current_page = current_page-1
         container.animate { right: '-=100%' }, 0
-      
-      $('.prev, .next').hide()
-      $.post("/timeline/items_by_year", year: year).done (html) ->
-        page.next().find('.timelineResults').html html
-        page.next().find('.year h3').text year
+
+      $.ajax
+        url: "/timeline/items_by_year",
+        type: "POST",
+        data:
+          year: year,
+        beforeSend: ->
+          $('.prev, .next').hide()
+          page.next().find('.year h3').text year
+          page.next().find('.timelineResults').html "<span>Fetching page</span>"
+        success: (html) ->
+          page.next().find('.timelineResults').html html
+
         container.animate { right: '+=100%' }, 500, -> 
           $('.prev, .next').show()
         current_page = current_page + 1
@@ -43,11 +59,19 @@ jQuery ->
         container.prepend(container.find('.timeline-row:last-child'))
         current_page = current_page+1
         container.animate { right: '+=100%' }, 0
-  
-      $('.prev, .next').hide()
-      $.post("/timeline/items_by_year", year: year).done (html) ->
-        page.prev().find('.timelineResults').html html
-        page.prev().find('.year h3').text year
+      
+      $.ajax
+        url: "/timeline/items_by_year",
+        type: "POST",
+        data: 
+          year: year,
+        beforeSend: ->
+          $('.prev, .next').hide()
+          page.prev().find('.year h3').text year
+          page.prev().find('.timelineResults').html "<span>Fetching page</span>"
+        success: (html) ->
+          page.prev().find('.timelineResults').html html
+
         container.animate { right: '-=100%' }, 500, -> 
           $('.prev, .next').show()
         current_page = current_page - 1
