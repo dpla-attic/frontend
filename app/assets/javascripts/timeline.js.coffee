@@ -14,7 +14,7 @@ jQuery ->
         data:
           year: requested_year,
         beforeSend: ->
-          el.find('.timelineResults').html "<span>Fetching page</span>"
+          el.find('.timelineResults').html "<span>Fetching page...</span>"
         success: (html) ->
           el.find('.timelineResults').html html
 
@@ -52,13 +52,17 @@ jQuery ->
       container.animate { right: '+=100%' }, 0
     
     if event.target.className == 'next'
-      fetchPage current_year+1, page.next()
+      year = current_year+1
+      _page = page.next()
+      fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
       container.animate { right: '+=100%' }, 500, -> 
         $('.prev, .next').show()
       current_page = current_page + 1
 
     else if event.target.className == 'prev'
-      fetchPage current_year-1, page.prev()
+      year = current_year-1
+      _page = page.prev()
+      fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
       container.animate { right: '-=100%' }, 500, -> 
         $('.prev, .next').show()
       current_page = current_page - 1
