@@ -3,13 +3,14 @@ jQuery ->
   current_page = 2 # first page is 1 (not 0), as in CSS
   total_pages = 5
 
+  # Click on graph column
   $('.graph').on 'click', 'li', (event) ->
     requested_year = parseInt $(this).find('h3').text()
     if requested_year
       el = container.find(".timeline-row:nth-child("+ current_page + ")")
       el.find('.year h3').text requested_year
       $.ajax
-        url: "/timeline/items_by_year",
+        url: "/timeline/items_by_year" + window.location.search,
         type: "POST",
         data:
           year: requested_year,
@@ -26,14 +27,14 @@ jQuery ->
   # Previous / next page
   fetchPage = (year, page) ->
     $.ajax
-      url: "/timeline/items_by_year",
+      url: "/timeline/items_by_year" + window.location.search,
       type: "POST",
       data:
         year: year,
       beforeSend: ->
         $('.prev, .next').hide()
         page.find('.year h3').text year
-        page.find('.timelineResults').html "<span>Fetching page</span>"
+        page.find('.timelineResults').html "<span>Fetching page...</span>"
       success: (html) ->
         page.find('.timelineResults').html html
 
