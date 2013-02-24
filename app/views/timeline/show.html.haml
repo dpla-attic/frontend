@@ -1,15 +1,15 @@
 .layoutTwo.timeline
-  = render partial: 'shared/search_block'
+  = render 'shared/search_panel'
 
   %h1 Timeline
-  = render 'timeline/search_results_count', query: params[:q], count: @search.count
-  = render 'timeline/controls'
+  = render 'shared/results/search_results', query: params[:q], search: @search
+  = render 'shared/refine_control'
 
   / Main container
   .timeContainer.decadesView
     %article.timeline
       / Century timeline
-      = render 'timeline/timeline_module'
+      = render 'timeline_module'
 
       .timelineView
         View:
@@ -29,7 +29,6 @@
       / Years
       .timelineContainer
         - 5.times do 
-          = render 'page'
+          = render 'empty_page'
 
-  %aside
-    = render partial: 'search/sidebar'
+  = render 'shared/sidebar'

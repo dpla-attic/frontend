@@ -1,0 +1,12 @@
+/ Search results block
+.searchResults
+  %h4
+    Your search
+    - if query.present?
+      for
+      %span= query
+    returned 
+    = number_with_delimiter search.count, delimiter: ','
+    results.
+    
+  = render 'shared/results/refined_by', search: search

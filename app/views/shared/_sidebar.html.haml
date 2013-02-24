@@ -1,0 +1,6 @@
+%aside
+  = render 'shared/sidebar/refine_by_subject'
+  - unless params[:controller] == 'timeline'
+    = render 'shared/sidebar/refine_by_date'
+  = render 'shared/sidebar/refine_by_type'
+  = render 'shared/sidebar/refine_by_language'

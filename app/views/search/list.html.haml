@@ -1,48 +1,13 @@
 .layoutTwo.search-page
-  %section.searchRow
-    .searchRowLeft
-    .searchRowRight
-      .searchViews
-        %span View:
-        %ul
-          %li.active
-            %a{:href => ""}
-              %span.icon-view-list{"aria-hidden" => "true"}
-          %li
-            %a.viewTwo{:href => ""}
-              %span.icon-view-map{"aria-hidden" => "true"}
-          %li
-            %a.viewThree{:href => ""}
-              %span.icon-view-time{"aria-hidden" => "true"}
-      %a.search-btn{:href => ""}
-        %span.icon-mag-glass{"aria-hidden" => "true"}
-      = form_tag(search_items_path, method: :get, authenticity_token: false, id: :searchBox) do
-        = preserved_search_fields without: :q
-        = text_field_tag :q, params[:q], placeholder: 'Search the Library'
-        = submit_tag 'Search', class: 'searchBtn', name: nil
+  = render 'shared/search_panel'
   %ul.shareSave
     %li.btn
       %a{:href => ""} Save
     %li.btn
       %a{:href => ""} Share
-  .controls
-    #toggle.mobile.Marticle
-      %span.icon-arrow-thin-left{"aria-hidden" => "true"}
-      Refine
-    #toggle.mobile.Maside
-      Refine
-      %span.icon-arrow-thin-right{"aria-hidden" => "true"}
   %h1 Search Results
-  .searchResults
-    %h4
-      Your search
-      - if params[:q].present?
-        for
-        %span= params[:q]
-      returned 
-      = number_with_delimiter @items.count, delimiter: ','
-      results.
-    = render partial: 'refined_by'
+  = render 'shared/results/search_results', query: params[:q], search: @search
+  = render 'shared/refine_control'
   - if @items.present?
     .slidePopOut
       #resultsBarTop.resultsBar
@@ -75,8 +40,6 @@
                   = link_to item.source, class: 'ViewObject', target: :_blank do
                     View Object
                     %span.icon-view-object{"aria-hidden" => "true"}
-    %aside
-      %h5 Refine
-      = render partial: 'sidebar'
+    = render partial: 'shared/sidebar'
     #resultsBarBottom.resultsBar
       = render partial: 'paginator'

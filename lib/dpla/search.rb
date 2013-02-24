@@ -60,6 +60,10 @@ module DPLA
     def decades
       results.facets.decade
     end
+    
+    def count
+      results.count
+    end
 
     private
 
