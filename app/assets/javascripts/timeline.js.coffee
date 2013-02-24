@@ -32,6 +32,15 @@ jQuery ->
       $('.timelineContainer').prepend $('.timelineContainer .timeline-row:nth-child(3)')
       $('.timelineContainer').animate { right: '+=100%'}, 0
 
+  page = 0;
+  $('.timelineContainer').on 'scroll', '.timelineResults', (event) ->
+    alert "scroll"
+    if $(this).scrollTop() > $(this).height() - $(this).scrollHeight() - 50
+      current_year = parseInt($(this).parent().parent().find('.year h3').text())
+      $.post("/timeline/items_by_year", year: current_year, page: page++).done (html) ->
+        $(this).append html
+  #$('.timelineContainer .timeline-row:nth-child(2) .timelineResults').scroll
+
 #   $(window).scroll ->
 #     url = $('.pagination .next_page').attr('href')
 #     if url && $(window).scrollTop() > $(document).height() - $(window).height() - 50
