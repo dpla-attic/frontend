@@ -27,5 +27,4 @@
         = select_month before[:month].to_i, {prompt: 'Month'}, name: 'before[month]', class: 'daterange month', id: :before_month
         = select_day   before[:day].to_i, {prompt: 'Day'}, name: 'before[day]', class: 'daterange day', id: :before_day
         = text_field nil, nil, value: before[:year], name: 'before[year]', placeholder: 'Year', class: 'daterange', id: :before_year
-      .formRow
-        = submit_tag 'Update', class: 'btn orange', name: nil
+      %a.btn.orange{:href => ""} Update
