@@ -1,6 +1,6 @@
 jQuery ->
 
-  $('.graph li').on 'click', ->
+  $('.graph').on 'click', 'li', ->
     requested_year = $(this).find('h3').text()
     if requested_year
       $.post("/timeline/items_by_year", year: requested_year).done (html) ->
