@@ -5,13 +5,13 @@
       %span View:
       %ul
         %li.active
-          %a{:href => ""}
+          = link_to search_items_path(params.except(:controller, :action)) do
             %span.icon-view-list{"aria-hidden" => "true"}
         %li
           %a.viewTwo{:href => ""}
             %span.icon-view-map{"aria-hidden" => "true"}
         %li
-          %a.viewThree{:href => ""}
+          = link_to timeline_path(params.except(:controller, :action)), class: 'viewThree' do
             %span.icon-view-time{"aria-hidden" => "true"}
     %a.search-btn{:href => ""} Search
     = form_tag('', method: :get, authenticity_token: false, id: :searchBox) do
