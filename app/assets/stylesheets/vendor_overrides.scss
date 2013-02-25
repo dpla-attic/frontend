@@ -1,4 +1,9 @@
 form {
+  input[type="password"] {
+      color: #222;
+      font: 16px/18px arial;
+      padding-left: 0.8em;
+  }
   input.btn {
     display: block;
     text-decoration: none;
