@@ -2,13 +2,13 @@
   #loginBox
     #cboxClose.pclose &times;
     %h1 Log In
-    = simple_form_for("user", :url => user_session_path, :html => {:id => "sign_in"}, :remote => true, :format => :json) do |f|
-      = f.input :username, required: false
+    = simple_form_for("user", :url => user_session_path(:format => :json), :html => {:id => "sign_in"}, :remote => true) do |f|
+      = f.input :email,    required: false
       = f.input :password, required: false
       = f.submit "Log In"
 
     .forgotSlide
-      = simple_form_for("user", :url => new_user_password_path, :html => {:id => "password_new"}, :remote => true, :format => :json) do |ff|
+      = simple_form_for("user", :url => user_password_path(:format => :json), :html => {:id => "password_new"}, :remote => true) do |ff|
         = ff.input :email, required: false
         = ff.submit "Forgot password?"
     %a.forgotPassword{href: ""} Forgot password?

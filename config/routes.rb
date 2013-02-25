@@ -1,5 +1,9 @@
 DplaPortal::Application.routes.draw do
-  devise_for :users, :controllers => {:registrations => "registrations", :confirmations => "confirmations" }
+  devise_for :users, controllers: {
+    :registrations => "registrations",
+    :confirmations => "confirmations",
+    :sessions      => "sessions"
+  }
 
   scope 'about', as: :about, via: :get do
     match 'overview',       to: 'pages#overview'

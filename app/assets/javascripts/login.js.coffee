@@ -1,12 +1,21 @@
 jQuery ->
-  $('#loginBox form#sign_in').on 'ajax:success', (e, data) ->
-    if data.success
-      alert 'success'
+  $('#loginBox form#sign_in').bind 'ajax:success', (e, data) ->
+    if data.success == true
+      window.location.href = data.redirect
     else
-      alert 'not'
-#   $('#loginBox').on 'click', 'input', (event) ->
-#     if $(this).attr('value') == 'Log In'
-#       alert "Login"
-#     if $(this).attr('value') == 'Submit'
-#       alert "Forgive password"
-#     false
+      window.location.href = 'users/sign_in'
+    false
+
+  $('#loginBox form#password_new').bind 'ajax:success', (e, data) ->
+    if data.success == true
+      window.location.href = data.redirect
+    else
+      window.location.href = 'users/password/new'
+    false
+
+  $('#signupBox form#sign_up').bind 'ajax:success', (e, data) ->
+    if data.success == true
+      window.location.href = data.redirect
+    else
+      window.location.href = 'users/password/new'
+    false

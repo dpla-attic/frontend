@@ -5,4 +5,4 @@ class RegistrationsController < Devise::RegistrationsController
     welcome_path
   end
 
-end 
+end

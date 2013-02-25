@@ -3,9 +3,9 @@
     #cboxClose.pclose &times;
     %h1 Sign Up
     %p Text about benefits of creating an account. Text about benefits of creating an account.
-    = simple_form_for("user", :url =>  new_user_registration_path, :remote => true, :format => :json) do |f|
+    = simple_form_for("user", :url =>  new_user_registration_path(:format => :json), :html => {:id => "sign_up"},  :remote => true) do |f|
       = f.input :email
-      = f.input :username
+      = f.input :name, label: "Username"
       = f.input :password, hint: "Must be at least 8 characters."
       = f.input :repeat_password
       = f.submit "Sign up"

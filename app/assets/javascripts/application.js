@@ -27,3 +27,5 @@
 //= require timeline.js.coffee
 //= require spikes.js.coffee
 //= require login.js.coffee
+//
+//= require rails.validations
