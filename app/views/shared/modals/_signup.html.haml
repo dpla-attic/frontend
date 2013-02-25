@@ -3,29 +3,9 @@
     #cboxClose.pclose &times;
     %h1 Sign Up
     %p Text about benefits of creating an account. Text about benefits of creating an account.
-    %form
-      %label.required
-        %span * 
-        \= required
-
-      %label
-        Email address
-        %span *
-      %input{type: "text", name: "Email"}
-      %label
-        Choose a username
-        %span *
-      %input{type: "text", name: "username"}
-
-      %label
-        Choose a password
-        %span *
-      %input{type: "text", name: "password"}
-      %h6 Must be at least 8 characters.
-
-      %label
-        Repeat password
-        %span *
-      %input{type: "text", name: "repeat password"}
-
-      %input{type: "submit", name: "submit", value: "Sign Up"}
+    = simple_form_for("user", :url =>  new_user_registration_path, :remote => true, :format => :json) do |f|
+      = f.input :email
+      = f.input :username
+      = f.input :password, hint: "Must be at least 8 characters."
+      = f.input :repeat_password
+      = f.submit "Sign up"
