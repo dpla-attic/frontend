@@ -20,5 +20,7 @@
         = current_user.name
     %li.bg.last= link_to "Sign out", destroy_user_session_path
   - else
-    %li.bg= link_to 'Login', new_user_session_path
-    %li.bg.last= link_to 'Sign Up', new_user_registration_path
+    %li.bg
+      %a.login.cBoxElement{href: "#loginBox"} Login
+    %li.bg.last
+      %a.signUp.cBoxElement{href: "#signupBox"} SignUp

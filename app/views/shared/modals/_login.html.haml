@@ -1,0 +1,19 @@
+%div{style: "display:none;"}
+  #loginBox
+    #cboxClose.pclose &times;
+    %h1 Log In
+    %form
+      %label Username
+      %input{type:"text", name: "username"}
+
+      %label Password
+      %input{type: "text", name: "password"}
+
+      %input{type: "submit", name: "submit", value: "Log In"}
+      
+      .forgotSlide
+        %label Email address
+        %input{type: "text", name: "email"}
+
+        %input{type: "submit", name: "submit", value: "Submit"}
+      %a.forgotPassword{href: ""} Forgot password?

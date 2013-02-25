@@ -1,0 +1,31 @@
+%div{style: "display:none;"}
+  #signupBox
+    #cboxClose.pclose &times;
+    %h1 Sign Up
+    %p Text about benefits of creating an account. Text about benefits of creating an account.
+    %form
+      %label.required
+        %span * 
+        \= required
+
+      %label
+        Email address
+        %span *
+      %input{type: "text", name: "Email"}
+      %label
+        Choose a username
+        %span *
+      %input{type: "text", name: "username"}
+
+      %label
+        Choose a password
+        %span *
+      %input{type: "text", name: "password"}
+      %h6 Must be at least 8 characters.
+
+      %label
+        Repeat password
+        %span *
+      %input{type: "text", name: "repeat password"}
+
+      %input{type: "submit", name: "submit", value: "Sign Up"}

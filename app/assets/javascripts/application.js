@@ -26,3 +26,4 @@
 //= require search.js.coffee
 //= require timeline.js.coffee
 //= require spikes.js.coffee
+//= require login.js.coffee
