@@ -13,7 +13,7 @@ module DPLA
         when 'limit'
           @limit = value.to_i rescue 0
         when 'docs'
-          value.each { |doc| push DPLA::Item.new(doc) }
+          value.each { |doc| push Item.new(doc) }
         when 'facets'
           @facets = DPLA::Facets.new(value)
         end

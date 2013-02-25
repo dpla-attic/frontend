@@ -15,57 +15,22 @@
             View Object
             %span.icon-view-object{"aria-hidden" => "true"}
       .table
-        -if @item.creator.present?
-          %ul
-            %li
-              %h6 Creator
-            %li= @item.creator
-        - if @item.created.present?
-          %ul
-            %li
-              %h6 Created date
-            %li= @item.created['displayDate']
-        - if @item.publisher.present?
-          %ul
-            %li
-              %h6 Publisher
-            %li= raw Array(@item.publisher).join('<br />')
+        = item_field :creator
+        = item_field :created_date
+        = item_field :publisher
 
       .detail-bottom
         %h6 Description
         %p= @item.description
 
     .table
-      - if @item.spatial.present?
-        %ul
-          %li
-            %h6 Location
-          %li= raw @item.spatial.map{|l| l["name"]}.join("<br />")
-      - if @item.format.present?
-        %ul
-          %li
-            %h6 Format
-          %li= @item.format
-      - if @item.type.present?
-        %ul
-          %li
-            %h6 Type
-          %li= @item.type
-      - if @item.subject.present?
-        %ul
-          %li
-            %h6 Subject
-          %li= raw @item.subject.map{|l| l["name"]}.join("<br />")
-      - if @item.rights.present?
-        %ul
-          %li
-            %h6 Rights
-          %li= @item.rights
-      - if @item.source.present?
-        %ul
-          %li
-            %h6 URL
-          %li= link_to @item.source, @item.source, target: :_blank
+      = item_field :location
+      = item_field :format
+      = item_field :type
+      = item_field :subject
+      = item_field :rights
+      = item_field :url, title: 'URL' do
+        = link_to @item.url, @item.url, target: :_blank
   %aside
     .module.yellow.line
       .moduleSection
