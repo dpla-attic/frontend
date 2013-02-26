@@ -48,7 +48,7 @@ SimpleForm.setup do |config|
   config.wrappers :dpla, :tag => false do |b|
     b.use :label_input
     b.use :hint, :tag => :h6
-    b.use :error, :tag => :span
+    b.use :error, :tag => :h6, :class => :error
   end 
 
   # The default wrapper to be used by the FormBuilder.
@@ -98,7 +98,7 @@ SimpleForm.setup do |config|
   # config.item_wrapper_class = nil
 
   # How the label text should be generated altogether with the required text.
-  config.label_text = lambda { |label, required| "#{label} #{required}" }
+  config.label_text = lambda { |label, required| "#{label} <span>#{required}</span>" }
 
   # You can define the class to use on all labels. Default is nil.
   config.label_class = nil

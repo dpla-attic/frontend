@@ -53,6 +53,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-deploy (0.3.2)
       capistrano (~> 2.9)
+    client_side_validations (3.2.2)
     coderay (1.0.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -202,6 +203,7 @@ DEPENDENCIES
   binding_of_caller
   breadcrumbs_on_rails
   capistrano-deploy
+  client_side_validations
   coffee-rails (~> 3.2.1)
   devise
   haml

@@ -1,0 +1,6 @@
+= simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+  = f.input :email, autofocus: true
+  = f.input :name, label: "Username"
+  = f.input :password, hint: "Must be at least 6 characters."
+  = f.input :password_confirmation, label: "Repeat password"
+  = f.submit "Sign up", class: "btn"

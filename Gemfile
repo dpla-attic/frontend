@@ -16,6 +16,7 @@ gem 'simple_form'
 gem 'breadcrumbs_on_rails'
 gem 'kaminari'
 gem 'navigasmic'
+gem 'client_side_validations'
 
 gem 'httparty'
 gem 'devise'

@@ -1,0 +1,9 @@
+%div{style: "display:none;"}
+  #loginBox
+    #cboxClose.pclose &times;
+    %h1 Log In
+    = render "sessions/form"
+
+    .forgotSlide
+      = render "passwords/form"
+    %a.forgotPassword{href: ""} Forgot password?
