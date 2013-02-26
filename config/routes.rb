@@ -2,7 +2,8 @@ DplaPortal::Application.routes.draw do
   devise_for :users, controllers: {
     :registrations => "registrations",
     :confirmations => "confirmations",
-    :sessions      => "sessions"
+    :sessions      => "sessions",
+    :passwords     => "passwords"
   }
 
   scope 'about', as: :about, via: :get do

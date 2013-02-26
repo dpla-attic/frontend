@@ -9,4 +9,25 @@ form {
     text-decoration: none;
     background: none repeat scroll 0 0 #DD4E00;
   }
+  h6.error {
+    color: red;
+  }
+}
+
+.account {
+  form {
+    input[type="submit"] {
+      &.btn {
+        width: auto;
+        height: auto;
+        position: static;
+        display: block;
+        text-indent: 0;
+        text-transform: none;
+        font: 0.938em/1.4em 'source_sans_proregular', arial, sans-serif;
+        padding: 7px 12px;
+        border: none;
+      }
+    }
+  }
 }

@@ -1,0 +1,3 @@
+= simple_form_for resource, as: resource_name, url: password_path(resource_name) do |f|
+  = f.input :email, required: true, autofocus: true
+  = f.submit "Submit", class: "btn"

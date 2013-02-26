@@ -48,7 +48,7 @@ SimpleForm.setup do |config|
   config.wrappers :dpla, :tag => false do |b|
     b.use :label_input
     b.use :hint, :tag => :h6
-    b.use :error, :tag => :span
+    b.use :error, :tag => :h6, :class => :error
   end 
 
   # The default wrapper to be used by the FormBuilder.
