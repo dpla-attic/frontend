@@ -62,7 +62,7 @@ class Timeline
 
     def fetch_graph_data
       facets = %w(created.start.year)
-      conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 200)
+      conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 2000)
       @data = DPLA::Items.by_conditions(conditions)
       @years = @data.facets.year
     end
