@@ -1,0 +1,83 @@
+.layoutTwo.map
+  = render 'shared/search_panel'
+
+  %h1 Map
+  = render 'shared/results/search_results', query: params[:q], search: @search
+  = render 'shared/refine_control'
+
+  %article
+    .mapContainer
+      .mobile-hover
+      .mapFrame
+        %img{:alt => "map", :src => asset_path("mapFrame.jpg")}/
+        .dot.more-results{:style => "left: 22%; bottom: 20%;"}
+          %span.resultnumber 785
+          .mapBox
+            .boxInner
+              %h5 Boston, MA
+              %a.closePopUp{:href => ""} &times;
+              .box-rows
+                .box-row
+                  .box-right
+                    %img{:alt => "pop image", :src => asset_path("map-popup.jpg")}/
+                  .box-left
+                    %h6 Text
+                    %h4
+                      %a{:href => ""} Title of Result Lorem Ipsum sit Dolor Amet.
+                    %p
+                      %span By Jonathan Doe
+                    %a.ViewObject{:href => ""}
+                      View Object
+                      %span.icon-view-object{"aria-hidden" => "true"}
+                .box-row
+                  .box-right
+                    %img{:alt => "pop image", :src => asset_path("map-popup.jpg")}/
+                  .box-left
+                    %h6 Text
+                    %h4
+                      %a{:href => ""} Title of Result Lorem Ipsum sit Dolor Amet.
+                    %p
+                      %span By Jonathan Doe
+                    %a.ViewObject{:href => ""}
+                      View Object
+                      %span.icon-view-object{"aria-hidden" => "true"}
+                .box-row
+                  .box-right
+                    %img{:alt => "pop image", :src => asset_path("map-popup.jpg")}/
+                  .box-left
+                    %h6 Text
+                    %h4
+                      %a{:href => ""} Title of Result Lorem Ipsum sit Dolor Amet.
+                    %p
+                      %span By Jonathan Doe
+                    %a.ViewObject{:href => ""}
+                      View Object
+                      %span.icon-view-object{"aria-hidden" => "true"}
+            .mapArrow
+        .dot{:style => "left: 70%; bottom: 10%;"}
+          %span.resultnumber 785
+          .mapBox
+            .boxInner
+              %a.closePopUp{:href => ""} &times;
+              .box-rows
+                .box-row
+                  .box-right
+                    %img{:alt => "pop image", :src => asset_path("map-popup.jpg")}/
+                  .box-left
+                    %h6 Text
+                    %h4
+                      %a{:href => ""} Title of Result Lorem Ipsum sit Dolor Amet.
+                    %p
+                      %span By Jonathan Doe
+                    %a.ViewObject{:href => ""}
+                      View Object
+                      %span.icon-view-object{"aria-hidden" => "true"}
+            .mapArrow
+        .dot{:style => "left: 70%; top: 20%;"}
+        .dot{:style => "left: 20%; top: 40%;"}
+        .dot{:style => "left: 10%; top: 60%;"}
+        .dot{:style => "left: 90%; top: 90%;"}
+
+
+
+  = render 'shared/sidebar'
