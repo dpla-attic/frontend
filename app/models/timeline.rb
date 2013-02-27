@@ -1,3 +1,5 @@
+require_dependency 'dpla/items'
+
 class Timeline
 
   def initialize(term, filters = {})
