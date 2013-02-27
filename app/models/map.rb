@@ -1,3 +1,5 @@
+require_dependency 'dpla/items'
+
 class Map
 
   def initialize(term, filters = {})
