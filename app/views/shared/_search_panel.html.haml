@@ -17,7 +17,8 @@
             = link_to timeline_path(params.except(:controller, :action)), class: 'viewThree' do
               %span.icon-view-time{"aria-hidden" => "true"}
     %a.search-btn{:href => ""} Search
-    = form_tag('', method: :get, authenticity_token: false, id: :searchBox) do
+    - url = %w(timeline search map).include?(params[:controller]) ? params[:controller] : 'search'
+    = form_tag(url, method: :get, authenticity_token: false, id: :searchBox) do
       = preserved_search_fields without: :q
       = text_field_tag :q, params[:q], placeholder: 'Search the Library'
       = submit_tag 'Search', class: 'searchBtn', name: nil
