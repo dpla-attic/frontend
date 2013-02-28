@@ -146,11 +146,11 @@ input[type="submit"] {
     text-indent: -999em;
     text-transform: uppercase;
     width: 41px;
-	padding: 0;
+    padding: 0;
     font-size: 20px;
     position: absolute;
-	top: 0;
-	right: 0;
+    top: 0;
+    right: 0;
 }
 
 .searchRow form input[type="text"] {
@@ -159,11 +159,11 @@ input[type="submit"] {
 
 .searchRow form input[type="submit"] {
     position: absolute;
-	top: 0;
-	right: 0;
-	width: 39px;
-	z-index: 1;
-	float: none;
+    top: 0;
+    right: 0;
+    width: 39px;
+    z-index: 1;
+    float: none;
 }
 
 .search-module input[type="submit"] {
@@ -182,9 +182,9 @@ input[type="submit"] {
        (-webkit-min-device-pixel-ratio: 1.25),
        (min-resolution: 120dpi) {
     input[type="submit"], .search-module input[type="submit"] {
-    	background: url("/assets/mag-glass-2x.png") no-repeat center center transparent;
-		background-size: 67% 67%;
-	}
+        background: url("/assets/mag-glass-2x.png") no-repeat center center transparent;
+        background-size: 67% 67%;
+    }
 
 }
 
@@ -405,7 +405,7 @@ header .active a { border-bottom: 3px solid #dd4e00; }
                 display: block;
                 padding: 5px 10px;
                 color: #222;
-				min-height: 15px;
+                min-height: 15px;
             }
             .topNav ul li span { color: #818285; }
             .topNav ul li a:hover, .topNav ul li a:hover span.icon-arrow-thin-down { color: #dd4e00; text-decoration: none; }
@@ -421,43 +421,43 @@ header .active a { border-bottom: 3px solid #dd4e00; }
                 background: #c1c1c1;
             }
             .topNav ul li.bg:hover {
-				background: #000;
-				-webkit-transition: 0.3s ease;
-    			-moz-transition: 0.3s ease;
-   				-o-transition: 0.3s ease;
-    			-ms-transition: 0.3s ease;
-    			transition: 0.3s ease;
-			}
+                background: #000;
+                -webkit-transition: 0.3s ease;
+                -moz-transition: 0.3s ease;
+                -o-transition: 0.3s ease;
+                -ms-transition: 0.3s ease;
+                transition: 0.3s ease;
+            }
 
             .topNav ul li.bg { margin-left: 15px; }
             .topNav ul li.bg.last { margin: 0; }
-			
-			.topNav .aboutMenu:hover {
-				background: #000;
-				color: #fff;
-			}
-			.topNav ul li.aboutMenu:hover a, .topNav ul li.aboutMenu:hover a span {
-				color: #fff;
-			}
-			.topNav ul li.aboutMenu:hover a:hover {
-				color: #c98400;
-			}
-			.topNav .aboutMenu ul {
-				position: absolute;
-				left: -999em;
-				z-index: 100;
-				width: 200px;
-				background: #000;
-				color: #fff;
-				padding: 5px 0;
-			}
-			.topNav .aboutMenu:hover ul {
-				left: 0;
-			}
-			.topNav .aboutMenu ul li {
-				display: block;
-				float: none;
-			}
+            
+            .topNav .aboutMenu:hover {
+                background: #000;
+                color: #fff;
+            }
+            .topNav ul li.aboutMenu:hover a, .topNav ul li.aboutMenu:hover a span {
+                color: #fff;
+            }
+            .topNav ul li.aboutMenu:hover a:hover {
+                color: #c98400;
+            }
+            .topNav .aboutMenu ul {
+                position: absolute;
+                left: -999em;
+                z-index: 100;
+                width: 200px;
+                background: #000;
+                color: #fff;
+                padding: 5px 0;
+            }
+            .topNav .aboutMenu:hover ul {
+                left: 0;
+            }
+            .topNav .aboutMenu ul li {
+                display: block;
+                float: none;
+            }
 
 .MainNav {
     border-top: 1px solid #CCCCCC;
@@ -565,7 +565,7 @@ aside .module span { color: #000; }
     -o-transition: 0.3s ease;
     -ms-transition: 0.3s ease;
     transition: 0.3s ease;
-	text-decoration: none;
+    text-decoration: none;
     color: #fff;
 } 
 
@@ -603,7 +603,7 @@ aside .module span { color: #000; }
     margin: 14px 2.7% 0 0;
     width: 67.9%;
     float: right;
-	position: relative;
+    position: relative;
 }
 
 .searchRowLeft {
@@ -611,7 +611,7 @@ aside .module span { color: #000; }
     background: #e6a425;
     float: left;
     margin: 0 0.9% 0 0;
-	padding: 8px 0 14px;
+    padding: 8px 0 14px;
     height: 55px;
 }
 
@@ -654,7 +654,7 @@ aside .module span { color: #000; }
 }
 .searchViews li span { color: #bcd0d9; }
 .searchViews li.active span, .searchViews li:hover span {
-	color: #fff;
+    color: #fff;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
     -o-transition: 0.3s ease;
@@ -1097,28 +1097,28 @@ aside .moduleSection p { margin: 0 0 10px; }
 .breadCrumbs li:first-child:before { content: "" }
 
 .Decades { 
-	width: 1200%;
+    width: 1200%;
 }
 
 .timeContainer.decadesView .yearTab { 
-	display: none;
+    display: none;
 }
 
 .Decades .prev, .Decades .next {
-	top: 151px;
-	z-index: 1;
+    top: 151px;
+    z-index: 1;
 }
 .Decades .next {
-	display: none;
+    display: none;
 }
 .DecadesDates {
     background: none repeat scroll 0 0 #6592A6;
     border-bottom: 3px solid #FFFFFF;
     overflow: hidden;
-	padding: 22px 0 0 0.391389%;
+    padding: 22px 0 0 0.391389%;
     position: relative;
-	height: 31px;
-	right: 91.659%;
+    height: 31px;
+    right: 91.659%;
 }
 .DecadesDates ul {
     margin: 0;
@@ -1131,8 +1131,8 @@ aside .moduleSection p { margin: 0 0 10px; }
     background: url("/assets/yearBar.jpg") no-repeat scroll center bottom #6592A6;
     padding: 0 0 10px;
     margin: 0;
-	width: 0.978%;
-	text-align: center;
+    width: 0.978%;
+    text-align: center;
 }
 .DecadesDates li { color: #bed7e2; }
 .DecadesDates li.century { color: #fff; font-size: 1.9em; }
@@ -1141,14 +1141,14 @@ aside .moduleSection p { margin: 0 0 10px; }
 .timeContainer { clear: both; width: 65.8201%; }
 .timelineModuleOuter {
     position: relative;
-	margin: 3px auto 0;
+    margin: 3px auto 0;
     width: 100%;
-	background: #ededed;
+    background: #ededed;
 }
 .timelineModule {
     background: #ededed;
     height: 68px;
-	position: relative;
+    position: relative;
 }
 .bars {
     margin: 0;
@@ -1170,7 +1170,7 @@ aside .moduleSection p { margin: 0 0 10px; }
 }
 .yearsView .bars {
     margin: 0 -9.6% 0 0.5%;
-	}
+    }
 .bars li {
     margin: 0 0.302114% 0 0;
     width: 0.604229%;
@@ -1188,9 +1188,9 @@ aside .moduleSection p { margin: 0 0 10px; }
 .centuries li {
     list-style: none;
     margin: 0;
-	width: 9.27%;
+    width: 9.27%;
     float: left;
-	text-align: center;
+    text-align: center;
     background: url(/assets/timlineLine.jpg) no-repeat center bottom;
 }
 .ie8 .centuries li {
@@ -1198,11 +1198,11 @@ aside .moduleSection p { margin: 0 0 10px; }
 }
 
 .centuries li:first-child {
-	margin-left: -1%;
+    margin-left: -1%;
 }
 
 .centuries li:last-child {
-	margin-right: -1%;
+    margin-right: -1%;
 }
 
 .scrubber a {
@@ -1213,8 +1213,8 @@ aside .moduleSection p { margin: 0 0 10px; }
     background: url(/assets/srubberArrow.jpg) no-repeat center bottom;
     width: 12.4%;
     padding-bottom: 17px;
-	outline: none;
-	cursor: move;
+    outline: none;
+    cursor: move;
 }
 
 .yearsView .scrubber a {
@@ -1246,9 +1246,9 @@ aside .moduleSection p { margin: 0 0 10px; }
     padding: 0 0 0 0.390625%;
     min-height: 400px;
     clear: both;
-	min-height: 500px;
+    min-height: 500px;
     position: relative;
-	right: 91.659%;
+    right: 91.659%;
 }
 .graph ul {
     margin: 0;
@@ -1350,9 +1350,9 @@ aside .moduleSection p { margin: 0 0 10px; }
 .saved-rows ul a { color: #4691B9; }
 
 .tab-content li {
-	list-style: none;
-	float: left;
-	width: 36.4638%;
+    list-style: none;
+    float: left;
+    width: 36.4638%;
     padding: .6% 1% 0 0;
     min-height: 1px;
     margin: 0;
@@ -1425,61 +1425,61 @@ input[type="checkbox"] {
 .resultsBar .btn { margin: 0; }
 
 .tab-content .resultsBar {
-	overflow: visible;
+    overflow: visible;
 }
 
 .tab-content .resultsBar:after, .tab-content .resultsBar ul:after {
-	content: ".";
+    content: ".";
     display: block;
     height: 0;
     clear: both;
     visibility: hidden;
 }
 .tab-content .resultsBar ul {
-	border: 0;
-	padding: 0;
-	float: left;
-	margin: 0;
-	overflow: visible;
+    border: 0;
+    padding: 0;
+    float: left;
+    margin: 0;
+    overflow: visible;
 }
 .tab-content .resultsBar ul li {
-	width: auto;
-	margin-right: 8px;
-	position: relative;
+    width: auto;
+    margin-right: 8px;
+    position: relative;
 }
 
 .tab-content .resultsBar ul li:first-child:hover {
-	background: #000;
-	color: #fff;
+    background: #000;
+    color: #fff;
 }
 .tab-content .resultsBar ul li:first-child:hover a {
-	background: #000;
-	padding: 7px 12px;
-	color: #fff;
+    background: #000;
+    padding: 7px 12px;
+    color: #fff;
 }
 .tab-content .resultsBar ul li:first-child:hover ul li a:hover {
-	color: #c98400;
-	text-decoration: none;
+    color: #c98400;
+    text-decoration: none;
 }
 .tab-content .resultsBar ul li:first-child ul {
-	position: absolute;
-	left: -999em;
-	z-index: 100;
-	width: 200px;
-	background: #000;
-	color: #fff;
-	padding: 5px 0;
+    position: absolute;
+    left: -999em;
+    z-index: 100;
+    width: 200px;
+    background: #000;
+    color: #fff;
+    padding: 5px 0;
 }
 .tab-content .resultsBar ul li:first-child:hover ul {
-	left: 0;
+    left: 0;
 }
 .tab-content #resultsBarBottom ul li:first-child:hover ul {
-	left: 0;
-	bottom: 2.3em;
+    left: 0;
+    bottom: 2.3em;
 }
 .tab-content .resultsBar ul li:first-child ul li, .tab-content .resultsBar ul li:first-child ul li a {
-	display: block;
-	float: none;
+    display: block;
+    float: none;
 }
 
 .btn span {
@@ -3817,10 +3817,10 @@ aside { height: 100%; }
 
 
 @media only screen and (min-width: 0px) and (max-width: 500px) {
-.centuries li, .graph li .info {
-    font-size: 0.8em;
+  .centuries li, .graph li .info {
+      font-size: 0.8em;
+  }
 }
-
 
 
 
