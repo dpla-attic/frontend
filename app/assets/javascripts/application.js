@@ -31,3 +31,4 @@
 //= require spikes.js.coffee
 //= require common.js.coffee
 //= require map.js
+//= require settings.js
