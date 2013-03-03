@@ -42,7 +42,6 @@ class Map
       conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 200)
       @data = DPLA::Items.by_conditions(conditions)
       @subjects, @languages, @types = @data.facets.subject, @data.facets.language, @data.facets.type
-      @decades = @data.facets.decade 
       @count = @data.count
     end
 

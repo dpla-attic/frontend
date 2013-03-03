@@ -23,7 +23,11 @@
 //= require vendor/touch.js
 //
 //= require jquery_ujs
+//= require leaflet
+//= require leaflet.markercluster
+//
 //= require search.js.coffee
 //= require timeline.js.coffee
 //= require spikes.js.coffee
 //= require common.js.coffee
+//= require map.js

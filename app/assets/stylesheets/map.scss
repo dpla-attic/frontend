@@ -1,0 +1,12 @@
+@import "leaflet";
+@import "leaflet.ie";
+@import "leaflet.markercluster";
+@import "leaflet.markercluster.default";
+@import "leaflet.markercluster.default.ie";
+
+.leaflet-cluster-anim .leaflet-marker-icon, .leaflet-cluster-anim .leaflet-marker-shadow {
+	-webkit-transition: -webkit-transform 0.25s ease-out, opacity 0.25s ease-in;
+	-moz-transition: -moz-transform 0.25s ease-out, opacity 0.25s ease-in;
+	-o-transition: -o-transform 0.25s ease-out, opacity 0.25s ease-in;
+	transition: transform 0.25s ease-out, opacity 0.25s ease-in;
+}

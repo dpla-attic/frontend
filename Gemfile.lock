@@ -92,6 +92,9 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    leaflet-markercluster-rails (0.2.1)
+      railties (~> 3.1)
+    leaflet-rails (0.5.0)
     libv8 (3.11.8.13)
     mail (2.4.4)
       i18n (>= 0.4.0)
@@ -209,6 +212,8 @@ DEPENDENCIES
   httparty
   jquery-rails
   kaminari
+  leaflet-markercluster-rails (~> 0.2.1)
+  leaflet-rails (~> 0.5.0)
   navigasmic
   pg
   quiet_assets
