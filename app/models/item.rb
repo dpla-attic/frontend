@@ -36,4 +36,8 @@ class Item
   def url
     @source
   end
+
+  def coordinates
+    @spatial.map{|l| l["coordinates"].split(",") rescue nil}.compact
+  end
 end

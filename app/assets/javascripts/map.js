@@ -111,10 +111,19 @@ $(window).load(function() {
         
         popupsForClosing.push(popupCluster); //maybe deleted
     }
+    
+    function getMapRadiusKM() {
+        var mapBoundNorthEast = mapT.getBounds().getNorthEast();
+        var mapDistance = mapBoundNorthEast.distanceTo(mapT.getCenter());
+        return mapDistance/1000;
+    }    
 
     function onMapMoveEnd() {
-        console.log(" Bounds of map " + mapT.getBounds().toBBoxString());
-        // do query for getting new settings    
+        console.log(" Bounds of map " + mapT.getBounds().toBBoxString());  
+        console.log(" Radius " + getMapRadiusKM() + ", center: " + mapT.getCenter());
+        $.getScript('/map/items_by_spatial?lat='+mapT.getCenter().lat+"&lon="+mapT.getCenter().lng+"&radius="+getMapRadiusKM());
+        drawMarkers();
+        markerClusterinit();
     }
 
     function onMapZoomEnd(e) {
@@ -125,7 +134,97 @@ $(window).load(function() {
          }*/
     }
 
+    function drawMarkers() {
+      // Draw markers
 
+      points = settings.points;
+      markerList = [];
+
+      // ++ Debug
+      console.log('start creating markers: ' + window.performance.now());
+      // -- Debug
+
+
+      for (var i = 0; i < points.length; i++) {
+          var pointData = points[i];
+        
+        
+          var htmlPopup = ''; 
+        
+        
+          htmlPopup = addHeaderToPopup(htmlPopup);
+        
+          htmlPopup = addRowToPopup(pointData, htmlPopup);
+          htmlPopup = addFooterToPopup(htmlPopup);
+
+          if (customizeMarkers) {
+              var myIcon = L.divIcon({className: 'dot'});
+
+              var marker = new L.marker([points[i].lat, points[i].lon], {icon: myIcon}).addTo(mapT)
+                      .bindPopup(htmlPopup);
+
+          } else {
+
+              var marker = new L.marker([points[i].lat, points[i].lon]).addTo(mapT)
+                      .bindPopup(htmlPopup);
+
+
+          }
+
+          // link on data for view
+          marker.dataT = pointData;
+
+          marker.on('click', onMarkerClick(htmlPopup));
+
+          markerList.push(marker);
+      }
+    }
+
+
+    // Marker Cluster initialization
+    
+    function markerClusterinit() {
+      if (customizeMarkerClusters) {
+          // var htmlMarkerCluster = '<div class="dot more-results""><span class="resultnumber">' + 785 + '</span>';
+
+          markers = new L.MarkerClusterGroup({
+              iconCreateFunction: function(cluster) {
+
+                  var childCount = cluster.getChildCount();
+                  return new L.DivIcon({html: '<div><span class="resultnumber">' + childCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)});
+
+              },
+              spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false});
+
+          //markers.bindPopup(htmlMarkerCluster);
+      } else {
+          markers = new L.MarkerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false});
+      }
+
+      markers.on('clusterclick', onClusterClick);
+
+
+      // ++ Debug
+      console.log('start clustering: ' + window.performance.now());
+      // -- Debug
+
+
+
+      // Draw marker clusters
+      markers.addLayers(markerList);
+      mapT.addLayer(markers);
+
+
+      // ++ Debug
+      console.log('end clustering: ' + window.performance.now());
+
+      console.log(" Bounds of map " + mapT.getBounds().toBBoxString());
+
+      // -- Debug
+    
+    
+    }
+    
     // MAIN SECTION
 
     // Map initialization 
@@ -138,97 +237,6 @@ $(window).load(function() {
     mapT.on('moveend', onMapMoveEnd);
     mapT.on('zoomend', onMapZoomEnd);
 
-
-    // Draw markers
-
-    points = settings.points;
-    markerList = [];
-
-    // ++ Debug
-    console.log('start creating markers: ' + window.performance.now());
-    // -- Debug
-
-
-    for (var i = 0; i < points.length; i++) {
-        var pointData = points[i];
-        
-        
-        var htmlPopup = ''; 
-        
-        
-        htmlPopup = addHeaderToPopup(htmlPopup);
-        
-        htmlPopup = addRowToPopup(pointData, htmlPopup);
-        htmlPopup = addFooterToPopup(htmlPopup);
-
-        if (customizeMarkers) {
-            var myIcon = L.divIcon({className: 'dot'});
-
-            var marker = new L.marker([points[i].lat, points[i].lon], {icon: myIcon}).addTo(mapT)
-                    .bindPopup(htmlPopup);
-
-        } else {
-
-            var marker = new L.marker([points[i].lat, points[i].lon]).addTo(mapT)
-                    .bindPopup(htmlPopup);
-
-
-        }
-
-        // link on data for view
-        marker.dataT = pointData;
-
-        marker.on('click', onMarkerClick(htmlPopup));
-
-        markerList.push(marker);
-    }
-
-
-
-    // Marker Cluster initialization
-    
-
-    if (customizeMarkerClusters) {
-        // var htmlMarkerCluster = '<div class="dot more-results""><span class="resultnumber">' + 785 + '</span>';
-
-        markers = new L.MarkerClusterGroup({
-            iconCreateFunction: function(cluster) {
-
-                var childCount = cluster.getChildCount();
-                return new L.DivIcon({html: '<div><span class="resultnumber">' + childCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)});
-
-            },
-            spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false});
-
-        //markers.bindPopup(htmlMarkerCluster);
-    } else {
-        markers = new L.MarkerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false});
-    }
-
-    markers.on('clusterclick', onClusterClick);
-
-
-    // ++ Debug
-    console.log('start clustering: ' + window.performance.now());
-    // -- Debug
-
-
-
-    // Draw marker clusters
-    markers.addLayers(markerList);
-    mapT.addLayer(markers);
-
-
-    // ++ Debug
-    console.log('end clustering: ' + window.performance.now());
-
-    console.log(" Bounds of map " + mapT.getBounds().toBBoxString());
-
-    // -- Debug
-    
-    
-    
-    
-    
-   
+    drawMarkers();
+    markerClusterinit();
 });

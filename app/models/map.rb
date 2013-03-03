@@ -4,7 +4,8 @@ class Map
 
   def initialize(term, filters = {})
     @term    = term
-    @filters = filters.except(:before, :after)
+    # TODO: except location filters if it present
+    @filters = filters
   end
 
   def subjects
@@ -20,6 +21,12 @@ class Map
   def types
     fetch_map_data if @types.nil?
     @types
+  end
+
+  # spatial = [lat, lng, radius_in_km]
+  def items(spatial, page = 0)
+    fetch_results(spatial, page)
+    @results
   end
 
   def count
@@ -43,6 +50,14 @@ class Map
       @data = DPLA::Items.by_conditions(conditions)
       @subjects, @languages, @types = @data.facets.subject, @data.facets.language, @data.facets.type
       @count = @data.count
+    end
+
+    def fetch_results(spatial, page)
+      facets = []
+      filters = @filters.merge({location: spatial[0..1], distance: spatial[2]})
+      conditions = { q: @term, facets: facets }.merge(filters).merge(page: page)
+      @data = DPLA::Items.by_conditions(conditions)
+      @results = @data
     end
 
 end

@@ -22,7 +22,9 @@ DplaPortal::Application.routes.draw do
     post 'items_by_year'
   end
 
-  resource :map, only: :show, controller: 'map'
+  resource :map, only: :show, controller: 'map' do
+    get 'items_by_spatial'
+  end
 
   root to: 'pages#home'
   match '/welcome' => 'users#welcome'

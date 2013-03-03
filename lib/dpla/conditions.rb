@@ -29,6 +29,11 @@ module DPLA
           case key.to_s
           when 'subject'
             result['subject.name'] = value
+          when 'location'
+            next unless value.is_a?(Array)
+            result['spatial.coordinates'] = value[0..1].join(",")
+          when 'distance'
+            result['spatial.distance'] = value.to_s + "km"
           when 'before'
             result['created.before'] = value
           when 'after'
