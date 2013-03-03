@@ -1,22 +1,24 @@
-settings = {
+var settings = {
   numberOfBestResults : 2,
 	
-	points : [ 
-	<% for item in @items do %>
-	  <% item.coordinates.each do |place| %>
-    	{
-    		number : 0,
-    		lat    : <%= place.first %>,
-    		lon    : <%= place.last %>,
-    		image  : "img/map-popup.jpg",
+  points : [ 
+  <% i = 0 %>
+  <% for item in @items do %>
+    <% item.coordinates.each do |place| %>
+      {
+        number : <%= i %>,
+        lat    : <%= place.first %>,
+        lon    : <%= place.last %>,
+        image  : "img/map-popup.jpg",
         text   : "Text 0",
         title  : "Hi, George",
-        href   : <%= item.title %>,
+        href   : "<%=j item.title %>",
         author : "By Jonathan Doe",
         score  : 0
-    	},
+      },
+      <% i = i + 1 %>
     <% end %>
-	<% end %>
+  <% end %>
     ]
 
 };
