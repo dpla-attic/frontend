@@ -1,4 +1,5 @@
 $(document).ready ->
+  numberOfBestResults = 3
   # markerList = []
   # markers = []
   # points = []
@@ -13,8 +14,8 @@ $(document).ready ->
   
   # Return map radius in km (vector length from center to corner)
   getMapRadius = ->
-    mapBoundNorthEast = mapT.getBounds().getNorthEast()
-    mapDistance = mapBoundNorthEast.distanceTo(mapT.getCenter())
+    mapBoundNorthEast = map.getBounds().getNorthEast()
+    mapDistance = mapBoundNorthEast.distanceTo(map.getCenter())
     mapDistance/1000
   
   addHeaderToPopup = (htmlPopup) ->
@@ -49,7 +50,7 @@ $(document).ready ->
     (e) ->
       #e.target.openPopup()
       popup = new L.popup()
-      popup.setLatLng(e.target.getLatLng()).setContent(htmlPopup).openOn(mapT)
+      popup.setLatLng(e.target.getLatLng()).setContent(htmlPopup).openOn(map)
 
   onClusterClick = (a) ->
     localClusterMarkers = a.layer.getAllChildMarkers()
@@ -58,17 +59,16 @@ $(document).ready ->
       b.dataT.score - a.dataT.score
   
     htmlLocalClusterPopup = ''
-    htmlLocalClusterPopup = addHeaderToPopup(htmlLocalClusterPopup)
+    htmlLocalClusterPopup = addHeaderToPopup htmlLocalClusterPopup
         
-    numberOfRows = Math.min(localClusterMarkers.length, settings.numberOfBestResults)
+    numberOfRows = Math.min localClusterMarkers.length, numberOfBestResults
     for localClusterMarker in localClusterMarkers[0...numberOfRows]
-      data = localClusterMarker.dataT
-      htmlLocalClusterPopup = addRowToPopup(data, htmlLocalClusterPopup)
+      htmlLocalClusterPopup = addRowToPopup localClusterMarker.dataT, htmlLocalClusterPopup
     
-    htmlLocalClusterPopup = addFooterToPopup(htmlLocalClusterPopup)
+    htmlLocalClusterPopup = addFooterToPopup htmlLocalClusterPopup
   
     popupCluster = new L.popup()
-    popupCluster.setLatLng(a.layer.getLatLng()).setContent(htmlLocalClusterPopup).openOn(mapT)
+    popupCluster.setLatLng(a.layer.getLatLng()).setContent(htmlLocalClusterPopup).openOn(map)
 
     popupCluster.isCluster = true #maybe deleted
     
@@ -77,8 +77,8 @@ $(document).ready ->
     popupsForClosing.push(popupCluster) #maybe deleted
 
   onMapMoveEnd = ->
-    console.log(" Bounds of map " + mapT.getBounds().toBBoxString())
-    console.log(" Radius " + getMapRadius() + ", center: " + mapT.getCenter())
+    console.log(" Bounds of map " + map.getBounds().toBBoxString())
+    console.log(" Radius " + getMapRadius() + ", center: " + map.getCenter())
     loadItems()
 
   onMapZoomEnd = (e) ->
@@ -89,15 +89,15 @@ $(document).ready ->
     false
     
   loadItems = ->
-    url = '/map/items_by_spatial.js?lat='+mapT.getCenter().lat+"&lon="+mapT.getCenter().lng+"&radius="+getMapRadius()
+    url = '/map/items_by_spatial.js?lat='+map.getCenter().lat+"&lon="+map.getCenter().lng+"&radius="+getMapRadius()
     $.getScript(url, ->
-      clearMarkers
+      # clearMarkers
       markerList = drawMarkers()
       clusterizeMarkers markerList
     )
     
-  clearMarkers = ->
-    mapT.removeLayer markers
+  # clearMarkers = ->
+  #   mapT.removeLayer markers
     
   # Draw markers
   drawMarkers = ->
@@ -106,20 +106,20 @@ $(document).ready ->
 
     console.log('start creating markers: ' + window.performance.now())
 
-    for pointData in points
+    for point in points
       htmlPopup = ''
-      htmlPopup = addHeaderToPopup(htmlPopup)
-      htmlPopup = addRowToPopup(pointData, htmlPopup)
-      htmlPopup = addFooterToPopup(htmlPopup)
+      htmlPopup = addHeaderToPopup htmlPopup
+      htmlPopup = addRowToPopup    point, htmlPopup
+      htmlPopup = addFooterToPopup htmlPopup
 
       if customizeMarkers
         myIcon = L.divIcon({className: 'dot'})
-        marker = new L.marker([pointData.lat, pointData.lon], {icon: myIcon}).bindPopup(htmlPopup)
+        marker = new L.marker([point.lat, point.lon], {icon: myIcon}).bindPopup(htmlPopup)
       else
-        marker = new L.marker([pointData.lat, pointData.lon]).bindPopup(htmlPopup)
+        marker = new L.marker([point.lat, point.lon]).bindPopup(htmlPopup)
 
       # link on data for view
-      marker.dataT = pointData
+      marker.dataT = point
       marker.on 'click', onMarkerClick(htmlPopup)
       markerList.push marker
     markerList
@@ -134,7 +134,11 @@ $(document).ready ->
         spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false
       # markers.bindPopup(htmlMarkerCluster);
     else
-      markers = new L.MarkerClusterGroup({spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false})
+      markers = new L.MarkerClusterGroup(
+        spiderfyOnMaxZoom:   false
+        showCoverageOnHover: false 
+        zoomToBoundsOnClick: false
+      )
    
     markers.on 'clusterclick', onClusterClick
      
@@ -142,21 +146,31 @@ $(document).ready ->
 
     # Draw marker clusters
     markers.addLayers markerList
-    markers.addTo mapT
+    markers.addTo map
 
     console.log('end clustering: ' + window.performance.now())
-    console.log(" Bounds of map " + mapT.getBounds().toBBoxString())
+    console.log(" Bounds of map " + map.getBounds().toBBoxString())
     
 
   # Map initialization
-  
-  mapT = L.map('mapT').setView([45.0, -93], 3)
-  L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-    maxZoom: 18
-  }).addTo(mapT)
 
-  mapT.on('moveend', onMapMoveEnd)
-  mapT.on('zoomend', onMapZoomEnd)
+  mapUrl = 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png'
+  mapAttribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+
+  minimal = L.tileLayer(mapUrl, 
+    attribution: mapAttribution
+    maxZoom: 18
+  )
+
+  markers = L.layerGroup()
+
+  map = L.map('mapT',
+    center: new L.LatLng(45.0, -93)
+    zoom: 3
+    layers: [minimal, markers]
+  )
+
+  map.on 'moveend', onMapMoveEnd
+  map.on 'zoomend', onMapZoomEnd
 
   loadItems()
