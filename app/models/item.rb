@@ -26,7 +26,7 @@ class Item
 
   # returns array with names
   def location
-    @spatial.map{|l| l.values.join(', ')}
+    @spatial.map{|l| l.values.join(', ')} if @spatial.present?
   end
 
   def publisher
