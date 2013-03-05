@@ -17,11 +17,10 @@ $(document).ready ->
   
   addHeaderToPopup = (htmlPopup) ->
     localHtmlPopup = htmlPopup
-    # htmlLocalClusterPopup += '<div class="mapBox">'
-    localHtmlPopup += '<div class="boxInner">'
-    localHtmlPopup += '<h5>Boston, MA</h5>'
-    # htmlLocalClusterPopup += '<a class="closePopUp" href="">&times;</a>'
-    localHtmlPopup += '<div class="box-rows">'
+    localHtmlPopup += """
+                      <div class="boxInner">
+                      <div class="box-rows">
+                      """
     localHtmlPopup
 
   addRowToPopup = (data, htmlPopup) ->
@@ -48,7 +47,7 @@ $(document).ready ->
   onMarkerClick = (htmlPopup) ->
     (e) ->
       #e.target.openPopup()
-      popup = new L.popup()
+      popup = new L.popup(className: "mapBox", minWidth: 400, maxWidth: 400)
       popup.setLatLng(e.target.getLatLng()).setContent(htmlPopup).openOn(map)
 
   onClusterClick = (a) ->
@@ -66,7 +65,7 @@ $(document).ready ->
     
     htmlLocalClusterPopup = addFooterToPopup htmlLocalClusterPopup
   
-    popupCluster = new L.popup()
+    popupCluster = new L.popup(className: "mapBox", minWidth: 400, maxWidth: 400)
     popupCluster.setLatLng(a.layer.getLatLng()).setContent(htmlLocalClusterPopup).openOn(map)
 
     popupCluster.isCluster = true #maybe deleted
@@ -118,9 +117,11 @@ $(document).ready ->
 
       if customizeMarkers
         myIcon = L.divIcon({className: 'dot'})
-        marker = new L.marker([point.lat, point.lon], {icon: myIcon}).bindPopup(htmlPopup)
+        marker = new L.marker([point.lat, point.lon], {icon: myIcon})
       else
-        marker = new L.marker([point.lat, point.lon]).bindPopup(htmlPopup)
+        marker = new L.marker([point.lat, point.lon])
+
+      # marker.bindPopup(htmlPopup, {className: 'mapBox'})
 
       marker.dataT = point
       marker.on 'click', onMarkerClick(htmlPopup)

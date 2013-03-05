@@ -1831,8 +1831,8 @@ aside h5 { margin: 5px 0 1em; }
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     position: absolute;
-    right: -515%;
-    top: -600%;
+/*    right: -515%;
+    top: -600%;*/
     width: 400px;
 }
 
