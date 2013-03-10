@@ -3,32 +3,33 @@
 
   %h1 Timeline
   = render 'shared/results/search_results', query: params[:q], search: @search
-  = render 'shared/refine_control'
+  - if @search.count > 0
+    = render 'shared/refine_control'
 
-  / Main container
-  .timeContainer.decadesView
-    %article.timeline
-      / Century timeline
-      = render 'timeline_module'
+    / Main container
+    .timeContainer.decadesView
+      %article.timeline
+        / Century timeline
+        = render 'timeline_module'
 
-      .timelineView
-        View:
-        %a.selected.DecadesTab{href:"#"} Decades
-        %a.yearTab{href:"#"} Years
+        .timelineView
+          View:
+          %a.selected.DecadesTab{href:"#"} Decades
+          %a.yearTab{href:"#"} Years
 
-      / Decades
-      .Decades
-        %span.next
-        %span.prev
-        .DecadesDates
-          = graph_dates
+        / Decades
+        .Decades
+          %span.next
+          %span.prev
+          .DecadesDates
+            = graph_dates
 
-        .graph
-          = graph @search.years
+          .graph
+            = graph @search.years
 
-      / Years
-      .timelineContainer
-        - 5.times do 
-          = render 'empty_page'
+        / Years
+        .timelineContainer
+          - 5.times do 
+            = render 'empty_page'
 
-  = render 'shared/sidebar'
+    = render 'shared/sidebar'
