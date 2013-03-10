@@ -41,7 +41,7 @@ class Item
 
   # returns array with names
   def subject
-    @aggregatedCHO['subject'].map{|l| l["name"]}
+    @aggregatedCHO['subject'].map{|l| l["name"]} if @aggregatedCHO['subject']
   end
 
   def type
