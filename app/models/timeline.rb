@@ -22,13 +22,8 @@ class Timeline
     @types
   end
 
-  def decades
-    fetch_timeline_data if @decades.nil?
-    @decades
-  end
-
   def years
-    fetch_graph_data if @years.nil?
+    fetch_timeline_data if @years.nil?
     @years
   end
 
@@ -54,19 +49,12 @@ class Timeline
   private
 
     def fetch_timeline_data
-      facets = %w(subject.name language.name type created.start.decade)
-      conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 200)
-      @data = DPLA::Items.by_conditions(conditions)
-      @subjects, @languages, @types = @data.facets.subject, @data.facets.language, @data.facets.type
-      @decades = @data.facets.decade 
-      @count = @data.count
-    end
-
-    def fetch_graph_data
-      facets = %w(created.start.year)
+      facets = %w(subject language type date)
       conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 2000)
       @data = DPLA::Items.by_conditions(conditions)
+      @subjects, @languages, @types = @data.facets.subject, @data.facets.language, @data.facets.type
       @years = @data.facets.year
+      @count = @data.count
     end
 
     def fetch_results(year, page)

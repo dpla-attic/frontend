@@ -45,7 +45,7 @@ class Map
   private
 
     def fetch_map_data
-      facets = %w(subject.name language.name type)
+      facets = %w(subject language type)
       conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 200)
       @data = DPLA::Items.by_conditions(conditions)
       @subjects, @languages, @types = @data.facets.subject, @data.facets.language, @data.facets.type

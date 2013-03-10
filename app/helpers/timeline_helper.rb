@@ -1,5 +1,12 @@
 module TimelineHelper
-  def timeline(decades, height = 30)
+  def timeline(years, height = 30)
+    decades = {}
+    years.each_pair do |year, count|
+      current = year.to_i
+      decade = current - current % 10
+      decades[decade.to_s] = (decades[decade.to_s] || 0) + count
+    end
+
     max_count = 0
     max_count = decades.sort{|a,b| a[1] <=> b[1]}.last.last unless decades.empty?
 

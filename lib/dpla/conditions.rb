@@ -27,23 +27,30 @@ module DPLA
       {}.tap do |result|
         conditions.each do |key, value|
           case key.to_s
-          when 'subject'
-            result['subject.name'] = value
+          when 'subject'  then result['aggregatedCHO.subject.name']  = value
+          when 'language' then result['aggregatedCHO.language.name'] = value
+          when 'type'     then result['aggregatedCHO.type']          = value
           when 'location'
             next unless value.is_a?(Array)
-            result['spatial.coordinates'] = value[0..1].join(",")
+            result['aggregatedCHO.spatial.coordinates'] = value[0..1].join(",")
           when 'distance'
-            result['spatial.distance'] = value.to_s + "km"
-          when 'before'
-            result['created.before'] = value
-          when 'after'
-            result['created.after'] = value
+            result['aggregatedCHO.spatial.distance'] = value.to_s + "km"
+          when 'before'   then result['aggregatedCHO.date.before']   = value
+          when 'after'    then result['aggregatedCHO.date.after']    = value
           when 'sort_by'
             case value.to_s
-            when 'subject'
-              result[key] = 'subject.name'
-            when 'created'
-              result[key] = 'created.start'
+            when 'subject' then result[key] = 'aggregatedCHO.subject.name'
+            when 'created' then result[key] = 'aggregatedCHO.date.begin'
+            end
+          when 'facets'
+            result[key] = []
+            value.each do |name|
+              case name
+              when 'subject'  then result[key] << 'aggregatedCHO.subject.name'
+              when 'language' then result[key] << 'aggregatedCHO.language.name'
+              when 'type'     then result[key] << 'aggregatedCHO.type'
+              when 'date'     then result[key] << 'aggregatedCHO.date.begin.year'
+              end
             end
           else
             result[key] = value if value.present?
