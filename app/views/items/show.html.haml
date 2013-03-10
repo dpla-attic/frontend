@@ -8,10 +8,10 @@
   %h1= @item.title
   %article
     .FeatureContent
-      - if @item.preview_source_url.present?
+      - if @item.preview_image
         .contentBox
-          = image_tag @item.preview_source_url
-          = link_to @item.source, target: :_blank, class:'ViewObject' do
+          = image_tag @item.preview_image
+          = link_to @item.url, target: :_blank, class:'ViewObject' do
             View Object
             %span.icon-view-object{"aria-hidden" => "true"}
       .table

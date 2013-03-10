@@ -1,43 +1,63 @@
 class Item
   extend ActiveModel::Naming
 
-  FIELDS = [
-    :id, :title, :description, :subject, :creator, :type, :publisher,
-    :format, :rights, :contributor, :created, :spatial, :temporal,
-    :language, :source, :isPartOf, :preview_source_url
-  ]
-    .each { |field| attr_accessor field }
-
   def initialize(doc)
-    FIELDS.each { |f| self.send "#{f}=", doc[f.to_s] }
-    if doc['dplaSourceRecord'].present?
-      self.language = doc['dplaSourceRecord']['language']
-    end
+    @id            = doc["id"]
+    @aggregatedCHO = doc["aggregatedCHO"] || {}
+    @originRecord  = doc["originalRecord"] || {}
+    @object        = doc["object"] || {}
+    @isShownAt     = doc["isShownAt"] || {}
   end
+
+  def id; @id end
+
+  def publisher
+    Array @aggregatedCHO['publisher']
+  end
+
+  def description; @aggregatedCHO['description'] end
+
+  def title; @aggregatedCHO['title'] end
+
+  def rights; @aggregatedCHO['rights'] end
 
   def created_date
-    @created['displayDate']
-  end
-
-  # returns array with names
-  def subject
-    @subject.map{|l| l["name"]}
+    @aggregatedCHO['date']['displayDate'] if @aggregatedCHO['date']
   end
 
   # returns array with names
   def location
-    @spatial.map{|l| l.values.join(', ')} if @spatial.present?
-  end
-
-  def publisher
-    Array @publisher
-  end
-
-  def url
-    @source
+    @aggregatedCHO['spatial'].map do |loc|
+      l = loc["name"], loc["country"], loc["region"], loc["county"], loc["state"], loc["city"]
+      l.compact.join(', ')
+    end if @aggregatedCHO['spatial']
   end
 
   def coordinates
-    @spatial.map{|l| l["coordinates"].split(",") rescue nil}.compact
+    @aggregatedCHO['spatial'].map{|l| l["coordinates"].split(",") rescue nil}.compact
   end
+
+  def creator; @aggregatedCHO['creator'] end
+
+  # returns array with names
+  def subject
+    @aggregatedCHO['subject'].map{|l| l["name"]}
+  end
+
+  def type
+    @aggregatedCHO['physicalmedium']
+  end
+
+  def url; @isShownAt['@id'] end
+
+  def format
+    @isShownAt['format']
+  end
+
+  def preview_image
+    @object["@id"]
+  end
+
+  alias :preview_source_url :preview_image
+
 end
