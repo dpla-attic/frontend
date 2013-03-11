@@ -22,6 +22,7 @@ gem 'devise'
 gem 'rails_config', :git => 'git://github.com/railsjedi/rails_config.git'
 gem "leaflet-rails", "~> 0.5.0"
 gem "leaflet-markercluster-rails", "~> 0.2.1"
+gem 'google-analytics-rails'
 
 group :development do
   gem 'thin'

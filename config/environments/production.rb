@@ -63,4 +63,6 @@ DplaPortal::Application.configure do
 
   config.action_mailer.default_url_options = { host: Settings.url.host, port: Settings.url.port }
   config.action_mailer.delivery_method = :sendmail
+
+  GA.tracker = Settings.googleanalytics.tracker
 end

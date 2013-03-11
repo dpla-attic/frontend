@@ -8,3 +8,5 @@ api:
 exhibitions:
   site: http://localhost
   elasticsearch: http://localhost:9200
+googleanalytics:
+  tracker: UA-38671601-1
