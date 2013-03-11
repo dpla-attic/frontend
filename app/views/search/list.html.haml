@@ -7,7 +7,6 @@
       %a{:href => ""} Share
   %h1 Search Results
   = render 'shared/results/search_results', query: params[:q], search: @search
-  = render 'shared/refine_control'
   - if @items.present?
     .slidePopOut
       #resultsBarTop.resultsBar
