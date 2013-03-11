@@ -38,6 +38,6 @@ class Item
   end
 
   def coordinates
-    @spatial.map{|l| l["coordinates"].split(",") rescue nil}.compact
+    @spatial.map{|l| l["coordinates"].split(",") rescue nil}.compact if @spatial.present?
   end
 end
