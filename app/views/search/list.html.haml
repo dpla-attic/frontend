@@ -12,14 +12,7 @@
       #resultsBarTop.resultsBar
         = render partial: 'paginator'
       %article
-        .matches
-          %section
-            %h4 Subject Matches
-            %a{:href => ""} Civil War, American
-          %section
-            %h4 Collection Matches
-            %a{:href => ""} Smithsonian Civil War Collection
-            %a.Viewmore{:href => ""} 23 more »
+        = render partial: 'matches'
         .search
           - @items.each do |item|
             %section

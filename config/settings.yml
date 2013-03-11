@@ -6,7 +6,9 @@ notifications:
 api:
   url: http://api.dp.la/dev
 exhibitions:
-  site: http://localhost
-  elasticsearch: http://localhost:9200
+  site: http://localhost:8080
+  elasticsearch:
+    host: http://localhost:9200
+    default_index: omeka
 googleanalytics:
   tracker: UA-38671601-1
