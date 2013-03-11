@@ -4,6 +4,7 @@ url:
 notifications:
   from: welcome@portal.dp.la
 api:
-  url: http://integration2.qa.dp.la/api/v1
-  username: demo
-  password: demo
+  url: http://api.dp.la/dev
+exhibitions:
+  site: http://localhost
+  elasticsearch: http://localhost:9200
