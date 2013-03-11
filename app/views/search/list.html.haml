@@ -7,7 +7,7 @@
       %a{:href => ""} Share
   %h1 Search Results
   = render 'shared/results/search_results', query: params[:q], search: @search
-  - if @items.present?
+  - if @search.count > 0
     .slidePopOut
       #resultsBarTop.resultsBar
         = render partial: 'paginator'
