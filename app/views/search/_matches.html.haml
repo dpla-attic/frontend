@@ -1,0 +1,7 @@
+.matches
+  - if @exhibitions.present?
+    %section
+      %h4 Exhibition Matches
+      = link_to_exhibition @exhibitions.first
+      - if @exhibitions.count > 1
+        %a.Viewmore{:href => ""} 23 more »

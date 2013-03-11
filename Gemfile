@@ -18,6 +18,7 @@ gem 'kaminari'
 gem 'navigasmic'
 
 gem 'httparty'
+gem 'elastictastic'
 gem 'devise'
 gem 'rails_config', :git => 'git://github.com/railsjedi/rails_config.git'
 gem "leaflet-rails", "~> 0.5.0"
