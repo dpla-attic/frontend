@@ -46,6 +46,10 @@ class Search
     results.facets.type
   end
 
+  def locations
+    results.facets.spatial
+  end
+
   def count
     results.count
   end
@@ -53,7 +57,7 @@ class Search
   private
 
     def results
-      @facets = %w(subject language type)
+      @facets = %w(subject language type spatial)
       conditions = { q: @term, facets: @facets }.merge(@filters).merge(@args)
       @result || @result = DPLA::Items.by_conditions(conditions)
     end

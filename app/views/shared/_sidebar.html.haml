@@ -1,8 +1,10 @@
 %aside
   - if params[:controller] == 'search'
     %h5 Refine
+  / = render 'shared/sidebar/refine_by_subject'
   = render 'shared/sidebar/refine_by_subject'
   - unless params[:controller] == 'timeline'
     = render 'shared/sidebar/refine_by_date'
   = render 'shared/sidebar/refine_by_type'
   = render 'shared/sidebar/refine_by_language'
+  = render 'shared/sidebar/refine_by_location'

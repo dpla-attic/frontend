@@ -22,6 +22,11 @@ class Timeline
     @types
   end
 
+  def locations
+    fetch_timeline_data if @locations.nil?
+    @locations
+  end
+
   def years
     fetch_timeline_data if @years.nil?
     @years
@@ -49,10 +54,10 @@ class Timeline
   private
 
     def fetch_timeline_data
-      facets = %w(subject language type date)
+      facets = %w(subject language type spatial date)
       conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 2000)
       @data = DPLA::Items.by_conditions(conditions)
-      @subjects, @languages, @types = @data.facets.subject, @data.facets.language, @data.facets.type
+      @subjects, @languages, @types, @locations = @data.facets.subject, @data.facets.language, @data.facets.type, @data.facets.spatial
       @years = @data.facets.year
       @count = @data.count
     end

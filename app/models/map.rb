@@ -23,6 +23,11 @@ class Map
     @types
   end
 
+  def locations
+    fetch_map_data if @locations.nil?
+    @locations
+  end
+
   # spatial = [lat, lng, radius_in_km]
   def items(spatial, page = 0)
     fetch_results(spatial, page)
@@ -45,10 +50,10 @@ class Map
   private
 
     def fetch_map_data
-      facets = %w(subject language type)
+      facets = %w(subject language type spatial)
       conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 200)
       @data = DPLA::Items.by_conditions(conditions)
-      @subjects, @languages, @types = @data.facets.subject, @data.facets.language, @data.facets.type
+      @subjects, @languages, @types, @locations = @data.facets.subject, @data.facets.language, @data.facets.type, @data.facets.spatial
       @count = @data.count
     end
 

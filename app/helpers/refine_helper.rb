@@ -37,4 +37,12 @@ module RefineHelper
   def before_refine
     @search.filters(:before)
   end
+
+  def location_facets
+    @search.locations.reject { |v| location_refines.include? v }.to_a
+  end
+
+  def location_refines
+    @search.filters :location
+  end
 end
