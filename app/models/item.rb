@@ -54,7 +54,7 @@ class Item
   end
 
   def creator
-    @aggregatedCHO['creator']
+    Array(@aggregatedCHO['creator']).join '; '
   end
 
   # returns array with names
