@@ -1,3 +1,20 @@
+///// Social media buttons
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+(function() {
+  var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+  po.src = 'https://apis.google.com/js/plusone.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+
+
 $(window).load(function() {
 
 
@@ -15,18 +32,18 @@ $(window).load(function() {
 	    $('.flex-active-slide .slideText').addClass('on');
 	});
 
-  $('.forgotPassword').click(function() {
-    $('.forgotSlide').slideDown();
-    $('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '430px'});
-    return false;
-  });
-  
-  $('#cboxOverlay, #cboxClose').click(function() {
-    $('.forgotSlide').slideUp();
-    $('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '320px'});
-    return false;
-  });
-
+	$('.forgotPassword').click(function() {
+		$('.forgotSlide').slideDown();
+		$('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '430px'});
+		return false;
+	});
+	
+	$('#cboxOverlay, #cboxClose').click(function() {
+		$('.forgotSlide').slideUp();
+		$('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '320px'});
+		return false;
+	});
+	
   $('.moreInfo').toggle(function() {
       $(this).addClass('hover');
       $('.flex-direction-nav a').addClass('hover');
@@ -64,7 +81,27 @@ $(window).load(function() {
     $('.breadCrumbs li').removeClass('current');
     $(this).clone().appendTo('.breadCrumbs ul').wrap('<li class="current"></li>');
   });
+  
+  $('.head').toggle(function() {
+      $(this).next().slideDown();
+      $(this).addClass('close');
+      $(this).children('span').addClass('icon-arrow-up');
+      $(this).children('span').removeClass('icon-arrow-down');
+    }, 
+    function() {
+      $(this).next().slideUp();
+      $(this).removeClass('close');
+      $(this).children('span').addClass('icon-arrow-down');
+      $(this).children('span').removeClass('icon-arrow-up');
+    }
+  );
 
+  ///// Search Field Open + Close on Phones
+  var boxHit = false;
+  var fieldHit = true;
+  var boxTimeout;
+  var fieldTimeout;
+  
   $('.search-btn').click(function() {
     $('.searchViews, .search-btn').addClass('off');
 	$('.searchRowRight form input[type="submit"]').hide();
@@ -74,21 +111,38 @@ $(window).load(function() {
 	$('.searchRowRight form input[type="text"]').focus();
     return false;
   });
-
-  $('.searchRowRight form input[type="text"]').blur(function() {
-    $('.search-btn, .searchViews').removeClass('off');
-	$('.searchRowRight form').attr('style', '');
+  
+  $('.searchRowRight form input[type="checkbox"]').click(function() {
+	boxHit = true;
+	fieldHit = false;
+	$(this).focus();
+	clearTimeout(boxTimeout);
+	clearTimeout(fieldTimeout);
   });
-
-  $('.head').toggle(function() {
-      $(this).next().slideDown();
-      $(this).addClass('close');
-    }, 
-    function() {
-      $(this).next().slideUp();
-      $(this).removeClass('close');
-    }
-  );
+  
+  $('.searchRowRight form input[type="text"]').focus(function() {
+	fieldHit = true;
+	boxHit = false;
+	clearTimeout(boxTimeout);
+	clearTimeout(fieldTimeout);
+  });
+  
+  $('.searchRowRight form input[type="checkbox"]').blur(function() {
+	boxTimeout = setTimeout(function(){
+	  if (fieldHit == false) { searchHide(); }
+	}, 500);
+  });
+															 
+  $('.searchRowRight form input[type="text"]').blur(function() {
+	fieldTimeout = setTimeout(function(){
+	  if (boxHit == false) { searchHide(); }
+	}, 500);
+  });
+  
+  function searchHide() {
+  	$('.search-btn, .searchViews').removeClass('off');
+	$('.searchRowRight form').attr('style', '');
+  }
 
   ///// REFINE SIDEBAR TOGGLE
   $('#toggle').toggle(function() {
@@ -145,11 +199,13 @@ $(window).load(function() {
   $('.open').toggle(
     function(){
       $(this).next('.slidingDiv').slideUp();
-      $(this).addClass('close');
+      $(this).children('span').addClass('icon-arrow-down');
+      $(this).children('span').removeClass('icon-arrow-up');
     },
     function(){
       $(this).next('.slidingDiv').slideDown();
-      $(this).removeClass('close');
+      $(this).children('span').addClass('icon-arrow-up');
+      $(this).children('span').removeClass('icon-arrow-down');
     }
   );
 
@@ -283,7 +339,7 @@ $(window).load(function() {
   }
   initScrub();
 
-  $('.scrubber a').append('<span class="arrow"></span>');
+  $('.scrubber a').append('<span class="arrow"></span><span class="icon-arrow-down" aria-hidden="true"></span>');
   
 
 /////TIMELINE VIEWS
@@ -299,15 +355,15 @@ $(window).load(function() {
     return false;
   });
   
- //  $('.graph li').click(function() {
- //    $('.timeContainer').removeClass('decadesView').addClass('yearsView');
- //    $('.Decades').hide();
- //    $('.timelineContainer').show();
-	// selectedYear = $(this).index();
-	// console.log(selectedYear);
-	// initTimeline();
- //    return false;
- //  });
+  $('.graph li').click(function() {
+    $('.timeContainer').removeClass('decadesView').addClass('yearsView');
+    $('.Decades').hide();
+    $('.timelineContainer').show();
+	selectedYear = $(this).index();
+	console.log(selectedYear);
+	initTimeline();
+    return false;
+  });
 
 
 /////TIMELINE MODULE: DECADES
@@ -344,23 +400,23 @@ $(window).load(function() {
   
 /////TIMELINE MODULE: YEARS
 
-  // $('.timeline-row .next').click(function() {
-  //   if($(this).parent().next().hasClass('timeline-row')) {
-  //     $('.prev, .next').hide();
-  //     $('.timelineContainer').animate({ right: '+=100%' }, 500, function() { 
-  //       $('.prev, .next').show();
-  //     });
-  //   }
-  // });
+  $('.timeline-row .next').click(function() {
+    if($(this).parent().next().hasClass('timeline-row')) {
+      $('.prev, .next').hide();
+      $('.timelineContainer').animate({ right: '+=100%' }, 500, function() { 
+        $('.prev, .next').show();
+      });
+    }
+  });
 
-  // $('.timeline-row .prev').click(function() {
-  //   if($(this).parent().prev().hasClass('timeline-row')) {
-  //     $('.prev, .next').hide();
-  //     $('.timelineContainer').animate({ right: '-=100%' }, 500, function() { 
-  //       $('.prev, .next').show(); 
-  //     });
-  //   }
-  // });
+  $('.timeline-row .prev').click(function() {
+    if($(this).parent().prev().hasClass('timeline-row')) {
+      $('.prev, .next').hide();
+      $('.timelineContainer').animate({ right: '-=100%' }, 500, function() { 
+        $('.prev, .next').show(); 
+      });
+    }
+  });
   
   
 // Fix subpixel rounding on timeline for proper alignment of years and bars. Delete when full browser support exists.
