@@ -1,10 +1,6 @@
 .layout
   = render 'shared/search_panel'
-  %ul.shareSave
-    %li.btn
-      %a{:href => ""} Save to...
-    %li.btn
-      %a{:href => ""} Share
+  = render 'shared/share_save'
   %h1= @item.title
   %article
     .FeatureContent

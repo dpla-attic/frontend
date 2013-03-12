@@ -60,7 +60,10 @@ class Map
     def fetch_results(spatial, page)
       facets = []
       filters = @filters.merge({location: spatial[0..1], distance: spatial[2]})
-      conditions = { q: @term, facets: facets }.merge(filters).merge(page: page, page_size: 100)
+      conditions = { q: @term, facets: facets }
+        .merge(filters)
+        .merge(page: page, page_size: 100)
+        .merge(fields: ['id', 'aggregatedCHO.spatial.coordinates', 'aggregatedCHO.type', 'aggregatedCHO.title', 'aggregatedCHO.creator', 'object.@id'])
       @data = DPLA::Items.by_conditions(conditions)
       @results = @data
     end

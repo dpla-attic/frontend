@@ -44,3 +44,12 @@ form {
     max-width:  150px;
   }
 }
+
+.mapBox {
+  .boxInner {
+    .box-rows {
+      height: 280px;
+      overflow: auto;
+    }
+  }
+}
