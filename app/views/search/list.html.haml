@@ -1,10 +1,6 @@
 .layoutTwo.search-page
   = render 'shared/search_panel'
-  %ul.shareSave
-    %li.btn
-      %a{:href => ""} Save
-    %li.btn
-      %a{:href => ""} Share
+  = render 'shared/share_save'
   %h1 Search Results
   = render 'shared/results/search_results', query: params[:q], search: @search
   - if @search.count > 0
