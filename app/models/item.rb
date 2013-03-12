@@ -2,6 +2,7 @@ class Item
   extend ActiveModel::Naming
 
   def initialize(doc)
+    doc = transform_dotted_keys doc
     @id            = doc["id"]
     @aggregatedCHO = doc["aggregatedCHO"] || {}
     @originRecord  = doc["originalRecord"] || {}
@@ -9,7 +10,9 @@ class Item
     @isShownAt     = doc["isShownAt"] || {}
   end
 
-  def id; @id end
+  def id
+    @id
+  end
 
   def publisher
     Array @aggregatedCHO['publisher']
@@ -17,9 +20,13 @@ class Item
 
   def description; @aggregatedCHO['description'] end
 
-  def title; @aggregatedCHO['title'] end
+  def title
+    @aggregatedCHO['title']
+  end
 
-  def rights; @aggregatedCHO['rights'] end
+  def rights
+    @aggregatedCHO['rights']
+  end
 
   def created_date
     @aggregatedCHO['date']['displayDate'] if @aggregatedCHO['date']
@@ -34,10 +41,21 @@ class Item
   end
 
   def coordinates
-    @aggregatedCHO['spatial'].map{|l| l["coordinates"].split(",") rescue nil}.compact
+    latlong = []
+    if @aggregatedCHO['spatial'].present?
+      if @aggregatedCHO['spatial'].is_a? Array
+        latlong = @aggregatedCHO['spatial'].map{ |l| l['coordinates'].split "," rescue nil}.compact
+      elsif @aggregatedCHO['spatial']['coordinates'].present?
+        if @aggregatedCHO['spatial']['coordinates'].is_a? Array
+          latlong = @aggregatedCHO['spatial']['coordinates'].map{ |l| l.split "," rescue nil}.compact
+        end
+      end
+    end
   end
 
-  def creator; @aggregatedCHO['creator'] end
+  def creator
+    @aggregatedCHO['creator']
+  end
 
   # returns array with names
   def subject
@@ -59,5 +77,22 @@ class Item
   end
 
   alias :preview_source_url :preview_image
+
+  private
+
+    def transform_dotted_keys(doc)
+      doc.keys
+        .select { |k| k.index('.') }
+        .select { |k| k =~ /^(aggregatedCHO|object)/ }
+        .each do |k|
+          value = doc.delete k
+          tokens = k.split '.'
+          first_token = tokens.shift
+          tokens.reverse.each { |t| value = {t => value} }
+          doc[first_token] ||= {}
+          doc[first_token].deep_merge! value
+        end
+      doc
+    end
 
 end
