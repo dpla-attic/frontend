@@ -65,7 +65,9 @@ class Item
     @aggregatedCHO['physicalmedium']
   end
 
-  def url; @isShownAt['@id'] end
+  def url
+    @isShownAt['@id']
+  end
 
   def format
     @isShownAt['format']

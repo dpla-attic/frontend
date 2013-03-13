@@ -4,7 +4,7 @@ $(document).ready ->
   $('#toggle').on 'click', ->
     setTimeout ->
       map.invalidateSize()
-    , 1000
+    , 500
 
   # map variable for debugging purposes
   window.map     = map
@@ -57,10 +57,13 @@ MapWrapper = L.Class.extend
         showCoverageOnHover: false
         zoomToBoundsOnClick: false
       markerCluster.addLayers statesPoints
+      markerCluster.on 'clusterclick', (cluster)->
+        console.log cluster
       this._layers.state = markerCluster
     this._layers.state
 
   getPointsLayer: ->
+    t = this
     unless this._layers.points
       markerCluster = new L.MarkerClusterGroup
         iconCreateFunction: (cluster) ->
@@ -69,6 +72,10 @@ MapWrapper = L.Class.extend
         spiderfyOnMaxZoom: false
         showCoverageOnHover: false
         zoomToBoundsOnClick: false
+      markerCluster.on 'clusterclick', (cluster)->
+        points = cluster.layer.getAllChildMarkers()
+        points = t.generatePopup(points.slice(0,5)).setLatLng(cluster.layer.getLatLng())
+        points.openOn t.map
       this._layers.points = markerCluster
     this._layers.points
 
@@ -97,9 +104,13 @@ MapWrapper = L.Class.extend
         'aggregatedCHO.spatial.distance': "#{position.radius}km"
       dataType: 'jsonp'
       cache: true
+      beforeSend: ->
+        t.turnWaitCursor true
       success: (data)->
         if $.isPlainObject(data) and $.isArray(data.docs)
           t.drawPoints data.docs
+      complete: ->
+        t.turnWaitCursor false
 
   drawPoints: (docs)->
     t = this
@@ -113,15 +124,25 @@ MapWrapper = L.Class.extend
             id: doc.id
             title: doc['aggregatedCHO.title']
             thumbnail: doc['object.@id']
+            type: doc['aggregatedCHO.type'] || ''
+            creator: doc['aggregatedCHO.creator'] || ''
+            url: doc['isShownAt.@id']
             lat: coordinates.shift()
             lng: coordinates.shift()
         catch error
         myIcon = L.divIcon({className: 'dot'})
         marker = new L.marker([point.lat, point.lng], {icon: myIcon})
         marker.data = point
+        marker.on 'click', (e)->
+          popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
+          popup.openOn t.map
         toDraw.push marker
 
     t.getPointsLayer().addLayers toDraw
+
+  turnWaitCursor: (turn)->
+    cursor = if turn then 'wait' else ''
+    $(this.map.getContainer()).css(cursor: cursor)
 
   loadMarkers: ->
     stateLayer  = this.getStateLayer()
@@ -134,3 +155,62 @@ MapWrapper = L.Class.extend
         this.requestItems(this.getPosition())
         this.map.removeLayer stateLayer
         this.map.addLayer    pointsLayer
+
+  generatePopup: (points) ->
+    points = [points] unless points instanceof Array
+
+    html = ''
+    $.each points, (i,point) ->
+      point = point.data
+      content =
+        """
+          <h6> #{ point.type }</h6>
+          <h4><a href="/item/#{ point.id }">#{ point.title }</a></h4>
+          <p><span> #{ point.creator }</span></p>
+          <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
+        """
+      if point.thumbnail
+        html +=
+          """
+            <div class="box-row">
+              <div class="box-right"><img src="#{ point.thumbnail }" /></div>
+              <div class="box-left">#{ content }</div>
+            </div>
+          """
+      else
+        html += "<div class=\"box-row\">#{ content }</div>"
+
+    html = '<div class="box-rows">' + html + '</div>' if points.length > 1
+    popup = new L.DPLAPopup offset: new L.Point(-10,-30)
+    popup.setContent html
+
+
+L.DPLAPopup = L.Popup.extend
+  _initLayout: ->
+    this._container = mapBox = L.DomUtil.create 'div', 'mapBox'
+    closeButton = L.DomUtil.create 'a', 'closePopUp', mapBox
+    closeButton.href = '#close'
+    closeButton.innerHTML = '&#215;'
+    L.DomEvent.on closeButton, 'click', this._onCloseButtonClick, this
+    this._contentNode = L.DomUtil.create 'div', 'boxInner', mapBox
+    L.DomEvent.on(this._contentNode, 'mousewheel', L.DomEvent.stopPropagation);
+    this._tip = L.DomUtil.create('div', 'mapArrow', mapBox);
+  _updateLayout: ->
+    container = this._contentNode
+    this._containerWidth = container.offsetWidth;
+    container.style.height =  container.offsetHeight + 'px';
+    this._container.style.bottom = 50 + 'px';
+    this._container.style.left = 50 + 'px';
+  _updatePosition: ->
+    pos = this._map.latLngToLayerPoint(this._latlng)
+    animated = this._animated
+    offset = this.options.offset
+    if (animated)
+      L.DomUtil.setPosition(this._container, pos);
+    this._containerBottom = -offset.y - (animated ? 0 : pos.y);
+    this._containerLeft = -Math.round(this._containerWidth / 2) + offset.x + (animated ? 0 : pos.x);
+    adjust =
+      x: 20
+      y: 10
+    this._container.style.bottom = (this._containerBottom + adjust.y) + 'px';
+    this._container.style.left = (this._containerLeft + adjust.x) + 'px';

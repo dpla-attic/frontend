@@ -238,19 +238,19 @@ h1 {
     color: #222;
     margin: 0 0 0.2em;
 }
-h1.border { 
-    border-bottom: 1px solid #CCCCCC;     
+h1.border {
+    border-bottom: 1px solid #CCCCCC;
     margin: 10px 0 20px;
-    padding: 0 0 4px; 
+    padding: 0 0 4px;
 }
 
 h2 {
     font: 1.6em/1.2em 'source_sans_proregular',arial,sans-serif;
     margin: 0 0 10px;
 }
-h2.border { 
-    border-bottom: 1px solid #CCCCCC;    
-    padding: 0 0 4px; 
+h2.border {
+    border-bottom: 1px solid #CCCCCC;
+    padding: 0 0 4px;
 	margin: 0.7em 0;
 	font: 1.867em/1.2em 'source_sans_proregular',arial,sans-serif;
 }
@@ -343,7 +343,7 @@ aside {
     margin: 0 0 1em 0;
     width: auto;
 }
-    
+
 .layoutTwo aside {
     float: left;
 }
@@ -357,10 +357,10 @@ aside {
     width: 49.62963%;
     overflow: hidden;
 }
-.content { 
+.content {
     margin: 0 0 10px 0;
     clear: both;
-    overflow: hidden; 
+    overflow: hidden;
 }
 .bottom .left {
     width: 65.820106%;
@@ -378,7 +378,7 @@ aside {
 /* ==========================================================================
    HEADER
    ========================================================================== */
-   
+
 header { position: relative; }
 .logo {
     float: left;
@@ -437,7 +437,7 @@ header .active a { border-bottom: 3px solid #2795b6; }
 
             .topNav ul li.bg { margin-left: 15px; }
             .topNav ul li.bg.last { margin: 0; }
-			
+
 			.topNav .aboutMenu:hover {
 				background: #000;
 				color: #fff;
@@ -476,7 +476,7 @@ header .active a { border-bottom: 3px solid #2795b6; }
         margin: 0;
         padding: 0;
     }
-    .MainNav li:first-child { margin: 0;} 
+    .MainNav li:first-child { margin: 0;}
 .MainNav li { margin: 0 0 0 2.8%; }
         .MainNav li a { display: block; padding: 0 0 1%; }
 
@@ -541,7 +541,7 @@ header .active a { border-bottom: 3px solid #2795b6; }
 }
 
 .ie8 .search-module input[type="text"] {
-    padding-top: 6px; 
+    padding-top: 6px;
     height: 24px;
 }
 
@@ -609,7 +609,7 @@ aside .module span { color: #000; }
     transition: 0.3s ease;
 	text-decoration: none;
     color: #fff;
-} 
+}
 
 
 
@@ -1057,7 +1057,7 @@ h6.open span {
     padding: 0;
     float: left;
     margin: 0 15px 0 0;
-    font-size: 1em; 
+    font-size: 1em;
 	color: inherit;
 }
 
@@ -1086,7 +1086,7 @@ h6.open span {
 }
 
 .sideNav li:first-child { border: none; }
-.sideNav a { 
+.sideNav a {
     display: block;
     padding: 2% 5%;
 }
@@ -1126,7 +1126,7 @@ h6.open span {
 }
 
 aside .moduleSection h6 { margin: 0; }
-aside .moduleSection p { margin: 0 0 10px; } 
+aside .moduleSection p { margin: 0 0 10px; }
 
 .moduleLeft {
     float: left;
@@ -1164,11 +1164,11 @@ aside .moduleSection p { margin: 0 0 10px; }
 .breadCrumbs li:before { content: "/ " }
 .breadCrumbs li:first-child:before { content: "" }
 
-.Decades { 
+.Decades {
 	width: 1200%;
 }
 
-.timeContainer.decadesView .yearTab { 
+.timeContainer.decadesView .yearTab {
 	display: none;
 }
 
@@ -1192,7 +1192,7 @@ aside .moduleSection p { margin: 0 0 10px; }
     margin: 0;
     padding: 0;
 }
-.DecadesDates li { 
+.DecadesDates li {
     float: left;
     list-style: none;
     font-size: 1.400em;
@@ -1342,8 +1342,8 @@ aside .moduleSection p { margin: 0 0 10px; }
 .graph li:hover { background: #fff; cursor: pointer; }
 .infoOuter {
     background: url(/assets/popup-arrow.png) no-repeat center top;
-    position: absolute; 
-    left: -999em;  
+    position: absolute;
+    left: -999em;
 }
 .info h3 { margin: 0; }
 .graph li .info {
@@ -1486,7 +1486,7 @@ body .profile .tabs .active a:hover { color: inherit; }
 .saved-rows .ascending {
     padding-right: 20px;
 }
-.saved-rows ul li:first-child a.descending, 
+.saved-rows ul li:first-child a.descending,
 .saved-rows ul li:first-child a.ascending {
     width: auto;
 }
@@ -1592,15 +1592,15 @@ input[type="checkbox"] {
     height: auto;
     border-radius: 0 0 0 0;
 }
-.account input { 
+.account input {
     border: 1px solid #cccccc;
     background: #fff;
     width: 27.407407%;
     height: 28px;
-    margin: 0.5% 0 1.5%; 
+    margin: 0.5% 0 1.5%;
     padding-left: 10px;
-    -moz-box-sizing: border-box; 
-    -webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -1755,7 +1755,7 @@ input[type="checkbox"] {
 }
 .savedList h5 {
     font-size: 1em;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 .savedList h4, .savedList h4 a, .search h4 a, .timelineContent h4 a {
@@ -1879,9 +1879,9 @@ input[type="checkbox"] {
     position: relative;
 }
 .map aside {
-    height: 100%; 
+    height: 100%;
     width: 31.5344%;
-    margin-left: 0; 
+    margin-left: 0;
 }
 
 #toggle {
@@ -1923,8 +1923,8 @@ aside h5 { margin: 5px 0 1em; }
     border-top: 2px solid #ccc;
     border-bottom: 2px solid #ccc;
     position: absolute;
-    right: -515%;
-    top: -600%;
+    /*right: -515%;*/
+    /*top: -600%;*/
     width: 400px;
 }
 
@@ -2152,8 +2152,8 @@ aside h5 { margin: 5px 0 1em; }
 /* ==========================================================================
    ROW MODULE
    ========================================================================== */
-.row { 
-    position: relative;     
+.row {
+    position: relative;
     margin: 2% 0 0 0;
     overflow: hidden;
     background: #ededed;
@@ -2173,12 +2173,12 @@ aside h5 { margin: 5px 0 1em; }
 
     .row a {
 		display: block;
-		overflow: hidden; 
+		overflow: hidden;
 	}
 	.row a, .row a h2, .row a h6, .row a .image img {
-		-webkit-transition: all 0.3s ease-out; 
-		-moz-transition: all 0.3s ease-out; 
-		-o-transition: all 0.3s ease-out; 
+		-webkit-transition: all 0.3s ease-out;
+		-moz-transition: all 0.3s ease-out;
+		-o-transition: all 0.3s ease-out;
 		transition: all 0.3s ease-out;
 	}
     .box h6 {
@@ -2190,7 +2190,7 @@ aside h5 { margin: 5px 0 1em; }
 	.row a:hover .image img {
 		opacity: 0.7;
 	}
-    
+
     .row span { display: block; font-size: 0.643em; line-height: 1.2em; }
 
     .box {
@@ -2205,7 +2205,7 @@ aside h5 { margin: 5px 0 1em; }
     .box h6 { position: absolute; bottom: 2%; font-family: 'source_sans_proregular',arial,sans-serif; }
 
     .blue .image { float: left; }
-    
+
 
 /* ==========================================================================
    SEARCH
@@ -2326,7 +2326,7 @@ aside h5 { margin: 5px 0 1em; }
 
 /* ==========================================================================
   SLIDER
-   ========================================================================== */ 
+   ========================================================================== */
    .slide-module {
         width: 100%;
         clear: both;
@@ -2426,14 +2426,14 @@ aside h5 { margin: 5px 0 1em; }
 
 /* HOME PAGE SLIDESHOW */
 .flex-control-nav { display: none; }
-.slides, .flex-control-nav, .flex-direction-nav {margin: 0; padding: 0; list-style: none;} 
+.slides, .flex-control-nav, .flex-direction-nav {margin: 0; padding: 0; list-style: none;}
 
 .flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides img {width: 100%; display: block;}
 .flex-pauseplay span {text-transform: capitalize;}
 
-.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
-html[xmlns] .slides {display: block;} 
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
 * html .slides {height: 1%;}
 
 .no-js .slides > li:first-child {display: block;}
@@ -2538,7 +2538,7 @@ footer .social.icons li { border: 1px solid #494949; }
         .social li a {
         	display: block;
             height: 31px;
-            background: #fff; 
+            background: #fff;
         }
 
 .social li.twitter {
@@ -2563,14 +2563,14 @@ footer .social.icons li { border: 1px solid #494949; }
     width: 36px;
     margin: -1px 0 0;
 }
-.social li:hover span { 
+.social li:hover span {
     color: #2795b6;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
     -o-transition: 0.3s ease;
     -ms-transition: 0.3s ease;
     transition: 0.3s ease;
-    border-bottom: 1px solid #2795b6;  
+    border-bottom: 1px solid #2795b6;
 }
 
 .social li.twitter span:hover { color: #2795b6; border-bottom: 1px solid #2795b6; }
@@ -2599,9 +2599,9 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 .popBar.bottom { margin: 0; }
 
 .popBar .breadCrumbs { width: 82%; margin: 5px 0 0; padding: 0; }
-.popBar .breadCrumbs li {     
+.popBar .breadCrumbs li {
     font: 1em/1.2em 'source_sans_pro_semiboldRg',arial,sans-serif;
-    margin: 0; 
+    margin: 0;
 	background: none;
 }
 .popBar .pagination {
@@ -2627,7 +2627,7 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 
 
 .pop-columns ul:first-child { border: none; }
-.pop-columns li { 
+.pop-columns li {
     cursor: pointer;
     list-style: none outside none;
     margin: 0;
@@ -2682,8 +2682,8 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 .overlay { display: none; }
 .pop-columns section:first-child { margin: 0; }
 .pop-columns span { float: right; }
-#inline_content, #loginBox , #signupBox { 
-    padding: 20px 24px; 
+#inline_content, #loginBox , #signupBox {
+    padding: 20px 24px;
     overflow: hidden;
     background: none repeat scroll 0 0 #FFFFFF;
 }
@@ -2754,8 +2754,8 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
     margin: 0 0 20px;
     width: 100%;
 	height: 28px;
-    -moz-box-sizing: border-box; 
-    -webkit-box-sizing: border-box; 
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
@@ -2922,7 +2922,7 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 .sideNav .head {
     color: #2795b6;
     display: block;
-    margin: 4% 5% 0; 
+    margin: 4% 5% 0;
     cursor: pointer;
 }
 .sideNav .head span {
@@ -3012,7 +3012,7 @@ div.timeline-year {
 .cboxIframe{width:100%; height:100%; display:block; border:0;}
 #colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
 #cboxLoadedContent { width: auto; }
-/* 
+/*
     User Style:
     Change the following styles to modify the appearance of ColorBox.  They are
     ordered & tabbed in a way that represents the nesting of the generated HTML.
@@ -3027,10 +3027,10 @@ div.timeline-year {
     #cboxMiddleRight{width:21px; background:url(assets/controls.png) right top repeat-y;}
     #cboxTopCenter{height:21px; background:url(assets/border.png) 0 0 repeat-x;}
     #cboxBottomCenter{height:21px; background:url(assets/border.png) 0 -29px repeat-x;}
-    #cboxContent{ 
-        background:#fff; 
+    #cboxContent{
+        background:#fff;
         overflow:hidden;
-        border-top: 8px solid #b1b1b1; 
+        border-top: 8px solid #b1b1b1;
     }
         .cboxIframe{background:#fff;}
         #cboxError{padding:50px; border:1px solid #ccc;}
@@ -3286,13 +3286,13 @@ div.timeline-year {
 
 
 /* NO JAVASCRIPT RULES */
-.no-js .timelineModuleOuter, 
-.no-js .timelineView, 
-.no-js #toggle, 
-.no-js .next, 
-.no-js .prev, 
-.no-js .moreInfo, 
-.no-js #cboxClose.pclose, 
+.no-js .timelineModuleOuter,
+.no-js .timelineView,
+.no-js #toggle,
+.no-js .next,
+.no-js .prev,
+.no-js .moreInfo,
+.no-js #cboxClose.pclose,
 .no-js .prevNext { display: none; }
 
 .no-js .timeline article { overflow: auto; margin: 0; }
@@ -3302,12 +3302,12 @@ div.timeline-year {
 .no-js .slide-container { overflow: hidden; }
 .no-js .DecadesDates, .no-js .graph { right: auto; }
 
-.no-js .overlay { 
-    display: block; 
-    max-width: 1300px; 
+.no-js .overlay {
+    display: block;
+    max-width: 1300px;
     margin: 20px auto;
     background: #EDEDED;
-    border-top: 8px solid #b1b1b1; 
+    border-top: 8px solid #b1b1b1;
 }
 .no-js #loginBox, .no-js #signupBox, .no-js #inline_content { background: none; }
 .no-js .overlay form {
@@ -3378,7 +3378,7 @@ div.timeline-year {
     .searchForm input[type="text"] { height: 26px; }
     .searchForm input[type="submit"] { margin: -7px 0 0; background-size: 80% 80%; }
     .app h4, .fullWidth h4 { font-size: 1em; line-height: 1.4; }
-	
+
 	.MainNav {
         clear: both;
         margin: 0 0 20px;
@@ -3395,8 +3395,8 @@ div.timeline-year {
     .searchViews { width: 40%; }
     .formRow select { float: none; display: block; clear: both; margin: 5px 0 5px; width: auto; }
     aside .module.line { background-position: center 43%; }
-    
-	.DecadesDates, .graph { 
+
+	.DecadesDates, .graph {
 		right: 98.8%;
 	}
 	.graph {
@@ -3406,13 +3406,13 @@ div.timeline-year {
 		width: 0.073529%;
 		margin: 0 0.024510% 0 0;
 	}
-	.Decades { 
+	.Decades {
 		width: 15000%;
 	}
-	.DecadesDates { 
+	.DecadesDates {
 		padding-left: 0.065317%;
 	}
-	.DecadesDates li { 
+	.DecadesDates li {
 		width: 0.980392%;
 	}
 	.DecadesDates li:first-child {
@@ -3439,7 +3439,7 @@ div.timeline-year {
 		padding-bottom: 0.3em;
 	}
     .text { width: 100%; }
-	
+
 	.year h3 { margin-top: 5px; }
 
 }
@@ -3471,7 +3471,7 @@ body .container h1 {
    padding-left: 2.6455%;
 }
 body .container article h1 {
-   padding-left: 0;  
+   padding-left: 0;
 }
 body {
     background-position: 0 -10px;
@@ -3485,20 +3485,20 @@ body {
     margin: 30px 0 15px;
 }
 
-.layout article, 
-article, 
-.layout aside, 
-aside, footer, 
-.content.bottom, 
-.upper-section, 
-.slide_bottom, 
-.slide-Container, 
-.searchResults, 
-.map article, 
-.layoutTwo aside, 
-.slidePopOut, 
+.layout article,
+article,
+.layout aside,
+aside, footer,
+.content.bottom,
+.upper-section,
+.slide_bottom,
+.slide-Container,
+.searchResults,
+.map article,
+.layoutTwo aside,
+.slidePopOut,
 article.overview .description {
-    padding: 0 2.6455%; width: 94.709%; 
+    padding: 0 2.6455%; width: 94.709%;
 }
 .rightSide {
     width: 100%;
@@ -3507,7 +3507,7 @@ article.overview .description {
 body .container article h1, body .container .upper-section h1 {padding: 0;}
 
 #resultsBarBottom {
-	margin: 0 2.6455%; 
+	margin: 0 2.6455%;
 }
 
 .breadCrumbs {
@@ -3537,7 +3537,7 @@ article.home {
 }
 .upper-left h1 { padding-left: 0%; }
 
-.pop-columns section, 
+.pop-columns section,
 .collections .pop-columns section {
     width: 100%;
     margin: 0;
@@ -3603,7 +3603,7 @@ body .container .upper-left h2 { font-size: 1.4em; }
         .logo { width: 238px; }
         .menu-btn { display: block; }
         .topNav, .MainNav { display: none; }
-        .MainNav { float: left; border: none; width: 52%; margin: 0 0 1.5em; border-right: 1px solid #CCCCCC; padding: 1px 0 0; } 
+        .MainNav { float: left; border: none; width: 52%; margin: 0 0 1.5em; border-right: 1px solid #CCCCCC; padding: 1px 0 0; }
             .MainNav li, .MainNav li:first-child { clear: both; margin: 0 0 1.8em; }
             .MainNav li:last-child { margin: 0; }
                 header .active a { border: none; color: #2b2b2b; }
@@ -3650,8 +3650,8 @@ body .container .upper-left h2 { font-size: 1.4em; }
 		width: auto;
 	}
 
-    
-    .bottom .right { width: 100%; clear: both; }  
+
+    .bottom .right { width: 100%; clear: both; }
 
     .matches section {
         width: 100%;
@@ -3759,7 +3759,7 @@ body .container .upper-left h2 { font-size: 1.4em; }
 .account select { width: 95.2%; }
 
 
-.savedList section:first-child .searchLeft, 
+.savedList section:first-child .searchLeft,
 .savedList section:first-child .searchMiddle,
 .savedList section:first-child .searchRight,
 .savedList section:first-child .delete {
@@ -3823,9 +3823,9 @@ body .container .upper-left h2 { font-size: 1.4em; }
 }
 .tab-content ul { position: relative; }
 .tab-content li { width: 99%; margin-bottom: 2%; }
-.tab-content li.row-2, .tab-content li.row-3 { 
-    width: 92.5%; 
-    padding: 0 0 0 27px; 
+.tab-content li.row-2, .tab-content li.row-3 {
+    width: 92.5%;
+    padding: 0 0 0 27px;
 }
 .tab-content li.row-4 {
     position: absolute;
@@ -3948,9 +3948,9 @@ aside { height: 100%; }
     footer .social.icons { margin: -4em 0 0 55%; float: left;  }
     footer nav { margin: 0; }
         footer nav ul { float: left; width: 50%; margin: 0 3% 0 0; }
-        .footer-navTwo { width: 45%; margin: 0; float: right; } 
+        .footer-navTwo { width: 45%; margin: 0; float: right; }
             footer nav li { float: none; margin: 1.8em 0 0; }
-            .footer-navTwo li { margin: 1.8em 0 0; } 
+            .footer-navTwo li { margin: 1.8em 0 0; }
             footer li:first-child { margin: 0; }
 
 
@@ -3992,7 +3992,7 @@ aside { height: 100%; }
 .timeline #toggle.mobile.Maside { display: none; }
 .timeline #toggle { display: none; }
 
-.DecadesDates, .graph { 
+.DecadesDates, .graph {
 	right: 98.8%;
 }
 .graph {
@@ -4002,13 +4002,13 @@ aside { height: 100%; }
 	width: 0.073529%;
 	margin: 0 0.024510% 0 0;
 }
-.Decades { 
+.Decades {
 	width: 15000%;
 }
-.DecadesDates { 
+.DecadesDates {
 	padding-left: 0.065317%;
 }
-.DecadesDates li { 
+.DecadesDates li {
 	width: 0.980392%;
 }
 .DecadesDates li:first-child {

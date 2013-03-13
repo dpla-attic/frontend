@@ -61,4 +61,9 @@
 
 #map {
   height: 800px;
+
+  .closePopUp {
+    margin-top: 6px;
+    z-index: 10;
+  }
 }
