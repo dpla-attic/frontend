@@ -49,8 +49,10 @@ module DPLA
               when 'subject'  then result[key] << 'aggregatedCHO.subject.name'
               when 'language' then result[key] << 'aggregatedCHO.language.name'
               when 'type'     then result[key] << 'aggregatedCHO.type'
-              when 'spatial'  then result[key] << 'aggregatedCHO.spatial.name'  
               when 'date'     then result[key] << 'aggregatedCHO.date.begin.year'
+              when 'location' then result[key] << 'aggregatedCHO.spatial.name'
+              when 'state'    then result[key] << 'aggregatedCHO.spatial.state'
+              when 'city'     then result[key] << 'aggregatedCHO.spatial.city'
               end
             end
           else

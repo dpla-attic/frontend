@@ -54,10 +54,10 @@ class Timeline
   private
 
     def fetch_timeline_data
-      facets = %w(subject language type spatial date)
+      facets = %w(subject language type location date)
       conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 2000)
       @data = DPLA::Items.by_conditions(conditions)
-      @subjects, @languages, @types, @locations = @data.facets.subject, @data.facets.language, @data.facets.type, @data.facets.spatial
+      @subjects, @languages, @types, @locations = @data.facets.subject, @data.facets.language, @data.facets.type, @data.facets.location
       @years = @data.facets.year
       @count = @data.count
     end

@@ -12,3 +12,7 @@
         #map
 
   = render 'shared/sidebar'
+
+:javascript
+  window.states   = #{@search.states.to_json};
+  window.api_path = '#{@api_path}';

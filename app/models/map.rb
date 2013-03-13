@@ -28,6 +28,16 @@ class Map
     @locations
   end
 
+  def states
+    fetch_map_data if @states.nil?
+    [].tap do |states|
+      @states.each do |state, count|
+        coord = State.geocode state
+        states << {name: state, count: count, lat: coord.first, lng: coord.last} if coord
+      end
+    end
+  end
+
   # spatial = [lat, lng, radius_in_km]
   def items(spatial, page = 0)
     fetch_results(spatial, page)
@@ -47,13 +57,23 @@ class Map
     end
   end
 
+  def api_path
+    fields = [
+      'id', 'aggregatedCHO.spatial.coordinates', 'aggregatedCHO.type',
+      'aggregatedCHO.title', 'aggregatedCHO.creator', 'object.@id' ]
+    conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields, page_size: 100))
+    api_url = Settings.api.url.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
+    "#{api_url}/items?#{conditions}"
+  end
+
   private
 
     def fetch_map_data
-      facets = %w(subject language type spatial)
+      facets = %w(subject language type location state)
       conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 200)
       @data = DPLA::Items.by_conditions(conditions)
-      @subjects, @languages, @types, @locations = @data.facets.subject, @data.facets.language, @data.facets.type, @data.facets.spatial
+      @subjects, @languages, @types, @locations, @states =
+        @data.facets.subject, @data.facets.language, @data.facets.type, @data.facets.location, @data.facets.state
       @count = @data.count
     end
 

@@ -23,6 +23,7 @@ DplaPortal::Application.routes.draw do
   end
 
   resource :map, only: :show, controller: 'map' do
+    get 'state'
     get 'items_by_spatial'
   end
 

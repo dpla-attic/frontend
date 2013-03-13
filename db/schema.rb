@@ -11,10 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123091035) do
+ActiveRecord::Schema.define(:version => 20130313093244) do
 
   create_table "searches", :force => true do |t|
     t.text "params"
+  end
+
+  create_table "states", :force => true do |t|
+    t.string "abbr"
+    t.string "name"
+    t.float  "lat"
+    t.float  "lng"
   end
 
   create_table "users", :force => true do |t|
