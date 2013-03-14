@@ -20,7 +20,7 @@ gem 'navigasmic'
 gem 'httparty'
 gem 'elastictastic'
 gem 'devise'
-gem 'rails_config', :git => 'git://github.com/railsjedi/rails_config.git'
+gem 'rails_config'
 gem "leaflet-rails", "~> 0.5.0"
 gem "leaflet-markercluster-rails", "~> 0.2.1"
 gem 'google-analytics-rails'
