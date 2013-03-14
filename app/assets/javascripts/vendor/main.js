@@ -355,15 +355,15 @@ $(window).load(function() {
     return false;
   });
   
-  $('.graph li').click(function() {
-    $('.timeContainer').removeClass('decadesView').addClass('yearsView');
-    $('.Decades').hide();
-    $('.timelineContainer').show();
-	selectedYear = $(this).index();
-	console.log(selectedYear);
-	initTimeline();
-    return false;
-  });
+ //  $('.graph li').click(function() {
+ //    $('.timeContainer').removeClass('decadesView').addClass('yearsView');
+ //    $('.Decades').hide();
+ //    $('.timelineContainer').show();
+	// selectedYear = $(this).index();
+	// console.log(selectedYear);
+	// initTimeline();
+ //    return false;
+ //  });
 
 
 /////TIMELINE MODULE: DECADES
@@ -400,23 +400,23 @@ $(window).load(function() {
   
 /////TIMELINE MODULE: YEARS
 
-  $('.timeline-row .next').click(function() {
-    if($(this).parent().next().hasClass('timeline-row')) {
-      $('.prev, .next').hide();
-      $('.timelineContainer').animate({ right: '+=100%' }, 500, function() { 
-        $('.prev, .next').show();
-      });
-    }
-  });
+  // $('.timeline-row .next').click(function() {
+  //   if($(this).parent().next().hasClass('timeline-row')) {
+  //     $('.prev, .next').hide();
+  //     $('.timelineContainer').animate({ right: '+=100%' }, 500, function() { 
+  //       $('.prev, .next').show();
+  //     });
+  //   }
+  // });
 
-  $('.timeline-row .prev').click(function() {
-    if($(this).parent().prev().hasClass('timeline-row')) {
-      $('.prev, .next').hide();
-      $('.timelineContainer').animate({ right: '-=100%' }, 500, function() { 
-        $('.prev, .next').show(); 
-      });
-    }
-  });
+  // $('.timeline-row .prev').click(function() {
+  //   if($(this).parent().prev().hasClass('timeline-row')) {
+  //     $('.prev, .next').hide();
+  //     $('.timelineContainer').animate({ right: '-=100%' }, 500, function() { 
+  //       $('.prev, .next').show(); 
+  //     });
+  //   }
+  // });
   
   
 // Fix subpixel rounding on timeline for proper alignment of years and bars. Delete when full browser support exists.
