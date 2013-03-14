@@ -18,7 +18,9 @@ class Item
     Array @aggregatedCHO['publisher']
   end
 
-  def description; @aggregatedCHO['description'] end
+  def description
+    @aggregatedCHO['description']
+  end
 
   def title
     @aggregatedCHO['title']
@@ -29,7 +31,7 @@ class Item
   end
 
   def created_date
-    @aggregatedCHO['date']['displayDate'] if @aggregatedCHO['date']
+    @aggregatedCHO['date']['displayDate'] rescue nil
   end
 
   # returns array with names
