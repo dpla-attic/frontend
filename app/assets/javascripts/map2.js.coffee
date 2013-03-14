@@ -29,7 +29,43 @@ MapWrapper = L.Class.extend
         t.onZoomstart()
       zoomend: ->
         t.onZoomend()
-    this.loadMarkers()
+    this.updateMapMarkers()
+
+  onDragend: ->
+    this.updateMapMarkers()
+
+  onZoomstart: ->
+    this.closeAllOpenPopups()
+
+  onZoomend: ->
+    this.updateMapMarkers()
+
+  updateMapMarkers: ->
+    stateLayer  = this.getStateLayer()
+    pointsLayer = this.getRegularLayer()
+    switch
+      when this.map.getZoom() in [4..6]
+        this.map.removeLayer pointsLayer
+        this.map.addLayer    stateLayer
+      else
+        this.requestRegularMarkers(this.getMapPosition())
+        this.map.removeLayer stateLayer
+        this.map.addLayer    pointsLayer
+
+  getMapPosition: ->
+    center    = this.map.getCenter()
+    northEast = this.map.getBounds().getNorthEast()
+    lat: center.lat
+    lng: center.lng
+    radius: center.distanceTo(northEast) / 1000
+
+  turnProgressCursor: (turn)->
+    cursor = if turn then 'progress' else ''
+    $(this.map.getContainer()).css(cursor: cursor)
+
+  closeAllOpenPopups: ->
+    $.each this._openPopups, (i,popup)->
+      popup._close()
 
   getBaseLayer: ->
     unless this._layers.base
@@ -65,10 +101,11 @@ MapWrapper = L.Class.extend
       markerCluster.addLayers statesMarkers
       markerCluster.on 'clusterclick', (cluster)->
         console.log 'state cluster click'
+        console.log e
       this._layers.state = markerCluster
     this._layers.state
 
-  getPointsLayer: ->
+  getRegularLayer: ->
     t = this
     unless this._layers.points
       markerCluster = new L.MarkerClusterGroup
@@ -80,28 +117,12 @@ MapWrapper = L.Class.extend
         zoomToBoundsOnClick: false
       markerCluster.on 'clusterclick', (cluster)->
         points = cluster.layer.getAllChildMarkers()
-        points = t.generatePopup(points.slice(0,5)).setLatLng(cluster.layer.getLatLng())
+        points = t.generatePopup(points.slice(0,5), 'This is test title').setLatLng(cluster.layer.getLatLng())
         t._openPopups.push points.openOn(t.map)
       this._layers.points = markerCluster
     this._layers.points
 
-  onDragend: ->
-    this.loadMarkers()
-
-  onZoomstart: ->
-    this.closeAllOpenPopups()
-
-  onZoomend: ->
-    this.loadMarkers()
-
-  getPosition: ->
-    center    = this.map.getCenter()
-    northEast = this.map.getBounds().getNorthEast()
-    lat: center.lat
-    lng: center.lng
-    radius: center.distanceTo(northEast) / 1000
-
-  requestItems: (position)->
+  requestRegularMarkers: (position)->
     while this._requestsPool.length > 0
       this._requestsPool.shift().abort()
 
@@ -117,11 +138,11 @@ MapWrapper = L.Class.extend
         t.turnProgressCursor true
       success: (data)->
         if $.isPlainObject(data) and $.isArray(data.docs)
-          t.drawPoints data.docs
+          t.drawRegularItems data.docs
       complete: ->
         t.turnProgressCursor false
 
-  drawPoints: (docs)->
+  drawRegularItems: (docs)->
     t = this
     toDraw = []
     $.each docs, (i, doc)->
@@ -143,33 +164,13 @@ MapWrapper = L.Class.extend
         marker = new L.marker([point.lat, point.lng], {icon: myIcon})
         marker.data = point
         marker.on 'click', (e)->
-          popup = t.generatePopup(e.target, 'This is test title').setLatLng(e.target.getLatLng())
+          popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
           t._openPopups.push popup.openOn(t.map)
         toDraw.push marker
 
-    t.getPointsLayer().addLayers toDraw
+    t.getRegularLayer().addLayers toDraw
 
-  turnProgressCursor: (turn)->
-    cursor = if turn then 'progress' else ''
-    $(this.map.getContainer()).css(cursor: cursor)
-
-  loadMarkers: ->
-    stateLayer  = this.getStateLayer()
-    pointsLayer = this.getPointsLayer()
-    switch
-      when this.map.getZoom() in [4..6]
-        this.map.removeLayer pointsLayer
-        this.map.addLayer    stateLayer
-      else
-        this.requestItems(this.getPosition())
-        this.map.removeLayer stateLayer
-        this.map.addLayer    pointsLayer
-
-  closeAllOpenPopups: ->
-    $.each this._openPopups, (i,popup)->
-      popup._close()
-
-  generatePopup: (points, title = null) ->
+  generatePopup: (points, title) ->
     points = [points] unless points instanceof Array
 
     html = ''
@@ -195,11 +196,11 @@ MapWrapper = L.Class.extend
 
     html = '<div class="box-rows">' + html + '</div>' if points.length > 1
     html = "<h5>#{ title }</h5>" + html if title
-    popup = new L.DPLAPopup offset: new L.Point(-10,-30)
+    popup = new DPLAPopup offset: new L.Point(-10,-30)
     popup.setContent html
 
 
-L.DPLAPopup = L.Popup.extend
+DPLAPopup = L.Popup.extend
   _initLayout: ->
     this._container = mapBox = L.DomUtil.create 'div', 'mapBox'
     L.DomEvent.disableClickPropagation mapBox
