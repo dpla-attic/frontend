@@ -3167,8 +3167,7 @@ div.timeline-year {
  *    `:before` to contain the top-margins of child elements.
  */
 
-.clearfix:before,
-.clearfix:
+.clearfix:before
 {
     content: " "; /* 1 */
     display: table; /* 2 */
