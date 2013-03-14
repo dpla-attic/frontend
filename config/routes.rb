@@ -26,6 +26,12 @@ DplaPortal::Application.routes.draw do
     get 'items_by_spatial'
   end
 
+  scope '/profile' do
+    resources :saved_searches, only: [:index, :create, :destroy] do
+      post 'destroy_bulk', on: :collection
+    end
+  end
+
   root to: 'pages#home'
   match '/welcome' => 'users#welcome'
 end

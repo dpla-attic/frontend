@@ -7,7 +7,7 @@
       %ul.tabs
         %li.active= link_to 'Your account', edit_user_registration_path
         %li= link_to 'Saved Items & Lists', "#"
-        %li= link_to 'Saved searches', '#'
+        %li= link_to 'Saved searches', saved_searches_path
       .tab-content
         .account
           = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|

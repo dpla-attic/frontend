@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123091035) do
+ActiveRecord::Schema.define(:version => 20130314095735) do
+
+  create_table "saved_searches", :force => true do |t|
+    t.string   "term"
+    t.string   "filters"
+    t.integer  "count"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "searches", :force => true do |t|
     t.text "params"
