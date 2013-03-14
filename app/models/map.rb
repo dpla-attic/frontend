@@ -61,7 +61,7 @@ class Map
     fields = [
       'id', 'aggregatedCHO.spatial.coordinates', 'aggregatedCHO.type',
       'aggregatedCHO.title', 'aggregatedCHO.creator', 'object.@id', 'isShownAt.@id' ]
-    conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields, page_size: 100))
+    conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields, page_size: 500))
     api_url = Settings.api.url.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
     "#{api_url}/items?#{conditions}"
   end

@@ -11,21 +11,24 @@ $(document).ready ->
   window.wrapper = wrapper
 
 MapWrapper = L.Class.extend
-  _layers: {}
-  _drawedItems: {}
+  _layers:       {}
+  _drawedItems:  {}
   _requestsPool: []
+  _openPopups:   []
 
   initialize: (domId)->
     this.map = L.map 'map'
       center: new L.LatLng(38, -93)
       zoom: 4
       layers: this.getBaseLayer()
-    self = this
+    t = this
     this.map.on
       dragend: ->
-        self.onDragend()
+        t.onDragend()
+      zoomstart: ->
+        t.onZoomstart()
       zoomend: ->
-        self.onZoomend()
+        t.onZoomend()
     this.loadMarkers()
 
   getBaseLayer: ->
@@ -37,16 +40,19 @@ MapWrapper = L.Class.extend
 
   getStateLayer: ->
     unless this._layers.state
-      statesPoints = []
+      statesMarkers = []
       if window.states instanceof Array
         $.each window.states, (i,state)->
-          point = new L.marker [state.lat, state.lng],
+          marker = new L.marker [state.lat, state.lng],
             icon: new L.DivIcon
               html: '<div class="mapCluster"><span class="resultnumber">' + state.count + '</span></div>'
               className: 'dot more-results'
               iconSize: new L.Point 20, 20
-          point.data = state
-          statesPoints.push point
+          marker.data = state
+          marker.on 'click', (e)->
+            console.log 'state marker'
+            console.log e
+          statesMarkers.push marker
       markerCluster = new L.MarkerClusterGroup
         iconCreateFunction: (cluster) ->
           totalCount = 0
@@ -56,9 +62,9 @@ MapWrapper = L.Class.extend
         spiderfyOnMaxZoom: false
         showCoverageOnHover: false
         zoomToBoundsOnClick: false
-      markerCluster.addLayers statesPoints
+      markerCluster.addLayers statesMarkers
       markerCluster.on 'clusterclick', (cluster)->
-        console.log cluster
+        console.log 'state cluster click'
       this._layers.state = markerCluster
     this._layers.state
 
@@ -75,12 +81,15 @@ MapWrapper = L.Class.extend
       markerCluster.on 'clusterclick', (cluster)->
         points = cluster.layer.getAllChildMarkers()
         points = t.generatePopup(points.slice(0,5)).setLatLng(cluster.layer.getLatLng())
-        points.openOn t.map
+        t._openPopups.push points.openOn(t.map)
       this._layers.points = markerCluster
     this._layers.points
 
   onDragend: ->
     this.loadMarkers()
+
+  onZoomstart: ->
+    this.closeAllOpenPopups()
 
   onZoomend: ->
     this.loadMarkers()
@@ -105,12 +114,12 @@ MapWrapper = L.Class.extend
       dataType: 'jsonp'
       cache: true
       beforeSend: ->
-        t.turnWaitCursor true
+        t.turnProgressCursor true
       success: (data)->
         if $.isPlainObject(data) and $.isArray(data.docs)
           t.drawPoints data.docs
       complete: ->
-        t.turnWaitCursor false
+        t.turnProgressCursor false
 
   drawPoints: (docs)->
     t = this
@@ -134,14 +143,14 @@ MapWrapper = L.Class.extend
         marker = new L.marker([point.lat, point.lng], {icon: myIcon})
         marker.data = point
         marker.on 'click', (e)->
-          popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
-          popup.openOn t.map
+          popup = t.generatePopup(e.target, 'This is test title').setLatLng(e.target.getLatLng())
+          t._openPopups.push popup.openOn(t.map)
         toDraw.push marker
 
     t.getPointsLayer().addLayers toDraw
 
-  turnWaitCursor: (turn)->
-    cursor = if turn then 'wait' else ''
+  turnProgressCursor: (turn)->
+    cursor = if turn then 'progress' else ''
     $(this.map.getContainer()).css(cursor: cursor)
 
   loadMarkers: ->
@@ -156,7 +165,11 @@ MapWrapper = L.Class.extend
         this.map.removeLayer stateLayer
         this.map.addLayer    pointsLayer
 
-  generatePopup: (points) ->
+  closeAllOpenPopups: ->
+    $.each this._openPopups, (i,popup)->
+      popup._close()
+
+  generatePopup: (points, title = null) ->
     points = [points] unless points instanceof Array
 
     html = ''
@@ -181,6 +194,7 @@ MapWrapper = L.Class.extend
         html += "<div class=\"box-row\">#{ content }</div>"
 
     html = '<div class="box-rows">' + html + '</div>' if points.length > 1
+    html = "<h5>#{ title }</h5>" + html if title
     popup = new L.DPLAPopup offset: new L.Point(-10,-30)
     popup.setContent html
 
@@ -188,6 +202,7 @@ MapWrapper = L.Class.extend
 L.DPLAPopup = L.Popup.extend
   _initLayout: ->
     this._container = mapBox = L.DomUtil.create 'div', 'mapBox'
+    L.DomEvent.disableClickPropagation mapBox
     closeButton = L.DomUtil.create 'a', 'closePopUp', mapBox
     closeButton.href = '#close'
     closeButton.innerHTML = '&#215;'
