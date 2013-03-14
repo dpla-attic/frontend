@@ -17,7 +17,7 @@ MapWrapper = L.Class.extend
   _openPopups:   []
 
   initialize: (domId)->
-    this.map = L.map 'map'
+    this.map = L.map 'map',
       center: new L.LatLng(38, -93)
       zoom: 4
       layers: this.getBaseLayer()
@@ -263,24 +263,24 @@ DPLAPopup = L.Popup.extend
     closeButton.innerHTML = '&#215;'
     L.DomEvent.on closeButton, 'click', this._onCloseButtonClick, this
     this._contentNode = L.DomUtil.create 'div', 'boxInner', mapBox
-    L.DomEvent.on(this._contentNode, 'mousewheel', L.DomEvent.stopPropagation);
-    this._tip = L.DomUtil.create('div', 'mapArrow', mapBox);
+    L.DomEvent.on(this._contentNode, 'mousewheel', L.DomEvent.stopPropagation)
+    this._tip = L.DomUtil.create('div', 'mapArrow', mapBox)
   _updateLayout: ->
     container = this._contentNode
-    this._containerWidth = container.offsetWidth;
-    container.style.height =  container.offsetHeight + 'px';
-    this._container.style.bottom = 50 + 'px';
-    this._container.style.left = 50 + 'px';
+    this._containerWidth = container.offsetWidth
+    container.style.height =  container.offsetHeight + 'px'
+    this._container.style.bottom = 50 + 'px'
+    this._container.style.left = 50 + 'px'
   _updatePosition: ->
     pos = this._map.latLngToLayerPoint(this._latlng)
     animated = this._animated
     offset = this.options.offset
     if (animated)
-      L.DomUtil.setPosition(this._container, pos);
-    this._containerBottom = -offset.y - (animated ? 0 : pos.y);
-    this._containerLeft = -Math.round(this._containerWidth / 2) + offset.x + (animated ? 0 : pos.x);
+      L.DomUtil.setPosition(this._container, pos)
+    this._containerBottom = -offset.y - (animated ? 0 : pos.y)
+    this._containerLeft = -Math.round(this._containerWidth / 2) + offset.x + (animated ? 0 : pos.x)
     adjust =
       x: 20
       y: 10
-    this._container.style.bottom = (this._containerBottom + adjust.y) + 'px';
-    this._container.style.left = (this._containerLeft + adjust.x) + 'px';
+    this._container.style.bottom = (this._containerBottom + adjust.y) + 'px'
+    this._container.style.left = (this._containerLeft + adjust.x) + 'px'
