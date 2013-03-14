@@ -24,3 +24,7 @@
         %li
           = refine
           = link_to '×', refine_path(:language, refine, remove: true)
+      - location_refines.each do |refine|
+        %li
+          = refine
+          = link_to '×', refine_path(:location, refine, remove: true)

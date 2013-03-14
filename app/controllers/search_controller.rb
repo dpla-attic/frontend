@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   def list
     @search = Search.new *permitted_params.search
     @items = @search.result permitted_params.args
-    session[:last_query] = request.url
+    @exhibitions = search_exhibitions permitted_params.term
   end
 
   private
@@ -11,4 +11,9 @@ class SearchController < ApplicationController
       @permitted_params ||= PermittedParams.new(params)
     end
 
+    def search_exhibitions(q = nil)
+      if q.present?
+        exhibits = Exhibition.find_by_term q
+      end
+    end
 end

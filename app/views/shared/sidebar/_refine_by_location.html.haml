@@ -1,38 +1,38 @@
-- if subject_refines.present? or subject_facets.present?
-  .module.yellow.subject
-    %h6.open By Subject
+- if location_refines.present? or location_facets.present?
+  .module.yellow
+    %h6.open By Location
     .slidingDiv
-      - if subject_refines.present?
-        - subject_refines.each do |refine|
+      - if location_refines.present?
+        - location_refines.each do |refine|
           .refineResult
             %span= refine
-            = link_to '×', refine_path(:subject, refine, remove: true)
-      - if subject_facets.present?
+            = link_to '×', refine_path(:location, refine, remove: true)
+      - if location_facets.present?
         .locations
           %ul
-            - subject_facets.slice(0,5).each do |facet|
+            - location_facets.slice(0,5).each do |facet|
               - name, count = facet.shift, facet.shift
               - if name.present?
                 %li
-                  = link_to name, refine_path(:subject, name)
+                  = link_to name, refine_path(:location, name)
                   %span= count
-    - if subject_facets.present? and subject_facets.count > 5
-      .more= link_to 'More »', '#more_subjects', class: 'inline cboxElement'
+    - if location_facets.present? and location_facets.count > 5
+      .more= link_to 'More »', '#more_locations', class: 'inline cboxElement'
       - content_for :colorbox do
-        #more_subjects.inline_content{:style => "padding:10px; background:#fff;"}
+        #more_locations.inline_content{:style => "padding:10px; background:#fff;"}
           #cboxClose.pclose &times;
-          %h1 Subjects
+          %h1 Locations
           .popBar
             .pagination
               .t-data-grid-pager
-                - if subject_facets.count > 30
-                  - pages = (subject_facets.count.to_f / 30).ceil
+                - if location_facets.count > 30
+                  - pages = (location_facets.count.to_f / 30).ceil
                   - (1..pages).to_a.each do |page|
                     - if page == 1
                       %span.current{data: {page: page}}= page
                     - else
                       %a{href: '#', data: {page: page}}= page
-          = subject_facets.each_slice(30).with_index do |section, page|
+          = location_facets.each_slice(30).with_index do |section, page|
             - page = page + 1
             - hidden_style = page != 1 ? 'display:none' : ''
             .pop-columns{data: {page: page}, style: "#{hidden_style}"}
@@ -43,5 +43,5 @@
                       - name, count = facet.shift, facet.shift
                       - if name.present?
                         %li
-                          = link_to name, refine_path(:subject, name)
+                          = link_to name, refine_path(:location, name)
                           %span= count

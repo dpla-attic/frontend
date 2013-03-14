@@ -1,12 +1,24 @@
 / Search results block
-.searchResults
-  %h4
-    Your search
-    - if query.present?
-      for
+- if @search.count > 0
+  .searchResults
+    %h4
+      Your search
+      - if query.present?
+        for
+        %span= query
+      returned 
+      = number_with_delimiter search.count, delimiter: ','
+      results.
+    = render 'shared/results/refined_by', search: search
+- else
+  .searchResults.no-results{role: "main"}
+    %h4
+      Your search for
       %span= query
-    returned 
-    = number_with_delimiter search.count, delimiter: ','
-    results.
-    
-  = render 'shared/results/refined_by', search: search
+      returned no results.
+    %p Suggestions:
+    %ul
+      %li Make sure all words are spelled correctly.
+      %li Try different keywords.
+      %li Try more general keywords.
+    = render 'shared/results/refined_by', search: search

@@ -1,6 +1,6 @@
 jQuery ->
-  $('#more_subjects .pagination').on 'click', 'a', ->
-    parent = $(this).parents '#more_subjects'
+  $('#more_subjects, #more_locations, #more_types, more_languages').on 'click', '.pagination a', ->
+    parent = $(this).parents '.inline_content'
     current = parent.find '.current'
     unless current[0] == $(this)[0]
       current_page = current.data 'page'

@@ -10,7 +10,38 @@
       - if language_facets.present?
         .locations
           %ul
-            - language_facets.each do |name, count|
-              %li
-                = link_to name, refine_path(:language, name)
-                %span= count
+            - language_facets.slice(0,5).each do |facet|
+              - name, count = facet.shift, facet.shift
+              - if name.present?
+                %li
+                  = link_to name, refine_path(:language, name)
+                  %span= count
+    - if language_facets.present? and language_facets.count > 5
+      .more= link_to 'More »', '#more_languages', class: 'inline cboxElement'
+      - content_for :colorbox do
+        #more_languages.inline_content{:style => "padding:10px; background:#fff;"}
+          #cboxClose.pclose &times;
+          %h1 Languages
+          .popBar
+            .pagination
+              .t-data-grid-pager
+                - if language_facets.count > 30
+                  - pages = (language_facets.count.to_f / 30).ceil
+                  - (1..pages).to_a.each do |page|
+                    - if page == 1
+                      %span.current{data: {page: page}}= page
+                    - else
+                      %a{href: '#', data: {page: page}}= page
+          = language_facets.each_slice(30).with_index do |section, page|
+            - page = page + 1
+            - hidden_style = page != 1 ? 'display:none' : ''
+            .pop-columns{data: {page: page}, style: "#{hidden_style}"}
+              - section.in_groups(3).each do |column|
+                %section
+                  %ul
+                    - column.reject(&:nil?).each do |facet|
+                      - name, count = facet.shift, facet.shift
+                      - if name.present?
+                        %li
+                          = link_to name, refine_path(:language, name)
+                          %span= count

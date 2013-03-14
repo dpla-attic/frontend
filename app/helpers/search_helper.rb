@@ -14,4 +14,9 @@ module SearchHelper
       end
     end.html_safe
   end
+
+  def link_to_exhibition(exhibition)
+    href = [Settings.exhibitions.site, 'exhibits', 'show', exhibition.slug].join('/')
+    link_to exhibition.title, href
+  end
 end

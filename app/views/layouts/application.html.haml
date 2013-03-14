@@ -14,11 +14,12 @@
     = stylesheet_link_tag    "application", media: "all"
     = csrf_meta_tags
     <!--[if lte IE 7]><script src="js/lte-ie7.js"></script><![endif]-->
+    = analytics_init if Rails.env.production?
   %body{class: "#{params[:controller]}-controller"}
     .container
       %header
         = link_to root_path, class: :logo do
-          = image_tag "logo.jpg", :alt => "DPLA: Digital Public Library of America"
+          = image_tag "logo.png", :alt => "DPLA: Digital Public Library of America"
         %a.menu-btn{:href => ""}
           %span.icon-arrow-thin-down{"aria-hidden" => "true"}
         %nav.topNav= render partial: 'shared/top_navigation'
