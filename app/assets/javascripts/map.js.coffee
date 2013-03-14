@@ -78,6 +78,7 @@ MapWrapper = L.Class.extend
     unless this._layers.state
       statesMarkers = []
       if window.states instanceof Array
+        t = this
         $.each window.states, (i,state)->
           marker = new L.marker [state.lat, state.lng],
             icon: new L.DivIcon
@@ -86,8 +87,8 @@ MapWrapper = L.Class.extend
               iconSize: new L.Point 20, 20
           marker.data = state
           marker.on 'click', (e)->
-            console.log 'state marker'
-            console.log e
+            state = e.target.data
+            t.openStatePopup state, e.target.getLatLng()
           statesMarkers.push marker
       markerCluster = new L.MarkerClusterGroup
         iconCreateFunction: (cluster) ->
@@ -100,10 +101,36 @@ MapWrapper = L.Class.extend
         zoomToBoundsOnClick: false
       markerCluster.addLayers statesMarkers
       markerCluster.on 'clusterclick', (cluster)->
-        console.log 'state cluster click'
-        console.log e
+        relevantChilds = cluster.layer.getAllChildMarkers().sort (a,b)->
+          b.data.count - a.data.count
+        t.openStatePopup relevantChilds.shift().data, cluster.layer.getLatLng()
+
+
       this._layers.state = markerCluster
     this._layers.state
+
+  openStatePopup: (state, latlng)->
+    while this._requestsPool.length > 0
+      this._requestsPool.shift().abort()
+
+    t = this
+    this._requestsPool.push $.ajax
+      url: window.api_path
+      data:
+        'aggregatedCHO.spatial.state': state.name
+        'page_size': 5
+      dataType: 'jsonp'
+      cache: true
+      beforeSend: ->
+        t.turnProgressCursor true
+      success: (data)->
+        if $.isPlainObject(data) and $.isArray(data.docs)
+          points = $.map data.docs, (doc)->
+            t.doc2point doc
+          popup = t.generatePopup(points, state.name).setLatLng(latlng)
+          t._openPopups.push popup.openOn t.map
+      complete: ->
+        t.turnProgressCursor false
 
   getRegularLayer: ->
     t = this
@@ -117,8 +144,9 @@ MapWrapper = L.Class.extend
         zoomToBoundsOnClick: false
       markerCluster.on 'clusterclick', (cluster)->
         points = cluster.layer.getAllChildMarkers()
-        points = t.generatePopup(points.slice(0,5), 'This is test title').setLatLng(cluster.layer.getLatLng())
-        t._openPopups.push points.openOn(t.map)
+        popupTitle = t.getClusterLocation(points)
+        popup = t.generatePopup(points.slice(0,5), popupTitle).setLatLng(cluster.layer.getLatLng())
+        t._openPopups.push popup.openOn(t.map)
       this._layers.points = markerCluster
     this._layers.points
 
@@ -132,6 +160,7 @@ MapWrapper = L.Class.extend
       data:
         'aggregatedCHO.spatial.coordinates': "#{position.lat},#{position.lng}"
         'aggregatedCHO.spatial.distance': "#{position.radius}km"
+        'page_size': 500
       dataType: 'jsonp'
       cache: true
       beforeSend: ->
@@ -148,34 +177,59 @@ MapWrapper = L.Class.extend
     $.each docs, (i, doc)->
       unless t._drawedItems[doc.id]
         t._drawedItems[doc.id] = true
-        try
-          coordinates = doc['aggregatedCHO.spatial.coordinates'][0].split ','
-          point =
-            id: doc.id
-            title: doc['aggregatedCHO.title']
-            thumbnail: doc['object.@id']
-            type: doc['aggregatedCHO.type'] || ''
-            creator: doc['aggregatedCHO.creator'] || ''
-            url: doc['isShownAt.@id']
-            lat: coordinates.shift()
-            lng: coordinates.shift()
-        catch error
-        myIcon = L.divIcon({className: 'dot'})
-        marker = new L.marker([point.lat, point.lng], {icon: myIcon})
-        marker.data = point
-        marker.on 'click', (e)->
-          popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
-          t._openPopups.push popup.openOn(t.map)
-        toDraw.push marker
+        point = t.doc2point doc
+        if point
+          myIcon = L.divIcon({className: 'dot'})
+          marker = new L.marker([point.lat, point.lng], {icon: myIcon})
+          marker.data = point
+          marker.on 'click', (e)->
+            popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
+            t._openPopups.push popup.openOn(t.map)
+          toDraw.push marker
 
     t.getRegularLayer().addLayers toDraw
+
+  getClusterLocation: (points)->
+    locations = {}
+    $.each points, (i, point)->
+      $.each point.data.location, (i,loc)->
+        if locations[loc]
+          locations[loc]++
+        else
+          locations[loc] = 1
+    locationName = ''
+    locationScore = 0
+    $.each locations, (name, score)->
+      if locationScore < score
+        locationName = name
+        locationScore = score
+    locationName
+
+  doc2point: (doc)->
+    coordinates = try
+      doc['aggregatedCHO.spatial.coordinates'][0].split ','
+    catch error
+      []
+    location = doc['aggregatedCHO.spatial.name']
+    location = [location] unless location instanceof Array
+    point =
+      id: doc.id
+      title: doc['aggregatedCHO.title']
+      thumbnail: doc['object.@id']
+      type: doc['aggregatedCHO.type'] || ''
+      creator: doc['aggregatedCHO.creator'] || ''
+      location: location
+      url: doc['isShownAt.@id']
+      lat: coordinates.shift()
+      lng: coordinates.shift()
+
 
   generatePopup: (points, title) ->
     points = [points] unless points instanceof Array
 
     html = ''
     $.each points, (i,point) ->
-      point = point.data
+      point = if $.isPlainObject(point) then point else point.data
       content =
         """
           <h6> #{ point.type }</h6>
