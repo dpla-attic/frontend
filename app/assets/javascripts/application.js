@@ -30,4 +30,4 @@
 //= require timeline.js.coffee
 //= require spikes.js.coffee
 //= require common.js.coffee
-//= require map2.js.coffee
+//= require map.js.coffee
