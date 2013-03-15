@@ -26,7 +26,5 @@ class SavedSearch < ActiveRecord::Base
         end
       end
     end
-    Rails.logger.debug a.inspect
-    a
   end
 end
