@@ -1,6 +1,6 @@
 class SearchController < ApplicationController
-  def list
-    @search = Search.new *permitted_params.search
+  def show
+    @search = List.new *permitted_params.search
     @items = @search.result permitted_params.args
     @exhibitions = search_exhibitions permitted_params.term
   end

@@ -16,7 +16,8 @@ DplaPortal::Application.routes.draw do
   end
 
   get '/item/:id',       to: 'items#show', as: 'item'
-  get '/search',         to: 'search#list', as: 'search_items'
+
+  resource :search, only: :show, controller: 'search'
 
   resource :timeline, only: :show, controller: 'timeline' do
     post 'items_by_year'
