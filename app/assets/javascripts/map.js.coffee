@@ -1,10 +1,11 @@
 $(document).ready ->
-  wrapper = new MapWrapper('map')
-  map = wrapper.map
-  $('#toggle').on 'click', ->
-    setTimeout ->
-      map.invalidateSize()
-    , 500
+  if $('.map-controller').length
+    wrapper = new MapWrapper('map')
+    map = wrapper.map
+    $('#toggle').on 'click', ->
+      setTimeout ->
+        map.invalidateSize()
+      , 500
 
   # map variable for debugging purposes
   window.map     = map
