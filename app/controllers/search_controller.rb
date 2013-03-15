@@ -1,4 +1,6 @@
 class SearchController < ApplicationController
+  helper_method :permitted_params
+
   def show
     @search = List.new *permitted_params.search
     @items = @search.result permitted_params.args

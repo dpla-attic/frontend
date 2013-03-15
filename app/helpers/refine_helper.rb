@@ -11,7 +11,7 @@ module RefineHelper
   end
 
   def subject_refines
-    @search.filters :subject
+    Array @search.filters :subject
   end
 
   def type_facets
@@ -19,7 +19,7 @@ module RefineHelper
   end
 
   def type_refines
-    @search.filters :type
+    Array @search.filters :type
   end
 
   def language_facets
@@ -27,7 +27,7 @@ module RefineHelper
   end
 
   def language_refines
-    @search.filters :language
+    Array @search.filters :language
   end
 
   def after_refine
@@ -43,6 +43,6 @@ module RefineHelper
   end
 
   def location_refines
-    @search.filters :location
+    Array @search.filters :location
   end
 end
