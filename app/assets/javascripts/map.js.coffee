@@ -56,9 +56,9 @@ MapWrapper = L.Class.extend
   roundMapClusterCount: (count)->
     switch
       when count > 999
-        "#{ Math.floor(count / 1000) }K"
+        "#{ Math.round(count / 1000) }K"
       when count > 999999
-        "#{ Math.floor(count / 1000 / 1000) }M"
+        "#{ Math.round(count / 1000 / 1000) }M"
       else
         count
 
