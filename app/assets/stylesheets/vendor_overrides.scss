@@ -65,3 +65,14 @@ form {
 .FeatureContent .table {
   padding-left: 0;
 }
+
+.flash {
+  margin-bottom: 10px;
+  padding: 5px 0;
+  &.alert, &.error {
+    color: red;
+  }
+  &.notice, &.success {
+    color: green;
+  }
+}
