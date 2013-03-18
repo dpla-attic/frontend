@@ -180,12 +180,15 @@ MapWrapper = L.Class.extend
         t._drawedItems[doc.id] = true
         point = t.doc2point doc
         if point
-          myIcon = L.divIcon({className: 'dot'})
+          myIcon = L.divIcon
+            className: 'dot'
+            iconSize: new L.Point 0, 0
           marker = new L.marker([point.lat, point.lng], {icon: myIcon})
           marker.data = point
           marker.on 'click', (e)->
             popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
             t._openPopups.push popup.openOn(t.map)
+            popup.adjust 0, 10
           toDraw.push marker
 
     t.getRegularLayer().addLayers toDraw
@@ -256,6 +259,9 @@ MapWrapper = L.Class.extend
 
 
 DPLAPopup = L.Popup.extend
+  adjust: (x,y)->
+    pos = L.DomUtil.getPosition this._container
+    L.DomUtil.setPosition this._container, pos.add(new L.Point x,y)
   _initLayout: ->
     this._container = mapBox = L.DomUtil.create 'div', 'mapBox'
     L.DomEvent.disableClickPropagation mapBox
