@@ -53,8 +53,13 @@ form {
     }
   }
 }
-.dot .mapCluster {
-  text-align: center;
+.dot {
+  .mapCluster {
+    text-align: center;
+    left: -5px;
+    position: relative;
+    width: 30px;
+  }
 }
 
 .FeatureContent .table {

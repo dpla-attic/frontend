@@ -53,6 +53,15 @@ MapWrapper = L.Class.extend
         this.map.removeLayer stateLayer
         this.map.addLayer    pointsLayer
 
+  roundMapClusterCount: (count)->
+    switch
+      when count > 999
+        "#{ Math.floor(count / 1000) }K"
+      when count > 999999
+        "#{ Math.floor(count / 1000 / 1000) }M"
+      else
+        count
+
   getMapPosition: ->
     center    = this.map.getCenter()
     northEast = this.map.getBounds().getNorthEast()
@@ -81,9 +90,10 @@ MapWrapper = L.Class.extend
       if window.states instanceof Array
         t = this
         $.each window.states, (i,state)->
+          roundedTotalCount = t.roundMapClusterCount state.count
           marker = new L.marker [state.lat, state.lng],
             icon: new L.DivIcon
-              html: '<div class="mapCluster"><span class="resultnumber">' + state.count + '</span></div>'
+              html: '<div class="mapCluster"><span class="resultnumber">' + roundedTotalCount + '</span></div>'
               className: 'dot more-results'
               iconSize: new L.Point 20, 20
           marker.data = state
@@ -96,7 +106,8 @@ MapWrapper = L.Class.extend
           totalCount = 0
           $.each cluster.getAllChildMarkers(), (i,point)->
             totalCount += point.data.count if point.data.count
-          new L.DivIcon({html: '<div class="mapCluster"><span class="resultnumber">' + totalCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)})
+          roundedTotalCount = t.roundMapClusterCount totalCount
+          new L.DivIcon({html: '<div class="mapCluster"><span class="resultnumber">' + roundedTotalCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)})
         spiderfyOnMaxZoom: false
         showCoverageOnHover: false
         zoomToBoundsOnClick: false
@@ -139,7 +150,8 @@ MapWrapper = L.Class.extend
       markerCluster = new L.MarkerClusterGroup
         iconCreateFunction: (cluster) ->
           totalCount = cluster.getChildCount()
-          new L.DivIcon({html: '<div class="mapCluster"><span class="resultnumber">' + totalCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)})
+          roundedTotalCount = t.roundMapClusterCount totalCount
+          new L.DivIcon({html: '<div class="mapCluster"><span class="resultnumber">' + roundedTotalCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)})
         spiderfyOnMaxZoom: false
         showCoverageOnHover: false
         zoomToBoundsOnClick: false
