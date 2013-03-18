@@ -1,0 +1,12 @@
+%ul
+  %li
+    = check_box_tag "ids[]", saved_search.id
+    = link_to saved_search.term, search_path(saved_search.to_params)
+  %li.row-2
+    - for key, refines in saved_search.filters
+      - Array(refines).each do |refine|
+        %span= refine
+  %li.row-3= saved_search.count
+  %li.row-4 
+    = link_to saved_search, method: :delete do
+      &times;

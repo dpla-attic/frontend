@@ -1,4 +1,6 @@
 class MapController < ApplicationController
+  helper_method :permitted_params
+
   def show
     @search = Map.new permitted_params.term, permitted_params.filters
     @api_path = @search.api_path

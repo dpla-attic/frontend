@@ -38,8 +38,6 @@ class PermittedParams < Struct.new(:params)
       month = date[:month].present? ? date[:month] : (options[:start] ? '12' : '1')
       day   = date[:day].present?   ? date[:day]   : (options[:start] ? '31' : '1')
       Date.new *[date[:year], month, day].map(&:to_i) rescue nil
-    elsif date.is_a?(String) and date.present?
-      Date.new *date.split('-').map(&:to_i) rescue nil
     end
   end
 

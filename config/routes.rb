@@ -16,7 +16,8 @@ DplaPortal::Application.routes.draw do
   end
 
   get '/item/:id',       to: 'items#show', as: 'item'
-  get '/search',         to: 'search#list', as: 'search_items'
+
+  resource :search, only: :show, controller: 'search'
 
   resource :timeline, only: :show, controller: 'timeline' do
     post 'items_by_year'
@@ -25,6 +26,12 @@ DplaPortal::Application.routes.draw do
   resource :map, only: :show, controller: 'map' do
     get 'state'
     get 'items_by_spatial'
+  end
+
+  scope '/profile' do
+    resources :saved_searches, only: [:index, :create, :destroy] do
+      post 'destroy_bulk', on: :collection
+    end
   end
 
   root to: 'pages#home'

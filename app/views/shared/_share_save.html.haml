@@ -1,6 +1,6 @@
 %ul.shareSave
   %li.btn
-    %a{:href => ""} Save
+    = link_to "Save", saved_searches_path(params.except(:controller, :action)), method: :post
   %li.btn
     %a{:href => ""} Share
     %ul

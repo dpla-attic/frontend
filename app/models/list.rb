@@ -1,6 +1,6 @@
 require_dependency 'dpla/items'
 
-class Search
+class List
   attr_reader :term, :filters, :args, :facets
 
   # - term is search query

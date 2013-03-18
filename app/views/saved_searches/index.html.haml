@@ -1,0 +1,31 @@
+.layout.fullWidth
+  = render 'shared/search_panel'
+  
+  %article#content{role: 'main'}
+    %h1 Your Profile
+    .profile
+      %ul.tabs
+        %li= link_to 'Your account', edit_user_registration_path
+        %li= link_to 'Saved Items & Lists', "#"
+        %li.active= link_to 'Saved searches', saved_searches_path
+      .tab-content
+        .savedItems
+          = form_tag destroy_bulk_saved_searches_path do
+            .resultsBar#resultsBarTop
+              %a.btn{href: ""} Delete
+              .pagination= paginate @saved_searches
+            .saved-rows
+              %ul
+                %li
+                  %input{type: "checkbox"}
+                  %a.sort.active.descending{href: ""} 
+                    Search Term
+                    %span.icon-arrow-down{"aria-hidden" => "true"}
+                %li.row-2 Filters
+                %li.row-3 
+                  %a.sort{href: "#"} Results
+                %li.row-4 Delete
+              = render partial: 'saved_search', collection: @saved_searches
+            .resultsBar#resultsBarBottom
+              %a.btn{href: ""} Delete
+              .pagination= paginate @saved_searches
