@@ -84,3 +84,11 @@ form {
 .searchRight {
   width: auto;
 }
+
+#colorbox {
+  .inline_content {
+    padding: 20px 24px;
+    overflow: hidden;
+    background: none repeat scroll 0 0 #FFFFFF;
+  }
+}

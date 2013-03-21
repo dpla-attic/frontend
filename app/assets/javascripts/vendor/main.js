@@ -22,7 +22,7 @@ $(window).load(function() {
 	    animation: "slide",
 	    pauseOnHover: true,
       prevText: '<span class="icon-arrow-left" aria-hidden="true"></span>',
-      nextText: '<span class="icon-arrow-right" aria-hidden="true"></span>' 
+      nextText: '<span class="icon-arrow-right" aria-hidden="true"></span>'
 	});
 
 	$('.moreInfo').mouseover(function () {
@@ -37,19 +37,19 @@ $(window).load(function() {
 		$('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '430px'});
 		return false;
 	});
-	
+
 	$('#cboxOverlay, #cboxClose').click(function() {
 		$('.forgotSlide').slideUp();
 		$('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '320px'});
 		return false;
 	});
-	
+
   $('.moreInfo').toggle(function() {
       $(this).addClass('hover');
       $('.flex-direction-nav a').addClass('hover');
       $('.flex-active-slide .slideOverlay').addClass('on');
       $('.flex-active-slide .slideText').addClass('on');
-    }, 
+    },
     function() {
       $(this).removeClass('hover');
       $('.flex-direction-nav a').removeClass('hover');
@@ -81,13 +81,13 @@ $(window).load(function() {
     $('.breadCrumbs li').removeClass('current');
     $(this).clone().appendTo('.breadCrumbs ul').wrap('<li class="current"></li>');
   });
-  
+
   $('.head').toggle(function() {
       $(this).next().slideDown();
       $(this).addClass('close');
       $(this).children('span').addClass('icon-arrow-up');
       $(this).children('span').removeClass('icon-arrow-down');
-    }, 
+    },
     function() {
       $(this).next().slideUp();
       $(this).removeClass('close');
@@ -101,7 +101,7 @@ $(window).load(function() {
   var fieldHit = true;
   var boxTimeout;
   var fieldTimeout;
-  
+
   $('.search-btn').click(function() {
     $('.searchViews, .search-btn').addClass('off');
 	$('.searchRowRight form input[type="submit"]').hide();
@@ -111,7 +111,7 @@ $(window).load(function() {
 	$('.searchRowRight form input[type="text"]').focus();
     return false;
   });
-  
+
   $('.searchRowRight form input[type="checkbox"]').click(function() {
 	boxHit = true;
 	fieldHit = false;
@@ -119,26 +119,26 @@ $(window).load(function() {
 	clearTimeout(boxTimeout);
 	clearTimeout(fieldTimeout);
   });
-  
+
   $('.searchRowRight form input[type="text"]').focus(function() {
 	fieldHit = true;
 	boxHit = false;
 	clearTimeout(boxTimeout);
 	clearTimeout(fieldTimeout);
   });
-  
+
   $('.searchRowRight form input[type="checkbox"]').blur(function() {
 	boxTimeout = setTimeout(function(){
 	  if (fieldHit == false) { searchHide(); }
 	}, 500);
   });
-															 
+
   $('.searchRowRight form input[type="text"]').blur(function() {
 	fieldTimeout = setTimeout(function(){
 	  if (boxHit == false) { searchHide(); }
 	}, 500);
   });
-  
+
   function searchHide() {
   	$('.search-btn, .searchViews').removeClass('off');
 	$('.searchRowRight form').attr('style', '');
@@ -156,7 +156,7 @@ $(window).load(function() {
       $('.slidePopOut').removeClass('moveOut');
       $('.map article, .timeContainer').removeClass('widthS');
 
-    }, 
+    },
     function() {
 
       $('aside').addClass('moveIn');
@@ -195,7 +195,7 @@ $(window).load(function() {
     $('.mobile-hover').hide();
     $('.map iframe').animate({ height: '300px' }, 'slow');
   });
- 
+
   $('.open').toggle(
     function(){
       $(this).next('.slidingDiv').slideUp();
@@ -209,6 +209,7 @@ $(window).load(function() {
     }
   );
 
+/*
   $('.pop-columns li').toggle(
     function(){
       $(this).children('ul').slideDown();
@@ -217,8 +218,7 @@ $(window).load(function() {
       $(this).children('ul').slideUp();
     }
   );
-
-
+*/
 
   $('.menu-btn').toggle(
     function(){
@@ -249,7 +249,7 @@ $(window).load(function() {
   $(window).resize(function() {
     var resW = $(window).width();
     clearTimeout(tOut);
-    if ( (ww>limit && resW<limit) || (ww<limit && resW>limit) ) {        
+    if ( (ww>limit && resW<limit) || (ww<limit && resW>limit) ) {
         tOut = setTimeout(refresh);
     }
   });
@@ -275,7 +275,7 @@ $(window).load(function() {
   var endPoint;
   var windowWidth;
   var selectedYear;
-  
+
   // Set defaults
   function initTimeline() {
 	  windowWidth = window.innerWidth || document.documentElement.clientWidth;
@@ -297,8 +297,8 @@ $(window).load(function() {
 	  }
   }
   initTimeline();
-  
-  
+
+
 /////TIMELINE MODULE: SCRUBBER
   function initScrub() {
 	if ($('.decadesView').length) {
@@ -340,7 +340,7 @@ $(window).load(function() {
   initScrub();
 
   $('.scrubber a').append('<span class="arrow"></span><span class="icon-arrow-down" aria-hidden="true"></span>');
-  
+
 
 /////TIMELINE VIEWS
   $('.DecadesTab').click(function() {
@@ -354,7 +354,7 @@ $(window).load(function() {
   $('.yearTab').click(function() {
     return false;
   });
-  
+
  //  $('.graph li').click(function() {
  //    $('.timeContainer').removeClass('decadesView').addClass('yearsView');
  //    $('.Decades').hide();
@@ -396,14 +396,14 @@ $(window).load(function() {
 	  }
 	}
   });
-  
-  
+
+
 /////TIMELINE MODULE: YEARS
 
   // $('.timeline-row .next').click(function() {
   //   if($(this).parent().next().hasClass('timeline-row')) {
   //     $('.prev, .next').hide();
-  //     $('.timelineContainer').animate({ right: '+=100%' }, 500, function() { 
+  //     $('.timelineContainer').animate({ right: '+=100%' }, 500, function() {
   //       $('.prev, .next').show();
   //     });
   //   }
@@ -412,13 +412,13 @@ $(window).load(function() {
   // $('.timeline-row .prev').click(function() {
   //   if($(this).parent().prev().hasClass('timeline-row')) {
   //     $('.prev, .next').hide();
-  //     $('.timelineContainer').animate({ right: '-=100%' }, 500, function() { 
-  //       $('.prev, .next').show(); 
+  //     $('.timelineContainer').animate({ right: '-=100%' }, 500, function() {
+  //       $('.prev, .next').show();
   //     });
   //   }
   // });
-  
-  
+
+
 // Fix subpixel rounding on timeline for proper alignment of years and bars. Delete when full browser support exists.
   if ($('.timeline').length) {
 	var barsCount = 0;
@@ -467,7 +467,7 @@ $(window).load(function() {
     });
   }
 
-       
+
 });
 
 

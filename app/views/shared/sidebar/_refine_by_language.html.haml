@@ -19,7 +19,7 @@
     - if language_facets.present? and language_facets.count > 5
       .more= link_to 'More »', '#more_languages', class: 'inline cboxElement'
       - content_for :colorbox do
-        #more_languages.inline_content{:style => "padding:10px; background:#fff;"}
+        #more_languages.inline_content
           #cboxClose.pclose &times;
           %h1 Languages
           .popBar
