@@ -1,6 +1,6 @@
 .layout.fullWidth
   = render 'shared/search_panel'
-  
+
   %article#content{role: 'main'}
     %h1 Your Profile
     .profile
@@ -18,11 +18,11 @@
               %ul
                 %li
                   %input{type: "checkbox"}
-                  %a.sort.active.descending{href: ""} 
+                  %a.sort.active.descending{href: ""}
                     Search Term
                     %span.icon-arrow-down{"aria-hidden" => "true"}
                 %li.row-2 Filters
-                %li.row-3 
+                %li.row-3
                   %a.sort{href: "#"} Results
                 %li.row-4 Delete
               = render partial: 'saved_search', collection: @saved_searches
