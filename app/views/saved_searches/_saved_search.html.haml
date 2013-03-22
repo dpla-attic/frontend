@@ -6,7 +6,9 @@
     - for key, refines in saved_search.filters
       - Array(refines).each do |refine|
         %span= refine
-  %li.row-3= saved_search.count
-  %li.row-4 
+  %li.row-3
+    %input{:type=>"hidden", :value=>saved_search.api_url, :class=>"api_url"}
+    %div.count
+  %li.row-4
     = link_to saved_search, method: :delete do
       &times;
