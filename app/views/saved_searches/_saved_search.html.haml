@@ -1,7 +1,8 @@
 %ul
   %li
     = check_box_tag "ids[]", saved_search.id
-    = link_to saved_search.term, search_path(saved_search.to_params)
+    - term = saved_search.term.present? ? saved_search.term : '(empty query)'
+    = link_to term, search_path(saved_search.to_params)
   %li.row-2
     - for key, refines in saved_search.filters
       - Array(refines).each do |refine|
