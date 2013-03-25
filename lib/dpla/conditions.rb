@@ -30,9 +30,8 @@ module DPLA
           when 'subject'  then result['aggregatedCHO.subject.name']  = value
           when 'language' then result['aggregatedCHO.language.name'] = value
           when 'type'     then result['aggregatedCHO.type']          = value
-          when 'location'
-            next unless value.is_a?(Array)
-            result['aggregatedCHO.spatial.coordinates'] = value[0..1].join(",")
+          when 'place'
+            result['aggregatedCHO.spatial.name'] = value
           when 'distance'
             result['aggregatedCHO.spatial.distance'] = value.to_s + "km"
           when 'before'   then result['aggregatedCHO.date.before']   = value
@@ -50,9 +49,9 @@ module DPLA
               when 'language' then result[key] << 'aggregatedCHO.language.name'
               when 'type'     then result[key] << 'aggregatedCHO.type'
               when 'date'     then result[key] << 'aggregatedCHO.date.begin.year'
-              when 'location' then result[key] << 'aggregatedCHO.spatial.name'
               when 'state'    then result[key] << 'aggregatedCHO.spatial.state'
               when 'city'     then result[key] << 'aggregatedCHO.spatial.city'
+              when 'place'    then result[key] << 'aggregatedCHO.spatial.name'
               end
             end
           else
