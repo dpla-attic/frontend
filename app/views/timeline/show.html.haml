@@ -29,7 +29,10 @@
 
         / Years
         .timelineContainer
-          - 5.times do 
+          - 5.times do
             = render 'empty_page'
 
     = render 'shared/sidebar'
+
+:javascript
+  window.api_search_path = '#{@api_search_path}';

@@ -15,17 +15,12 @@ DplaPortal::Application.routes.draw do
     root to: redirect('/about/overview')
   end
 
-  get '/item/:id',       to: 'items#show', as: 'item'
+  get '/item/:id', to: 'items#show', as: 'item'
 
-  resource :search, only: :show, controller: 'search'
-
-  resource :timeline, only: :show, controller: 'timeline' do
-    post 'items_by_year'
-  end
-
-  resource :map, only: :show, controller: 'map' do
-    get 'state'
-    get 'items_by_spatial'
+  scope only: :show do
+    resource :search,   controller: :search
+    resource :timeline, controller: :timeline
+    resource :map,      controller: :map
   end
 
   scope '/profile' do
@@ -34,6 +29,6 @@ DplaPortal::Application.routes.draw do
     end
   end
 
-  root to: 'pages#home'
   match '/welcome' => 'users#welcome'
+  root to: 'pages#home'
 end

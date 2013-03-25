@@ -58,15 +58,21 @@ class Search
     results.count
   end
 
-  def api_path
+  def api_base_path
+    api_path = Settings.api.url
+    if Settings.api.username && Settings.api.password
+      api_path = api_path.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
+    end
+  end
+
+  def api_search_path
     fields = %w(
       id aggregatedCHO.title aggregatedCHO.type aggregatedCHO.creator
       isShownAt.@id object.@id
       aggregatedCHO.spatial.name aggregatedCHO.spatial.coordinates
     )
     conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields))
-    api_url = Settings.api.url.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
-    "#{api_url}/items?#{conditions}"
+    "#{api_base_path}/items?#{conditions}"
   end
 
   def conditions

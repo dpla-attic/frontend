@@ -38,11 +38,11 @@ module RefineHelper
     @search.filters(:before)
   end
 
-  def location_facets
-    @search.locations.reject { |v| location_refines.include? v }.to_a
+  def place_facets
+    @search.places.reject { |v| place_refines.include? v }.to_a
   end
 
-  def location_refines
-    Array @search.filters :location
+  def place_refines
+    Array @search.filters :place
   end
 end

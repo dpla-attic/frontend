@@ -127,7 +127,7 @@ MapWrapper = L.Class.extend
 
     t = this
     this._requestsPool.push $.ajax
-      url: window.api_path
+      url: window.api_search_path
       data:
         'aggregatedCHO.spatial.state': state.name
         'page_size': 5
@@ -169,7 +169,7 @@ MapWrapper = L.Class.extend
 
     t = this
     this._requestsPool.push $.ajax
-      url: window.api_path
+      url: window.api_search_path
       data:
         'aggregatedCHO.spatial.coordinates': "#{position.lat},#{position.lng}"
         'aggregatedCHO.spatial.distance': "#{position.radius}km"

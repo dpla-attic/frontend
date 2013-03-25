@@ -8,8 +8,8 @@ notifications:
 # DPLA API URL and credentials
 api:
   url: http://integration1.qa.dp.la/v2
-  username: username
-  password: password
+  username:
+  password:
 exhibitions:
   # Omeka exhibition site address. Used for generating link
   site: http://localhost:8080

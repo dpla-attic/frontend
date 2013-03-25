@@ -1,47 +1,49 @@
-- if location_refines.present? or location_facets.present?
+- if place_refines.present? or place_facets.present?
   .module.yellow
     %h6.open By Location
     .slidingDiv
-      - if location_refines.present?
-        - location_refines.each do |refine|
+      - if place_refines.present?
+        - place_refines.each do |refine|
           .refineResult
             %span= refine
-            = link_to '×', refine_path(:location, refine, remove: true)
-      - if location_facets.present?
+            = link_to '×', refine_path(:place, refine, remove: true)
+      - if place_facets.present?
         .locations
           %ul
-            - location_facets.slice(0,5).each do |facet|
+            - place_facets.slice(0, 5 - place_refines.count).each do |facet|
               - name, count = facet.shift, facet.shift
               - if name.present?
                 %li
-                  = link_to name, refine_path(:location, name)
+                  = link_to name, refine_path(:place, name)
                   %span= count
-    - if location_facets.present? and location_facets.count > 5
-      .more= link_to 'More »', '#more_locations', class: 'inline cboxElement'
-      - content_for :colorbox do
-        #more_locations.inline_content
-          #cboxClose.pclose &times;
-          %h1 Locations
-          .popBar
-            .pagination
-              .t-data-grid-pager
-                - if location_facets.count > 30
-                  - pages = (location_facets.count.to_f / 30).ceil
-                  - (1..pages).to_a.each do |page|
-                    - if page == 1
-                      %span.current{data: {page: page}}= page
-                    - else
-                      %a{href: '#', data: {page: page}}= page
-          = location_facets.each_slice(30).with_index do |section, page|
-            - page = page + 1
-            - hidden_style = page != 1 ? 'display:none' : ''
-            .pop-columns{data: {page: page}, style: "#{hidden_style}"}
-              - section.in_groups(3).each do |column|
-                %section
-                  %ul
-                    - column.reject(&:nil?).each do |facet|
-                      - name, count = facet.shift, facet.shift
-                      - if name.present?
-                        %li
-                          = link_to name, refine_path(:location, name)
-                          %span= count
+    //- if location_facets.present? and location_facets.count > 5
+    //  .more= link_to 'More »', '#more_locations', class: 'inline cboxElement'
+
+// Popup
+//- content_for :colorbox do
+//  #more_locations.inline_content
+//    #cboxClose.pclose &times;
+//    %h1 Locations
+//    .popBar
+//      .pagination
+//        .t-data-grid-pager
+//          - if location_facets.count > 30
+//            - pages = (location_facets.count.to_f / 30).ceil
+//            - (1..pages).to_a.each do |page|
+//              - if page == 1
+//                %span.current{data: {page: page}}= page
+//              - else
+//                %a{href: '#', data: {page: page}}= page
+//    = location_facets.each_slice(30).with_index do |section, page|
+//      - page = page + 1
+//      - hidden_style = page != 1 ? 'display:none' : ''
+//      .pop-columns{data: {page: page}, style: "#{hidden_style}"}
+//        - section.in_groups(3).each do |column|
+//          %section
+//            %ul
+//              - column.reject(&:nil?).each do |facet|
+//                - name, count = facet.shift, facet.shift
+//                - if name.present?
+//                  %li
+//                    = link_to name, refine_path(:location, name)
+//                    %span= count

@@ -10,7 +10,7 @@
         %li
           After
           = after_refine.strftime('%b %-d, %Y')
-          = link_to '×', params.reject { |k,v| k.to_sym.eql? :after } 
+          = link_to '×', params.reject { |k,v| k.to_sym.eql? :after }
       - if before_refine.present?
         %li
           Before
@@ -24,7 +24,7 @@
         %li
           = refine
           = link_to '×', refine_path(:language, refine, remove: true)
-      - location_refines.each do |refine|
+      - place_refines.each do |refine|
         %li
           = refine
-          = link_to '×', refine_path(:location, refine, remove: true)
+          = link_to '×', refine_path(:place, refine, remove: true)
