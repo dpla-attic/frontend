@@ -1,8 +1,9 @@
-# Be sure to restart your server when you modify this file.
+session_store  = Settings.session.store.to_sym
 
-DplaPortal::Application.config.session_store :cookie_store, key: '_dpla_portal_session'
+if :dalli_store == session_store
+  require 'action_dispatch/middleware/session/dalli_store'
+end
 
-# Use the database for sessions instead of the cookie-based default,
-# which shouldn't be used to store highly confidential information
-# (create the session table with "rails generate session_migration")
-# DplaPortal::Application.config.session_store :active_record_store
+sesson_options = { key: Settings.session.key }
+sesson_options.merge! Settings.session[session_store].to_hash if Settings.session[session_store]
+DplaPortal::Application.config.session_store session_store, sesson_options

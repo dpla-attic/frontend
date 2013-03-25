@@ -17,6 +17,7 @@ gem 'breadcrumbs_on_rails'
 gem 'kaminari'
 gem 'navigasmic'
 
+gem 'dalli'
 gem 'httparty'
 gem 'elastictastic'
 gem 'devise'

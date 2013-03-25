@@ -56,6 +56,7 @@ GEM
       execjs
     coffee-script-source (1.6.1)
     daemons (1.1.9)
+    dalli (2.6.2)
     debug_inspector (0.0.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
@@ -212,6 +213,7 @@ DEPENDENCIES
   breadcrumbs_on_rails
   capistrano-deploy
   coffee-rails (~> 3.2.1)
+  dalli
   devise
   elastictastic
   google-analytics-rails

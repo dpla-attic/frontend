@@ -20,3 +20,12 @@ exhibitions:
 # Google Analytics account
 googleanalytics:
   tracker: UA-38671601-1
+# Sessions settings
+session:
+  # Store settings. cookie_store and dalli_store are available
+  store: dalli_store
+  key: _dpla_frontend
+  # Settings for memcache sessions
+  dalli_store:
+    memcache_server:
+      - localhost

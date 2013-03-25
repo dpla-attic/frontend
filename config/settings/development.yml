@@ -1,3 +1,5 @@
 url:
   host: localhost
   port: 3000
+session:
+  store: cookie_store
