@@ -9,4 +9,15 @@
         = render partial: 'aside'
         .rightSide
           .list-detail
-            %h2= @list.title
+            %h2{class: @list.private? ? 'private' : ''}
+              = @list.title
+              - if @list.private?
+                %span
+                  %span.icon-lock{'aria-hidden' => true}
+                  Private
+            - if @list.description.present?
+              %p= @list.description
+          - if @list.saved_items.present?
+            #resultsBarTop.resultsBar
+          - else
+            %p Empty list

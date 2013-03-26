@@ -10,3 +10,7 @@
         .rightSide
           .list-detail
             %h2 Unlisted Items
+          - if @items.present?
+            #resultsBarTop.resultsBar
+          - else
+            %p No unlisted items

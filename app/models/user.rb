@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :saved_searches
   has_many :saved_lists
+  has_many :saved_items
 
   validates :name, presence: true
 

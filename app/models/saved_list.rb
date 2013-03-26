@@ -4,5 +4,5 @@ class SavedList < ActiveRecord::Base
   has_many :saved_items, dependent: :destroy
   belongs_to :user
 
-  validates :title, :description, :user, presence: true
+  validates :title, :user, presence: true
 end

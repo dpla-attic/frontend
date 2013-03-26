@@ -4,9 +4,11 @@ class SavedListsController < ApplicationController
   before_filter :load_lists, only: [:show, :index, :unlisted]
 
   def index
+    @items = current_user.saved_items
   end
 
   def unlisted
+    @items
   end
 
   def show
