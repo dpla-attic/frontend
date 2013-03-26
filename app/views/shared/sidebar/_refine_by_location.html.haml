@@ -7,6 +7,11 @@
           .refineResult
             %span= refine
             = link_to '×', refine_path(:country, refine, remove: true)
+      - if state_refines.present?
+        - state_refines.each do |refine|
+          .refineResult
+            %span= refine
+            = link_to '×', refine_path(:state, refine, remove: true)
       - if place_refines.present?
         - place_refines.each do |refine|
           .refineResult
