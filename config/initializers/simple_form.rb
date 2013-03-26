@@ -49,7 +49,7 @@ SimpleForm.setup do |config|
     b.use :label_input
     b.use :hint, :tag => :h6
     b.use :error, :tag => :h6, :class => :error
-  end 
+  end
 
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :dpla

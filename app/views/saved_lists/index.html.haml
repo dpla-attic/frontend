@@ -1,0 +1,10 @@
+.layout.fullWidth
+  = render 'shared/search_panel'
+
+  %article#content{role: 'main'}
+    %h1 Saved Items & Lists
+    .profile
+      %ul.tabs
+        %li= link_to 'Your account', edit_user_registration_path
+        %li.active= link_to 'Saved Items & Lists', saved_lists_path
+        %li= link_to 'Saved searches', saved_searches_path

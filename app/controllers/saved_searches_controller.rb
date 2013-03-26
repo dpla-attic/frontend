@@ -6,8 +6,10 @@ class SavedSearchesController < ApplicationController
   end
 
   def create
-    @saved_search = current_user.saved_searches.new(term: permitted_params.term,
-                        filters: permitted_params.filters)
+    @saved_search = current_user.saved_searches.new(
+      term: permitted_params.term,
+      filters: permitted_params.filters
+    )
     @saved_search.save
     redirect_to saved_searches_path
   end

@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   has_many :saved_searches
+  has_many :saved_lists
 
   validates :name, presence: true
 

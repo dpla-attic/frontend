@@ -24,9 +24,13 @@ DplaPortal::Application.routes.draw do
   end
 
   scope '/profile' do
-    resources :saved_searches, only: [:index, :create, :destroy] do
+    resources :saved_searches, path: 'searches', only: [:index, :create, :destroy] do
       post 'destroy_bulk', on: :collection
     end
+    resources :saved_lists, path: 'lists', except: :index do
+      root to: :show
+    end
+    resources :saved_items, path: 'items', only: :destroy
   end
 
   match '/welcome' => 'users#welcome'

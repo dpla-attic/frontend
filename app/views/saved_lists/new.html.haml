@@ -1,0 +1,13 @@
+.layout.fullWidth
+  = render 'shared/search_panel'
+
+  %article
+    %h1 New Saved List
+    .profile
+      %ul.tabs
+        %li= link_to 'Your account', edit_user_registration_path
+        %li.active= link_to 'Saved Items & Lists', saved_lists_path
+        %li= link_to 'Saved searches', saved_searches_path
+      .tab-content
+        .account
+          = render partial: 'form'
