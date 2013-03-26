@@ -1,12 +1,12 @@
 class SavedListsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_list, only: [:show, :edit, :update, :destroy]
+  before_filter :load_list,  only: [:show, :edit, :update, :destroy]
+  before_filter :load_lists, only: [:show, :index, :unlisted]
 
   def index
   end
 
   def unlisted
-
   end
 
   def show
@@ -44,10 +44,14 @@ class SavedListsController < ApplicationController
 
   private
 
-    def find_list
+    def load_list
       if params[:id]
         @list = current_user.saved_lists.find params[:id] rescue nil
         raise ActionController::RoutingError.new('Not Found') unless @list
       end
+    end
+
+    def load_lists
+      @lists = current_user.saved_lists
     end
 end

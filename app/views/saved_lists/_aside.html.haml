@@ -10,4 +10,14 @@
           Unlisted
           %span.icon-lock{'aria-hidden' => true}
         %span 25
+        - @lists.each do |list|
+          %li{class: list.eql?(@list) ? 'active' : ''}
+            - locked = list.private? ? 'locked' : ''
+            = link_to list, class: "name #{locked}" do
+              = list.title
+              - if list.private?
+                %span.icon-lock{'aria-hidden' => true}
+            %span= list.saved_items.count
+            = link_to 'edit', edit_saved_list_path(list), class: :edit
+            = link_to '×',    list, class: :remove, method: :delete, confirm: 'Are you sure?'
     = link_to 'Add New', new_saved_list_path, class: :btn
