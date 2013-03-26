@@ -31,15 +31,34 @@ MapWrapper = L.Class.extend
       zoomend: ->
         t.onZoomend()
     this.updateMapMarkers()
+    this.navigateToHashParams()
 
   onDragend: ->
     this.updateMapMarkers()
+    this.updateWindowLocation()
 
   onZoomstart: ->
     this.closeAllOpenPopups()
 
   onZoomend: ->
     this.updateMapMarkers()
+    this.updateWindowLocation()
+
+  updateWindowLocation: ->
+    $.each this.getMapPosition(), (key, value)->
+      if ['lat', 'lng', 'zoom'].indexOf key > -1
+        $.address.parameter(key,value)
+
+  navigateToHashParams: ->
+    pos =
+      lat: $.address.parameter 'lat'
+      lng: $.address.parameter 'lng'
+      zoom: $.address.parameter 'zoom'
+    if pos.lat && pos.lng
+      this.map.panTo(new L.LatLng(pos.lat, pos.lng))
+    if pos.zoom
+      this.map.setZoom(pos.zoom)
+
 
   updateMapMarkers: ->
     stateLayer  = this.getStateLayer()
@@ -67,6 +86,7 @@ MapWrapper = L.Class.extend
     northEast = this.map.getBounds().getNorthEast()
     lat: center.lat
     lng: center.lng
+    zoom: this.map.getZoom()
     radius: center.distanceTo(northEast) / 1000
 
   turnProgressCursor: (turn)->
