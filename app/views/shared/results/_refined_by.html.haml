@@ -24,6 +24,10 @@
         %li
           = refine
           = link_to '×', refine_path(:language, refine, remove: true)
+      - country_refines.each do |refine|
+        %li
+          = refine
+          = link_to '×', refine_path(:country, refine, remove: true)
       - place_refines.each do |refine|
         %li
           = refine

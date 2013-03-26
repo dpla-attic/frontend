@@ -42,12 +42,12 @@ class Search
     results.facets.type
   end
 
-  def states
-    results.facets.state
+  def countries
+    results.facets.country
   end
 
-  def cities
-    results.facets.city
+  def states
+    results.facets.state
   end
 
   def places
@@ -76,8 +76,8 @@ class Search
   end
 
   def conditions
-    facets = %w(subject language type place city state)
-    { q: @term, facets: facets }.merge(@filters).merge(@args)
+    facets = %w(subject language type country state place)
+    { q: @term, facets: facets, facet_size: 100 }.merge(@filters).merge(@args)
   end
 
   private
