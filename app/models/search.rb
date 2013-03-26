@@ -63,6 +63,7 @@ class Search
     if Settings.api.username && Settings.api.password
       api_path = api_path.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
     end
+    api_path
   end
 
   def api_search_path
