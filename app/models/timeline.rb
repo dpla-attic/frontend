@@ -16,7 +16,7 @@ class Timeline < Search
   end
 
   def conditions
-    facets = %w(subject language type place city state date)
+    facets = %w(date)
     conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 2000)
   end
 

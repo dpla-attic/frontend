@@ -7,7 +7,7 @@ module RefineHelper
   end
 
   def subject_facets
-    @search.subjects.reject { |v| subject_refines.include? v }.to_a
+    @search.subjects ? @search.subjects.reject { |v| subject_refines.include? v }.to_a : []
   end
 
   def subject_refines
@@ -15,7 +15,7 @@ module RefineHelper
   end
 
   def type_facets
-    @search.types.reject { |v| type_refines.include? v }.to_a
+    @search.types ? @search.types.reject { |v| type_refines.include? v }.to_a : []
   end
 
   def type_refines
@@ -23,7 +23,7 @@ module RefineHelper
   end
 
   def language_facets
-    @search.languages.reject { |v| language_refines.include? v }.to_a
+    @search.languages ? @search.languages.reject { |v| language_refines.include? v }.to_a : []
   end
 
   def language_refines
@@ -39,7 +39,7 @@ module RefineHelper
   end
 
   def country_facets
-    @search.countries.reject { |v| country_refines.include? v }.to_a
+    @search.countries ? @search.countries.reject { |v| country_refines.include? v }.to_a : []
   end
 
   def country_refines
@@ -47,7 +47,7 @@ module RefineHelper
   end
 
   def state_facets
-    @search.states.reject { |v| state_refines.include? v }.to_a
+    @search.states ? @search.states.reject { |v| state_refines.include? v }.to_a : []
   end
 
   def state_refines
@@ -55,7 +55,7 @@ module RefineHelper
   end
 
   def place_facets
-    @search.places.reject { |v| place_refines.include? v }.to_a
+    @search.places ? @search.places.reject { |v| place_refines.include? v }.to_a : []
   end
 
   def place_refines
