@@ -50,10 +50,15 @@ jQuery ->
   render_items_count = (count)->
     "<h2 class=\"items_count\"><span color=\"#000\">#{ count }</span> items</h2>"
 
+  updateWindowLocation = (params = {})->
+    if params.year
+      $.address.parameter('year', params.year)
+
   # Click on graph column
   $('.graph').on 'click', 'li', (event) ->
     fetched_page = 1
     requested_year = parseInt $(this).find('h3').text()
+    updateWindowLocation year: requested_year
     infinite_scroll_in_progress = false
     loader = render_loader()
     if requested_year
@@ -130,6 +135,8 @@ jQuery ->
         $('.prev, .next').show()
       current_sheet = current_sheet - 1
 
+    updateWindowLocation year: year
+
   # Infinite scroll
   $('.timelineResults').on 'scroll', (event) ->
     holder = $(this)
@@ -153,3 +160,7 @@ jQuery ->
           holder.append html
         complete: ->
           infinite_scroll_in_progress = false
+
+  if year = $.address.parameter('year')
+    li = $("li[data-year=\'#{ year }\']")
+    li.click()

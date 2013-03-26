@@ -47,7 +47,7 @@ module TimelineHelper
               content_tag(:div,
                 content_tag(:div, "<h3>#{year}</h3><span>#{count} items</span>".html_safe, class: "info"),
                 class: "infoOuter"),
-            style: "height: #{col_height}px;")
+            style: "height: #{col_height}px;", data: {year: year})
         else
           content_tag(:li, "", style: "visibility: hidden;")
         end

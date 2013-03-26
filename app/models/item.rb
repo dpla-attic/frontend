@@ -34,6 +34,10 @@ class Item
     @aggregatedCHO['date']['displayDate'] rescue nil
   end
 
+  def year
+    @aggregatedCHO['date']['displayDate'].split('-').first rescue nil
+  end
+
   # returns array with names
   def location
     location = @aggregatedCHO['spatial'].map do |loc|

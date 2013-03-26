@@ -28,24 +28,28 @@
       = item_field :url, title: 'URL' do
         = link_to @item.url, @item.url, target: :_blank
   %aside
-    .module.yellow.line
-      .moduleSection
-        .moduleLeft
-          %h6 Created Date
-          %p 1966-06
-          %a{:href => ""} View on timeline »
-        .moduleRight
-          %img{:alt => "Timeline", :src => "/assets/moduleImg1.jpg"}/
-      - if @item.location.present? && @item.coordinates.present?
-        .moduleSection
-          .moduleLeft
-            %h6 Location
-            %p= @item.location.first
-            - coordinates = @item.coordinates.first
-            - anchor = {lat: coordinates.first.strip, lng: coordinates.last.strip, zoom: 10}.to_param
-            = link_to 'View on map »', map_path(anchor: "/?#{anchor}")
-          .moduleRight
-            %img{:alt => "Map", :src => "/assets/moduleImg2.jpg"}/
+    - is_location_present = @item.location.present? && @item.coordinates.present?
+    - is_date_present     = @item.created_date.present? && @item.year.present?
+    - if is_location_present or is_date_present
+      .module.yellow.line
+        -if is_date_present
+          .moduleSection
+            .moduleLeft
+              %h6 Created Date
+              %p= @item.created_date
+              = link_to 'View on timeline »', timeline_path(anchor: "/?year=#{@item.year}")
+            .moduleRight
+              %img{:alt => "Timeline", :src => "/assets/moduleImg1.jpg"}/
+        - if is_location_present
+          .moduleSection
+            .moduleLeft
+              %h6 Location
+              %p= @item.location.first
+              - coordinates = @item.coordinates.first
+              - anchor = {lat: coordinates.first.strip, lng: coordinates.last.strip, zoom: 10}.to_param
+              = link_to 'View on map »', map_path(anchor: "/?#{anchor}")
+            .moduleRight
+              %img{:alt => "Map", :src => "/assets/moduleImg2.jpg"}/
     .module
       %h6 From the Collection
       %h5
