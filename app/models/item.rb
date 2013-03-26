@@ -36,10 +36,11 @@ class Item
 
   # returns array with names
   def location
-    @aggregatedCHO['spatial'].map do |loc|
+    location = @aggregatedCHO['spatial'].map do |loc|
       l = loc["name"], loc["country"], loc["region"], loc["county"], loc["state"], loc["city"]
       l.compact.join(', ')
     end if @aggregatedCHO['spatial']
+    Array location
   end
 
   def coordinates
