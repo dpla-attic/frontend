@@ -15,7 +15,7 @@ class SavedSearchesController < ApplicationController
   def destroy
     @search = SavedSearch.find(params[:id])
     @search.destroy
-    redirect_to saved_searches_pathl
+    redirect_to saved_searches_path
   end
 
   def destroy_bulk
