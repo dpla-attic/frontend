@@ -2,9 +2,8 @@
   = render 'shared/search_panel'
 
   %article
-    %h1 Saved items
+    %h1 Your Profile
     .profile
-      %ul.tabs
-        %li= link_to 'Your account', edit_user_registration_path
-        %li.active= link_to 'Saved Items & Lists', saved_lists_path
-        %li= link_to 'Saved searches', saved_searches_path
+      = render partial: 'shared/profile/tabs'
+      .tab-content
+        = render partial: 'aside'

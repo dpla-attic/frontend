@@ -1,0 +1,13 @@
+.leftSide
+  .module.itemList.yellow
+    %ul.itemList-top
+      %li{class: 'index' == params[:action] ? 'active' : ''}
+        = link_to 'All Items', saved_lists_path, class: 'name'
+    %h4 Your Lists
+    %ul
+      %li{class: 'unlisted' == params[:action] ? 'active' : ''}
+        = link_to unlisted_saved_items_path, class: 'name locked' do
+          Unlisted
+          %span.icon-lock{'aria-hidden' => true}
+        %span 25
+    = link_to 'Add New', new_saved_list_path, class: :btn

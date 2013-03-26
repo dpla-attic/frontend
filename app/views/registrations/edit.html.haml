@@ -4,10 +4,7 @@
   %article
     %h1 Your Profile
     .profile
-      %ul.tabs
-        %li.active= link_to 'Your account', edit_user_registration_path
-        %li= link_to 'Saved Items & Lists', saved_lists_path
-        %li= link_to 'Saved searches', saved_searches_path
+      = render partial: 'shared/profile/tabs'
       .tab-content
         .account
           = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|

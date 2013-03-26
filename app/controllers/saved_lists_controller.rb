@@ -1,11 +1,16 @@
 class SavedListsController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :find_list, only: [:show, :edit, :update, :destroy]
 
   def index
   end
 
+  def unlisted
+
+  end
+
   def show
-    @list = SavedList.find params[:id]
+    @lists = current_user.saved_lists.all
   end
 
   def new
@@ -22,11 +27,9 @@ class SavedListsController < ApplicationController
   end
 
   def edit
-    @list = SavedList.find params[:id]
   end
 
   def update
-    @list = SavedList.find params[:id]
     if @list.update_attributes params[:saved_list]
       redirect_to @list
     else
@@ -35,5 +38,16 @@ class SavedListsController < ApplicationController
   end
 
   def destroy
+    @list.destroy
+    redirect_to saved_lists_path
   end
+
+  private
+
+    def find_list
+      if params[:id]
+        @list = current_user.saved_lists.find params[:id] rescue nil
+        raise ActionController::RoutingError.new('Not Found') unless @list
+      end
+    end
 end
