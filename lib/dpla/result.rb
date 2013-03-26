@@ -1,6 +1,6 @@
 module DPLA
   class Result < Array
-    attr_reader :count, :start, :limit, :facets
+    attr_reader :start, :limit, :facets
 
     # - response is raw JSON from API
     def initialize(response)
@@ -21,6 +21,10 @@ module DPLA
     end
 
     alias limit_value limit
+
+    def count
+      @count || 0
+    end
 
     def prepare(count, start, limit)
       @count, @start, @limit = count, start, limit

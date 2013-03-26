@@ -1,6 +1,6 @@
 module DPLA
   class Facets
-    attr_reader :subject, :language, :type, :year, :location, :state
+    attr_reader :subject, :language, :type, :year, :country, :state, :place
 
     def initialize(facets)
       facets.each do |key, value|
@@ -17,12 +17,16 @@ module DPLA
           @type = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'aggregatedCHO.spatial.name'
-          @location = {}.tap do |subject|
+        when 'aggregatedCHO.spatial.country'
+          @country = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
         when 'aggregatedCHO.spatial.state'
           @state = {}.tap do |subject|
+            value['terms'].each { |term| subject[term['term']] = term['count'] }
+          end if value['terms'].is_a? Array
+        when 'aggregatedCHO.spatial.name'
+          @place = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
         when 'aggregatedCHO.date.begin.year'

@@ -72,10 +72,10 @@ $(window).load(function() {
       $('.flex-direction-nav a').removeClass('hover');
 	});
 
-  $('.pop-open').click(function() {
-    $('.breadCrumbs li').removeClass('current');
-    $(this).next('a').clone().appendTo('.breadCrumbs ul').wrap('<li class="current"></li>');
-  });
+  // $('.pop-open').click(function() {
+  //   $('.breadCrumbs li').removeClass('current');
+  //   $(this).next('a').clone().appendTo('.breadCrumbs ul').wrap('<li class="current"></li>');
+  // });
 
   $('.collections .pop-columns a').click(function() {
     $('.breadCrumbs li').removeClass('current');
@@ -262,11 +262,11 @@ $(window).load(function() {
 
   $(".signUp").colorbox({inline:true, width:"100%", maxWidth: "600px", transition: "none"});
 
-  $('.pop-open').click(function() {
-    $('.pop-columns.country').fadeOut(function() {
-      $('.pop-columns.states').fadeIn();
-    });
-  });
+  // $('.pop-open').click(function() {
+  //   $('.pop-columns.country').fadeOut(function() {
+  //     $('.pop-columns.states').fadeIn();
+  //   });
+  // });
 
 
 /////TIMELINE SETUP

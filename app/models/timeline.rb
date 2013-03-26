@@ -1,72 +1,31 @@
 require_dependency 'dpla/items'
 
-class Timeline
+class Timeline < Search
 
-  def initialize(term, filters = {})
-    @term    = term
-    @filters = filters.except(:before, :after)
-  end
-
-  def subjects
-    fetch_timeline_data if @subjects.nil?
-    @subjects
-  end
-
-  def languages
-    fetch_timeline_data if @languages.nil?
-    @languages
-  end
-
-  def types
-    fetch_timeline_data if @types.nil?
-    @types
-  end
-
-  def locations
-    fetch_timeline_data if @locations.nil?
-    @locations
+  def api_search_path
+    fields = %w(
+      id aggregatedCHO.title aggregatedCHO.type aggregatedCHO.creator
+      aggregatedCHO.description isShownAt.@id object.@id
+    )
+    conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields))
+    "#{api_base_path}/items?#{conditions}"
   end
 
   def years
-    fetch_timeline_data if @years.nil?
-    @years
+    result.facets.year
   end
 
-  def items(year = nil, page = 0)
-    year ||= Time.now.year
-    fetch_results(year, page)
-    @results
+  def conditions
+    facets = %w(subject language type place city state date)
+    conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 2000)
   end
 
-  def count
-    fetch_timeline_data if @count.nil?
-    @count
-  end
-
-  def filters(name = nil)
-    if name.present?
-      @filters[name.to_sym].present? ? @filters[name.to_sym] : []
-    else
-      @filters
-    end
-  end
-
-  private
-
-    def fetch_timeline_data
-      facets = %w(subject language type location date)
-      conditions = { q: @term, facets: facets }.merge(@filters).merge(page_size: 0, facet_size: 2000)
-      @data = DPLA::Items.by_conditions(conditions)
-      @subjects, @languages, @types, @locations = @data.facets.subject, @data.facets.language, @data.facets.type, @data.facets.location
-      @years = @data.facets.year
-      @count = @data.count
-    end
-
-    def fetch_results(year, page)
-      facets = []
-      filters = @filters.merge({after: year, before: year})
-      conditions = { q: @term, facets: facets }.merge(filters).merge(page: page)
-      @data = DPLA::Items.by_conditions(conditions)
-      @results = @data
-    end
 end
+
+  # def items_by_year
+  #   @search = Timeline.new permitted_params.term, permitted_params.filters
+  #   page = params[:page].to_i if params[:page]
+  #   @year = params[:year] ? params[:year].to_i : Time.now.year
+  #   @items = @search.items(@year, page || 0)
+  #   render partial: "timeline/items", locals: { items: @items }, layout: false
+  # end

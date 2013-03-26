@@ -91,4 +91,22 @@ form {
     overflow: hidden;
     background: none repeat scroll 0 0 #FFFFFF;
   }
+  .inline_content { padding: 20px 24px!important; overflow: hidden;}
+
+  .inline_content .tabs { background: none; margin: 0 0 1%;}
+  .inline_content .tabs a {
+      background: none;
+      border: none;
+  }
+  .inline_content .tabs a:hover {
+      color: #4691b9;
+  }
+
+  .inline_content .tabs .active a {
+      background: #dd4e00;
+      color: #fff;
+  }
+  .popBar .breadCrumbs li:before {
+    content: none;
+  }
 }

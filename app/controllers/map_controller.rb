@@ -3,7 +3,7 @@ class MapController < ApplicationController
 
   def show
     @search = Map.new permitted_params.term, permitted_params.filters
-    @api_path = @search.api_path
+    @api_search_path = @search.api_search_path
   end
 
   private
