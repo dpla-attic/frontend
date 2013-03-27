@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :saved_searches
   has_many :saved_lists
-  has_many :saved_items
+  has_many :saved_items, through: :saved_item_positions
+  has_many :saved_item_positions
 
   validates :name, presence: true
 

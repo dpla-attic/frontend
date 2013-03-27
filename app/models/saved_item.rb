@@ -1,8 +1,9 @@
 class SavedItem < ActiveRecord::Base
-  attr_accessible :item_id, :saved_list_id
+  attr_accessible :item_id
+  attr_accessor :item
 
-  belongs_to :saved_list
-  belongs_to :user
+  has_many :saved_lists, through: :saved_item_positions
+  has_many :saved_item_positions
 
-  validates :item_id, :saved_list, :user, presence: true
+  validates :item_id, presence: true
 end

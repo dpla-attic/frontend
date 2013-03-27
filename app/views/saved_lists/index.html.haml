@@ -10,7 +10,34 @@
         .rightSide
           .list-detail
             %h2 All Items
-          - if @items.present?
+          - if @saved_items.present?
             #resultsBarTop.resultsBar
+              .pagination.drop= paginate @saved_items
+
+            .savedList
+              %form
+                %section
+                - @saved_items.each do |saved_item|
+                  %section
+                    = check_box_tag :item, saved_item.id, false, class: :checkbox
+                    .searchLeft
+                      %h4= link_to saved_item.item.title, item_path(saved_item.item.id)
+                      %p= saved_item.item.description
+                      = link_to saved_item.item.url, target: :_blank, class:'ViewObject' do
+                        View Object
+                        %span.icon-view-object{"aria-hidden" => "true"}
+                    .searchMiddle
+                      - if saved_item.item.preview_image
+                        = image_tag saved_item.item.preview_image
+                    .searchRight
+                      - saved_item.saved_lists.each do |list|
+                        %span= link_to list.title, list
+                    .delete
+                      - remove_path = remove_saved_item_path(item_id: saved_item.id)
+                      = link_to '×', remove_path, class: :remove, method: :delete, confirm: 'Are you sure?'
           - else
-            %p No Saved Items
+            %p Empty list
+
+          - if @saved_items.present?
+            #resultsBarTop.resultsBar
+              .pagination.drop= paginate @saved_items

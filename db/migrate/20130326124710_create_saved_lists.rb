@@ -5,7 +5,6 @@ class CreateSavedLists < ActiveRecord::Migration
       t.text :description
       t.boolean :private
       t.references :user
-
       t.timestamps
     end
   end

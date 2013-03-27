@@ -27,8 +27,11 @@ DplaPortal::Application.routes.draw do
     resources :saved_searches, path: 'searches', only: [:index, :create, :destroy] do
       post 'destroy_bulk', on: :collection
     end
-    resources :saved_lists, path: 'lists'
-    resources :saved_items, path: 'items', only: [:create, :update, :destroy]
+    resources :saved_lists, path: 'lists', id: /\d/
+    scope '/lists' do
+      post   'add_item',    to: 'saved_lists#add_item',    as: :add_saved_item
+      delete 'remove_item', to: 'saved_lists#remove_item', as: :remove_saved_item
+    end
   end
 
   match '/welcome' => 'users#welcome'
