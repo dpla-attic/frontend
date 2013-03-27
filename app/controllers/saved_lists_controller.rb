@@ -75,7 +75,7 @@ class SavedListsController < ApplicationController
     end
 
     def load_lists
-      @lists = current_user.saved_lists.order('title')
+      @lists = current_user.saved_lists
     end
 
     def load_saved_item

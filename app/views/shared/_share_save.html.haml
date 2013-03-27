@@ -12,7 +12,7 @@
               = link_to list.title, add_saved_item_path(item_params), method: :post
         - else
           %li
-            = link_to 'You haven\'t saved lists. Please, create one first.', new_saved_list_path
+            = link_to 'Unlisted', add_saved_item_path(item_id: params[:id]), method: :post
   %li.btn
     %a{:href => ""} Share
     %ul

@@ -1,0 +1,32 @@
+- is_list = 'show'  == params[:action]
+.resultsBar{id: @is_bottom ? 'resultsBarBottom' : 'resultsBarTop'}
+  %ul
+    - if is_list
+      - lists = @lists - [@list]
+      - if lists.present?
+        %li
+          = link_to '#', class: :btn do
+            = 'Copy to...'
+            %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
+          %ul
+            - lists.each do |list|
+              %li
+                = link_to list.title, list, data: {list_id: list.id}
+    - else
+      - if @lists.present?
+        %li
+          = link_to '#', class: :btn do
+            = 'Add to...'
+            %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
+          %ul
+            - @lists.each do |list|
+              %li
+                = link_to list.title, list, data: {list_id: list.id}
+    %li
+      = link_to 'Remove', saved_lists_path, class: :btn
+    - if is_list
+      %li
+        = link_to 'Reorder', saved_lists_path, class: :btn
+
+
+  .pagination.drop= paginate @saved_items

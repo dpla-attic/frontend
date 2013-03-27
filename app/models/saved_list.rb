@@ -6,4 +6,6 @@ class SavedList < ActiveRecord::Base
   belongs_to :user
 
   validates :title, :user, presence: true
+
+  default_scope order('title ASC')
 end

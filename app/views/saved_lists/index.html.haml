@@ -1,6 +1,5 @@
 .layout.fullWidth
   = render 'shared/search_panel'
-
   %article#content{role: 'main'}
     %h1 Your Profile
     .profile
@@ -11,12 +10,17 @@
           .list-detail
             %h2 All Items
           - if @saved_items.present?
-            #resultsBarTop.resultsBar
-              .pagination.drop= paginate @saved_items
-
+            = render partial: 'paginator'
             .savedList
               %form
                 %section
+                = check_box_tag :item, nil, nil, class: :checkbox
+                .searchLeft
+                .searchMiddle
+                .searchRight
+                  %h5 List
+                .delete
+                  %h5 Remove
                 - @saved_items.each do |saved_item|
                   %section
                     = check_box_tag :item, saved_item.id, false, class: :checkbox
@@ -37,7 +41,9 @@
                       = link_to '×', remove_path, class: :remove, method: :delete, confirm: 'Are you sure?'
           - else
             %p Empty list
-
           - if @saved_items.present?
-            #resultsBarTop.resultsBar
-              .pagination.drop= paginate @saved_items
+            // TODO: I'm very sorry for this dirty passing params, but locals: {is_bottom: true}
+            // absolutely doesn't work. Very strange, may by is's bug in Rails.
+            // I'll come back to this problem later
+            - @is_bottom = true
+            = render partial: 'paginator'
