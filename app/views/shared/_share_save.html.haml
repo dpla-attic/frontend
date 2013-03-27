@@ -5,14 +5,13 @@
     - elsif 'items' == params[:controller]
       %a Save To...
       %ul
-        - if current_user.saved_lists.present?
-          - current_user.saved_lists.each do |list|
+        %li
+          = link_to 'Unlisted', add_saved_item_path(item_id: params[:id]), method: :post
+        - if @lists.present?
+          - @lists.each do |list|
             %li
               - item_params = {id: list, item_id: params[:id]}
               = link_to list.title, add_saved_item_path(item_params), method: :post
-        - else
-          %li
-            = link_to 'Unlisted', add_saved_item_path(item_id: params[:id]), method: :post
   %li.btn
     %a{:href => ""} Share
     %ul

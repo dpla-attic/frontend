@@ -1,6 +1,6 @@
 class SavedListsController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :load_list,  only: [:show, :edit, :update, :destroy, :add_item, :remove_item]
+  before_filter :load_list,  only: [:show, :edit, :update, :destroy, :add_item]
   before_filter :load_lists, only: [:show, :index]
   before_filter :load_saved_item, only: :add_item
 
@@ -13,8 +13,12 @@ class SavedListsController < ApplicationController
   end
 
   def show
-    @saved_items = @list.saved_items
-      .page(params[:page]).per(20)
+    if @list
+      @saved_items = @list.saved_items
+        .page(params[:page]).per(20)
+    else
+      @saved_items = @unlisted.page(params[:page]).per(20)
+    end
     attach_api_items @saved_items
   end
 
@@ -59,8 +63,10 @@ class SavedListsController < ApplicationController
     @item_positions = current_user
       .saved_item_positions
       .where saved_item_id: params[:item_id]
-    @item_positions = @item_positions
-      .where saved_list_id: params[:id] if params[:id].present?
+    if params[:id].present?
+      @item_positions = @item_positions
+        .where saved_list_id: params[:id].to_i.nonzero? ? params[:id] : nil
+    end
     @item_positions.delete_all
     redirect_to saved_lists_path
   end
@@ -76,6 +82,8 @@ class SavedListsController < ApplicationController
 
     def load_lists
       @lists = current_user.saved_lists
+      @unlisted = current_user.saved_items
+        .where('saved_item_positions.saved_list_id' => nil)
     end
 
     def load_saved_item

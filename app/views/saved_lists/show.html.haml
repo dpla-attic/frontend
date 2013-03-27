@@ -8,14 +8,21 @@
         = render partial: 'aside'
         .rightSide
           .list-detail
-            %h2{class: @list.private? ? 'private' : ''}
-              = @list.title
-              - if @list.private?
+            - if @list.present?
+              %h2{class: @list.private? ? 'private' : ''}
+                = @list.title
+                - if @list.private?
+                  %span
+                    %span.icon-lock{'aria-hidden' => true}
+                    Private
+              - if @list.description.present?
+                %p= @list.description
+            - else
+              %h2{class: 'private'}
+                Unlisted
                 %span
                   %span.icon-lock{'aria-hidden' => true}
                   Private
-            - if @list.description.present?
-              %p= @list.description
           - if @saved_items.present?
             = render partial: 'paginator'
             .savedList
@@ -43,7 +50,7 @@
                     .searchRight
                       = text_field_tag :item_order, nil, placeholder: 0
                     .delete
-                      - remove_path = remove_saved_item_path(item_id: saved_item, id: @list)
+                      - remove_path = remove_saved_item_path(item_id: saved_item, id: @list || 'unlisted')
                       = link_to '×', remove_path, class: :remove, method: :delete, confirm: 'Are you sure?'
           - else
             %p Empty list

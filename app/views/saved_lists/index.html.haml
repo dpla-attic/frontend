@@ -34,8 +34,14 @@
                       - if saved_item.item.preview_image
                         = image_tag saved_item.item.preview_image
                     .searchRight
-                      - saved_item.saved_lists.each do |list|
-                        %span= link_to list.title, list
+                      - lists = saved_item.saved_item_positions.includes(:saved_list).map { |p| p.saved_list }
+                      - lists.each do |list|
+                        %span
+                          - if list.present?
+                            = link_to list.title, list
+                          - else
+                            = link_to 'Unlisted', unlisted_saved_lists_path
+
                     .delete
                       - remove_path = remove_saved_item_path(item_id: saved_item.id)
                       = link_to '×', remove_path, class: :remove, method: :delete, confirm: 'Are you sure?'
