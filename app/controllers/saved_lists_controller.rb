@@ -1,18 +1,16 @@
 class SavedListsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :load_list,  only: [:show, :edit, :update, :destroy]
-  before_filter :load_lists, only: [:show, :index, :unlisted]
+  before_filter :load_lists, only: [:show, :index]
 
   def index
-    @items = current_user.saved_items
-  end
-
-  def unlisted
-    @items
+    @saved_items = current_user.saved_items.page(params[:page]).per(20)
+    @items = DPLA::Items.by_ids @saved_items.map &:item_id
   end
 
   def show
-    @lists = current_user.saved_lists.all
+    @saved_items = current_user.saved_items.page(params[:page]).per(20)
+    @items = DPLA::Items.by_ids @saved_items.map &:item_id
   end
 
   def new
@@ -26,9 +24,6 @@ class SavedListsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
   end
 
   def update
@@ -54,6 +49,6 @@ class SavedListsController < ApplicationController
     end
 
     def load_lists
-      @lists = current_user.saved_lists
+      @lists = current_user.saved_lists.order('title')
     end
 end

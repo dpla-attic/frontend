@@ -1,6 +1,18 @@
 %ul.shareSave
   %li.btn
-    = link_to "Save", saved_searches_path(params.except(:controller, :action)), method: :post
+    - if 'search' == params[:controller]
+      = link_to "Save", saved_searches_path(params.except(:controller, :action)), method: :post
+    - elsif 'items' == params[:controller]
+      %a Save To...
+      %ul
+        - if current_user.saved_lists.present?
+          - current_user.saved_lists.each do |list|
+            %li
+              - item_params = {saved_list_id: list, item_id: params[:id]}
+              = link_to list.title, saved_items_path(item_params), method: :post
+        - else
+          %li
+            = link_to 'You haven\'t saved lists. Please, create one first.', new_saved_list_path
   %li.btn
     %a{:href => ""} Share
     %ul

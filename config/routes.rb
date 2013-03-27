@@ -28,9 +28,7 @@ DplaPortal::Application.routes.draw do
       post 'destroy_bulk', on: :collection
     end
     resources :saved_lists, path: 'lists'
-    resources :saved_items, path: 'items', only: :destroy do
-      get :unlisted, to: 'saved_lists#unlisted', on: :collection
-    end
+    resources :saved_items, path: 'items', only: [:create, :update, :destroy]
   end
 
   match '/welcome' => 'users#welcome'

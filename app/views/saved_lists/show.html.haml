@@ -17,7 +17,32 @@
                   Private
             - if @list.description.present?
               %p= @list.description
-          - if @list.saved_items.present?
+          - if @saved_items.present?
             #resultsBarTop.resultsBar
+              .pagination.drop= paginate @saved_items
+
+            .savedList
+              %form
+                %section
+                - @items.each do |item|
+                  %section
+                    = check_box_tag :item, item.id, false, class: :checkbox
+                    .searchLeft
+                      %h4= link_to item_path(item.id)
+                      %p= item.description
+                      = link_to item.url, target: :_blank, class:'ViewObject' do
+                        View Object
+                        %span.icon-view-object{"aria-hidden" => "true"}
+                    .searchMiddle
+                      - if item.preview_image
+                        = image_tag item.preview_image
+                    .searchRight
+                      = text_field_tag :item_order, nil, placeholder: 0
+                    .delete
+                      = link_to '×', saved_item_path(id: item.id), class: :remove, method: :delete, confirm: 'Are you sure?'
           - else
             %p Empty list
+
+          - if @saved_items.present?
+            #resultsBarTop.resultsBar
+              .pagination.drop= paginate @saved_items

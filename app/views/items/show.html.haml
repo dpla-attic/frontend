@@ -4,12 +4,12 @@
   %h1= @item.title
   %article
     .FeatureContent
-      - if @item.preview_image
-        .contentBox
+      .contentBox
+        - if @item.preview_image
           = image_tag @item.preview_image
-          = link_to @item.url, target: :_blank, class:'ViewObject' do
-            View Object
-            %span.icon-view-object{"aria-hidden" => "true"}
+        = link_to @item.url, target: :_blank, class:'ViewObject' do
+          View Object
+          %span.icon-view-object{"aria-hidden" => "true"}
       .table
         = item_field :creator
         = item_field :created_date
