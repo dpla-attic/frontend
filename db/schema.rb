@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130326124710) do
 
   create_table "saved_items", :force => true do |t|
-    t.integer  "item_id"
+    t.string   "item_id"
     t.integer  "user_id"
     t.integer  "saved_list_id"
     t.datetime "created_at",    :null => false
