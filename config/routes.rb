@@ -32,7 +32,7 @@ DplaPortal::Application.routes.draw do
     end
     scope '/lists' do
       post   'add_item',    to: 'saved_lists#add_item',    as: :add_saved_item
-      delete 'remove_item', to: 'saved_lists#remove_item', as: :remove_saved_item
+      delete 'delete_item', to: 'saved_lists#delete_item', as: :delete_saved_item
     end
   end
 

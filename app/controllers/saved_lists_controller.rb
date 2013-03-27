@@ -5,21 +5,22 @@ class SavedListsController < ApplicationController
   before_filter :load_saved_item, only: :add_item
 
   def index
-    @saved_items = current_user.saved_items
-      .includes(:saved_lists)
+    @saved_item_positions = current_user.saved_item_positions
+      .includes(:saved_item, :saved_list)
       .group('saved_items.id')
       .page(params[:page]).per(20)
-    attach_api_items @saved_items
+    attach_api_items @saved_item_positions
   end
 
   def show
     if @list
-      @saved_items = @list.saved_items
+      @saved_item_positions = @list.saved_item_positions
+        .includes(:saved_item)
         .page(params[:page]).per(20)
     else
-      @saved_items = @unlisted.page(params[:page]).per(20)
+      @saved_item_positions = @unlisted.page(params[:page]).per(20)
     end
-    attach_api_items @saved_items
+    attach_api_items @saved_item_positions
   end
 
   def new
@@ -59,7 +60,7 @@ class SavedListsController < ApplicationController
     end
   end
 
-  def remove_item
+  def delete_item
     @item_positions = current_user
       .saved_item_positions
       .where saved_item_id: params[:item_id]
@@ -82,8 +83,9 @@ class SavedListsController < ApplicationController
 
     def load_lists
       @lists = current_user.saved_lists
-      @unlisted = current_user.saved_items
-        .where('saved_item_positions.saved_list_id' => nil)
+      @unlisted = current_user.saved_item_positions
+        .includes(:saved_item)
+        .where('saved_list_id' => nil)
     end
 
     def load_saved_item
@@ -99,13 +101,14 @@ class SavedListsController < ApplicationController
       end
     end
 
-    def attach_api_items(saved_items)
+    def attach_api_items(saved_items_positions)
       api_items = {}.tap do |hash|
-        DPLA::Items.by_ids(saved_items.map &:item_id )
+        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id })
           .each { |item| hash[item.id] = item }
       end
-      saved_items.each do |saved_item|
-        saved_item.item = api_items[saved_item.item_id] || Item.new('id' => saved_item.item_id)
+      saved_items_positions.each do |position|
+        api_item_id = position.saved_item.item_id
+        position.item = api_items[api_item_id] || Item.new('id' => api_item_id)
       end
     end
 end

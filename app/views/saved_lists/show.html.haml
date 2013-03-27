@@ -23,38 +23,40 @@
                 %span
                   %span.icon-lock{'aria-hidden' => true}
                   Private
-          - if @saved_items.present?
+          - if @saved_item_positions.present?
             = render partial: 'paginator'
             .savedList
               %form
                 %section
-                  = check_box_tag :item, nil, nil, class: :checkbox
+                  = check_box_tag nil, nil, nil, class: 'checkbox select-all'
                   .searchLeft
                   .searchMiddle
                   .searchRight
                     %h5 Order
                   .delete
                     %h5 Remove
-                - @saved_items.each do |saved_item|
+                - @saved_item_positions.each do |position|
+                  - saved_item = position.saved_item
                   %section
-                    = check_box_tag :item, saved_item.id, false, class: :checkbox
+                    - checkbox_data = { position: position.id, list: @list ? @list.id : 'unlisted' }
+                    = check_box_tag :position, nil, nil, class: :checkbox, data: checkbox_data
                     .searchLeft
-                      %h4= link_to saved_item.item.title, item_path(saved_item.item.id)
-                      %p= saved_item.item.description
-                      = link_to saved_item.item.url, target: :_blank, class:'ViewObject' do
+                      %h4= link_to position.item.title, item_path(position.item.id)
+                      %p= position.item.description
+                      = link_to position.item.url, target: :_blank, class:'ViewObject' do
                         View Object
                         %span.icon-view-object{"aria-hidden" => "true"}
                     .searchMiddle
-                      - if saved_item.item.preview_image
-                        = image_tag saved_item.item.preview_image
+                      - if position.item.preview_image
+                        = image_tag position.item.preview_image
                     .searchRight
-                      = text_field_tag :item_order, nil, placeholder: 0
+                      = text_field_tag :position, position.position, placeholder: 0
                     .delete
-                      - remove_path = remove_saved_item_path(item_id: saved_item, id: @list || 'unlisted')
-                      = link_to '×', remove_path, class: :remove, method: :delete, confirm: 'Are you sure?'
+                      - delete_path = delete_saved_item_path(item_id: saved_item, id: @list || 'unlisted')
+                      = link_to '×', delete_path, class: :remove, method: :delete, confirm: 'Are you sure?'
           - else
             %p Empty list
-          - if @saved_items.present?
+          - if @saved_item_positions.present?
             // TODO: I'm very sorry for this dirty passing params, but locals: {is_bottom: true}
             // absolutely doesn't work. Very strange, may by is's bug in Rails.
             // I'll come back to this problem later
