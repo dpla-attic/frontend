@@ -2014,6 +2014,9 @@ aside h5 { margin: 5px 0 1em; }
 	top: 6px;
 	font-size: 1.3em;
 }
+.closePopUp:hover {
+    text-decoration: none;
+}
 
 /* ==========================================================================
    TIMELINE
@@ -3526,6 +3529,14 @@ body .container article h1, body .container .upper-section h1 {padding: 0;}
 .subjectListing li { margin-top: 5px; }
 
 #cboxContent h1 { padding: 0; }
+#cboxClose,
+.closePopUp {
+    font-size: 3em;
+}
+.closePopUp {
+    top: 12px;
+}
+
 
 footer { padding-top: 7%; padding-bottom: 7%; }
 footer .footer-navTwo li:first-child { margin: 0; }
