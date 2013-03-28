@@ -56,7 +56,7 @@ $(document).ready ->
     # POST /saved/lists/reorder_positions
     $('#reorder_items').click ->
       form = $(this).parents('.rightSide').find('form')
-      affected = $.each form.find('.position.item'), (input)->
+      affected = $.each form.find('.position.item'), (i,input)->
         $(input).val('') if isNaN Math.abs(parseInt($(input).val(), 10))
       return false unless affected.length
 
