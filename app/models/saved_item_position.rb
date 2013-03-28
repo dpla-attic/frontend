@@ -8,8 +8,6 @@ class SavedItemPosition < ActiveRecord::Base
 
   validates :saved_item, :user, presence: true
 
-  default_scope order('position ASC')
-
   def neighbors
     self.user.saved_item_positions
       .includes(:saved_list)

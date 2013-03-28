@@ -7,8 +7,8 @@ class SavedListsController < ApplicationController
 
   def index
     @saved_item_positions = current_user.saved_item_positions
-      .includes(:saved_item, :saved_list)
-      .group('saved_items.id')
+      .includes(:saved_list, :saved_item)
+      .select('DISTINCT ON (saved_item_id) *')
       .page(params[:page]).per(20)
     attach_api_items @saved_item_positions
   end
@@ -17,6 +17,7 @@ class SavedListsController < ApplicationController
     if @list
       @saved_item_positions = @list.saved_item_positions
         .includes(:saved_item)
+        .order('position ASC')
         .page(params[:page]).per(20)
     else
       @saved_item_positions = @unlisted.page(params[:page]).per(20)
