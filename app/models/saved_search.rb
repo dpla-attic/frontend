@@ -30,7 +30,8 @@ class SavedSearch < ActiveRecord::Base
 
   def api_url
     conditions = DPLA::Conditions.new({ q: term}.merge(filters).merge(page_size: 0))
-    api_url = Settings.api.url.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
+    api_url = Settings.api.url
+    api_url = api_url.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@" if !Settings.api.username.blank?
     "#{api_url}/items?#{conditions}"
   end
 end
