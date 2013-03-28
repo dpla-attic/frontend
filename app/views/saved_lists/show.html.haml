@@ -50,7 +50,7 @@
                       - if position.item.preview_image
                         = image_tag position.item.preview_image
                     .searchRight
-                      - position_value = position.position.zero? ? nil : position.position
+                      - position_value = position.position.to_i.zero? ? nil : position.position
                       = text_field_tag :position, position_value, placeholder: 0, id: nil, class: 'position item', data: {position: position.id}
                     .delete
                       - delete_path = delete_saved_item_path(item_id: saved_item, id: @list || 'unlisted')
