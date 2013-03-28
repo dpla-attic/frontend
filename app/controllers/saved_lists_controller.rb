@@ -3,6 +3,7 @@ class SavedListsController < ApplicationController
   before_filter :load_list,  only: [:show, :edit, :update, :destroy, :add_item]
   before_filter :load_lists, only: [:show, :index]
   before_filter :load_saved_item, only: :add_item
+  before_filter :prepare_positions_params, only: [:delete_positions, :reorder_positions, :copy_positions]
 
   def index
     @saved_item_positions = current_user.saved_item_positions
@@ -73,15 +74,47 @@ class SavedListsController < ApplicationController
   end
 
   def delete_positions
-    render json: params
+    @positions.each do |pos|
+      if pos[:item]
+        current_user.saved_item_positions
+          .where(saved_item_id: pos[:item])
+          .delete_all
+      elsif pos[:position]
+        current_user.saved_item_positions
+          .where(id: pos[:position])
+          .delete_all
+      end
+    end
+    render json: @positions
   end
 
   def reorder_positions
-    render json: params
+    @positions.each do |pos|
+      position = current_user.saved_item_positions
+        .where(id: pos[:position]).first
+      position.update_attribute(:position, pos[:value]) if position
+    end
+    render json: @positions
   end
 
   def copy_positions
-    render json: params
+    @positions.each do |pos|
+      target_list = current_user.saved_lists.find params[:list] rescue nil
+      next unless target_list
+
+      original_position = current_user.saved_item_positions.find pos[:position] rescue nil
+      next unless original_position
+
+      is_duplicate = current_user.saved_item_positions
+        .where(saved_item_id: original_position.saved_item, saved_list_id: target_list).present?
+      next if is_duplicate
+
+      current_user.saved_item_positions.create(
+        saved_list: target_list,
+        saved_item: original_position.saved_item
+      )
+    end
+    render json: @positions
   end
 
   private
@@ -122,5 +155,9 @@ class SavedListsController < ApplicationController
         api_item_id = position.saved_item.item_id
         position.item = api_items[api_item_id] || Item.new('id' => api_item_id)
       end
+    end
+
+    def prepare_positions_params
+      @positions = params[:positions] ? params[:positions].map { |k,v| v } : []
     end
 end

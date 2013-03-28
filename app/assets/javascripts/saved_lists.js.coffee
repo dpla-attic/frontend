@@ -28,7 +28,7 @@ $(document).ready ->
         complete: ->
           window.location.href = window.location.href
 
-      return false
+      false
 
     # Copy items
     # POST /saved/lists/copy_positions
@@ -56,20 +56,19 @@ $(document).ready ->
     # POST /saved/lists/reorder_positions
     $('#reorder_items').click ->
       form = $(this).parents('.rightSide').find('form')
-      affected = $.grep form.find('.position.item'), (input)->
-        valid = parseInt($(input).val(), 10) > 0
-        $(input).val('') unless valid
-        valid
+      affected = $.each form.find('.position.item'), (i,input)->
+        $(input).val('') if isNaN Math.abs(parseInt($(input).val(), 10))
       return false unless affected.length
 
       $.ajax
         type: 'POST',
         url: '/saved/lists/reorder_positions'
         data:
-          positions: affected.map (input)->
-            data = $(input).data()
-            data.value = $(input).val()
-            data
+          positions: affected.map (i,input)->
+              data = $(input).data()
+              data.value = (Math.abs(parseInt($(input).val(), 10)) || 0)
+              data
+            .toArray()
         complete: ->
           window.location.href = window.location.href
 

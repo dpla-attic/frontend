@@ -5,7 +5,7 @@
       - lists = @lists - [@list]
       - if lists.present?
         %li{id: :copy_items_to}
-          = link_to '#', class: :btn do
+          = link_to @list, class: :btn do
             = 'Copy to...'
             %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
           %ul
@@ -15,7 +15,7 @@
     - else
       - if @lists.present?
         %li{id: :copy_items_to}
-          = link_to '#', class: :btn do
+          = link_to @list, class: :btn do
             = 'Add to...'
             %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
           %ul
@@ -23,10 +23,10 @@
               %li
                 = link_to list.title, list, data: {list: list.id}
     %li
-      = link_to 'Remove', saved_lists_path, id: :remove_items, class: :btn
+      = link_to 'Remove', @list, id: :remove_items, class: :btn
     - if is_list
       %li
-        = link_to 'Reorder', saved_lists_path, id: :reorder_items, class: :btn
+        = link_to 'Reorder', @list, id: :reorder_items, class: :btn
 
 
   .pagination.drop= paginate @saved_item_positions
