@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
+gem 'pg', :require => 'pg'
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -28,7 +29,6 @@ gem 'google-analytics-rails'
 
 group :development do
   gem 'thin'
-  gem 'sqlite3'
   gem 'capistrano-deploy', :require => false
   gem 'quiet_assets'
   gem 'better_errors'
@@ -41,6 +41,3 @@ group :test, :development do
   gem 'shoulda-matchers'
 end
 
-group :production do
-	gem 'pg', :require => 'pg'
-end
