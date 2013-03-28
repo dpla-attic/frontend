@@ -39,7 +39,7 @@
                   - saved_item = position.saved_item
                   %section
                     - checkbox_data = { position: position.id, list: @list ? @list.id : 'unlisted' }
-                    = check_box_tag :position, nil, nil, class: :checkbox, data: checkbox_data
+                    = check_box_tag :position, nil, nil, id: nil, class: 'checkbox item', data: checkbox_data
                     .searchLeft
                       %h4= link_to position.item.title, item_path(position.item.id)
                       %p= position.item.description
@@ -50,7 +50,7 @@
                       - if position.item.preview_image
                         = image_tag position.item.preview_image
                     .searchRight
-                      = text_field_tag :position, position.position, placeholder: 0
+                      = text_field_tag :position, position.position, placeholder: 0, id: nil, class: 'position item', data: {position: position.id}
                     .delete
                       - delete_path = delete_saved_item_path(item_id: saved_item, id: @list || 'unlisted')
                       = link_to '×', delete_path, class: :remove, method: :delete, confirm: 'Are you sure?'

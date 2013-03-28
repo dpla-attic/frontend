@@ -72,6 +72,18 @@ class SavedListsController < ApplicationController
     redirect_to saved_lists_path
   end
 
+  def delete_positions
+    render json: params
+  end
+
+  def reorder_positions
+    render json: params
+  end
+
+  def copy_positions
+    render json: params
+  end
+
   private
 
     def load_list
