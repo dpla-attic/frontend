@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
 
     item_lists = current_user.saved_items
       .includes(:saved_lists)
-      .where(item_id: 'cec24549a51b9a4413779cab8fc31713')
+      .where(item_id: params[:id])
       .group('saved_lists.id')
       .map { |i| i.saved_lists }
       .flatten
