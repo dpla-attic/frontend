@@ -2,50 +2,48 @@
 /[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7">
 /[if IE 7] <html class="no-js lt-ie9 lt-ie8">
 /[if IE 8] <html class="no-js lt-ie9">
-/ [if gt IE 8]><!
-%html.no-js
-  / <![endif]
-  %head
-    %meta{:charset => "utf-8"}
-    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
-    %title DPLA
-    %meta{:content => "", :name => "description"}
-    %meta{:content => "width=device-width", :name => "viewport"}
-    = stylesheet_link_tag    "application", media: "all"
-    = csrf_meta_tags
-    <!--[if lte IE 7]><script src="js/lte-ie7.js"></script><![endif]-->
-    = analytics_init if Rails.env.production?
-  %body{class: "#{params[:controller]}-controller"}
-    .container
-      %header
-        = link_to root_path, class: :logo do
-          = image_tag "logo.png", :alt => "DPLA: Digital Public Library of America"
-        %a.menu-btn{:href => ""}
-          %span.icon-arrow-thin-down{"aria-hidden" => "true"}
-        %nav.topNav= render partial: 'shared/top_navigation'
-        %nav.MainNav= render partial: 'shared/main_navigation'
-      .clear
-      = render partial: 'shared/flash_message'
-      = yield
-      %footer
-        %nav= render partial: 'shared/footer_navigation'
-        .footerBottom
-          %ul.social.icons
-            %li.facebook
-              %a{:href => ""}
-                %span.icon-facebook{"aria-hidden" => "true"}
-            %li.twitter
-              %a{:href => ""}
-                %span.icon-twitter{"aria-hidden" => "true"}
-            %li.RSS
-              %a{:href => ""}
-                %span.icon-rss{"aria-hidden" => "true"}
-          = image_tag "footer-logo.png", :alt => "DPLA: Digital Public Library of America", class: 'logo'
-    - if content_for? :colorbox
-      %div{style: 'display:none'}
-        = yield :colorbox
-    = javascript_include_tag "application"
-    /[if lte IE 7] <script src="/assets/vendor/lte-ie7.js"></script>
+/ [if gt IE 8] <!--> <html class="no-js"> <!--
+%head
+  %meta{:charset => "utf-8"}
+  %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}
+  %title DPLA
+  %meta{:content => "", :name => "description"}
+  %meta{:content => "width=device-width", :name => "viewport"}
+  = stylesheet_link_tag    "application", media: "all"
+  = csrf_meta_tags
+  <!--[if lte IE 7]><script src="js/lte-ie7.js"></script><![endif]-->
+  = analytics_init if Rails.env.production?
+%body{class: "#{params[:controller]}-controller"}
+  .container
+    %header
+      = link_to root_path, class: :logo do
+        = image_tag "logo.png", :alt => "DPLA: Digital Public Library of America"
+      %a.menu-btn{:href => ""}
+        %span.icon-arrow-thin-down{"aria-hidden" => "true"}
+      %nav.topNav= render partial: 'shared/top_navigation'
+      %nav.MainNav= render partial: 'shared/main_navigation'
+    .clear
+    = render partial: 'shared/flash_message'
+    = yield
+    %footer
+      %nav= render partial: 'shared/footer_navigation'
+      .footerBottom
+        %ul.social.icons
+          %li.facebook
+            %a{:href => ""}
+              %span.icon-facebook{"aria-hidden" => "true"}
+          %li.twitter
+            %a{:href => ""}
+              %span.icon-twitter{"aria-hidden" => "true"}
+          %li.RSS
+            %a{:href => ""}
+              %span.icon-rss{"aria-hidden" => "true"}
+        = image_tag "footer-logo.png", :alt => "DPLA: Digital Public Library of America", class: 'logo'
+  - if content_for? :colorbox
+    %div{style: 'display:none'}
+      = yield :colorbox
+  = javascript_include_tag "application"
+  /[if lte IE 7] <script src="/assets/vendor/lte-ie7.js"></script>
 
-    = render 'shared/modals/login'
-    = render 'shared/modals/signup'
+  = render 'shared/modals/login'
+  = render 'shared/modals/signup'
