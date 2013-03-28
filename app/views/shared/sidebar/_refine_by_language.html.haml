@@ -1,6 +1,8 @@
 - if language_refines.present? or language_facets.present?
   .module.yellow
-    %h6.open By Language
+    %h6.open
+      By Language
+      %span.icon-arrow-up{"aria-hidden" => "true"}
     .slidingDiv
       - if language_refines.present?
         - language_refines.each do |refine|
