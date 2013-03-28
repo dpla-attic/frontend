@@ -11,7 +11,7 @@ class SavedSearchesController < ApplicationController
       filters: permitted_params.filters
     )
     @saved_search.save
-    redirect_to saved_searches_path
+    redirect_to :back
   end
 
   def destroy
