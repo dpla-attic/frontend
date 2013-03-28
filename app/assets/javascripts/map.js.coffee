@@ -149,7 +149,7 @@ MapWrapper = L.Class.extend
     this._requestsPool.push $.ajax
       url: window.api_search_path
       data:
-        'aggregatedCHO.spatial.state': state.name
+        'sourceResource.spatial.state': state.name
         'page_size': 5
       dataType: 'jsonp'
       cache: true
@@ -191,8 +191,8 @@ MapWrapper = L.Class.extend
     this._requestsPool.push $.ajax
       url: window.api_search_path
       data:
-        'aggregatedCHO.spatial.coordinates': "#{position.lat},#{position.lng}"
-        'aggregatedCHO.spatial.distance': "#{position.radius}km"
+        'sourceResource.spatial.coordinates': "#{position.lat},#{position.lng}"
+        'sourceResource.spatial.distance': "#{position.radius}km"
         'page_size': 500
       dataType: 'jsonp'
       cache: true
@@ -243,19 +243,19 @@ MapWrapper = L.Class.extend
 
   doc2point: (doc)->
     coordinates = try
-      doc['aggregatedCHO.spatial.coordinates'][0].split ','
+      doc['sourceResource.spatial.coordinates'][0].split ','
     catch error
       []
-    location = doc['aggregatedCHO.spatial.name']
+    location = doc['sourceResource.spatial.name']
     location = [location] unless location instanceof Array
     point =
       id: doc.id
-      title: doc['aggregatedCHO.title']
-      thumbnail: doc['object.@id']
-      type: doc['aggregatedCHO.type'] || ''
-      creator: doc['aggregatedCHO.creator'] || ''
+      title: doc['sourceResource.title']
+      thumbnail: doc['object']
+      type: doc['sourceResource.type'] || ''
+      creator: doc['sourceResource.creator'] || ''
       location: location
-      url: doc['isShownAt.@id']
+      url: doc['isShownAt']
       lat: coordinates.shift()
       lng: coordinates.shift()
 

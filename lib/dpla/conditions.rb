@@ -27,31 +27,31 @@ module DPLA
       {}.tap do |result|
         conditions.each do |key, value|
           case key.to_s
-          when 'subject'  then result['aggregatedCHO.subject.name'] = value
-          when 'language' then result['aggregatedCHO.language.name'] = value
-          when 'type'     then result['aggregatedCHO.type'] = value
-          when 'country'  then result['aggregatedCHO.spatial.country'] = value
-          when 'state'    then result['aggregatedCHO.spatial.state'] = value
-          when 'place'    then result['aggregatedCHO.spatial.name'] = value
-          when 'distance' then result['aggregatedCHO.spatial.distance'] = value.to_s + "km"
-          when 'before'   then result['aggregatedCHO.date.before'] = value
-          when 'after'    then result['aggregatedCHO.date.after'] = value
+          when 'subject'  then result['sourceResource.subject.name'] = value
+          when 'language' then result['sourceResource.language.name'] = value
+          when 'type'     then result['sourceResource.type'] = value
+          when 'country'  then result['sourceResource.spatial.country'] = value
+          when 'state'    then result['sourceResource.spatial.state'] = value
+          when 'place'    then result['sourceResource.spatial.name'] = value
+          when 'distance' then result['sourceResource.spatial.distance'] = value.to_s + "km"
+          when 'before'   then result['sourceResource.date.before'] = value
+          when 'after'    then result['sourceResource.date.after'] = value
           when 'sort_by'
             case value.to_s
-            when 'subject' then result[key] = 'aggregatedCHO.subject.name'
-            when 'created' then result[key] = 'aggregatedCHO.date.begin'
+            when 'subject' then result[key] = 'sourceResource.subject.name'
+            when 'created' then result[key] = 'sourceResource.date.begin'
             end
           when 'facets'
             result[key] = []
             value.each do |name|
               case name
-              when 'subject'  then result[key] << 'aggregatedCHO.subject.name'
-              when 'language' then result[key] << 'aggregatedCHO.language.name'
-              when 'type'     then result[key] << 'aggregatedCHO.type'
-              when 'date'     then result[key] << 'aggregatedCHO.date.begin.year'
-              when 'country'  then result[key] << 'aggregatedCHO.spatial.country'
-              when 'state'    then result[key] << 'aggregatedCHO.spatial.state'
-              when 'place'    then result[key] << 'aggregatedCHO.spatial.name'
+              when 'subject'  then result[key] << 'sourceResource.subject.name'
+              when 'language' then result[key] << 'sourceResource.language.name'
+              when 'type'     then result[key] << 'sourceResource.type'
+              when 'date'     then result[key] << 'sourceResource.date.begin.year'
+              when 'country'  then result[key] << 'sourceResource.spatial.country'
+              when 'state'    then result[key] << 'sourceResource.spatial.state'
+              when 'place'    then result[key] << 'sourceResource.spatial.name'
               end
             end
           else

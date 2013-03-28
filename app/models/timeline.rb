@@ -4,8 +4,9 @@ class Timeline < Search
 
   def api_search_path
     fields = %w(
-      id aggregatedCHO.title aggregatedCHO.type aggregatedCHO.creator
-      aggregatedCHO.description isShownAt.@id object.@id
+      id sourceResource.title isShownAt object
+      sourceResource.type sourceResource.creator
+      sourceResource.spatial.name sourceResource.spatial.coordinates
     )
     conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields))
     "#{api_base_path}/items?#{conditions}"

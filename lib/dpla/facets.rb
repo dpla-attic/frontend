@@ -5,31 +5,31 @@ module DPLA
     def initialize(facets)
       facets.each do |key, value|
         case key
-        when 'aggregatedCHO.subject.name'
+        when 'sourceResource.subject.name'
           @subject = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'aggregatedCHO.language.name'
+        when 'sourceResource.language.name'
           @language = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'aggregatedCHO.type'
+        when 'sourceResource.type'
           @type = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'aggregatedCHO.spatial.country'
+        when 'sourceResource.spatial.country'
           @country = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'aggregatedCHO.spatial.state'
+        when 'sourceResource.spatial.state'
           @state = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'aggregatedCHO.spatial.name'
+        when 'sourceResource.spatial.name'
           @place = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'aggregatedCHO.date.begin.year'
+        when 'sourceResource.date.begin.year'
           @year = {}.tap do |subject|
             value['entries'].each { |entry| subject[entry['time']] = entry['count'] }
           end if value['entries'].is_a? Array

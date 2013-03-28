@@ -11,22 +11,22 @@ jQuery ->
     html = ''
     if $.isPlainObject(result) and $.isArray(result.docs)
       $.each result.docs, (i, doc)->
-        type  = "<h6>#{ doc['aggregatedCHO.type'] }</h6>"
-        title = "<a href=\"/item/#{ doc['id'] }\">#{ doc['aggregatedCHO.title'] }</a>"
-        creator = "<p><span>#{ doc['aggregatedCHO.creator'] }</span></p>"
-        description = "<p>#{ doc['aggregatedCHO.description'] || '' }</p>"
+        type  = "<h6>#{ doc['sourceResource.type'] }</h6>"
+        title = "<a href=\"/item/#{ doc['id'] }\">#{ doc['sourceResource.title'] }</a>"
+        creator = "<p><span>#{ doc['sourceResource.creator'] }</span></p>"
+        description = "<p>#{ doc['sourceResource.description'] || '' }</p>"
         source_link =
-          if !! doc['isShownAt.@id']
+          if !! doc['isShownAt']
             """
-            <a href="#{ doc['isShownAt.@id'] }" class="ViewObject" target="_blank">
+            <a href="#{ doc['isShownAt'] }" class="ViewObject" target="_blank">
               View Object
               <span class="icon-view-object" aria-hidden="true"></span>
             </a>
             """
           else ''
         preview =
-          if !! doc['object.@id']
-            "<img src=\"#{ doc['object.@id'] }\" />"
+          if !! doc['object']
+            "<img src=\"#{ doc['object'] }\" />"
           else ''
 
         html +=
@@ -69,8 +69,8 @@ jQuery ->
         dataType: 'jsonp'
         cache: true
         data:
-          'aggregatedCHO.date.before': requested_year
-          'aggregatedCHO.date.after':  requested_year
+          'sourceResource.date.before': requested_year
+          'sourceResource.date.after':  requested_year
         beforeSend: ->
           el.find('.timelineResults').html('').append loader
         success: (result) ->
@@ -93,8 +93,8 @@ jQuery ->
       dataType: 'jsonp'
       cache: true
       data:
-        'aggregatedCHO.date.before': year
-        'aggregatedCHO.date.after':  year
+        'sourceResource.date.before': year
+        'sourceResource.date.after':  year
       beforeSend: ->
         $('.prev, .next').hide()
         page.find('.year h3').text year
@@ -148,8 +148,8 @@ jQuery ->
         dataType: 'jsonp'
         cache: true
         data:
-          'aggregatedCHO.date.before': current_year
-          'aggregatedCHO.date.after':  current_year
+          'sourceResource.date.before': current_year
+          'sourceResource.date.after':  current_year
           'page': ++fetched_page
         beforeSend: ->
           infinite_scroll_in_progress = true

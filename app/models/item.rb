@@ -4,10 +4,10 @@ class Item
   def initialize(doc)
     doc = transform_dotted_keys doc
     @id            = doc["id"]
-    @aggregatedCHO = doc["aggregatedCHO"] || {}
-    @originRecord  = doc["originalRecord"] || {}
-    @object        = doc["object"] || {}
-    @isShownAt     = doc["isShownAt"] || {}
+    @sourceResource = doc["sourceResource"] || {}
+    @originalRecord  = doc["originalRecord"] || {}
+    @object        = doc["object"]
+    @isShownAt     = doc["isShownAt"]
   end
 
   def id
@@ -15,73 +15,73 @@ class Item
   end
 
   def publisher
-    Array @aggregatedCHO['publisher']
+    Array @sourceResource['publisher']
   end
 
   def description
-    @aggregatedCHO['description']
+    @sourceResource['description']
   end
 
   def title
-    @aggregatedCHO['title']
+    @sourceResource['title']
   end
 
   def rights
-    @aggregatedCHO['rights']
+    @sourceResource['rights']
   end
 
   def created_date
-    @aggregatedCHO['date']['displayDate'] rescue nil
+    @sourceResource['date']['displayDate'] rescue nil
   end
 
   def year
-    @aggregatedCHO['date']['displayDate'].split('-').first rescue nil
+    @sourceResource['date']['displayDate'].split('-').first rescue nil
   end
 
   # returns array with names
   def location
-    location = @aggregatedCHO['spatial'].map do |loc|
+    location = @sourceResource['spatial'].map do |loc|
       l = loc["name"], loc["country"], loc["region"], loc["county"], loc["state"], loc["city"]
       l.compact.join(', ')
-    end if @aggregatedCHO['spatial']
+    end if @sourceResource['spatial']
     Array location
   end
 
   def coordinates
     latlong = []
-    if @aggregatedCHO['spatial'].present?
-      if @aggregatedCHO['spatial'].is_a? Array
-        latlong = @aggregatedCHO['spatial'].map{ |l| l['coordinates'].split "," rescue nil}.compact
-      elsif @aggregatedCHO['spatial']['coordinates'].present?
-        if @aggregatedCHO['spatial']['coordinates'].is_a? Array
-          latlong = @aggregatedCHO['spatial']['coordinates'].map{ |l| l.split "," rescue nil}.compact
+    if @sourceResource['spatial'].present?
+      if @sourceResource['spatial'].is_a? Array
+        latlong = @sourceResource['spatial'].map{ |l| l['coordinates'].split "," rescue nil}.compact
+      elsif @sourceResource['spatial']['coordinates'].present?
+        if @sourceResource['spatial']['coordinates'].is_a? Array
+          latlong = @sourceResource['spatial']['coordinates'].map{ |l| l.split "," rescue nil}.compact
         end
       end
     end
   end
 
   def creator
-    Array(@aggregatedCHO['creator']).join '; '
+    Array(@sourceResource['creator']).join '; '
   end
 
   def subject
-    @aggregatedCHO['subject'].map{|l| l["name"]} if @aggregatedCHO['subject']
+    @sourceResource['subject'].map{|l| l["name"]} if @sourceResource['subject']
   end
 
   def type
-    @aggregatedCHO['physicalmedium']
+    @sourceResource['type']
   end
 
   def url
-    @isShownAt['@id']
+    @isShownAt
   end
 
   def format
-    @isShownAt['format']
+    @originalRecord['format']
   end
 
   def preview_image
-    @object["@id"]
+    @object
   end
 
   alias :preview_source_url :preview_image
@@ -91,7 +91,7 @@ class Item
     def transform_dotted_keys(doc)
       doc.keys
         .select { |k| k.index('.') }
-        .select { |k| k =~ /^(aggregatedCHO|object)/ }
+        .select { |k| k =~ /^(sourceResource|object)/ }
         .each do |k|
           value = doc.delete k
           tokens = k.split '.'

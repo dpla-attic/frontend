@@ -7,7 +7,7 @@ notifications:
   from: welcome@portal.dp.la
 # DPLA API URL and credentials
 api:
-  url: http://integration1.qa.dp.la/v2
+  url: http://198.101.129.127/v2
   username:
   password:
 exhibitions:
