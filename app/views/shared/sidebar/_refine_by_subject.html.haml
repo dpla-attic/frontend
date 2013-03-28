@@ -1,6 +1,8 @@
 - if subject_refines.present? or subject_facets.present?
   .module.yellow.subject
-    %h6.open By Subject
+    %h6.open
+      By Subject
+      %span.icon-arrow-up{"aria-hidden" => "true"}
     .slidingDiv
       - if subject_refines.present?
         - subject_refines.each do |refine|

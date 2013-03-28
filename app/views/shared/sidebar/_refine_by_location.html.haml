@@ -1,6 +1,8 @@
 - if true #place_refines.present? or place_facets.present?
   .module.yellow
-    %h6.open By Location
+    %h6.open
+      By Location
+      %span.icon-arrow-up{"aria-hidden" => "true"}
     .slidingDiv
       - if country_refines.present?
         - country_refines.each do |refine|

@@ -1,4 +1,7 @@
 %section
+  .sectionRight
+    - if item.preview_image
+      = image_tag item.preview_image
   .sectionLeft
     %h6= item.type
     - if item.id.present?
@@ -12,6 +15,3 @@
       = link_to item.url, class: 'ViewObject', target: :_blank do
         View Object
         %span.icon-view-object{"aria-hidden" => "true"}
-  .sectionRight
-    - if item.preview_image
-      = image_tag item.preview_image
