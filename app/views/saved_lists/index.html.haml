@@ -24,8 +24,8 @@
                 - @saved_item_positions.each do |position|
                   - saved_item = position.saved_item
                   %section
-                    - checkbox_data = {item: saved_item.id}
-                    = check_box_tag :item, nil, nil, class: :checkbox, data: checkbox_data
+                    - checkbox_data = {item: saved_item.id, position: position.id}
+                    = check_box_tag :item, nil, nil, id: nil, class: 'checkbox item', data: checkbox_data
                     .searchLeft
                       %h4= link_to position.item.title, item_path(position.item.id)
                       %p= position.item.description
