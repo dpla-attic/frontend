@@ -1,7 +1,7 @@
 !!!
-/[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7">
-/[if IE 7] <html class="no-js lt-ie9 lt-ie8">
-/[if IE 8] <html class="no-js lt-ie9">
+/[if lt IE 7] <html class="no-js lt-ie9 ie8 lt-ie7">
+/[if IE 7]    <html class="no-js lt-ie9 ie8">
+/[if IE 8]    <html class="no-js lt-ie9 ie8">
 / [if gt IE 8] <!--> <html class="no-js"> <!--
 %head
   %meta{:charset => "utf-8"}
@@ -12,6 +12,7 @@
   = stylesheet_link_tag    "application", media: "all"
   = csrf_meta_tags
   <!--[if lte IE 7]><script src="js/lte-ie7.js"></script><![endif]-->
+  %script{:src  => "/assets/vendor/modernizr-2.6.2.min"}
   = analytics_init if Rails.env.production?
 %body{class: "#{params[:controller]}-controller"}
   .container
@@ -20,7 +21,7 @@
         = image_tag "logo.png", :alt => "DPLA: Digital Public Library of America"
       %a.menu-btn{:href => ""}
         %span.icon-arrow-thin-down{"aria-hidden" => "true"}
-      %nav.topNav= render partial: 'shared/top_navigation'
+      %nav.topNav#top-nav= render partial: 'shared/top_navigation'
       %nav.MainNav= render partial: 'shared/main_navigation'
     .clear
     = render partial: 'shared/flash_message'
@@ -43,7 +44,6 @@
     %div{style: 'display:none'}
       = yield :colorbox
   = javascript_include_tag "application"
-  /[if lte IE 7] <script src="/assets/vendor/lte-ie7.js"></script>
 
   = render 'shared/modals/login'
   = render 'shared/modals/signup'
