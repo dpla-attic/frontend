@@ -32,6 +32,7 @@ jQuery ->
         html +=
         """
         <section>
+          <div class="sectionRight">#{ preview }</div>
           <div class="sectionLeft">
             #{ type }
             #{ title }
@@ -39,7 +40,6 @@ jQuery ->
             #{ description }
             #{ source_link }
           </div>
-          <div class="sectionRight">#{ preview }</div>
         </section>
         """
     html
