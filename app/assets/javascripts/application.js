@@ -18,6 +18,7 @@
 //= require vendor/jquery.opacityrollover.js
 //= require vendor/jquery-ui-1.9.2.custom.min.js
 //= require vendor/jquery.address-1.5.min.js
+//= require vendor/modernizr-2.6.2.min
 //= require vendor/main.js
 //= require vendor/plugins.js
 //= require vendor/touch.js
