@@ -27,7 +27,7 @@ DplaPortal::Application.routes.draw do
     resources :saved_searches, path: 'searches', only: [:index, :create, :destroy] do
       post 'destroy_bulk', on: :collection
     end
-    resources :saved_lists, path: 'lists', id: /\d/ do
+    resources :saved_lists, path: 'lists', id: /\d+/ do
       get 'unlisted', action: :show, on: :collection
     end
     scope '/lists' do
