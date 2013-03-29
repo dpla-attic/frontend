@@ -172,5 +172,10 @@ form {
   .account input[type="password"]{
     width: 100%;
   }
-   
+  
+  .no-results {
+    .refine {
+      display: block;
+    }
+  }
 }
