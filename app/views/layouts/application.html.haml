@@ -11,7 +11,8 @@
   %meta{:content => "width=device-width", :name => "viewport"}
   = stylesheet_link_tag    "application", media: "all"
   = csrf_meta_tags
-  <!--[if lte IE 7]><script src="#{ javascript_include_tag 'lte-ie7.js' }"></script><![endif]-->
+  = javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js'
+  <!--[if lte IE 7]>#{ javascript_include_tag 'lte-ie7.js' }<![endif]-->
   = analytics_init if Rails.env.production?
 %body{class: "#{params[:controller]}-controller"}
   .container
