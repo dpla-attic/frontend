@@ -6,10 +6,11 @@
   = render 'shared/refine_control'
 
   %article
-    .mapContainer
-      .mobile-hover
-      .mapFrame
-        #map
+    - if !@search.result.empty?
+      .mapContainer
+        .mobile-hover
+        .mapFrame
+          #map
 
   = render 'shared/sidebar'
 
