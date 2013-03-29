@@ -149,4 +149,10 @@ form {
   .closePopUp {
       top: 12px;
   }
+
+  .account input[type="text"],
+  .account input[type="password"]{
+    width: 100%;
+  }
+   
 }
