@@ -153,6 +153,12 @@ form {
   overflow: hidden;
 }
 
+.module {
+  form {
+    border-radius: 0;
+  }
+}
+
 @media only screen and (min-width: 0px) and (max-width: 680px) {
   #cboxClose,
   .closePopUp {
