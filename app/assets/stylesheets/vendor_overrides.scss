@@ -141,6 +141,18 @@ form {
 .closePopUp:hover {
     text-decoration: none;
 }
+
+.social li {
+  font-size: 33px;
+  display: block;
+  overflow: hidden;
+}
+
+.social li span {
+  height: 32px;
+  overflow: hidden;
+}
+
 @media only screen and (min-width: 0px) and (max-width: 680px) {
   #cboxClose,
   .closePopUp {
