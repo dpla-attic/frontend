@@ -58,7 +58,7 @@ class SavedListsController < ApplicationController
     if @list
       redirect_to @list
     else
-      redirect_to saved_lists_path
+      redirect_to :back
     end
   end
 
