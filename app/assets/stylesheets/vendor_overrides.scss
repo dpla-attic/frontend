@@ -172,6 +172,24 @@ form {
   }
 }
 
+aside {
+  .module.line {
+    width: 100%;
+    padding: 4% 0;
+    background: #EDEDED;
+
+    .moduleSection {
+      padding: 15px 5% 0;
+      border-top: 1px solid #bebebe;
+
+      &:first-child {
+        padding: 0 5%;
+        border: none;
+      }
+    }
+  }
+}
+
 #cboxClose:before, #cboxClose:after {
   color: red;
 }
