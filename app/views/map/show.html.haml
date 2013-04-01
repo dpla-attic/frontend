@@ -3,16 +3,16 @@
 
   %h1 Map
   = render 'shared/results/search_results', query: params[:q], search: @search
-  = render 'shared/refine_control'
+  - if !@search.result.empty?
+    = render 'shared/refine_control'
 
-  %article
-    - if !@search.result.empty?
+    %article
       .mapContainer
         .mobile-hover
         .mapFrame
           #map
 
-  = render 'shared/sidebar'
+    = render 'shared/sidebar'
 
 :javascript
   window.states   = #{@search.geocoded_states.to_json};
