@@ -113,6 +113,8 @@ form {
 // }
 
 #colorbox {
+  outline: none;
+
   .inline_content {
     padding: 20px 24px;
     overflow: hidden;
@@ -135,6 +137,17 @@ form {
   }
   .popBar .breadCrumbs li:before {
     content: none;
+  }
+  #cboxClose {
+    font-family: 'source_sans_proregular', arial, sans-serif;
+    z-index: 10;
+    width: auto;
+    height: 22px;
+    line-height: 1;
+    text-indent: 0;
+    text-transform: none;
+    border: none;
+    background: transparent;
   }
 }
 
@@ -159,10 +172,22 @@ form {
   }
 }
 
+#cboxClose:before, #cboxClose:after {
+  color: red;
+}
+
+#cboxClose:before,
+#cboxClose:after {
+  display: none;
+}
+
 @media only screen and (min-width: 0px) and (max-width: 680px) {
+  #colorbox #cboxClose,
   #cboxClose,
   .closePopUp {
       font-size: 3em;
+      height: 34px;
+      top: 16px;
   }
   .closePopUp {
       top: 12px;

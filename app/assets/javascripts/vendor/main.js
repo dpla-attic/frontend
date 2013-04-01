@@ -256,11 +256,29 @@ $(window).load(function() {
 
 
   //LIGHT BOX
-  $(".inline").colorbox({inline:true, width:"100%", maxWidth: "1000px", transition: "none"});
+  $(".inline").colorbox({
+    inline:true,
+    width:"100%",
+    maxWidth: "1000px",
+    transition: "none",
+    close: '&times;'
+  });
 
-  $(".login").colorbox({inline:true, width:"100%", maxWidth: "600px", transition: "none"});
+  $(".login").colorbox({
+    inline:true,
+    width:"100%",
+    maxWidth: "600px",
+    transition: "none",
+    close: '&times;'
+  });
 
-  $(".signUp").colorbox({inline:true, width:"100%", maxWidth: "600px", transition: "none"});
+  $(".signUp").colorbox({
+    inline:true,
+    width:"100%",
+    maxWidth: "600px",
+    transition: "none",
+    close: '&times;'    
+  });
 
   // $('.pop-open').click(function() {
   //   $('.pop-columns.country').fadeOut(function() {
