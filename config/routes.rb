@@ -17,6 +17,8 @@ DplaPortal::Application.routes.draw do
 
   get '/item/:id', to: 'items#show', as: 'item'
 
+  resources :subjects, only: :index
+
   scope only: :show do
     resource :search,   controller: :search
     resource :timeline, controller: :timeline

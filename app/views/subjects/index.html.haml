@@ -1,0 +1,43 @@
+.layout.fullWidth.collections
+  = render 'shared/search_panel'
+  %article#content.subjects{role: :main}
+    %h1 Subjects
+    %ul.tabs
+      %li.active
+        %a{href: '#', data: {viewport: :places_num}} Number of Results
+      %li
+        %a{href: '#', data: {viewport: :places_az}} A-Z
+    #more_subjects
+      #places_num.viewport
+        = render partial: 'paginator'
+        = @subjects.each_slice(30).with_index do |section, page|
+          - page = page + 1
+          - hidden_style = page != 1 ? 'display:none' : ''
+          .pop-columns{data: {page: page}, style: "#{hidden_style}"}
+            - section.in_groups(3).each do |column|
+              %section
+                %ul
+                  - column.reject(&:nil?).each do |facet|
+                    - name, count = facet.shift, facet.shift
+                    - if name.present?
+                      %li
+                        = link_to name, refine_path(:subject, name, controller: :search, action: :show)
+                        %span= count
+        = render partial: 'paginator'
+      #places_az.viewport
+        = render partial: 'paginator'
+        - sorted_subjects = @subjects.sort { |a,b| a.first.downcase <=> b.first.downcase }
+        = sorted_subjects.each_slice(30).with_index do |section, page|
+          - page = page + 1
+          - hidden_style = page != 1 ? 'display:none' : ''
+          .pop-columns{data: {page: page}, style: "#{hidden_style}"}
+            - section.in_groups(3).each do |column|
+              %section
+                %ul
+                  - column.reject(&:nil?).each do |facet|
+                    - name, count = facet.shift, facet.shift
+                    - if name.present?
+                      %li
+                        = link_to name, refine_path(:subject, name, controller: :search, action: :show)
+                        %span= count
+        = render partial: 'paginator'

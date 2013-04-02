@@ -5,13 +5,15 @@ jQuery ->
   $('#more_subjects, #more_locations, #more_types, #more_languages').on 'click', '.pagination a', ->
     parent = $(this).parents('.popBar').parent()
     current = parent.find '.pagination .current'
-    unless current[0] == $(this)[0]
+    unless current.text() == $(this).text()
       current_page = current.data 'page'
       parent.find('.pop-columns[data-page='+current_page+']').hide()
       page = $(this).data 'page'
       parent.find('.pop-columns[data-page='+page+']').show()
-      current.replaceWith "<a data-page="+current_page+" href=\"#\">"+current_page+"</a>"
-      $(this).replaceWith "<span data-page="+page+" class=\"current\">"+page+"</span>"
+      $(this).parents('.viewport').find('.pagination span.current')
+        .replaceWith "<a data-page="+current_page+" href=\"#\">"+current_page+"</a>"
+      $(this).parents('.viewport').find(".pagination a[data-page=#{ page }]")
+        .replaceWith "<span data-page="+page+" class=\"current\">"+page+"</span>"
       $.colorbox.resize({heigth: $('#cboxContent').outerHeight()})
       false
 
