@@ -46,7 +46,7 @@ MapWrapper = L.Class.extend
 
   updateWindowLocation: ->
     $.each this.getMapPosition(), (key, value)->
-      if ['lat', 'lng', 'zoom'].indexOf(key) > -1
+      if $.inArray(key, ['lat', 'lng', 'zoom']) > -1
         $.address.parameter(key,value)
 
   navigateToHashParams: ->
@@ -160,8 +160,8 @@ MapWrapper = L.Class.extend
           points = $.map data.docs, (doc)->
             t.doc2point doc
           popup = t.generatePopup(points, state.name).setLatLng(latlng)
-          t._openPopups.push popup.openOn t.map
-      complete: ->
+          t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
+      complete: (jqXHR, textStatus)->
         t.turnProgressCursor false
 
   getRegularLayer: ->
@@ -179,7 +179,7 @@ MapWrapper = L.Class.extend
         points = cluster.layer.getAllChildMarkers()
         popupTitle = t.getClusterLocation(points)
         popup = t.generatePopup(points.slice(0,5), popupTitle).setLatLng(cluster.layer.getLatLng())
-        t._openPopups.push popup.openOn(t.map)
+        t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
       this._layers.points = markerCluster
     this._layers.points
 
@@ -201,7 +201,7 @@ MapWrapper = L.Class.extend
       success: (data)->
         if $.isPlainObject(data) and $.isArray(data.docs)
           t.drawRegularItems data.docs
-      complete: ->
+      complete: (jqXHR, textStatus)->
         t.turnProgressCursor false
 
   drawRegularItems: (docs)->
@@ -219,8 +219,7 @@ MapWrapper = L.Class.extend
           marker.data = point
           marker.on 'click', (e)->
             popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
-            t._openPopups.push popup.openOn(t.map)
-            popup.adjust 0, 10
+            t._openPopups.push popup.openOn(t.map, {x: 20, y: 0})
           toDraw.push marker
 
     t.getRegularLayer().addLayers toDraw
@@ -291,9 +290,6 @@ MapWrapper = L.Class.extend
 
 
 DPLAPopup = L.Popup.extend
-  adjust: (x,y)->
-    pos = L.DomUtil.getPosition this._container
-    L.DomUtil.setPosition this._container, pos.add(new L.Point x,y)
   _initLayout: ->
     this._container = mapBox = L.DomUtil.create 'div', 'mapBox'
     L.DomEvent.disableClickPropagation mapBox
@@ -310,16 +306,8 @@ DPLAPopup = L.Popup.extend
     container.style.height =  container.offsetHeight + 'px'
     this._container.style.bottom = 50 + 'px'
     this._container.style.left = 50 + 'px'
-  _updatePosition: ->
-    pos = this._map.latLngToLayerPoint(this._latlng)
-    animated = this._animated
-    offset = this.options.offset
-    if (animated)
-      L.DomUtil.setPosition(this._container, pos)
-    this._containerBottom = -offset.y - (animated ? 0 : pos.y)
-    this._containerLeft = -Math.round(this._containerWidth / 2) + offset.x + (animated ? 0 : pos.x)
-    adjust =
-      x: 20
-      y: 10
-    this._container.style.bottom = (this._containerBottom + adjust.y) + 'px'
+  openOn: (m, adjust = {x: 10, y: 20})->
+    L.Popup.prototype.openOn.call(this, m)
     this._container.style.left = (this._containerLeft + adjust.x) + 'px'
+    this._container.style.bottom = (this._containerBottom + adjust.y) + 'px'
+    return this;
