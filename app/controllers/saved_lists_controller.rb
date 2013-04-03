@@ -52,14 +52,10 @@ class SavedListsController < ApplicationController
   end
 
   def add_item
-    @item_position = current_user
+    current_user
       .saved_item_positions
       .where(saved_item_id: @item, saved_list_id: @list).first_or_create
-    if @list
-      redirect_to @list
-    else
-      redirect_to :back
-    end
+    redirect_to :back
   end
 
   def delete_item
