@@ -12,7 +12,7 @@ api:
   username:
   password:
   # API key, will be added to all API requests as &api_key=
-  api_key:
+  key:
 exhibitions:
   # Omeka exhibition site address. Used for generating link
   site: http://localhost:8080
