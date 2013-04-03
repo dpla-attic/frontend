@@ -9,8 +9,7 @@
       - Array(refines).each do |refine|
         %span= refine
   %li.row-3
-    %input{:type=>"hidden", :value=>saved_search.api_url, :class=>"api_url"}
-    %div.count
+    %div.count{data: {api_url: saved_search.api_url}}
   %li.row-4
     = link_to saved_search, method: :delete, confirm: 'Are you sure?' do
       &times;
