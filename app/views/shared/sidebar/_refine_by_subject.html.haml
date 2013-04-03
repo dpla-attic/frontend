@@ -25,10 +25,10 @@
 - content_for :colorbox do
   #more_subjects.inline_content
     %h1 Subjects
-    .popBar
-      .pagination
-        .t-data-grid-pager
-          - if subject_facets.count > 30
+    - if subject_facets.count > 30
+      .popBar
+        .pagination
+          .t-data-grid-pager
             - pages = (subject_facets.count.to_f / 30).ceil
             - (1..pages).to_a.each do |page|
               - if page == 1
