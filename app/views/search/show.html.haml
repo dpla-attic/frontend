@@ -19,7 +19,7 @@
               .searchLeft
                 %h6= item.type
                 - if item.id.present?
-                  %h4= link_to item.title, item_path(item.id)
+                  %h4= link_to item.title, item_path(item.id) + "?back_uri=" + CGI::escape(request.url)
                 - else
                   %h4= item.title
                 %p
