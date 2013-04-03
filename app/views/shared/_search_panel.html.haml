@@ -1,6 +1,6 @@
 %section.searchRow
   .searchRowLeft
-    - if request.env["HTTP_REFERER"] and params[:controller] == 'items'
+    - if params[:back_uri].present?
       = link_to "« back to search results", params[:back_uri]
   .searchRowRight
     - if %w(timeline search map).include? params[:controller]
