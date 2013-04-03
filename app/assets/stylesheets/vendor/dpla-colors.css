@@ -136,8 +136,6 @@ li.row-4 a,
 
 /* OTHER STYLES */
 h1 { color: #4691b9; }
-header li { font-size: 1.200em; }
-
 
 .graph li { background: #c4d7e0; }
 .DecadesDates li { color: #bed7e2; }
@@ -156,6 +154,10 @@ header li { font-size: 1.200em; }
 .searchViews li span { color: #bcd0d9; }
 
 footer nav li { font-size: 0.98em; }
+
+@media only screen and (min-width: 0px) and (max-width: 680px) {
+.topNav ul li.aboutMenu:hover a:hover { color: #DD4E00; }
+}
 
 @media only screen and (min-width: 0px) and (max-width: 500px) {
 .centuries li, .graph li .info {
