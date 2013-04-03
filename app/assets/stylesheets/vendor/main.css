@@ -2637,22 +2637,19 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 .pop-columns { clear: both; }
 .pop-columns.states { display: none; }
 .pop-columns ul {
+    padding: 0;
+    margin: 0;
+}
+.pop-columns ul li {
     border-top: 1px solid #CCCCCC;
     margin: 2px 0 0;
     padding: 3px 0 0;
+    background: none;
+    cursor: pointer;
+    list-style: none outside none;
+    overflow: hidden;
 }
-
-.pop-columns ul ul {
-    border-top: none;
-    margin: 2px 0 0;
-    padding: 3px 0 0;
-    display: none;
-}
-
-.pop-columns ul ul li { background: none; padding: 0;  }
-
-
-.pop-columns ul:first-child { border: none; }
+.pop-columns ul li:first-child { border: none; }
 .pop-columns li {
     cursor: pointer;
     list-style: none outside none;
@@ -3571,7 +3568,7 @@ article.home {
 .leftSide .itemList {
     margin-bottom: 5%;
 }
-.collections .pop-columns ul:first-child {
+.pop-columns ul li:first-child {
     border-top: 1px solid #CCCCCC;
 }
 .fullWidth.collections .pagination {
@@ -3587,7 +3584,7 @@ article.home {
 .subjectListing li a {
     padding: 5px 12px;
 }
-.collections .pop-columns ul {
+.pop-columns ul li {
     margin: 10px 0 0;
     padding: 10px 0 0;
 }
