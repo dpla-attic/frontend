@@ -6,16 +6,19 @@
       - if query.present?
         for
         %span= query
-      returned 
+      returned
       = number_with_delimiter search.count, delimiter: ','
       results.
     = render 'shared/results/refined_by', search: search
 - else
   .searchResults.no-results{role: "main"}
     %h4
-      Your search for
-      %span= query
-      returned no results.
+      -if query.nil?
+        Your search didn't return results
+      -else
+        Your search for
+        %span= query
+        returned no results.
     %p Suggestions:
     %ul
       %li Make sure all words are spelled correctly.
