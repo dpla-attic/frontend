@@ -10,9 +10,11 @@ jQuery ->
       parent.find('.pop-columns[data-page='+current_page+']').hide()
       page = $(this).data 'page'
       parent.find('.pop-columns[data-page='+page+']').show()
-      $(this).parents('.viewport').find('.pagination span.current')
+
+      container = $(this).parents('.popBar').parent()
+      container.find('.pagination span.current')
         .replaceWith "<a data-page="+current_page+" href=\"#\">"+current_page+"</a>"
-      $(this).parents('.viewport').find(".pagination a[data-page=#{ page }]")
+      container.find(".pagination a[data-page=#{ page }]")
         .replaceWith "<span data-page="+page+" class=\"current\">"+page+"</span>"
       $.colorbox.resize({heigth: $('#cboxContent').outerHeight()})
       false
