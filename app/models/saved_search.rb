@@ -28,10 +28,20 @@ class SavedSearch < ActiveRecord::Base
     end
   end
 
+  def api_base_path
+    api_path = Settings.api.url
+    if Settings.api.username && Settings.api.password
+      api_path = api_path.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
+    end
+    api_path
+  end
+
+  def api_key
+    "&api_key=#{Settings.api.key}" if Settings.api.key
+  end
+
   def api_url
     conditions = DPLA::Conditions.new({ q: term}.merge(filters).merge(page_size: 0))
-    api_url = Settings.api.url
-    api_url = api_url.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@" if !Settings.api.username.blank?
-    "#{api_url}/items?#{conditions}"
+    "#{api_base_path}/items?#{conditions}#{api_key}"
   end
 end

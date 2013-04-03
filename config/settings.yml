@@ -8,8 +8,11 @@ notifications:
 # DPLA API URL and credentials
 api:
   url: http://198.101.129.127/v2
+  # Username and password for Basic HTTP Auth to API
   username:
   password:
+  # API key, will be added to all API requests as &api_key=
+  api_key:
 exhibitions:
   # Omeka exhibition site address. Used for generating link
   site: http://localhost:8080

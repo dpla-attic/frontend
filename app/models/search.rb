@@ -70,6 +70,10 @@ class Search
     api_path
   end
 
+  def api_key
+    "&api_key=#{Settings.api.key}" if Settings.api.key
+  end
+
   def api_search_path
     fields = %w(
       id sourceResource.title isShownAt object
@@ -77,7 +81,7 @@ class Search
       sourceResource.spatial.name sourceResource.spatial.coordinates
     )
     conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields))
-    "#{api_base_path}/items?#{conditions}"
+    "#{api_base_path}/items?#{conditions}#{api_key}"
   end
 
   def conditions
