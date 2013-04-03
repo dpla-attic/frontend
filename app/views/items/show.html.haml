@@ -1,7 +1,7 @@
 .layout
   = render 'shared/search_panel'
   = render 'shared/share_save'
-  %h1= @item.title
+  %h1= @item.title || @item.id
   %article
     .FeatureContent
       .contentBox

@@ -8,6 +8,9 @@ class Item
     @originalRecord  = doc["originalRecord"] || {}
     @object        = doc["object"]
     @isShownAt     = doc["isShownAt"]
+    if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
+      @sourceResource['spatial'] = [ @sourceResource['spatial'] ]
+    end
   end
 
   def id
@@ -43,20 +46,13 @@ class Item
     location = @sourceResource['spatial'].map do |loc|
       l = loc["name"], loc["country"], loc["region"], loc["county"], loc["state"], loc["city"]
       l.compact.join(', ')
-    end if @sourceResource['spatial']
+    end if @sourceResource['spatial'].present?
     Array location
   end
 
   def coordinates
-    latlong = []
     if @sourceResource['spatial'].present?
-      if @sourceResource['spatial'].is_a? Array
-        latlong = @sourceResource['spatial'].map{ |l| l['coordinates'].split "," rescue nil}.compact
-      elsif @sourceResource['spatial']['coordinates'].present?
-        if @sourceResource['spatial']['coordinates'].is_a? Array
-          latlong = @sourceResource['spatial']['coordinates'].map{ |l| l.split "," rescue nil}.compact
-        end
-      end
+      @sourceResource['spatial'].map{ |l| l['coordinates'].split "," rescue nil}.compact
     end
   end
 

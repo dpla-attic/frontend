@@ -249,7 +249,7 @@ MapWrapper = L.Class.extend
     location = [location] unless location instanceof Array
     point =
       id: doc.id
-      title: doc['sourceResource.title']
+      title: doc['sourceResource.title'] || doc['id']
       thumbnail: doc['object']
       type: doc['sourceResource.type'] || ''
       creator: doc['sourceResource.creator'] || ''
