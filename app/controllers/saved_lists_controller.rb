@@ -3,7 +3,7 @@ class SavedListsController < ApplicationController
   before_filter :load_list,  only: [:show, :edit, :update, :destroy, :add_item]
   before_filter :load_lists, only: [:show, :index]
   before_filter :load_saved_item, only: :add_item
-  before_filter :prepare_positions_params, only: [:delete_positions, :reorder_positions, :copy_positions]
+  before_filter :prepare_positions_params, only: [:delete_positions, :reorder_positions, :copy_positions, :move_positions]
 
   def index
     @saved_item_positions = current_user.saved_item_positions
@@ -99,26 +99,40 @@ class SavedListsController < ApplicationController
   end
 
   def copy_positions
-    @positions.each do |pos|
-      target_list = current_user.saved_lists.find params[:list] rescue nil
-      next unless target_list
+    copy_or_move_position(:copy)
+  end
 
-      original_position = current_user.saved_item_positions.find pos[:position] rescue nil
-      next unless original_position
-
-      is_duplicate = current_user.saved_item_positions
-        .where(saved_item_id: original_position.saved_item, saved_list_id: target_list).present?
-      next if is_duplicate
-
-      current_user.saved_item_positions.create(
-        saved_list: target_list,
-        saved_item: original_position.saved_item
-      )
-    end
-    render json: @positions
+  def move_positions
+    copy_or_move_position(:move)
   end
 
   private
+
+    def copy_or_move_position(flag)
+      @positions.each do |pos|
+        target_list = current_user.saved_lists.find params[:list] rescue nil
+        next unless target_list
+
+        original_position = current_user.saved_item_positions.find pos[:position] rescue nil
+        next unless original_position
+
+        is_duplicate = current_user.saved_item_positions
+          .where(saved_item_id: original_position.saved_item, saved_list_id: target_list).present?
+        next if is_duplicate
+
+        current_user.saved_item_positions.create(
+          saved_list: target_list,
+          saved_item: original_position.saved_item
+        )
+
+        if (flag = :move)
+          current_user.saved_item_positions
+            .where(saved_item_id: original_position.saved_item, saved_list_id: original_position.saved_list)
+            .delete_all
+        end
+      end
+      render json: @positions
+    end
 
     def load_list
       if params[:id].present?

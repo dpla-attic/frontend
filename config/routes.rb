@@ -38,6 +38,7 @@ DplaPortal::Application.routes.draw do
       delete 'delete_positions',      to: 'saved_lists#delete_positions',  as: :delete_positions
       post   'reorder_positions',     to: 'saved_lists#reorder_positions', as: :reorder_positions
       post   'copy_positions',        to: 'saved_lists#copy_positions',    as: :copy_positions
+      post   'move_positions',        to: 'saved_lists#move_positions',    as: :move_positions
     end
   end
 

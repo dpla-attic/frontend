@@ -14,7 +14,7 @@
                 = link_to list.title, list, data: {list: list.id}
     - else
       - if @lists.present?
-        %li{id: :copy_items_to}
+        %li{id: :move_items_to}
           = link_to @list, class: :btn do
             = 'Add to...'
             %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}

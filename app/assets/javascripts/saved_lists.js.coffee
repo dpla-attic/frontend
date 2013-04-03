@@ -52,6 +52,28 @@ $(document).ready ->
 
       return false
 
+    # Move items
+    # POST /saved/lists/move_positions
+    $('#move_items_to a').click ->
+      list = $(this).data 'list'
+      form = $(this).parents('.rightSide').find('form')
+      affected = form.find('.checkbox.item:checked')
+      return false unless list
+      return false unless affected.length
+
+      $.ajax
+        type: 'POST',
+        url: '/saved/lists/move_positions'
+        data:
+          list: list,
+          positions: affected.map (i,checkbox)->
+              $(checkbox).data()
+            .toArray()
+        complete: ->
+          window.location.href = window.location.href
+
+      return false
+
     # Reorder positions
     # POST /saved/lists/reorder_positions
     $('#reorder_items').click ->
