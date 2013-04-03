@@ -48,6 +48,7 @@ module DPLA
               when 'subject'  then result[key] << 'sourceResource.subject.name'
               when 'language' then result[key] << 'sourceResource.language.name'
               when 'type'     then result[key] << 'sourceResource.type'
+              when 'provider' then result[key] << 'provider.name'
               when 'date'     then result[key] << 'sourceResource.date.begin.year'
               when 'country'  then result[key] << 'sourceResource.spatial.country'
               when 'state'    then result[key] << 'sourceResource.spatial.state'

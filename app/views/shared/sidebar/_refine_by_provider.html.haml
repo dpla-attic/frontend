@@ -1,0 +1,19 @@
+- if provider_refines.present? or provider_facets.present?
+  .module.yellow
+    %h6.open
+      By Provider
+      %span.icon-arrow-up{"aria-hidden" => "true"}
+    .slidingDiv
+      - if provider_refines.present?
+        - provider_refines.each do |refine|
+          .refineResult
+            %span= refine
+            = link_to '×', refine_path(:provider, refine, remove: true)
+      - if provider_facets.present?
+        .locations
+          %ul
+            - provider_facets.slice(0, 5 - provider_refines.count).each do |facet|
+            - name, count = facet.shift, facet.shift
+              %li
+                = link_to name, refine_path(:provider, name)
+                %span= count

@@ -22,6 +22,14 @@ module RefineHelper
     Array @search.filters :type
   end
 
+  def provider_facets
+    @search.providers ? @search.providers.reject { |v| provider_refines.include? v }.to_a : []
+  end
+
+  def provider_refines
+    Array @search.filters :provider
+  end
+
   def language_facets
     @search.languages ? @search.languages.reject { |v| language_refines.include? v }.to_a : []
   end

@@ -20,6 +20,10 @@
         %li
           = refine
           = link_to '×', refine_path(:type, refine, remove: true)
+      - provider_refines.each do |refine|
+        %li
+          = refine
+          = link_to '×', refine_path(:provider, refine, remove: true)
       - language_refines.each do |refine|
         %li
           = refine

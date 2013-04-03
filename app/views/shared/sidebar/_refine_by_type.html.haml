@@ -12,7 +12,8 @@
       - if type_facets.present?
         .locations
           %ul
-            - type_facets.each do |name, count|
+            - type_facets.slice(0, 5 - type_refines.count).each do |facet|
+            - name, count = facet.shift, facet.shift
               %li
                 = link_to name, refine_path(:type, name)
                 %span= count
