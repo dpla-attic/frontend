@@ -1,6 +1,6 @@
 class SavedSearchesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :prepare_positions_params, only: [:destroy_bulk]
+  before_filter :prepare_id_params, only: [:destroy_bulk]
 
 
   def index
@@ -23,9 +23,9 @@ class SavedSearchesController < ApplicationController
   end
 
   def destroy_bulk
-    @positions.each do |pos|
+    @id_params.each do |id_param|
       current_user.saved_searches
-        .where(id: pos[:position])
+        .where(id: id_param[:id])
         .delete_all
     end
 
@@ -38,8 +38,8 @@ class SavedSearchesController < ApplicationController
       @permitted_params ||= PermittedParams.new(params)
     end
 
-    def prepare_positions_params
-      @positions = params[:positions] ? params[:positions].map { |k,v| v } : []
+    def prepare_id_params
+      @id_params = params[:ids] ? params[:ids].map { |k,v| v } : []
     end
 
 end

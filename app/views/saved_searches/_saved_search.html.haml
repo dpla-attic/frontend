@@ -1,7 +1,7 @@
 %ul
   %li
-    - checkbox_data = { position:saved_search.id }
-    = check_box_tag :position, nil, nil, id: nil, class: 'checkbox item', data: checkbox_data
+    - checkbox_data = { id:saved_search.id }
+    = check_box_tag :id, nil, nil, id: nil, class: 'checkbox item', data: checkbox_data
     - term = saved_search.term.present? ? saved_search.term : '(empty query)'
     = link_to term, search_path(saved_search.to_params)
   %li.row-2

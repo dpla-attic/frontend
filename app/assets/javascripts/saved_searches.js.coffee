@@ -10,8 +10,8 @@ $(document).ready ->
        affected.removeAttr 'checked'
 
     # Remove items
-    # DELETE /saved/lists/delete_positions
-    $('#remove_items').click ->
+    # DELETE /saved/searches/destroy_bulk
+    $('#remove_searches').click ->
       form = $(this).parents('.savedItems').find('form')
       affected = form.find('.checkbox.item:checked')
       return false unless affected.length
@@ -21,7 +21,7 @@ $(document).ready ->
         type: 'POST',
         url: '/saved/searches/destroy_bulk'
         data:
-          positions: affected.map (i,checkbox)->
+          ids: affected.map (i,checkbox)->
               $(checkbox).data()
             .toArray()
         complete: ->
