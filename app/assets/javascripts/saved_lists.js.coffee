@@ -12,7 +12,7 @@ $(document).ready ->
 
     # Remove items
     # DELETE /saved/lists/delete_positions
-    $('#remove_items').click ->
+    $('.remove_items').click ->
       form = $(this).parents('.rightSide').find('form')
       affected = form.find('.checkbox.item:checked')
       return false unless affected.length
@@ -54,7 +54,7 @@ $(document).ready ->
 
     # Reorder positions
     # POST /saved/lists/reorder_positions
-    $('#reorder_items').click ->
+    $('.reorder_items').click ->
       form = $(this).parents('.rightSide').find('form')
       affected = $.each form.find('.position.item'), (i,input)->
         $(input).val('') if isNaN Math.abs(parseInt($(input).val(), 10))

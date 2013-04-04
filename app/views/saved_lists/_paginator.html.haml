@@ -23,10 +23,10 @@
               %li
                 = link_to list.title, list, data: {list: list.id}
     %li
-      = link_to 'Remove', @list, id: :remove_items, class: :btn
+      = link_to 'Remove', @list, class: 'btn remove_items'
     - if is_list
       %li
-        = link_to 'Reorder', @list, id: :reorder_items, class: :btn
+        = link_to 'Reorder', @list, class: 'btn reorder_items'
 
 
   .pagination.drop= paginate @saved_item_positions
