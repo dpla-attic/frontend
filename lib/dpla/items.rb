@@ -7,12 +7,12 @@ module DPLA
 
     def self.by_ids(ids)
       query = Conditions.new(ids)
-      load "/items/#{query}#{api_key}"
+      load "/items/#{query}?#{api_key}"
     end
 
     def self.by_conditions(conditions)
       query = Conditions.new(conditions)
-      load "/items?#{query}#{api_key}"
+      load "/items?#{query}&#{api_key}"
     end
 
     def self.load(query)
@@ -28,7 +28,7 @@ module DPLA
     end
 
     def self.api_key
-      "&api_key=#{Settings.api.key}" if Settings.api.key
+      "api_key=#{Settings.api.key}" if Settings.api.key
     end
   end
 end
