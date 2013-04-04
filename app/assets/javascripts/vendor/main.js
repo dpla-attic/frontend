@@ -144,8 +144,8 @@ $(window).load(function() {
 	$('.searchRowRight form').attr('style', '');
   }
 
-  ///// REFINE SIDEBAR TOGGLE
-  $('#toggle').toggle(function() {
+  ///// REFINE SIDEBAR TOGGLE: DESKTOP AND TABLET
+  $('.timeline #toggle, .map #toggle').toggle(function() {
 
       $('aside').addClass('moveOut');
       $('.slidePopOut').addClass('moveIn');
@@ -171,6 +171,7 @@ $(window).load(function() {
     }
   );
 
+  ///// REFINE SIDEBAR TOGGLE: PHONE
   $('#toggle.Marticle').click( function() {
       $('aside').addClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveOut');
