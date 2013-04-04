@@ -257,28 +257,31 @@ $(window).load(function() {
 
 
   //LIGHT BOX
-  $(".inline").colorbox({
+  $('.inline').colorbox({
     inline:true,
-    width:"100%",
-    maxWidth: "1000px",
-    transition: "none",
-    close: '&times;'
+    width:'100%',
+    maxWidth: '1000px',
+    transition: 'none',
+    close: '&times;',
+    reposition: false
   });
 
-  $(".login").colorbox({
+  $('.login').colorbox({
     inline:true,
-    width:"100%",
-    maxWidth: "600px",
-    transition: "none",
-    close: '&times;'
+    width:'100%',
+    maxWidth: '600px',
+    transition: 'none',
+    close: '&times;',
+    reposition: false
   });
 
-  $(".signUp").colorbox({
+  $('.signUp').colorbox({
     inline:true,
-    width:"100%",
-    maxWidth: "600px",
-    transition: "none",
-    close: '&times;'    
+    width:'100%',
+    maxWidth: '600px',
+    transition: 'none',
+    close: '&times;',
+    reposition: false    
   });
 
   // $('.pop-open').click(function() {
