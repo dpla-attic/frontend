@@ -104,6 +104,12 @@ form {
   }
 }
 
+.search-page {
+  .matches {
+    height: 54px;
+  }
+}
+
 // .searchLeft {
 //   float: none;
 //   width: auto;
@@ -215,7 +221,7 @@ aside {
   .account input[type="password"]{
     width: 100%;
   }
-  
+
   .no-results {
     .refine {
       display: block;

@@ -1,6 +1,7 @@
 .matches
+  - section_style = (@exhibitions.blank? or @collections.blank?) ? 'margin-top:30px;' : ''
   - if @exhibitions.present?
-    %section
+    %section{style: section_style}
       %h4 Exhibition Matches
       = link_to_exhibition @exhibitions.first
       - if @exhibitions.count > 1
