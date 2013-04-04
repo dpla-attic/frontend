@@ -30,6 +30,7 @@ module DPLA
           when 'subject'  then result['sourceResource.subject.name'] = value
           when 'language' then result['sourceResource.language.name'] = value
           when 'type'     then result['sourceResource.type'] = value
+          when 'provider' then result['dataProvider'] = value
           when 'country'  then result['sourceResource.spatial.country'] = value
           when 'state'    then result['sourceResource.spatial.state'] = value
           when 'place'    then result['sourceResource.spatial.name'] = value
@@ -48,7 +49,7 @@ module DPLA
               when 'subject'  then result[key] << 'sourceResource.subject.name'
               when 'language' then result[key] << 'sourceResource.language.name'
               when 'type'     then result[key] << 'sourceResource.type'
-              when 'provider' then result[key] << 'provider.name'
+              when 'provider' then result[key] << 'dataProvider'
               when 'date'     then result[key] << 'sourceResource.date.begin.year'
               when 'country'  then result[key] << 'sourceResource.spatial.country'
               when 'state'    then result[key] << 'sourceResource.spatial.state'
