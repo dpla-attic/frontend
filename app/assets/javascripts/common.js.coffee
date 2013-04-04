@@ -43,3 +43,7 @@ jQuery ->
       $('#countries').fadeIn()
       $.colorbox.resize({heigth: $('#cboxContent').outerHeight()})
     false
+
+  if window.twitter_account
+    $('.twitter #tweets').tweet
+      username: window.twitter_account

@@ -103,24 +103,4 @@
             %p
               %span Nov 13
         %a{:href => ""} All News »
-      .twiiter
-        %h2.border
-          %a{:href => ""} @digpublib
-          on Twitter
-        %ul
-          %li
-            %p John Palfrey delivers TEDx Talk
-            %a{:href => ""} http://hvrd.me/X9Hdn7
-            %p
-              %span 8 hours ago
-          %li
-            %p
-              RT
-              = succeed ":" do
-                %a{:href => ""} @metalabharvard
-              New post by Yanni Loukissas on Chattanooga
-              %a{:href => ""} #DPLA
-              appfest at
-              %a{:href => ""} http://bit.ly/W6XWpT
-            %p
-              %span Yesterday
+      = render partial: 'shared/twitter_widget'

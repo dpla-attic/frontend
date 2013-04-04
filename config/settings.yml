@@ -32,3 +32,5 @@ session:
   dalli_store:
     memcache_server:
       - localhost
+widgets:
+  twitter_username: dpla

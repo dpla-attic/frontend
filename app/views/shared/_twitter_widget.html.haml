@@ -1,0 +1,7 @@
+- if  twitter_name = Settings.widgets.twitter_username
+  :javascript
+    window.twitter_account = "#{ twitter_name }";
+  .twitter
+    %h2.border
+      = link_to "@#{twitter_name} on Twitter", "https://twitter.com/#{twitter_name}"
+    #tweets
