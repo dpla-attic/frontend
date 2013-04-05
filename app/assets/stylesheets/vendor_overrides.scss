@@ -227,7 +227,8 @@ aside {
   }
 
   .account input[type="text"],
-  .account input[type="password"]{
+  .account input[type="password"],
+  .account .textarea textarea {
     width: 100%;
   }
 
