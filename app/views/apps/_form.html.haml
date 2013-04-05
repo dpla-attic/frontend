@@ -1,0 +1,7 @@
+= simple_form_for @app do |f|
+  = f.input :title, required: true, autofocus: true
+  = f.input :author, required: true
+  = f.input :description
+  = f.input :home_page
+  %br
+  = f.button :submit, class: :btn

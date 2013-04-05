@@ -1,0 +1,9 @@
+.layout.fullWidth
+  = render 'shared/search_panel'
+
+  %article
+    %h1 Edit app "#{@app.title_was}"
+    .profile
+      .tab-content
+        .account
+          = render 'form'

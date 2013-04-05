@@ -1,4 +1,7 @@
 DplaPortal::Application.routes.draw do
+  resources :apps
+
+
   devise_for :users, controllers: {
     :registrations => "registrations",
     :confirmations => "confirmations",
