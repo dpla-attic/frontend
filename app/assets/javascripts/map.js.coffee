@@ -150,7 +150,7 @@ MapWrapper = L.Class.extend
       url: window.api_search_path
       data:
         'sourceResource.spatial.state': state.name
-        'page_size': 5
+        'page_size': 50
       dataType: 'jsonp'
       cache: true
       beforeSend: ->
