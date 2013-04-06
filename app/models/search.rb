@@ -84,6 +84,10 @@ class Search
     "#{api_base_path}/items?#{conditions}#{api_key}"
   end
 
+  def app_search_path
+    Hash[@filters.map {|k,v| [k, Array(v)] }].to_query
+  end
+
   def conditions
     facets = %w(subject language type provider country state place)
     { q: @term, facets: facets, facet_size: 100 }.merge(@filters).merge(@args)

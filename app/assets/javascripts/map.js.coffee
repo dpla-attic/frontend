@@ -159,7 +159,11 @@ MapWrapper = L.Class.extend
         if $.isPlainObject(data) and $.isArray(data.docs)
           points = $.map data.docs, (doc)->
             t.doc2point doc
-          popup = t.generatePopup(points, state.name).setLatLng(latlng)
+          state_search_href = "/search?#{ window.app_search_path }&state[]=#{ state.name }"
+          link_to_state_search = """
+            <a href="#{ state_search_href }">#{ state.name }</a>
+          """
+          popup = t.generatePopup(points, link_to_state_search).setLatLng(latlng)
           t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
       complete: (jqXHR, textStatus)->
         t.turnProgressCursor false
@@ -177,8 +181,13 @@ MapWrapper = L.Class.extend
         zoomToBoundsOnClick: false
       markerCluster.on 'clusterclick', (cluster)->
         points = cluster.layer.getAllChildMarkers()
-        popupTitle = t.getClusterLocation(points)
-        popup = t.generatePopup(points.slice(0,50), popupTitle).setLatLng(cluster.layer.getLatLng())
+        location = t.getClusterLocation(points)
+        location_search_href = "/search?#{ window.app_search_path }&place[]=#{ location }"
+        link_to_location_search = """
+          <a href="#{ location_search_href }">#{ location }</a>
+        """
+        popup = t.generatePopup(points.slice(0,50), link_to_location_search)
+          .setLatLng(cluster.layer.getLatLng())
         t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
       this._layers.points = markerCluster
     this._layers.points
