@@ -3,11 +3,12 @@ class Item
 
   def initialize(doc)
     doc = transform_dotted_keys doc
-    @id            = doc["id"]
-    @sourceResource = doc["sourceResource"] || {}
-    @originalRecord  = doc["originalRecord"] || {}
-    @object        = doc["object"]
-    @isShownAt     = doc["isShownAt"]
+    @id             = doc['id']
+    @sourceResource = doc['sourceResource'] || {}
+    @originalRecord = doc['originalRecord'] || {}
+    @object         = doc['object']
+    @isShownAt      = doc['isShownAt']
+    @dataProvider   = doc['dataProvider']
     if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
       @sourceResource['spatial'] = [ @sourceResource['spatial'] ]
     end
@@ -44,7 +45,7 @@ class Item
   # returns array with names
   def location
     location = @sourceResource['spatial'].map do |loc|
-      l = loc["name"], loc["country"], loc["region"], loc["county"], loc["state"], loc["city"]
+      l = loc['name'], loc['country'], loc['region'], loc['county'], loc['state'], loc['city']
       l.compact.join(', ')
     end if @sourceResource['spatial'].present?
     Array location
@@ -52,7 +53,7 @@ class Item
 
   def coordinates
     if @sourceResource['spatial'].present?
-      @sourceResource['spatial'].map{ |l| l['coordinates'].split "," rescue nil}.compact
+      @sourceResource['spatial'].map{ |l| l['coordinates'].split ',' rescue nil}.compact
     end
   end
 
@@ -61,7 +62,7 @@ class Item
   end
 
   def subject
-    @sourceResource['subject'].map{|l| l["name"]} if @sourceResource['subject']
+    @sourceResource['subject'].map{|l| l['name']} if @sourceResource['subject']
   end
 
   def type
@@ -78,6 +79,10 @@ class Item
 
   def preview_image
     @object
+  end
+
+  def data_provider
+    @dataProvider
   end
 
   alias :preview_source_url :preview_image

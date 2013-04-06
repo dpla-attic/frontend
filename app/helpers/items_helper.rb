@@ -1,7 +1,7 @@
 module ItemsHelper
   def item_field(name, options = {}, &block)
     value = @item.send name
-    title = options[:title] || name.to_s.capitalize.gsub('_', ' ')
+    title = options[:title] || name.to_s.split('_').map(&:capitalize).join(' ')
 
     if value.present?
       content_tag(:ul) do
