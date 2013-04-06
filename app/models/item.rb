@@ -23,7 +23,7 @@ class Item
   end
 
   def description
-    @sourceResource['description']
+    Array(@sourceResource['description']).join('. ')
   end
 
   def title
