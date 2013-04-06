@@ -178,7 +178,7 @@ MapWrapper = L.Class.extend
       markerCluster.on 'clusterclick', (cluster)->
         points = cluster.layer.getAllChildMarkers()
         popupTitle = t.getClusterLocation(points)
-        popup = t.generatePopup(points.slice(0,5), popupTitle).setLatLng(cluster.layer.getLatLng())
+        popup = t.generatePopup(points.slice(0,50), popupTitle).setLatLng(cluster.layer.getLatLng())
         t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
       this._layers.points = markerCluster
     this._layers.points
