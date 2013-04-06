@@ -17,9 +17,11 @@ ActiveRecord::Schema.define(:version => 20130405074111) do
     t.string   "title"
     t.string   "author"
     t.text     "description"
-    t.string   "home_page"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string   "home_page_url"
+    t.string   "icon"
+    t.string   "screenshot"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "saved_item_positions", :force => true do |t|

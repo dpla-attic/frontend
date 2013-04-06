@@ -17,6 +17,8 @@ gem 'simple_form'
 gem 'breadcrumbs_on_rails'
 gem 'kaminari'
 gem 'navigasmic'
+gem 'carrierwave'
+gem 'rmagick'
 
 gem 'dalli'
 gem 'httparty'

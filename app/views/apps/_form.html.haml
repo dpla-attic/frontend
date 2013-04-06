@@ -1,7 +1,11 @@
 = simple_form_for @app do |f|
+  = f.input :icon
+  = f.input :screenshot
   = f.input :title, required: true, autofocus: true
   = f.input :author, required: true
   = f.input :description
-  = f.input :home_page
+  = f.input :home_page_url
   %br
   = f.button :submit, class: :btn
+- if @app.persisted?
+  = link_to 'Delete app', @app, class: :btn, method: :delete, confirm: 'Are you sure?'

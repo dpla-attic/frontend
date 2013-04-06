@@ -1,18 +1,17 @@
-%p#notice= notice
-
-%p
-  %b Title:
-  = @app.title
-%p
-  %b Author:
-  = @app.author
-%p
-  %b Description:
-  = @app.description
-%p
-  %b Home page:
-  = @app.home_page
-
-= link_to 'Edit', edit_app_path(@app)
-\|
-= link_to 'Back', apps_path
+.layout.fullWidth.app
+  = render 'shared/search_panel'
+  .breadCrumbs
+    %ul
+      %li= link_to 'App Library', apps_path
+      %li= @app.title
+  = render 'shared/share_save'
+  %article#content.app-detail{role: :main}
+    %h1= @app.title
+    - if @app.screenshot.present?
+      .leftSide
+        = image_tag @app.screenshot
+    .rightSide
+      %p= @app.description
+      %ul.buttons
+        %li.btn= link_to 'App Home page', @app.home_page_url
+        %li.btn= link_to 'Develop this App', @app.home_page_url

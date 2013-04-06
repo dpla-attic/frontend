@@ -3,8 +3,10 @@ class CreateApps < ActiveRecord::Migration
     create_table :apps do |t|
       t.string :title
       t.string :author
-      t.text :description
-      t.string :home_page
+      t.text   :description
+      t.string :home_page_url
+      t.string :icon
+      t.string :screenshot
 
       t.timestamps
     end

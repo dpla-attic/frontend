@@ -21,3 +21,6 @@
 
 # Ignore database config
 /config/database.yml
+
+# Ignore carrierwave uploads
+/public/uploads

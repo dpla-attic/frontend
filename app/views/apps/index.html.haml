@@ -16,10 +16,12 @@
         .moduleContainer.threeCol
           - apps_row.each do |app|
             %section.module
-              .icon
+              - if app.icon.present?
+                .icon= image_tag app.icon
               .text
                 %h5= link_to app.title, app
                 %p= app.author
               %p= app.description
-              = link_to 'App Home Page »'
+              - if app.home_page_url
+                = link_to 'App Home Page »', app.home_page_url
 
