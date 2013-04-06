@@ -145,8 +145,8 @@ $(window).load(function() {
   }
 
   ///// REFINE SIDEBAR TOGGLE
-  $('#toggle').toggle(function() {
-
+  $('#toggle').click(function() {
+    if ($('aside').is(':visible')) {
       $('aside').addClass('moveOut');
       $('.slidePopOut').addClass('moveIn');
       $('.map article, .timeContainer').addClass('widthL');
@@ -155,10 +155,8 @@ $(window).load(function() {
       $('aside').removeClass('moveIn');
       $('.slidePopOut').removeClass('moveOut');
       $('.map article, .timeContainer').removeClass('widthS');
-
-    },
-    function() {
-
+    }
+    else {
       $('aside').addClass('moveIn');
       $('.slidePopOut').addClass('moveOut');
       $('.map article, .timeContainer').addClass('widthS');
@@ -167,9 +165,8 @@ $(window).load(function() {
       $('aside').removeClass('moveOut');
       $('.slidePopOut').removeClass('moveIn');
       $('.map article, .timeContainer').removeClass('widthL');
-
     }
-  );
+  });
 
   $('#toggle.Marticle').click( function() {
       $('aside').addClass('moveIn');

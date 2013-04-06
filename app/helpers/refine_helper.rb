@@ -6,6 +6,12 @@ module RefineHelper
     params.merge(options).deep_merge(area => refine_params.uniq, page: nil)
   end
 
+  def refines_present?
+    subject_refines.present? or type_refines.present? or provider_refines.present? or
+      language_refines.present? or after_refine.present? or before_refine.present? or
+      country_refines.present? or state_refines.present? or place_refines.present?
+  end
+
   def subject_facets
     @search.subjects ? @search.subjects.reject { |v| subject_refines.include? v }.to_a : []
   end
