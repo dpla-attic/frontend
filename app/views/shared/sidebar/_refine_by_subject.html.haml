@@ -1,9 +1,10 @@
 - if subject_refines.present? or subject_facets.present?
+  - is_collapsed = params[:q].blank? && subject_refines.blank?
   .module.yellow.subject
     %h6.open
       By Subject
-      %span.icon-arrow-up{"aria-hidden" => "true"}
-    .slidingDiv
+      %span{'aria-hidden' => true, class: is_collapsed ? 'icon-arrow-down' : 'icon-arrow-up'}
+    .slidingDiv{style: is_collapsed ? 'display:none;' : ''}
       - if subject_refines.present?
         - subject_refines.each do |refine|
           .refineResult
