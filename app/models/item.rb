@@ -85,8 +85,6 @@ class Item
     @dataProvider
   end
 
-  alias :preview_source_url :preview_image
-
   private
 
     def transform_dotted_keys(doc)

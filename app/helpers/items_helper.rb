@@ -18,4 +18,18 @@ module ItemsHelper
       end
     end
   end
+
+  def item_thumbnail(item)
+    if item.preview_image.present?
+      image_tag item.preview_image
+    else
+      default = Settings.ui.items.default_thumbnails
+      case
+      when Array(default.image).include?(item.type) then image_tag 'icon-image.gif'
+      when Array(default.sound).include?(item.type) then image_tag 'icon-sound.gif'
+      when Array(default.video).include?(item.type) then image_tag 'icon-video.gif'
+      else image_tag 'icon-text.gif'
+      end
+    end
+  end
 end

@@ -120,7 +120,7 @@ form {
 
 .searchRight {
   text-align: right;
-  
+
   img {
     width: auto;
   }
@@ -211,6 +211,12 @@ aside {
 #cboxClose:before,
 #cboxClose:after {
   display: none;
+}
+
+.savedList {
+  .delete {
+    text-align: center;
+  }
 }
 
 @media only screen and (min-width: 0px) and (max-width: 680px) {

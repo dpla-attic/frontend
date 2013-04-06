@@ -14,8 +14,7 @@
           - @items.each do |item|
             %section
               .searchRight
-                - if item.preview_source_url
-                  = image_tag item.preview_source_url
+                = item_thumbnail(item)
               .searchLeft
                 %h6= item.type
                 - if item.id.present?

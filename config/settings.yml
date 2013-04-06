@@ -34,3 +34,16 @@ session:
       - localhost
 widgets:
   twitter_username: dpla
+# User interface tweaks
+ui:
+  # Items
+  items:
+    # Default thumbnails for items without thumbnail
+    # Mapping default thumbnails to sourceResource.type field
+    # Text thumbnail will be displayed for unmatched types
+    default_thumbnails:
+      image:
+        - image
+      sound:
+        - sound
+      video:
