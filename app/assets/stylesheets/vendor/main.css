@@ -73,7 +73,7 @@ img {
     vertical-align: middle;
 }
 
-.search img {
+.search img, .FeatureContent img {
     max-width: 100%;
     max-height: 100%;
 }
