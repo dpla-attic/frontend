@@ -11,8 +11,9 @@ jQuery ->
     html = ''
     if $.isPlainObject(result) and $.isArray(result.docs)
       $.each result.docs, (i, doc)->
+        item_href = "/item/#{ doc['id'] }?back_uri=#{ encodeURIComponent(window.location.href) }"
         type  = "<h6>#{ doc['sourceResource.type'] || '' }</h6>"
-        title = "<a href=\"/item/#{ doc['id'] }\">#{ doc['sourceResource.title'] || doc['id'] }</a>"
+        title = "<a href=\"#{ item_href }\">#{ doc['sourceResource.title'] || doc['id'] }</a>"
         creator = "<p><span>#{ doc['sourceResource.creator'] || '' }</span></p>"
         description = "<p>#{ doc['sourceResource.description'] || '' }</p>"
         source_link =

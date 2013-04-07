@@ -35,19 +35,12 @@ MapWrapper = L.Class.extend
 
   onDragend: ->
     this.updateMapMarkers()
-    this.updateWindowLocation()
 
   onZoomstart: ->
     this.closeAllOpenPopups()
 
   onZoomend: ->
     this.updateMapMarkers()
-    this.updateWindowLocation()
-
-  updateWindowLocation: ->
-    # $.each this.getMapPosition(), (key, value)->
-    #   if $.inArray(key, ['lat', 'lng', 'zoom']) > -1
-    #     $.address.parameter(key,value)
 
   navigateToHashParams: ->
     pos =
@@ -269,15 +262,23 @@ MapWrapper = L.Class.extend
 
 
   generatePopup: (points, title) ->
+    t = this
     points = [points] unless points instanceof Array
+
+    base_uri = window.location.href
+    if window.location.href.indexOf('#') > 0
+      base_uri = base_uri.substr(0, window.location.href.indexOf('#'))
+    pos = t.getMapPosition()
+    back_uri = "#{ base_uri }#/?lat=#{ pos.lat }&lng=#{ pos.lng }&zoom=#{ pos.zoom }"
 
     html = ''
     $.each points, (i,point) ->
       point = if $.isPlainObject(point) then point else point.data
+      item_href = "/item/#{ point.id }?back_uri=#{ encodeURIComponent(back_uri) }"
       content =
         """
           <h6> #{ point.type }</h6>
-          <h4><a href="/item/#{ point.id }">#{ point.title }</a></h4>
+          <h4><a href="#{ item_href }">#{ point.title }</a></h4>
           <p><span> #{ point.creator }</span></p>
           <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
         """
