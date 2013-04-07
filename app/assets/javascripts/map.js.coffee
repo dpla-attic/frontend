@@ -45,9 +45,9 @@ MapWrapper = L.Class.extend
     this.updateWindowLocation()
 
   updateWindowLocation: ->
-    $.each this.getMapPosition(), (key, value)->
-      if $.inArray(key, ['lat', 'lng', 'zoom']) > -1
-        $.address.parameter(key,value)
+    # $.each this.getMapPosition(), (key, value)->
+    #   if $.inArray(key, ['lat', 'lng', 'zoom']) > -1
+    #     $.address.parameter(key,value)
 
   navigateToHashParams: ->
     pos =
