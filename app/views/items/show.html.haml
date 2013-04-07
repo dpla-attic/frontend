@@ -17,7 +17,20 @@
 
       .detail-bottom
         %h6 Description
-        %p= @item.description
+        .desc-short
+          %p
+            = @item.description
+            \...&nbsp;
+            %a.desc-toggle
+              more
+              %span.icon-arrow-down{"aria-hidden" => "true"}
+        .desc-long
+          %p
+            = @item.description
+            &nbsp;
+            %a.desc-toggle
+              less
+              %span.icon-arrow-up{"aria-hidden" => "true"}
 
     .table
       = item_field :location

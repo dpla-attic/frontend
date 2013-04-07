@@ -15,12 +15,14 @@
               %ul
                 %li
                   %input{type: "checkbox", class: 'checkbox select-all'}
-                  %a.sort.active.descending{href: ""}
+                  %a.sort.active{href: ""}
                     Search Term
                     %span.icon-arrow-down{"aria-hidden" => "true"}
                 %li.row-2 Filters
                 %li.row-3
-                  %a.sort{href: "#"} Results
+                  %a.sort{href: ""}
+                    Results
+                    %span{"aria-hidden" => "true"}
                 %li.row-4 Delete
               = render partial: 'saved_search', collection: @saved_searches
             .resultsBar#resultsBarBottom

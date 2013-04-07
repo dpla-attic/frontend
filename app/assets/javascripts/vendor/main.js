@@ -144,8 +144,8 @@ $(window).load(function() {
 	$('.searchRowRight form').attr('style', '');
   }
 
-  ///// REFINE SIDEBAR TOGGLE
-  $('#toggle').click(function() {
+  ///// REFINE SIDEBAR TOGGLE: DESKTOP AND TABLET
+  $('.timeline #toggle, .map #toggle').click(function() {
     if ($('aside').is(':visible')) {
       $('aside').addClass('moveOut');
       $('.slidePopOut').addClass('moveIn');
@@ -168,6 +168,7 @@ $(window).load(function() {
     }
   });
 
+  ///// REFINE SIDEBAR TOGGLE: PHONE
   $('#toggle.Marticle').click( function() {
       $('aside').addClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveOut');
@@ -253,28 +254,31 @@ $(window).load(function() {
 
 
   //LIGHT BOX
-  $(".inline").colorbox({
+  $('.inline').colorbox({
     inline:true,
-    width:"100%",
-    maxWidth: "1000px",
-    transition: "none",
-    close: '&times;'
+    width:'100%',
+    maxWidth: '1000px',
+    transition: 'none',
+    close: '&times;',
+    reposition: false
   });
 
-  $(".login").colorbox({
+  $('.login').colorbox({
     inline:true,
-    width:"100%",
-    maxWidth: "600px",
-    transition: "none",
-    close: '&times;'
+    width:'100%',
+    maxWidth: '600px',
+    transition: 'none',
+    close: '&times;',
+    reposition: false
   });
 
-  $(".signUp").colorbox({
+  $('.signUp').colorbox({
     inline:true,
-    width:"100%",
-    maxWidth: "600px",
-    transition: "none",
-    close: '&times;'
+    width:'100%',
+    maxWidth: '600px',
+    transition: 'none',
+    close: '&times;',
+    reposition: false
   });
 
   // $('.pop-open').click(function() {
@@ -282,6 +286,37 @@ $(window).load(function() {
   //     $('.pop-columns.states').fadeIn();
   //   });
   // });
+
+
+  //PROFILE: Saved Searches Column Sort
+  $('.sort').click(function() {
+    if ($(this).hasClass('active')) {
+      if ($(this).find('span').hasClass('icon-arrow-up')) {
+        $(this).find('span').removeClass('icon-arrow-up').addClass('icon-arrow-down');
+      } else {
+        $(this).find('span').removeClass('icon-arrow-down').addClass('icon-arrow-up');
+      }
+    } else {
+      $('.sort').removeClass('active');
+      $('.sort').find('span').removeClass('icon-arrow-up icon-arrow-down');
+      $(this).addClass('active');
+      $(this).find('span').addClass('icon-arrow-down');
+    }
+    return false;
+  });
+
+  //ITEM DETAIL: toggle description length
+  $('.desc-short .desc-toggle').click(function() {
+    $('.desc-short').hide();
+    $('.desc-long').slideDown();
+    return false;
+  });
+  $('.desc-long .desc-toggle').click(function() {
+    $('.desc-long').slideUp(function() {
+      $('.desc-short').fadeIn('fast');
+    });
+    return false;
+  });
 
 
 /////TIMELINE SETUP
