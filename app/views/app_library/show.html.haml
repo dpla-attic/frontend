@@ -1,0 +1,23 @@
+.layout.fullWidth
+  = render 'shared/search_panel'
+  = render 'shared/share_save'
+  
+  .breadCrumbs
+    %ul 
+      %li<
+        %a{:href => "/app-library/"}<
+          App Library 
+      %li<
+        App Name
+
+  %article#content.app-detail{"role"=>"main"}
+    %h1 Search DPLA and Europeana By Jesús Domínguez (DIGIBÍS)
+    .leftSide
+      %img{:src => "/assets/stub-01.jpg", :alt => ""}/ 
+    .rightSide
+      %p Through Europeana and DPLA APIs it's easy to discover sources of information previously unknown or unforeseen and go directly to a digital version of an item.
+      %ul.buttons 
+        %li.btn
+          %a{:href => "http://www.digibis.com/dpla-europeana/"} App Home Page
+        %li.btn
+          %a{:href => ""} Develop this App
