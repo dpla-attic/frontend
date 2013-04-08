@@ -61,7 +61,7 @@ module RefineHelper
   end
 
   def state_facets
-    @search.states ? @search.states.reject { |v| state_refines.include? v }.to_a : []
+    @search.states ? @search.states.reject { |v| state_refines.include? (v) or (!State.state_in_list? (v)) }.to_a : []
   end
 
   def state_refines
