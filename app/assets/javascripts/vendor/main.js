@@ -384,7 +384,6 @@ $(window).load(function() {
 		min: 0,
 		max: endPoint*1000
 	  });
-	  console.log($('.scrubber').slider('value'));
 	}
   }
   initScrub();
@@ -410,7 +409,6 @@ $(window).load(function() {
  //    $('.Decades').hide();
  //    $('.timelineContainer').show();
 	// selectedYear = $(this).index();
-	// console.log(selectedYear);
 	// initTimeline();
  //    return false;
  //  });

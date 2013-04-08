@@ -12,7 +12,8 @@
       .table
         = item_field :creator
         = item_field :created_date
-        = item_field :data_provider
+        = item_field :provider
+        = item_field :data_provider, title: 'Owning Institution'
         = item_field :publisher
 
       .detail-bottom
@@ -51,7 +52,7 @@
             .moduleLeft
               %h6 Created Date
               %p= @item.created_date
-              = link_to 'View on timeline »', timeline_path(anchor: "/?year=#{@item.year}")
+              = link_to 'View on timeline »', timeline_path(anchor: "/?year=#{@item.year}&item_id=#{@item.id}")
             .moduleRight
               %img{:alt => "Timeline", :src => "/assets/moduleImg1.jpg"}/
         - if is_location_present

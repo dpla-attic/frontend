@@ -2,14 +2,21 @@ require_dependency 'dpla/items'
 
 class Timeline < Search
 
-  def api_search_path
-    fields = %w(
+  def fields
+    %w(
       id sourceResource.title isShownAt object
       sourceResource.type sourceResource.creator
       sourceResource.spatial.name sourceResource.spatial.coordinates
     )
+  end
+
+  def api_search_path
     conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields))
     "#{api_base_path}/items?#{conditions}#{api_key}"
+  end
+
+  def api_item_path
+    "#{api_base_path}/items?id=%&fields=#{fields.join(',')}&#{api_key}"
   end
 
   def years

@@ -9,8 +9,12 @@ jQuery ->
 
   render_docs = (result)->
     html = ''
+
+    bumped_item_id = $.address.parameter('item_id')
     if $.isPlainObject(result) and $.isArray(result.docs)
       $.each result.docs, (i, doc)->
+        if bumped_item_id && (doc['id'] == bumped_item_id)
+          return
         item_href = "/item/#{ doc['id'] }?back_uri=#{ encodeURIComponent(window.location.href) }"
         type  = "<h6>#{ doc['sourceResource.type'] || '' }</h6>"
         title = "<a href=\"#{ item_href }\">#{ doc['sourceResource.title'] || doc['id'] }</a>"
@@ -79,6 +83,7 @@ jQuery ->
           html = render_docs result
           loader.remove()
           el.find('.timelineResults').append count, html
+          $('article.timeline').trigger('timeline:year_loaded')
 
       $('.timeContainer').removeClass('decadesView').addClass('yearsView')
       $('.Decades').hide()
@@ -165,3 +170,17 @@ jQuery ->
   if year = $.address.parameter('year')
     li = $("li[data-year=\'#{ year }\']")
     li.click()
+
+    if item_id = $.address.parameter('item_id')
+      $('article.timeline').one 'timeline:year_loaded', ->
+        $.address.parameter('item_id', null)
+        el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
+        $.ajax
+          url: api_item_path.replace '%', item_id
+          dataType: 'jsonp'
+          cache: true
+          success: (result) ->
+            el.find('section').css({opacity: 0.25})
+            el.find('.timelineResults').one 'scroll', ->
+              el.find('section').css({opacity: 1})
+            el.find('h2').after(render_docs result)
