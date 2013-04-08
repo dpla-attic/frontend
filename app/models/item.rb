@@ -45,8 +45,7 @@ class Item
   # returns array with names
   def location
     location = @sourceResource['spatial'].map do |loc|
-      l = loc['name'], loc['country'], loc['region'], loc['county'], loc['state'], loc['city']
-      l.compact.join(', ')
+      l = loc['name']
     end if @sourceResource['spatial'].present?
     Array location
   end
