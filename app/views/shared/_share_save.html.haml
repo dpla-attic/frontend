@@ -9,7 +9,7 @@
           - if @show_unlisted
             = link_to 'Unlisted', add_saved_item_path(item_id: params[:id]), method: :post
           - elsif !@lists.present?
-            Item was saved already
+            .sharebtn Item was saved already
         - if @lists.present?
           - @lists.each do |list|
             %li
