@@ -82,9 +82,11 @@ MapWrapper = L.Class.extend
     zoom: this.map.getZoom()
     radius: center.distanceTo(northEast) / 1000
 
-  turnProgressCursor: (turn)->
-    cursor = if turn then 'progress' else ''
-    $(this.map.getContainer()).css(cursor: cursor)
+  turnProgress: (turn)->
+    if turn
+      $('#loading').show()
+    else
+      $('#loading').hide()
 
   closeAllOpenPopups: ->
     $.each this._openPopups, (i,popup)->
@@ -147,7 +149,7 @@ MapWrapper = L.Class.extend
       dataType: 'jsonp'
       cache: true
       beforeSend: ->
-        t.turnProgressCursor true
+        t.turnProgress true
       success: (data)->
         if $.isPlainObject(data) and $.isArray(data.docs)
           points = $.map data.docs, (doc)->
@@ -159,7 +161,7 @@ MapWrapper = L.Class.extend
           popup = t.generatePopup(points, link_to_state_search).setLatLng(latlng)
           t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
       complete: (jqXHR, textStatus)->
-        t.turnProgressCursor false
+        t.turnProgress false
 
   getRegularLayer: ->
     t = this
@@ -199,12 +201,12 @@ MapWrapper = L.Class.extend
       dataType: 'jsonp'
       cache: true
       beforeSend: ->
-        t.turnProgressCursor true
+        t.turnProgress true
       success: (data)->
         if $.isPlainObject(data) and $.isArray(data.docs)
           t.drawRegularItems data.docs
       complete: (jqXHR, textStatus)->
-        t.turnProgressCursor false
+        t.turnProgress false
 
   drawRegularItems: (docs)->
     t = this
