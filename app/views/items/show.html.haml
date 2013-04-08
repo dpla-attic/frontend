@@ -55,16 +55,16 @@
               = link_to 'View on timeline »', timeline_path(anchor: "/?year=#{@item.year}&item_id=#{@item.id}")
             .moduleRight
               %img{:alt => "Timeline", :src => "/assets/moduleImg1.jpg"}/
-        - if is_location_present
-          .moduleSection
-            .moduleLeft
-              %h6 Location
-              %p= @item.location.first
-              - coordinates = @item.coordinates.first
-              - anchor = {lat: coordinates.first.strip, lng: coordinates.last.strip, zoom: 10}.to_param
-              = link_to 'View on map »', map_path(anchor: "/?#{anchor}")
-            .moduleRight
-              %img{:alt => "Map", :src => "/assets/moduleImg2.jpg"}/
+        / - if is_location_present
+        /   .moduleSection
+        /     .moduleLeft
+        /       %h6 Location
+        /       %p= @item.location.first
+        /       - coordinates = @item.coordinates.first
+        /       - anchor = {lat: coordinates.first.strip, lng: coordinates.last.strip, zoom: 10}.to_param
+        /       = link_to 'View on map »', map_path(anchor: "/?#{anchor}")
+        /     .moduleRight
+        /       %img{:alt => "Map", :src => "/assets/moduleImg2.jpg"}/
     / .module
     /   %h6 From the Collection
     /   %h5
