@@ -75,4 +75,8 @@ class State
       self.new state.last
     end
   end
+
+  def self.state_in_list?(state)
+    LIST.has_key? state
+  end
 end
