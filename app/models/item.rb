@@ -9,6 +9,7 @@ class Item
     @object         = doc['object']
     @isShownAt      = doc['isShownAt']
     @dataProvider   = doc['dataProvider']
+    @provider       = doc['provider']['name']
     if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
       @sourceResource['spatial'] = [ @sourceResource['spatial'] ]
     end
@@ -82,6 +83,10 @@ class Item
 
   def data_provider
     @dataProvider
+  end
+
+  def provider
+    @provider
   end
 
   private
