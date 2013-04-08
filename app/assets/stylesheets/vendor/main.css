@@ -71,10 +71,12 @@ hr {
 
 img {
     vertical-align: middle;
+    max-width: 100%;
 }
 
-.search img, .FeatureContent img {
-    max-width: 100%;
+.search img,
+.FeatureContent img,
+.searchMiddle img {
     max-height: 100%;
 }
 
