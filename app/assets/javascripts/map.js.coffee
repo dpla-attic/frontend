@@ -56,13 +56,13 @@ MapWrapper = L.Class.extend
   updateMapMarkers: ->
     stateLayer  = this.getStateLayer()
     pointsLayer = this.getRegularLayer()
+
+    this.map.addLayer stateLayer
     switch
       when this.map.getZoom() in [4..6]
         this.map.removeLayer pointsLayer
-        this.map.addLayer    stateLayer
       else
         this.requestRegularMarkers(this.getMapPosition())
-        this.map.removeLayer stateLayer
         this.map.addLayer    pointsLayer
 
   roundMapClusterCount: (count)->
