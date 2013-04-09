@@ -5,5 +5,5 @@ $(document).ready ->
   $('#searchBox').submit ->
     body_class = $('body').attr 'class'
     if $.trim($('#q').val()).length == 0
-      /timeline|map/.test(body_class) or window.is_refines_present
+      !! (/timeline|map/.test(body_class) or window.is_refines_present)
 
