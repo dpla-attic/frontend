@@ -5,7 +5,7 @@
       %li= link_to 'App Library', apps_path
       %li= @app.title
   = render 'shared/share_save'
-  %article#content.app-detail{role: :main}
+  %article#content.app-detail{role: "main"}
     %h1= @app.title
     - if @app.screenshot.present?
       .leftSide
