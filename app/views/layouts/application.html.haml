@@ -32,6 +32,7 @@
         = image_tag "logo.png", :alt => "DPLA: Digital Public Library of America"
       %a.menu-btn{:href => ""}
         %span.icon-arrow-thin-down{"aria-hidden" => "true"}
+        %span.visuallyhidden Navigation
       %nav.topNav#top-nav= render 'shared/top_navigation'
       %nav.MainNav#main-nav{role: "navigation"}= render partial: 'shared/main_navigation'
     .clear

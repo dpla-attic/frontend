@@ -10,6 +10,7 @@
         = link_to unlisted_saved_lists_path, class: "name locked" do
           Unlisted
           %span.icon-lock{'aria-hidden' => true}
+          %span.visuallyhidden Private
         %span= @unlisted.count
       - @lists.each do |list|
         %li{class: list.eql?(@list) ? 'active' : ''}
@@ -18,6 +19,7 @@
             = list.title
             - if list.private?
               %span.icon-lock{'aria-hidden' => true}
+              %span.visuallyhidden Private
           %span= list.saved_items.count
           = link_to 'edit', edit_saved_list_path(list), class: :edit
           = link_to '×',    list, class: :remove, method: :delete, confirm: 'Are you sure?'
