@@ -45,11 +45,6 @@ DplaPortal::Application.routes.draw do
     end
   end
 
-  scope 'app-library', as: :app_library do
-    match 'details', to: 'app_library#show'
-    root to: 'app_library#index'
-  end
-
   match '/welcome' => 'users#welcome'
   root to: 'pages#home'
 end
