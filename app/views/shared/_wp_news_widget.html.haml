@@ -1,0 +1,18 @@
+- if  wordpress_url = Settings.widgets.wordpress_url
+  :javascript
+    window.wordpress_url = "#{ wordpress_url }";
+  #wp_news_feed
+    .news
+      %ul
+
+/ .news
+/   %ul
+/     %li
+/       %a{:href => ""} Press: Toby Graham interview about the DPLA on WGAU.
+/       %p
+/         %span Nov 15
+/     %li
+/       %a{:href => ""} Rijksmusem Launches 125,000 Image Digital Collection
+/       %p
+/         %span Nov 13
+/   %a{:href => ""} All News »

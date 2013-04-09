@@ -82,25 +82,6 @@
           %a{:href => "#"} App Home Page »
     %section.right
       %h1.border News
-      %ul.social
-        %li.facebook
-          %a{:href => ""}
-            %span.icon-facebook{"aria-hidden" => "true"}
-        %li.twitter
-          %a{:href => ""}
-            %span.icon-twitter{"aria-hidden" => "true"}
-        %li.RSS
-          %a{:href => ""}
-            %span.icon-rss{"aria-hidden" => "true"}
-      .news
-        %ul
-          %li
-            %a{:href => ""} Press: Toby Graham interview about the DPLA on WGAU.
-            %p
-              %span Nov 15
-          %li
-            %a{:href => ""} Rijksmusem Launches 125,000 Image Digital Collection
-            %p
-              %span Nov 13
-        %a{:href => ""} All News »
-      = render partial: 'shared/twitter_widget'
+      = render 'shared/social_icons'
+      = render 'shared/wp_news_widget'
+      = render 'shared/twitter_widget'
