@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130405074111) do
+ActiveRecord::Schema.define(:version => 20130409101234) do
 
   create_table "apps", :force => true do |t|
     t.string   "title"
@@ -20,8 +20,9 @@ ActiveRecord::Schema.define(:version => 20130405074111) do
     t.string   "home_page_url"
     t.string   "icon"
     t.string   "screenshot"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "develop_app_url"
   end
 
   create_table "saved_item_positions", :force => true do |t|
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20130405074111) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "name",                   :default => "", :null => false
+    t.boolean  "is_admin"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

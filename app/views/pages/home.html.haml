@@ -60,26 +60,8 @@
       %h4
         The DPLA is a platform. Developers make apps that use the library’s data in many different ways. Here are just a few.
         %span
-          %a{:href => "#"} App Library »
-      .moduleContainer
-        .module
-          .icon
-            = image_tag "icon-1.png"
-          .text
-            %h5
-              %a{:href => ""} Catalog the Whole Earth
-            %p By Jeff Goldenson, Jessica Yurkofsky
-          %p It allows anyone to catalog the world around them really easily. They email a picture of whatever they want to catalog to the webapp, and then log online to edit metadata and submit.
-          %a{:href => "#"} App Home Page »
-        .module.yellow
-          .icon
-            = image_tag "icon-2.png"
-          .text
-            %h5
-              %a{:href => ""} Cuttr
-            %p By Cecily Walker, Jessica Keyes, Andromeda Yelton, Nandhita Kumar, Ashley K. Worley
-          %p Crowdsourced question and answer service. The service allows users to ask and answer questions, vote on relevance of questions, and earn reputation points based on answers.
-          %a{:href => "#"} App Home Page »
+          %a{:href => apps_path} App Library »
+        = render partial: 'shared/apps/apps_view'
     %section.right
       %h1.border News
       = render 'shared/social_icons'

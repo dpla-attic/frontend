@@ -1,4 +1,7 @@
 class AppsController < ApplicationController
+
+  before_filter :prepare_view_params, only: [:index, :show]
+
   def index
     @apps = App.page(params[:page]).per(6)
 
@@ -66,5 +69,9 @@ class AppsController < ApplicationController
       format.html { redirect_to apps_url }
       format.json { head :no_content }
     end
+  end
+
+  def prepare_view_params
+    @is_admin = user_signed_in? && current_user.is_admin
   end
 end
