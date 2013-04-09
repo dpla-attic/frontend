@@ -3,7 +3,7 @@
     %p Apps not found
 - else
   - @apps.each_slice(3) do |apps_row|
-    .moduleContainer.threeCol
+    .moduleContainer{class: 'apps' == params[:controller] ? 'threeCol' : nil}
       - apps_row.each do |app|
         %section.module
           - if app.icon.present?

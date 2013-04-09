@@ -6,9 +6,6 @@
       %li= @app.title
   = render 'shared/share_save'
   %article#content.app-detail{role: :main}
-    - if is_admin?
-      = link_to 'Edit', edit_app_path, class: :btn
-      = link_to 'Delete app', @app, class: :btn, method: :delete, confirm: 'Are you sure?'
     %h1= @app.title
     - if @app.screenshot.present?
       .leftSide
@@ -18,3 +15,8 @@
       %ul.buttons
         %li.btn= link_to 'App Home page', @app.home_page_url
         %li.btn= link_to 'Develop this App', @app.develop_app_url
+      %br
+      %ul.buttons
+        - if is_admin?
+          %li.btn= link_to 'Edit this app', edit_app_path
+          %li.btn= link_to 'Delete this app', @app, method: :delete, confirm: 'Are you sure?'
