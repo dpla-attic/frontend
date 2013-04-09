@@ -1,4 +1,7 @@
 DplaPortal::Application.routes.draw do
+  resources :apps
+
+
   devise_for :users, controllers: {
     :registrations => "registrations",
     :confirmations => "confirmations",
@@ -40,11 +43,6 @@ DplaPortal::Application.routes.draw do
       post   'copy_positions',        to: 'saved_lists#copy_positions',    as: :copy_positions
       post   'move_positions',        to: 'saved_lists#move_positions',    as: :move_positions
     end
-  end
-
-  scope 'app-library', as: :app_library do
-    match 'details', to: 'app_library#show'
-    root to: 'app_library#index'
   end
 
   match '/welcome' => 'users#welcome'

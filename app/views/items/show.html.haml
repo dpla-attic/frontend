@@ -38,7 +38,12 @@
       = item_field :location
       = item_field :format
       = item_field :type
-      = item_field :subject
+      - if @item.subject.present?
+        %ul
+          %li
+            %h6 Subject
+          %li
+            = Array(@item.subject).map { |s| link_to_subject s }.join('<br />').html_safe
       = item_field :rights
       = item_field :url, title: 'URL' do
         = link_to @item.url, @item.url, target: :_blank
