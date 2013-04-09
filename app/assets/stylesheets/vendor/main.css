@@ -1275,9 +1275,6 @@ aside .moduleSection p { margin: 0 0 10px; }
 	top: 151px;
 	z-index: 1;
 }
-.Decades .next {
-	display: none;
-}
 .DecadesDates {
     background: none repeat scroll 0 0 #8b8b8b;
     border-bottom: 3px solid #FFFFFF;
@@ -1285,7 +1282,6 @@ aside .moduleSection p { margin: 0 0 10px; }
 	padding: 22px 0 0 0.391389%;
     position: relative;
 	height: 31px;
-	right: 91.659%;
 }
 .DecadesDates ul {
     margin: 0;
@@ -1332,7 +1328,7 @@ aside .moduleSection p { margin: 0 0 10px; }
 
 
 .bars {
-    margin: 0 -22% 0 0.5%;
+    margin: 0 -19% 0 0.5%;
     padding: 0;
 }
 .yearsView .bars {
@@ -1346,7 +1342,7 @@ aside .moduleSection p { margin: 0 0 10px; }
 .centuries {
     border-bottom: 1px solid #2b2b2b;
     padding: 10px 0 0 0;
-    margin: 0 -16% 0 -4%;
+    margin: 0 -13.5% 0 -4%;
     overflow: hidden;
 }
 .yearsView .centuries {
@@ -1355,7 +1351,7 @@ aside .moduleSection p { margin: 0 0 10px; }
 .centuries li {
     list-style: none;
     margin: 0;
-	width: 9.27%;
+	width: 9.15%;
     float: left;
 	text-align: center;
     background: url(/assets/timlineLine.jpg) no-repeat center bottom;
@@ -1377,7 +1373,7 @@ aside .moduleSection p { margin: 0 0 10px; }
     position: absolute;
     top: -3px;
     cursor: pointer;
-    width: 12.4%;
+    width: 10%;
 	outline: none;
 	cursor: move;
     text-align: center;
@@ -1430,7 +1426,6 @@ aside .moduleSection p { margin: 0 0 10px; }
     clear: both;
 	min-height: 500px;
     position: relative;
-	right: 91.659%;
 }
 .graph ul {
     margin: 0;
@@ -1442,7 +1437,7 @@ aside .moduleSection p { margin: 0 0 10px; }
 .infoOuter {
     background: url(/assets/popup-arrow.png) no-repeat center top;
     position: absolute;
-    left: -999em;
+    left: -1999em;
 }
 .info h3 { margin: 0; }
 .graph li .info {
@@ -2217,7 +2212,7 @@ aside h5 { margin: 5px 0 1em; }
 }
 
 .timelineModule {
-    margin: 0 13% 25px 3%;
+    margin: 0 11.5% 25px 3%;
 }
 
 .timelineContainer {
