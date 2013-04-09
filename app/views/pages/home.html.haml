@@ -26,7 +26,7 @@
         %p from libraries, archives, and museums
         = form_tag(search_path, method: :get, authenticity_token: false, class: 'search-form') do
           = preserved_search_fields without: :q
-          = text_field_tag :q, params[:q], placeholder: 'Search the Library'
+          = text_field_tag :q, params[:q], placeholder: 'Search the Library', required: 'required'
           = submit_tag 'Search', class: 'searchBtn', name: nil
     %section.right
       .row.yellow
