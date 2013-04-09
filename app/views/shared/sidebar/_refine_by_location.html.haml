@@ -59,6 +59,10 @@
                     %span.current{data: {page: page}}= page
                   - else
                     %a{href: '#', data: {page: page}}= page
+
+        - us_refined = country_refines.include? 'United States'
+        - us_facet = nil
+
         = country_facets.each_slice(30).with_index do |section, page|
           - page = page + 1
           - hidden_style = page != 1 ? 'display:none' : ''
@@ -66,12 +70,27 @@
             - section.in_groups(3).each do |column|
               %section
                 %ul
+                  - column.each do |facet|
+                    - next if facet.nil?
+                    - if facet.first == 'United States'
+                      - us_facet = facet
+                      - true
+                  - if us_facet or us_refined
+                    %li
+                      %span.pop-open
+                      - if us_refined
+                        %span{style: 'float:left;'} United States
+                      - else
+                        = link_to 'United States', refine_path(:country, 'United States')
+                      - if us_facet
+                        %span= us_facet.last
+                    - us_facet = us_refined = nil
+
                   - column.reject(&:nil?).each do |facet|
-                    - name, count = facet.shift, facet.shift
+                    - name, count = facet.first, facet.last
                     - if name.present?
+                      - next if name == 'United States'
                       %li
-                        - if 'united states' == name.downcase
-                          %span.pop-open
                         = link_to name, refine_path(:country, name)
                         %span= count
 
