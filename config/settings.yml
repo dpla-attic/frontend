@@ -34,6 +34,14 @@ session:
       - localhost
 widgets:
   twitter_username: dpla
+  # URL of wordpress site.
+  # NOTE: JSON API plugin is required to able read Wordpress feed as JSONP requests
+  wordpress_url: http://dp.la
+  # Urls for social icons
+  social_icons:
+    facebook: https://www.facebook.com/theDPLA
+    twitter: https://twitter.com/dpla
+    rss: http://dp.la/feed
 # User interface tweaks
 ui:
   # Items

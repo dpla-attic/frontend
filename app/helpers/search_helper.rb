@@ -19,4 +19,8 @@ module SearchHelper
     href = [Settings.exhibitions.site, 'exhibits', 'show', exhibition.slug].join('/')
     link_to exhibition.title, href
   end
+
+  def link_to_subject(subject)
+    link_to subject, search_path(subject: subject)
+  end
 end
