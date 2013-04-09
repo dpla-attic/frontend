@@ -2,7 +2,7 @@
   = render 'shared/search_panel'
   = render 'shared/share_save'
   %h1= @item.title || @item.id
-  %article
+  %article#content{role: "main"}
     .FeatureContent
       .contentBox
         = item_thumbnail(@item)

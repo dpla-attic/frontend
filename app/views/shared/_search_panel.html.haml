@@ -20,7 +20,7 @@
       %span.icon-mag-glass{"aria-hidden" => "true"}
     - url = %w(timeline search map).include?(params[:controller]) ? params[:controller] : '/search'
     - Rails.logger.debug "URL: #{url}"
-    = form_tag(url, method: :get, authenticity_token: false, id: :searchBox, class: 'search-form') do
+    = form_tag(url, method: :get, authenticity_token: false, id: :searchBox, class: 'search-form', role: 'search') do
       = preserved_search_fields without: :q
       = text_field_tag :q, params[:q], placeholder: 'Search the Library'
       = submit_tag 'Search', class: 'searchBtn', name: nil

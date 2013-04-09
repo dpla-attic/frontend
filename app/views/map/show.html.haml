@@ -7,7 +7,7 @@
     = render 'shared/refine_control'
 
     - aside_collapses = params[:controller] != 'search'
-    %article{class: aside_collapses ? 'widthL' : 'widthS'}
+    %article#content{class: aside_collapses ? 'widthL' : 'widthS', role: "main"}
       %p.message Only results with location data are shown below.
       .mapContainer
         .mobile-hover

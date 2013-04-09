@@ -11,7 +11,7 @@
       results.
     = render 'shared/results/refined_by', search: search
 - else
-  .searchResults.no-results{role: "main"}
+  .searchResults.no-results#content{role: "main"}
     %h4
       -if query.nil?
         Your search didn't return results
