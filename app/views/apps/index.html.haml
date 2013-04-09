@@ -6,7 +6,7 @@
     %h4 Explore the DPLA through many apps lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a dui at ligula viverra blandit et quis velit. Donec tempor tincidunt nisi sit amet venenatis. Proin at mauris vel lectus egestas mattis. In sed ligula non ipsum ullamcorper eleifend vel eget orci. Aenean id leo at massa lacinia iaculis sit amet quis sapien. Proin a venenatis magna.
 
     = link_to 'Become an App Developer', '#', class: :btn
-    - if @is_admin
+    - if is_admin?
       = link_to 'New App', new_app_path, class: :btn
     .pagination= paginate @apps
 

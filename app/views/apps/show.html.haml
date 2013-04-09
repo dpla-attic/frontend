@@ -6,7 +6,7 @@
       %li= @app.title
   = render 'shared/share_save'
   %article#content.app-detail{role: :main}
-    - if @is_admin
+    - if is_admin?
       = link_to 'Edit', edit_app_path, class: :btn
       = link_to 'Delete app', @app, class: :btn, method: :delete, confirm: 'Are you sure?'
     %h1= @app.title

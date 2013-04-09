@@ -1,6 +1,6 @@
 class AppsController < ApplicationController
 
-  before_filter :prepare_view_params, only: [:index, :show]
+  before_filter :authenticate_admin!, only: [:edit, :create, :update, :destroy]
 
   def index
     @apps = App.page(params[:page]).per(6)
@@ -71,7 +71,4 @@ class AppsController < ApplicationController
     end
   end
 
-  def prepare_view_params
-    @is_admin = user_signed_in? && current_user.is_admin
-  end
 end
