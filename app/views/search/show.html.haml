@@ -31,3 +31,6 @@
     = render partial: 'shared/sidebar'
     #resultsBarBottom.resultsBar
       = render partial: 'paginator'
+
+  :javascript
+    window.is_refines_present = #{ refines_present? };
