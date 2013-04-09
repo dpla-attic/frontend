@@ -1,6 +1,6 @@
 class AppsController < ApplicationController
 
-  before_filter :authenticate_admin!, only: [:edit, :create, :update, :destroy]
+  before_filter :authenticate_admin!, only: [:edit, :new, :create, :update, :destroy]
 
   def index
     @apps = App.page(params[:page]).per(6)
