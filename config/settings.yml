@@ -22,7 +22,7 @@ exhibitions:
     default_index: omeka
 # Google Analytics account
 googleanalytics:
-  tracker: UA-38671601-1
+  tracker: UA-28197764-1
 # Sessions settings
 session:
   # Store settings. cookie_store and dalli_store are available
