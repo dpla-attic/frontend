@@ -5,7 +5,7 @@
   %h1 Search Results
   = render 'shared/results/search_results', query: params[:q], search: @search
   - if @search.count > 0
-    .slidePopOut
+    .slidePopOut#content{role: "main"}
       #resultsBarTop.resultsBar
         = render partial: 'paginator'
       %article
