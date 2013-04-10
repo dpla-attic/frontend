@@ -19,6 +19,7 @@ gem 'kaminari'
 gem 'navigasmic'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'page_title_helper'
 
 gem 'dalli'
 gem 'httparty'

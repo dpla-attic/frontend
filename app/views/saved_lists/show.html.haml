@@ -1,3 +1,8 @@
+- if @list.present?
+  - page_title! t('.title', title: @list.title)
+- else
+  - page_title! t('.title_unlisted')
+
 .layout.fullWidth
   = render 'shared/search_panel'
   %article#content{role: "main"}

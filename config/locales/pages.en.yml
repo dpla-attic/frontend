@@ -1,0 +1,60 @@
+en:
+  app:
+    name: Digital Public Library of America
+  pages:
+    home:
+      title: Welcome
+  users:
+    welcome:
+      title: Welcome
+  apps:
+    index:
+      title: App Library
+    new:
+      title: Add New Application to Library
+    show:
+      title: Application “%{name}”
+    edit:
+      title: Edit Application “%{name}”
+  subjects:
+    index:
+      title: Subjects
+  search:
+    show:
+      title: Search
+      title_with_query: '“%{query}” - %{title}'
+  timeline:
+    show:
+      title: Timeline
+      title_with_query: '“%{query}” - %{title}'
+  map:
+    show:
+      title: Map
+      title_with_query: '“%{query}” - %{title}'
+  saved_searches:
+    index:
+      title: Saved Searches
+  saved_lists:
+    new:
+      title: New Saved List
+    edit:
+      title: Edit Saved List “%{title}”
+    index:
+      title: Saved Items & Lists
+    show:
+      title: Saved List “%{title}”
+      title_unlisted: Unlisted Saved Items
+  sessions:
+    new:
+      title: Sign In
+  passwords:
+    new:
+      title: Forgot your password?
+  registrations:
+    new:
+      title: Sign up
+    edit:
+      title: Your Profile
+  confirmations:
+    new:
+      title: Resend confirmation instructions

@@ -1,3 +1,5 @@
+- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+
 .layoutTwo.timeline
   = render 'shared/search_panel'
 

@@ -1,3 +1,5 @@
+- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+
 .layoutTwo.search-page
   = render 'shared/search_panel'
   = render 'shared/share_save'
