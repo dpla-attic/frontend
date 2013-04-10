@@ -9,15 +9,6 @@ DplaPortal::Application.routes.draw do
     :passwords     => "passwords"
   }
 
-  scope 'about', as: :about, via: :get do
-    match 'overview',       to: 'pages#overview'
-    match 'leadership',     to: 'pages#leadership'
-    match 'workstreams',    to: 'pages#workstreams'
-    match 'for-developers', to: 'pages#for_developers', as: 'for_developers'
-    match 'get-involved',   to: 'pages#get_involved',   as: 'get_involved'
-    root to: redirect('/about/overview')
-  end
-
   get '/item/:id', to: 'items#show', as: 'item'
 
   resources :subjects, only: :index
