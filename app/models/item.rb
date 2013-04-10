@@ -40,7 +40,7 @@ class Item
   end
 
   def year
-    @sourceResource['date']['displayDate'].split('-').first rescue nil
+    @sourceResource['date']['begin'].split('-').first rescue nil
   end
 
   # returns array with names
