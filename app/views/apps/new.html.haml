@@ -2,10 +2,8 @@
   = render 'shared/search_panel'
 
   %article#content{role: "main"}
-    %h1 Your Profile
+    %h1 New app
     .profile
-      = render partial: 'shared/profile/tabs'
       .tab-content
-        %h1 New Saved List
         .account
-          = render partial: 'form'
+          = render 'form'

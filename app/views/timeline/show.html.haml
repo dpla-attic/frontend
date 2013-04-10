@@ -1,3 +1,5 @@
+- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+
 .layoutTwo.timeline
   = render 'shared/search_panel'
 
@@ -9,8 +11,7 @@
     / Main container
     - aside_collapsed = params[:controller] != 'search'
     .timeContainer.decadesView{class: aside_collapsed ? 'widthL' : 'widthS'}
-      %article.timeline
-        %p.message Only results with time data are shown below.
+      %article.timeline#content{role: "main"}
         / Century timeline
         = render 'timeline_module'
 

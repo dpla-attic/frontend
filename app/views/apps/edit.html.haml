@@ -1,11 +1,11 @@
+- page_title! t('.title', name: @app.title )
+
 .layout.fullWidth
   = render 'shared/search_panel'
 
   %article#content{role: "main"}
-    %h1 Your Profile
+    %h1 Edit app "#{@app.title_was}"
     .profile
-      = render partial: 'shared/profile/tabs'
       .tab-content
-        %h1 New Saved List
         .account
-          = render partial: 'form'
+          = render 'form'

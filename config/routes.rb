@@ -1,19 +1,13 @@
 DplaPortal::Application.routes.draw do
+  resources :apps
+
+
   devise_for :users, controllers: {
     :registrations => "registrations",
     :confirmations => "confirmations",
     :sessions      => "sessions",
     :passwords     => "passwords"
   }
-
-  scope 'about', as: :about, via: :get do
-    match 'overview',       to: 'pages#overview'
-    match 'leadership',     to: 'pages#leadership'
-    match 'workstreams',    to: 'pages#workstreams'
-    match 'for-developers', to: 'pages#for_developers', as: 'for_developers'
-    match 'get-involved',   to: 'pages#get_involved',   as: 'get_involved'
-    root to: redirect('/about/overview')
-  end
 
   get '/item/:id', to: 'items#show', as: 'item'
 
@@ -40,11 +34,6 @@ DplaPortal::Application.routes.draw do
       post   'copy_positions',        to: 'saved_lists#copy_positions',    as: :copy_positions
       post   'move_positions',        to: 'saved_lists#move_positions',    as: :move_positions
     end
-  end
-
-  scope 'app-library', as: :app_library do
-    match 'details', to: 'app_library#show'
-    root to: 'app_library#index'
   end
 
   match '/welcome' => 'users#welcome'

@@ -1,3 +1,5 @@
+- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+
 .layoutTwo.search-page
   = render 'shared/search_panel'
   = render 'shared/share_save'
@@ -5,7 +7,7 @@
   %h1 Search Results
   = render 'shared/results/search_results', query: params[:q], search: @search
   - if @search.count > 0
-    .slidePopOut
+    .slidePopOut#content{role: "main"}
       #resultsBarTop.resultsBar
         = render partial: 'paginator'
       %article
@@ -31,3 +33,6 @@
     = render partial: 'shared/sidebar'
     #resultsBarBottom.resultsBar
       = render partial: 'paginator'
+
+  :javascript
+    window.is_refines_present = #{ refines_present? };

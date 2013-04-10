@@ -1,7 +1,9 @@
+- page_title! t('.title', title: @list.title_was)
+
 .layout.fullWidth
   = render 'shared/search_panel'
 
-  %article
+  %article#content{role: "main"}
     %h1 Your Profile
     .profile
       = render partial: 'shared/profile/tabs'

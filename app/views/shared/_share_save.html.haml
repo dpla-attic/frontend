@@ -15,7 +15,7 @@
             %li
               - item_params = {id: list, item_id: params[:id]}
               = link_to list.title, add_saved_item_path(item_params), method: :post
-  %li.btn
+  %li.btn.share
     %a{:href => ""} Share
     %ul
       %li

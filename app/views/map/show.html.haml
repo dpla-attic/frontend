@@ -1,3 +1,5 @@
+- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+
 .layoutTwo.map
   = render 'shared/search_panel'
 
@@ -7,8 +9,7 @@
     = render 'shared/refine_control'
 
     - aside_collapses = params[:controller] != 'search'
-    %article{class: aside_collapses ? 'widthL' : 'widthS'}
-      %p.message Only results with location data are shown below.
+    %article#content{class: aside_collapses ? 'widthL' : 'widthS', role: "main"}
       .mapContainer
         .mobile-hover
         .mapFrame
