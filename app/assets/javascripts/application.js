@@ -36,3 +36,4 @@
 //= require saved_searches.js.coffee
 //= require saved_lists.js.coffee
 //= require subjects.js.coffee
+//= require share-ie.js.coffee

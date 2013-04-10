@@ -222,6 +222,17 @@ aside {
   }
 }
 
+.shareSave {
+  .hover-ie {
+    a {
+      background: black;
+    }
+    ul {
+      right: 0;
+    }
+  }
+}
+
 @media only screen and (min-width: 0px) and (max-width: 680px) {
   #colorbox #cboxClose,
   #cboxClose,
