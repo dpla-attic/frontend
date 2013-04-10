@@ -7,7 +7,9 @@
       - apps_row.each do |app|
         %section.module
           - if app.icon.present?
-            .icon= image_tag app.icon
+            .icon
+              = link_to app do
+                = image_tag app.icon
           .text
             %h5= link_to app.title, app
             %p= app.author
