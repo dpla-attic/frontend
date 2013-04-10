@@ -120,8 +120,7 @@ class SavedListsController < ApplicationController
           saved_list: target_list,
           saved_item: original_position.saved_item
         )
-
-        if (flag = :move)
+        if (flag == :move)
           current_user.saved_item_positions
             .where(saved_item_id: original_position.saved_item, saved_list_id: original_position.saved_list)
             .delete_all
