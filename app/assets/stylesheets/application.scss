@@ -9,10 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require vendor/normalize.css
- *= require vendor/fonts.css
  *= require vendor/main.css
  *= require vendor/dpla-colors.css
  *= require vendor_overrides.scss
+ *= require fonts.css
  *= require map.scss
  *= require search.scss
  *= require subjects.scss

@@ -65,7 +65,7 @@ module DplaPortal
     # Add the fonts path
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     # Precompile additional assets
-    config.assets.precompile += %w( .svg .eot .woff .ttf lte-ie7.js)
+    config.assets.precompile += %w( .svg .eot .woff .ttf lte-ie7.js modernizr-2.6.2.min.js fonts.css)
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.011'
