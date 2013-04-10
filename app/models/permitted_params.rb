@@ -12,7 +12,7 @@ class PermittedParams < Struct.new(:params)
     filters = params.map do |key, value|
       case key
       when *(%w(before after))
-        date = date_from_params(value)
+        date = date_from_params(value, end: key == 'before')
         [key, date] unless date.nil?
       when *(%w(type language subject country state place provider))
         [key, value]
@@ -35,8 +35,8 @@ class PermittedParams < Struct.new(:params)
 
   def date_from_params(date, options = {})
     if date.is_a? Hash and date[:year].present?
-      month = date[:month].present? ? date[:month] : (options[:start] ? '12' : '1')
-      day   = date[:day].present?   ? date[:day]   : (options[:start] ? '31' : '1')
+      month = date[:month].present? ? date[:month] : (options[:end] ? '12' : '1')
+      day   = date[:day].present?   ? date[:day]   : (options[:end] ? '31' : '1')
       Date.new *[date[:year], month, day].map(&:to_i) rescue nil
     end
   end
