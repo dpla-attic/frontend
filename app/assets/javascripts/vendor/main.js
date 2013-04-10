@@ -150,7 +150,7 @@ $(window).load(function() {
       $('aside').addClass('moveOut');
       $('.slidePopOut').addClass('moveIn');
       $('.map article, .timeContainer').addClass('widthL');
-      $('#toggle').html('Refine <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
+      $('#toggle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
 
       $('aside').removeClass('moveIn');
       $('.slidePopOut').removeClass('moveOut');
@@ -160,7 +160,7 @@ $(window).load(function() {
       $('aside').addClass('moveIn');
       $('.slidePopOut').addClass('moveOut');
       $('.map article, .timeContainer').addClass('widthS');
-      $('#toggle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Refine');
+      $('#toggle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Hide');
 
       $('aside').removeClass('moveOut');
       $('.slidePopOut').removeClass('moveIn');
@@ -368,7 +368,7 @@ $(window).load(function() {
       endPoint = 100;
       initScrub();
     }
-    
+
   }
   initTimeline();
 
@@ -481,7 +481,7 @@ $(window).load(function() {
   //   $('.scrubber').slider('value', $('.scrubber').slider('value') + 98.039257);
   //   if($(this).parent().next().hasClass('timeline-row')) {
   //     $('.prev, .next').hide();
-  //     $('.timelineContainer').animate({ right: '+=100%' }, 500, function() { 
+  //     $('.timelineContainer').animate({ right: '+=100%' }, 500, function() {
   //       getQueryString();
   //       if (queryObj[ "year" ] == 2013) {
   //         $('.prev').show();
@@ -496,7 +496,7 @@ $(window).load(function() {
   //   if($(this).parent().prev().hasClass('timeline-row')) {
   //     $('.scrubber').slider('value', $('.scrubber').slider('value') - 98.039257);
   //     $('.prev, .next').hide();
-  //     $('.timelineContainer').animate({ right: '-=100%' }, 500, function() { 
+  //     $('.timelineContainer').animate({ right: '-=100%' }, 500, function() {
   //       getQueryString();
   //       if (queryObj[ "year" ] == 1000) {
   //         $('.next').show();
