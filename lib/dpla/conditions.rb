@@ -68,7 +68,7 @@ module DPLA
         conditions.each do |key, value|
           next unless value.present?
           comma_separated = [:facets, :fields].include?(key.to_sym)
-          wrap = ['sourceResource.subject.name'].include?(key.to_s)
+          wrap = /subject|language|type|provider|country|state|place/.match key.to_s
           value = Array(value).select { |v| v.present? }
           value.map! { |v| ['"', v, '"'].join } if !comma_separated and wrap
           value.map! { |v| encode_uri(v) }
