@@ -131,6 +131,7 @@ jQuery ->
       fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
       container.animate { right: '+=100%' }, 500, ->
         $('.prev, .next').show()
+      $('.scrubber').slider('value', $('.scrubber').slider('value') + 98.039257);
       current_sheet = current_sheet + 1
 
     else if event.target.className == 'prev'
@@ -139,6 +140,7 @@ jQuery ->
       fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
       container.animate { right: '-=100%' }, 500, ->
         $('.prev, .next').show()
+      $('.scrubber').slider('value', $('.scrubber').slider('value') - 98.039257);
       current_sheet = current_sheet - 1
 
     updateWindowLocation year: year

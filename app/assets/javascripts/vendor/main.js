@@ -329,7 +329,7 @@ $(window).load(function() {
 
   // Get year from querystring
   function getQueryString() {
-    var querystring = location.search.replace( '?', '' ).split( '&' );
+    var querystring = location.hash.substring(location.hash.indexOf("?") + 1).split( '&' );
     queryObj = {};
     for ( var i=0; i<querystring.length; i++ ) {
       var name = querystring[i].split('=')[0];
@@ -410,7 +410,7 @@ $(window).load(function() {
 		max: endPoint*1000,
     change: function( event, ui ) {
       console.log($('.scrubber').slider('value') * 1020 / 100000 + 1000);
-      //Call new Year data here
+      $('.scrubber').slider('value') * 1020 / 100000 + 1000
     }
 	  });
 	}
