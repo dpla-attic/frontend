@@ -201,14 +201,11 @@ MapWrapper = L.Class.extend
       dataType: 'jsonp'
       cache: true
       beforeSend: ->
-        console.log("beforeSend")
         t.turnProgress true
       success: (data)->
-        console.log("success")
         if $.isPlainObject(data) and $.isArray(data.docs)
           t.drawRegularItems data.docs
       complete: (jqXHR, textStatus)->
-        console.log("complete")
         t.turnProgress false
 
   drawRegularItems: (docs)->
