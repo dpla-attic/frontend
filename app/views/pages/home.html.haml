@@ -5,20 +5,35 @@
         .flexslider.homeslide
           %ul.slides
             %li
-              = image_tag "slide/slide1.jpg"
+              = image_tag "slide/home-slide1.jpg"
               .slideOverlay
               .slideText
-                %p SLIDE ONE Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO »
+                %p
+                  %a{:href => '/item/280233fc9e42a02d32d268fe284a7613'} Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO&nbsp;»  
             %li
-              = image_tag "slide/slide1.jpg"
+              = image_tag "slide/home-slide2.jpg"
               .slideOverlay
               .slideText
-                %p SLIDE TWO Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO »
+                %p
+                  %a{:href => '/item/123c3ea1d7f099da675ce7c3a6c0ca4b'} An illuminated manuscript page from The Book of Hours, dated 1514&nbsp;»
             %li
-              = image_tag "slide/slide1.jpg"
+              = image_tag "slide/home-slide3.jpg"
               .slideOverlay
               .slideText
-                %p SLIDE THREE Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO »
+                %p
+                  %a{:href => '/item/7ba1d607106bf46b1c3775498f4de5ba'} Indian women playing game of plum stones. This is a print by the artist and military officer Seth Eastman, who was stationed in Minnesota before statehood&nbsp;»
+            %li
+              = image_tag "slide/home-slide4.jpg"
+              .slideOverlay
+              .slideText
+                %p
+                  %a{:href => '/item/a699e705f5a48eeec323f12b171e5c5f'} Bandanna printed in red overall with left portrait legend &ldquo;PRESIDENT/GROVER CLEVELAND&rdquo; and right portrait legend &ldquo;VICE PRESIDENT/THOMAS A. HENDRICKS&rdquo;&nbsp;»
+            %li
+              = image_tag "slide/home-slide5.jpg"
+              .slideOverlay
+              .slideText
+                %p
+                  %a{:href => '/item/cb19a85534fefc28a0b66203fde264de'} Benjamin Sewall Blake jumping, ca. 1888. Francis Blake, photographer&nbsp;»
           %a.moreInfo
             %span i
       .searchForm
@@ -30,30 +45,30 @@
           = submit_tag 'Search', class: 'searchBtn', name: nil
     %section.right
       .row.yellow
-        .box
-          %h2 Exhibitions
-          %h6
-            = link_to 'View all »', exhibitions_path
-        .image
-          = image_tag "row-1.jpg"
+        %a{:href => exhibitions_path}
+          .box
+            %h2 Exhibitions
+            %h6 View all »
+          .image
+            = image_tag "home-exhibitions.jpg"
       .row.blue
-        .box
-          %h2
-            Explore
-            %span by Place
-          %h6
-            = link_to 'Map »', map_path
-        .image
-          = image_tag "row-1.jpg"
+        %a{:href => map_path}
+          .box
+            %h2
+              Explore
+              %span by Place
+            %h6 Map »
+          .image
+            = image_tag "home-exploreplace.jpg"
       .row
-        .box
-          %h2
-            Explore
-            %span by Date
-          %h6
-            = link_to 'Timeline »', timeline_path
-        .image
-          = image_tag "row-2.jpg"
+        %a{:href => timeline_path}
+          .box
+            %h2
+              Explore
+              %span by Date
+            %h6 Timeline » 
+          .image
+            = image_tag "home-exploretime.jpg"
   .content.bottom
     %section.left
       %h1.border Apps
