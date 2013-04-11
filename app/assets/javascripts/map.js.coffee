@@ -201,11 +201,14 @@ MapWrapper = L.Class.extend
       dataType: 'jsonp'
       cache: true
       beforeSend: ->
+        console.log("beforeSend")
         t.turnProgress true
       success: (data)->
+        console.log("success")
         if $.isPlainObject(data) and $.isArray(data.docs)
           t.drawRegularItems data.docs
       complete: (jqXHR, textStatus)->
+        console.log("complete")
         t.turnProgress false
 
   drawRegularItems: (docs)->
@@ -245,10 +248,13 @@ MapWrapper = L.Class.extend
     locationName
 
   doc2point: (doc)->
-    coordinates = try
-      doc['sourceResource.spatial.coordinates'][0].split ','
-    catch error
-      []
+    if $.isArray(doc['sourceResource.spatial.coordinates'])
+      coordinates = try
+        doc['sourceResource.spatial.coordinates'][0].split ','
+      catch error
+        []
+    else
+      coordinates = doc['sourceResource.spatial.coordinates'].split ','
     location = doc['sourceResource.spatial.name']
     location = [location] unless location instanceof Array
     point =
