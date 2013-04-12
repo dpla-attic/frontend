@@ -422,6 +422,7 @@ $(window).load(function() {
 /////TIMELINE VIEWS
   $('.DecadesTab').click(function() {
     $('.timeContainer').removeClass('yearsView').addClass('decadesView');
+    $(document).trigger('decadesTabEvent');
 	$('.DecadesDates, .graph').attr('style', '');
     $('.timelineContainer').hide();
     $('.Decades').show();
