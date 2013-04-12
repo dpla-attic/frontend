@@ -25,6 +25,9 @@ googleanalytics:
   tracker: UA-28197764-1
 # Sessions settings
 session:
+  # Name of cookie indicator is user signed in or not
+  # Userful for serving cached pages for guest users
+  logged_in_flag: _dpla_no_cache
   # Store settings. cookie_store and dalli_store are available
   store: dalli_store
   key: _dpla_frontend
