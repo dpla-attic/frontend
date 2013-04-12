@@ -423,6 +423,7 @@ if ($('.shareSave').length) {
 /////TIMELINE VIEWS
   $('.DecadesTab').click(function() {
     $('.timeContainer').removeClass('yearsView').addClass('decadesView');
+    $('article.timeline').trigger('timeline:decades_tab_activated');
 	$('.DecadesDates, .graph').attr('style', '');
     $('.timelineContainer').hide();
     $('.Decades').show();
