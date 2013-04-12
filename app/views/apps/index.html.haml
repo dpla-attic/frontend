@@ -7,7 +7,7 @@
 
     - if is_admin?
       = link_to 'Add New App', new_app_path, class: :btn
-    = link_to 'Become an App Developer', '#', class: :btn
+    = link_to 'Become an App Developer', Settings.apps.become_app_developer, class: :btn
     .pagination= paginate @apps
 
     = render partial: 'shared/apps/apps_view'
