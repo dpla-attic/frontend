@@ -1,0 +1,20 @@
+.layout.fullWidth.collections
+  = render 'shared/search_panel'
+  %article#content.partners{role: "main"}
+    %h1 Partners
+    #more_partners
+      = render partial: 'paginator'
+      = @partners.each_slice(30).with_index do |section, page|
+        - page = page + 1
+        - hidden_style = page != 1 ? 'display:none' : ''
+        .pop-columns{data: {page: page}, style: "#{hidden_style}"}
+          - section.in_groups(3).each do |column|
+            %section
+              %ul
+                - column.reject(&:nil?).each do |facet|
+                  - name, count = facet.shift, facet.shift
+                  - if name.present?
+                    %li
+                      = link_to name, refine_path(:partner, name, controller: :search, action: :show)
+                      %span= count
+      = render partial: 'paginator'

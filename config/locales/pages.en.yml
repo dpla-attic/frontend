@@ -19,6 +19,9 @@ en:
   subjects:
     index:
       title: Subjects
+  partners:
+    index:
+      title: Partners
   search:
     show:
       title: Search
