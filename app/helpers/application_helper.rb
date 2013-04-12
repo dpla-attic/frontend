@@ -15,6 +15,10 @@ module ApplicationHelper
     Settings.exhibitions.site
   end
 
+  def wordpress_path(path = '')
+    Settings.wordpress.site + path
+  end
+
   def is_admin?
     user_signed_in? && current_user.is_admin?
   end
