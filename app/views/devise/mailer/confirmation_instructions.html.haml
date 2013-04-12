@@ -1,4 +1,4 @@
-%p
-  Welcome #{@resource.name}!
-%p You can confirm your account email through the link below:
+%p Welcome to the DPLA, #{@resource.name}!
+%p Confirming your account will give you full access to the DPLA's features, and all account notifications will be sent to this email address.
+%p Follow the link below to confirm:
 %p= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @resource.confirmation_token)
