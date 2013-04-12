@@ -6,6 +6,23 @@ jQuery ->
   fetched_page = 1
   infinite_scroll_in_progress = false
 
+  $('article.timeline').on "timeline:decades_tab_activated", (e, eventInfo) ->
+    updateLinks()
+
+  updateLinks = () ->
+    $('.module.yellow li a, .pop-columns li a, .refine li a, .refineResult a').each (index, el) ->
+      url = el.href
+      if url.indexOf("#") >= 0
+        url = url.substring(0, url.indexOf('#'));
+      if ($('.yearsView').length)
+        hash = location.hash.substring(location.hash.indexOf("#/?") + 3)
+        if (hash)
+          el.href = url + "#/?" + hash
+      else
+        el.href = url
+
+  updateLinks()
+
 
   render_docs = (result)->
     html = ''
@@ -88,6 +105,7 @@ jQuery ->
       $('.timeContainer').removeClass('decadesView').addClass('yearsView')
       $('.Decades').hide()
       $('.timelineContainer').show()
+      updateLinks()
     return false
 
   # Previous / next page
@@ -110,6 +128,7 @@ jQuery ->
         count = render_items_count result.count
         html = render_docs result
         page.find('.timelineResults').append count, html
+        updateLinks()
 
   $('.timelineContainer').on 'click', '.timeline-row', (event) ->
     current_year = parseInt $(this).find('.year h3').text()
