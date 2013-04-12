@@ -24,7 +24,7 @@ wordpress:
   # Wordpress site for building links to pages served by WP
   site: http://localhost:4000
 apps:
-  become_app_developer: http://dp.la/developers
+  become_app_developer: http://dp.la/info/developers
 # Google Analytics account
 googleanalytics:
   tracker: UA-28197764-1
