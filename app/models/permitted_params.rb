@@ -14,7 +14,7 @@ class PermittedParams < Struct.new(:params)
       when *(%w(before after))
         date = date_from_params(value, end: key == 'before')
         [key, date] unless date.nil?
-      when *(%w(type language subject country state place provider))
+      when *(%w(type language subject country state place provider partner))
         [key, value]
       end
     end

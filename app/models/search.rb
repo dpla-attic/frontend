@@ -46,6 +46,10 @@ class Search
     results.facets.provider
   end
 
+  def partners
+    results.facets.partner
+  end
+
   def countries
     results.facets.country
   end
@@ -89,7 +93,7 @@ class Search
   end
 
   def conditions
-    facets = %w(subject language type provider country state place)
+    facets = %w(subject language type provider partner country state place)
     { q: @term, facets: facets, facet_size: 100 }.merge(@filters).merge(@args)
   end
 

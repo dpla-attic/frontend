@@ -7,7 +7,8 @@ module RefineHelper
   end
 
   def refines_present?
-    subject_refines.present? or type_refines.present? or provider_refines.present? or
+    subject_refines.present? or type_refines.present? or
+      provider_refines.present? or partner_refines.present?
       language_refines.present? or after_refine.present? or before_refine.present? or
       country_refines.present? or state_refines.present? or place_refines.present?
   end
@@ -34,6 +35,14 @@ module RefineHelper
 
   def provider_refines
     Array @search.filters :provider
+  end
+
+  def partner_facets
+    @search.partners ? @search.partners.reject { |v| partner_refines.include? v }.to_a : []
+  end
+
+  def partner_refines
+    Array @search.filters :partner
   end
 
   def language_facets

@@ -1,6 +1,6 @@
 module DPLA
   class Facets
-    attr_reader :subject, :language, :type, :provider, :year, :country, :state, :place
+    attr_reader :subject, :language, :type, :provider, :partner, :year, :country, :state, :place
 
     def initialize(facets)
       facets.each do |key, value|
@@ -19,6 +19,10 @@ module DPLA
           end if value['terms'].is_a? Array
         when 'dataProvider'
           @provider = {}.tap do |subject|
+            value['terms'].each { |term| subject[term['term']] = term['count'] }
+          end if value['terms'].is_a? Array
+        when 'provider.name'
+          @partner = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
         when 'sourceResource.spatial.country'
