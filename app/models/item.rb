@@ -9,7 +9,7 @@ class Item
     @object         = doc['object']
     @isShownAt      = doc['isShownAt']
     @dataProvider   = doc['dataProvider']
-    @provider       = doc['provider']['name']
+    @provider       = doc['provider']['name'] if doc['provider']
     if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
       @sourceResource['spatial'] = [ @sourceResource['spatial'] ]
     end
