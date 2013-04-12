@@ -12,7 +12,6 @@ jQuery ->
   updateLinks = () ->
     $('.module.yellow li a, .pop-columns li a, .refine li a, .refineResult a').each (index, el) ->
       url = el.href
-      hash = location.hash.substring(location.hash.indexOf("#/?") + 3)
       if url.indexOf("#") >= 0
         url = url.substring(0, url.indexOf('#'));
       if ($('.yearsView').length)
