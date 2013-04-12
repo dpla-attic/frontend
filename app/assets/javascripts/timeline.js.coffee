@@ -59,35 +59,42 @@ jQuery ->
     if params.year
       $.address.parameter('year', params.year)
 
+  $('article.timeline').on "timeline:scrubber_changed", (e, eventInfo) ->
+    loadTimeLineYear(Math.round(eventInfo))
+
+  loadTimeLineYear = (requested_year) ->
+    loader = render_loader()
+    el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
+    el.find('.year h3').text requested_year
+    $.ajax
+      url: api_search_path
+      dataType: 'jsonp'
+      cache: true
+      data:
+        'sourceResource.date.before': requested_year
+        'sourceResource.date.after':  requested_year
+      beforeSend: ->
+        el.find('.timelineResults').html('').append loader
+      success: (result) ->
+        count = render_items_count result.count
+        html = render_docs result
+        loader.remove()
+        el.find('.timelineResults').append count, html
+
+
   # Click on graph column
   $('.graph').on 'click', 'li', (event) ->
     fetched_page = 1
     requested_year = parseInt $(this).find('h3').text()
     updateWindowLocation year: requested_year
     infinite_scroll_in_progress = false
-    loader = render_loader()
     if requested_year
-      el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
-      el.find('.year h3').text requested_year
-      $.ajax
-        url: api_search_path
-        dataType: 'jsonp'
-        cache: true
-        data:
-          'sourceResource.date.before': requested_year
-          'sourceResource.date.after':  requested_year
-        beforeSend: ->
-          el.find('.timelineResults').html('').append loader
-        success: (result) ->
-          count = render_items_count result.count
-          html = render_docs result
-          loader.remove()
-          el.find('.timelineResults').append count, html
-          $('article.timeline').trigger('timeline:year_loaded')
+      loadTimeLineYear(requested_year)
 
       $('.timeContainer').removeClass('decadesView').addClass('yearsView')
       $('.Decades').hide()
       $('.timelineContainer').show()
+      $('article.timeline').trigger('timeline:year_loaded')
     return false
 
   # Previous / next page
