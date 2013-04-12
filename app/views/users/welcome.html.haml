@@ -3,5 +3,9 @@
 
   %h1 Thank you for signing up for a user account!
   .article#content{role: "main"}
-    %h4 A confirmation email has been sent to the following address: #{current_user.email}.
-    %h4 Please follow the link provided in the email to finish the registration process.
+    - unless current_user.confirmed?
+      %h4 A confirmation email has been sent to the following address: #{current_user.email}.
+      %h4 Please follow the link provided in the email to finish the registration process.
+    - else
+      :javascript
+        setTimeout(function(){ window.location.href = '/' }, 5000);
