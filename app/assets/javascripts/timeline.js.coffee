@@ -6,7 +6,7 @@ jQuery ->
   fetched_page = 1
   infinite_scroll_in_progress = false
 
-  $(document).on "decadesTabEvent", (e, eventInfo) ->
+  $('article.timeline').on "timeline:decades_tab_activated", (e, eventInfo) ->
     updateLinks()
 
   updateLinks = () ->
