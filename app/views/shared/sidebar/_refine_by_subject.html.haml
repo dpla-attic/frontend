@@ -13,7 +13,7 @@
       - if subject_facets.present?
         .locations
           %ul
-            - subject_facets.slice(0, 5 - subject_refines.count).each do |facet|
+            - subject_facets.slice(0, 5).each do |facet|
               - name, count = facet.shift, facet.shift
               - if name.present?
                 %li

@@ -12,7 +12,7 @@
       - if language_facets.present?
         .locations
           %ul
-            - language_facets.slice(0, 5 - language_refines.count).each do |facet|
+            - language_facets.slice(0, 5).each do |facet|
               - name, count = facet.shift, facet.shift
               - if name.present?
                 %li

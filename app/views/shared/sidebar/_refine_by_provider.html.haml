@@ -12,7 +12,7 @@
       - if provider_facets.present?
         .locations
           %ul
-            - provider_facets.slice(0, 5 - provider_refines.count).each do |facet|
+            - provider_facets.slice(0, 5).each do |facet|
             - name, count = facet.shift, facet.shift
               %li
                 = link_to name, refine_path(:provider, name)

@@ -22,7 +22,7 @@
       - if place_facets.present?
         .locations
           %ul
-            - place_facets.slice(0, 5 - place_refines.count).each do |facet|
+            - place_facets.slice(0, 5).each do |facet|
               - name, count = facet.shift, facet.shift
               - if name.present?
                 %li
