@@ -1,14 +1,12 @@
 = semantic_navigation config: :bootstrap do |n|
   - n.item 'Home', root_path
-  - n.item 'Subjects', subjects_path
-  - n.item 'Collections', '#'
   - n.item 'Exhibitions', exhibitions_path
   - n.item 'Map', map_path, highlights_on: [{controller: 'map'}]
   - n.item 'Timeline', timeline_path, highlights_on: [{controller: 'timeline'}]
-  - n.item 'App Library', apps_path
+  - n.item 'Subjects', subjects_path
+  - n.item 'Apps', apps_path
+  - n.item 'About', wordpress_path('/about')
 = semantic_navigation config: :bootstrap, class: 'footer-navTwo' do |n|
-  - n.item 'Help', '#'
-  - n.item 'About', '#'
-  - n.item 'News', '#', class: 'news-clear'
-  - n.item 'Contact', '#'
-  - n.item 'Accessibility', '#'
+  - n.item 'Follow', wordpress_path('/news'), class: 'news-clear'
+  - n.item 'Contact', wordpress_path('/contact')
+  - n.item 'Terms & Privacy', wordpress_path('/terms')
