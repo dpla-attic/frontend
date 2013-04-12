@@ -9,7 +9,7 @@
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
-@import url('fonts.css');
+@import url('/assets/fonts.css');
 html,
 button,
 input,
@@ -3535,7 +3535,7 @@ div.timeline-year {
     .formRow select { float: none; display: block; clear: both; margin: 5px 0 5px; width: auto; }
     aside .module.line { background-position: center 43%; }
     .exibition-image { width: 100%; margin: 0 0 4%; }
-    .module.blue h5 { clear: left; }    
+    .module.blue h5 { clear: left; }
 
 	.DecadesDates, .graph {
 		right: 98.8%;
