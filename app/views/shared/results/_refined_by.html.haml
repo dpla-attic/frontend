@@ -24,6 +24,10 @@
         %li
           = refine
           = link_to '×', refine_path(:provider, refine, remove: true)
+      - partner_refines.each do |refine|
+        %li
+          = refine
+          = link_to '×', refine_path(:partner, refine, remove: true)
       - language_refines.each do |refine|
         %li
           = refine
