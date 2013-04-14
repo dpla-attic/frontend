@@ -7,7 +7,8 @@
   %article#content{role: "main"}
     .FeatureContent
       .contentBox
-        = item_thumbnail(@item)
+        = link_to @item.url do
+          = item_thumbnail(@item)
         = link_to @item.url, target: :_blank, class:'ViewObject' do
           View Object
           %span.icon-view-object{"aria-hidden" => "true"}
