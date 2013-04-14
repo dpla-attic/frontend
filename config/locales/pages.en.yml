@@ -48,7 +48,7 @@ en:
       title: Saved Items & Lists
     show:
       title: Saved List “%{title}”
-      title_unlisted: Unlisted Saved Items
+      title_unlisted: Your Saved Items
   sessions:
     new:
       title: Sign In

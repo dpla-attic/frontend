@@ -42,7 +42,7 @@
                           - if list.present?
                             = link_to list.title, list
                           - else
-                            = link_to 'Unlisted', unlisted_saved_lists_path
+                            = link_to 'Your Saved Items', unlisted_saved_lists_path
 
                     .delete
                       - delete_path = delete_saved_item_path(item_id: saved_item.id)
