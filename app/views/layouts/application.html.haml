@@ -36,7 +36,6 @@
       %nav.topNav#top-nav= render 'shared/top_navigation'
       %nav.MainNav#main-nav{role: "navigation"}= render partial: 'shared/main_navigation'
     .clear
-    = render 'shared/flash_message'
     = yield
     %footer{role: "contentinfo"}
       %nav= render 'shared/footer_navigation'
