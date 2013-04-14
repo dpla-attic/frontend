@@ -20,22 +20,23 @@
         = item_field :publisher
 
       .detail-bottom
-        %h6 Description
-        .desc-short
-          %p
-            = truncate @item.description, length: 450
-            - if @item.description.length > 450
-              %a.desc-toggle
-                more
-                %span.icon-arrow-down{"aria-hidden" => "true"}
-        - if @item.description.length > 450
-          .desc-long
+        - if @item.description.present?
+          %h6 Description
+          .desc-short
             %p
-              = @item.description
-              &nbsp;
-              %a.desc-toggle
-                less
-                %span.icon-arrow-up{"aria-hidden" => "true"}
+              = truncate @item.description, length: 450
+              - if @item.description.length > 450
+                %a.desc-toggle
+                  more
+                  %span.icon-arrow-down{"aria-hidden" => "true"}
+          - if @item.description.length > 450
+            .desc-long
+              %p
+                = @item.description
+                &nbsp;
+                %a.desc-toggle
+                  less
+                  %span.icon-arrow-up{"aria-hidden" => "true"}
 
     .table
       = item_field :location
