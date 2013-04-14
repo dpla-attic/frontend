@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_filter :add_about_breadcrumb, except: :home
 
   def home
-    @apps = App.find(:all, order: "id desc", limit: 2)
+    @apps = App.where(is_promo: true).limit(2)
   end
 
   def overview
