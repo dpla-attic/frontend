@@ -49,7 +49,7 @@ widgets:
   social_icons:
     facebook: https://www.facebook.com/theDPLA
     twitter: https://twitter.com/dpla
-    rss: http://dp.la/feed
+    rss: http://dp.la/info/feed
 # User interface tweaks
 ui:
   # Items
