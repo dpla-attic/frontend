@@ -245,12 +245,13 @@ MapWrapper = L.Class.extend
     locationName
 
   doc2point: (doc)->
+    coordinates = []
     if $.isArray(doc['sourceResource.spatial.coordinates'])
       coordinates = try
         doc['sourceResource.spatial.coordinates'][0].split ','
       catch error
         []
-    else
+    else if doc['sourceResource.spatial.coordinates']
       coordinates = doc['sourceResource.spatial.coordinates'].split ','
     location = doc['sourceResource.spatial.name']
     location = [location] unless location instanceof Array
