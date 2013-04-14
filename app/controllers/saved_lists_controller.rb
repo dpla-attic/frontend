@@ -132,7 +132,7 @@ class SavedListsController < ApplicationController
     def load_list
       if params[:id].present?
         @list = current_user.saved_lists.find params[:id] rescue nil
-        raise ActionController::RoutingError.new('Not Found') unless @list
+        render_404 unless @list
       end
     end
 

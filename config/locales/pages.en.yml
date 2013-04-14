@@ -4,6 +4,8 @@ en:
   pages:
     home:
       title: Welcome
+    error_404:
+      title: Page Not Found
   users:
     welcome:
       title: Welcome
