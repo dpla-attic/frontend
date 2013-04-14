@@ -3,7 +3,8 @@
   = f.input :screenshot
   = f.input :title, required: true, autofocus: true
   = f.input :author, required: true
-  = f.input :description
+  = f.input :teaser_description, input_html: { rows: 5 }
+  = f.input :description, input_html: { rows: 5 }
   .is_promo
     = f.input :is_promo, label: 'Show on home page'
   = f.input :home_page_url
