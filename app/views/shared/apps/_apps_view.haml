@@ -4,8 +4,9 @@
 - else
   - @apps.each_slice(3) do |apps_row|
     .moduleContainer{class: 'apps' == params[:controller] ? 'threeCol' : nil}
-      - apps_row.each do |app|
-        %section.module
+      - apps_row.each_with_index do |app, i|
+        - is_home_page = params[:controller] == 'pages' && params[:action] == 'home'
+        %section.module{class: is_home_page && i == 1 ? 'yellow' : nil}
           - if app.icon.present?
             .icon
               = link_to app do
