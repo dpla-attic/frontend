@@ -4,6 +4,8 @@
   = render 'shared/search_panel'
   = render 'shared/share_save'
   %h1= @item.title || @item.id
+  - if @item.titles.present?
+    %h4= @item.titles.join(', ')
   %article#content{role: "main"}
     .FeatureContent
       .contentBox
