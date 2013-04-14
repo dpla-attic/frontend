@@ -90,8 +90,7 @@ jQuery ->
       dataType: 'jsonp'
       cache: true
       data:
-        'sourceResource.date.before': requested_year
-        'sourceResource.date.after':  requested_year
+        'sourceResource.date.begin': requested_year
       beforeSend: ->
         el.find('.timelineResults').html('').append loader
       success: (result) ->
