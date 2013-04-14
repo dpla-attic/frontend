@@ -47,6 +47,7 @@ jQuery ->
   if window.twitter_account
     $('.twitter #tweets').tweet
       username: window.twitter_account
+      count: 2
 
   if window.wordpress_url && $('#wp_news_feed').length > 0
     news_container = $('#wp_news_feed ul')
@@ -55,13 +56,13 @@ jQuery ->
       dataType: 'jsonp'
       data:
         json: 1
-        count: 3
+        count: 2
       success: (data)->
         if data.posts
           $.each data.posts, (i,post)->
             news_container.append """
             <li>
               <a href="#{ post.url }">#{ post.title }</a>
-              <p>#{ $.datepicker.formatDate('M d', new Date(post.date)) }</p>
+              <p><span>#{ $.datepicker.formatDate('M d', new Date(post.date)) }</span></p>
             </li>
             """
