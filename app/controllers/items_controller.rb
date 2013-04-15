@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   def show
     @item = DPLA::Items.by_ids(params[:id]).first
-    raise ActionController::RoutingError.new('Not Found') unless @item
+    return render_404 unless @item
 
     @show_unlisted = true
     if user_signed_in?

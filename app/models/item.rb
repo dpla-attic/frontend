@@ -28,7 +28,15 @@ class Item
   end
 
   def title
-    @sourceResource['title']
+    Array(@sourceResource['title']).first
+  end
+
+  def titles(options = {})
+    if options[:with_first]
+      Array(@sourceResource['title'])
+    else
+      Array(@sourceResource['title'])[1..-1]
+    end
   end
 
   def rights

@@ -39,4 +39,7 @@ DplaPortal::Application.routes.draw do
 
   match '/welcome' => 'users#welcome'
   root to: 'pages#home'
+
+  # Redner 404 error page for uncatched routes
+  match '*a', :to => 'application#render_404'
 end

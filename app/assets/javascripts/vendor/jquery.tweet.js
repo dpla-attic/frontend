@@ -208,7 +208,7 @@
       o.join = s.join_text ? t('<span class="tweet_join">{join_text}</span>', o) : '';
       o.avatar = o.avatar_size ?
         t('<a class="tweet_avatar" href="{avatar_profile_url}"><img src="{avatar_url}" height="{avatar_size}" width="{avatar_size}" alt="{avatar_screen_name}\'s avatar" title="{avatar_screen_name}\'s avatar" border="0"/></a>', o) : '';
-      o.time = t('<p class="tweet_time"><a href="{tweet_url}" title="view tweet on twitter">{tweet_relative_time}</a></p>', o);
+      o.time = t('<p class="tweet_time"><span><a href="{tweet_url}" title="view tweet on twitter">{tweet_relative_time}</a><span></p>', o);
       o.text = t('<p class="tweet_text">{tweet_text_fancy}</p>', o);
       o.retweeted_text = t('<span class="tweet_text">{retweeted_tweet_text}</span>', o);
       o.reply_action = t('<a class="tweet_action tweet_reply" href="{reply_url}">reply</a>', o);

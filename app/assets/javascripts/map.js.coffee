@@ -245,12 +245,13 @@ MapWrapper = L.Class.extend
     locationName
 
   doc2point: (doc)->
+    coordinates = []
     if $.isArray(doc['sourceResource.spatial.coordinates'])
       coordinates = try
         doc['sourceResource.spatial.coordinates'][0].split ','
       catch error
         []
-    else
+    else if doc['sourceResource.spatial.coordinates']
       coordinates = doc['sourceResource.spatial.coordinates'].split ','
     location = doc['sourceResource.spatial.name']
     location = [location] unless location instanceof Array
@@ -280,10 +281,13 @@ MapWrapper = L.Class.extend
     $.each points, (i,point) ->
       point = if $.isPlainObject(point) then point else point.data
       item_href = "/item/#{ point.id }?back_uri=#{ encodeURIComponent(back_uri) }"
+      title = point.title
+      if $.isArray(title)
+        title = title[0]
       content =
         """
           <h6> #{ point.type }</h6>
-          <h4><a href="#{ item_href }">#{ point.title }</a></h4>
+          <h4><a href="#{ item_href }">#{ title }</a></h4>
           <p><span> #{ point.creator }</span></p>
           <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
         """

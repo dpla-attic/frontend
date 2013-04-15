@@ -7,7 +7,7 @@ notifications:
   from: welcome@portal.dp.la
 # DPLA API URL and credentials
 api:
-  url: http://198.101.129.127/v2
+  url: http://api.dp.la/v2
   # Username and password for Basic HTTP Auth to API
   username:
   password:
@@ -49,7 +49,7 @@ widgets:
   social_icons:
     facebook: https://www.facebook.com/theDPLA
     twitter: https://twitter.com/dpla
-    rss: http://dp.la/feed
+    rss: http://dp.la/info/feed
 # User interface tweaks
 ui:
   # Items

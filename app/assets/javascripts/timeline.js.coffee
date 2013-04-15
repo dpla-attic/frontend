@@ -34,7 +34,10 @@ jQuery ->
           return
         item_href = "/item/#{ doc['id'] }?back_uri=#{ encodeURIComponent(window.location.href) }"
         type  = "<h6>#{ doc['sourceResource.type'] || '' }</h6>"
-        title = "<a href=\"#{ item_href }\">#{ doc['sourceResource.title'] || doc['id'] }</a>"
+        title = doc['sourceResource.title'] || doc['id']
+        if $.isArray(title)
+          title = title[0]
+        title = "<a href=\"#{ item_href }\">#{ title }</a>"
         creator = "<p><span>#{ doc['sourceResource.creator'] || '' }</span></p>"
         description = "<p>#{ doc['sourceResource.description'] || '' }</p>"
         source_link =
@@ -76,31 +79,39 @@ jQuery ->
     if params.year
       $.address.parameter('year', params.year)
 
+  $('article.timeline').on "timeline:scrubber_changed", (e, eventInfo) ->
+    requested_year = Math.round(eventInfo)
+    loadTimeLineYear(requested_year)
+    updateWindowLocation(year: requested_year)
+
+  loadTimeLineYear = (requested_year) ->
+    loader = render_loader()
+    el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
+    el.find('.year h3').text requested_year
+    $.ajax
+      url: api_search_path
+      dataType: 'jsonp'
+      cache: true
+      data:
+        'sourceResource.date.begin': requested_year
+      beforeSend: ->
+        el.find('.timelineResults').html('').append loader
+      success: (result) ->
+        count = render_items_count result.count
+        html = render_docs result
+        loader.remove()
+        el.find('.timelineResults').append count, html
+        $('article.timeline').trigger('timeline:year_loaded')
+
+
   # Click on graph column
   $('.graph').on 'click', 'li', (event) ->
     fetched_page = 1
     requested_year = parseInt $(this).find('h3').text()
     updateWindowLocation year: requested_year
     infinite_scroll_in_progress = false
-    loader = render_loader()
     if requested_year
-      el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
-      el.find('.year h3').text requested_year
-      $.ajax
-        url: api_search_path
-        dataType: 'jsonp'
-        cache: true
-        data:
-          'sourceResource.date.before': requested_year
-          'sourceResource.date.after':  requested_year
-        beforeSend: ->
-          el.find('.timelineResults').html('').append loader
-        success: (result) ->
-          count = render_items_count result.count
-          html = render_docs result
-          loader.remove()
-          el.find('.timelineResults').append count, html
-          $('article.timeline').trigger('timeline:year_loaded')
+      loadTimeLineYear(requested_year)
 
       $('.timeContainer').removeClass('decadesView').addClass('yearsView')
       $('.Decades').hide()
@@ -190,18 +201,17 @@ jQuery ->
 
   if year = $.address.parameter('year')
     li = $("li[data-year=\'#{ year }\']")
-    li.click()
-
     if item_id = $.address.parameter('item_id')
-      $('article.timeline').one 'timeline:year_loaded', ->
         $.address.parameter('item_id', null)
-        el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
-        $.ajax
-          url: api_item_path.replace '%', item_id
-          dataType: 'jsonp'
-          cache: true
-          success: (result) ->
-            el.find('section').css({opacity: 0.25})
-            el.find('.timelineResults').one 'scroll', ->
-              el.find('section').css({opacity: 1})
-            el.find('h2').after(render_docs result)
+        $('article.timeline').one 'timeline:year_loaded', ->
+          el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
+          $.ajax
+            url: api_item_path.replace '%', item_id
+            dataType: 'jsonp'
+            cache: true
+            success: (result) ->
+              el.find('section').css({opacity: 0.25})
+              el.find('.timelineResults').one 'scroll', ->
+                el.find('section').css({opacity: 1})
+              el.find('h2').after(render_docs result)
+    li.click()

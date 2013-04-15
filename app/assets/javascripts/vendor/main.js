@@ -374,8 +374,13 @@ if ($('.shareSave').length) {
   initTimeline();
 
 
+  $('article.timeline').one('timeline:year_loaded', function(e, eventInfo) {
+    initTimeline();
+  });
+
 /////TIMELINE MODULE: SCRUBBER
   function initScrub() {
+  getQueryString();
 	if ($('.decadesView').length) {
 	  $('.scrubber').slider({
 		value: (selectedYear*100000)/1020 - 4000,
@@ -410,8 +415,7 @@ if ($('.shareSave').length) {
 		min: 0,
 		max: endPoint*1000,
     change: function( event, ui ) {
-      console.log($('.scrubber').slider('value') * 1020 / 100000 + 1000);
-      $('.scrubber').slider('value') * 1020 / 100000 + 1000
+      $('article.timeline').trigger('timeline:scrubber_changed', [$('.scrubber').slider('value') * 1020 / 100000 + 1000]);
     }
 	  });
 	}

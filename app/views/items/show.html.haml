@@ -4,10 +4,13 @@
   = render 'shared/search_panel'
   = render 'shared/share_save'
   %h1= @item.title || @item.id
+  - if @item.titles.present?
+    %h4= @item.titles.join(', ')
   %article#content{role: "main"}
     .FeatureContent
       .contentBox
-        = item_thumbnail(@item)
+        = link_to @item.url do
+          = item_thumbnail(@item)
         = link_to @item.url, target: :_blank, class:'ViewObject' do
           View Object
           %span.icon-view-object{"aria-hidden" => "true"}
@@ -19,22 +22,23 @@
         = item_field :publisher
 
       .detail-bottom
-        %h6 Description
-        .desc-short
-          %p
-            = truncate @item.description, length: 450
-            - if @item.description.length > 450
-              %a.desc-toggle
-                more
-                %span.icon-arrow-down{"aria-hidden" => "true"}
-        - if @item.description.length > 450
-          .desc-long
+        - if @item.description.present?
+          %h6 Description
+          .desc-short
             %p
-              = @item.description
-              &nbsp;
-              %a.desc-toggle
-                less
-                %span.icon-arrow-up{"aria-hidden" => "true"}
+              = truncate @item.description, length: 450
+              - if @item.description.length > 450
+                %a.desc-toggle
+                  more
+                  %span.icon-arrow-down{"aria-hidden" => "true"}
+          - if @item.description.length > 450
+            .desc-long
+              %p
+                = @item.description
+                &nbsp;
+                %a.desc-toggle
+                  less
+                  %span.icon-arrow-up{"aria-hidden" => "true"}
 
     .table
       = item_field :location
