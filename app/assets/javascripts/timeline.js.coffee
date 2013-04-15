@@ -203,15 +203,15 @@ jQuery ->
     li = $("li[data-year=\'#{ year }\']")
     if item_id = $.address.parameter('item_id')
         $.address.parameter('item_id', null)
-      $('article.timeline').one 'timeline:year_loaded', ->
-        el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
-        $.ajax
-          url: api_item_path.replace '%', item_id
-          dataType: 'jsonp'
-          cache: true
-          success: (result) ->
-            el.find('section').css({opacity: 0.25})
-            el.find('.timelineResults').one 'scroll', ->
-              el.find('section').css({opacity: 1})
-            el.find('h2').after(render_docs result)
+        $('article.timeline').one 'timeline:year_loaded', ->
+          el = container.find(".timeline-row:nth-child("+ current_sheet + ")")
+          $.ajax
+            url: api_item_path.replace '%', item_id
+            dataType: 'jsonp'
+            cache: true
+            success: (result) ->
+              el.find('section').css({opacity: 0.25})
+              el.find('.timelineResults').one 'scroll', ->
+                el.find('section').css({opacity: 1})
+              el.find('h2').after(render_docs result)
     li.click()

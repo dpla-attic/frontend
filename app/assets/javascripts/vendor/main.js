@@ -374,7 +374,7 @@ if ($('.shareSave').length) {
   initTimeline();
 
 
-  $('article.timeline').on('timeline:year_loaded', function(e, eventInfo) {
+  $('article.timeline').one('timeline:year_loaded', function(e, eventInfo) {
     initTimeline();
   });
 
