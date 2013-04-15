@@ -95,3 +95,31 @@ $(document).ready ->
           window.location.href = window.location.href
 
       return false
+
+    # Switch status
+    # POST /saved/lists/switch_status
+    $('.statusLink').click ->
+      that = $(this)
+      list = that.data 'list'
+      return false unless list
+
+      $.ajax
+        type: 'POST',
+        url: '/saved/lists/switch_status'
+        data:
+          list: list
+        complete: ->
+          if that.hasClass('icon-lock')
+            that.removeClass('icon-lock').addClass('icon-unlock')
+          else
+            that.removeClass('icon-unlock').addClass('icon-lock')
+          if ($(".active." + list).length > 0) #should update right side
+            el = $('#selectedListStatus span');
+            if el.hasClass('icon-lock')
+              el.removeClass('icon-lock').addClass('icon-unlock')
+            else
+              el.removeClass('icon-unlock').addClass('icon-lock')
+
+
+      return false
+

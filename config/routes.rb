@@ -34,6 +34,7 @@ DplaPortal::Application.routes.draw do
       post   'reorder_positions',     to: 'saved_lists#reorder_positions', as: :reorder_positions
       post   'copy_positions',        to: 'saved_lists#copy_positions',    as: :copy_positions
       post   'move_positions',        to: 'saved_lists#move_positions',    as: :move_positions
+      post   'switch_status',         to: 'saved_lists#switch_status',     as: :switch_list_status
     end
   end
 

@@ -102,6 +102,12 @@ class SavedListsController < ApplicationController
     copy_or_move_position(:move)
   end
 
+  def switch_status
+    target_list = current_user.saved_lists.find params[:list]
+    target_list.update_attribute(:private, !target_list.private) if target_list
+    redirect_to :back
+  end
+
   private
 
     def copy_or_move_position(flag)
