@@ -159,7 +159,7 @@ class SavedListsController < ApplicationController
     def attach_api_items(saved_items_positions)
       api_items = {}.tap do |hash|
         DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id })
-          .each { |item| hash[item.id] = item }
+          .each { |item| hash[item.id] = item } rescue nil
       end
       saved_items_positions.each do |position|
         api_item_id = position.saved_item.item_id
