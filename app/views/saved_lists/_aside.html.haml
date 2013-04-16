@@ -18,7 +18,7 @@
             = link_to list.title, list
             %span
               - list_data = {list: list.id}
-            %a{class: "statusLink #{locked}", href: "#", data: list_data}
+            %a{class: "statusLink #{locked}", href: "#", data: list_data, title: list.private? ? 'Set public status' : 'Set private status'}
           %span= list.saved_items.count
           = link_to 'edit', edit_saved_list_path(list), class: :edit
           = link_to '×',    list, class: :remove, method: :delete, confirm: 'Are you sure?'

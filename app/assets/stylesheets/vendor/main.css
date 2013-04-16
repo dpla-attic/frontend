@@ -1824,7 +1824,7 @@ input[type="checkbox"] {
     text-decoration: none;
 }
 
-.private span {
+#selectedListStatus span, .private span {
     display: inline-block;
     color: #7b7b7b;
     font-size: 0.625em;

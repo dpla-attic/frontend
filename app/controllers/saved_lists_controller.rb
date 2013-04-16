@@ -39,10 +39,13 @@ class SavedListsController < ApplicationController
   end
 
   def update
-    if @list.update_attributes params[:saved_list]
-      redirect_to @list
-    else
-      render :edit
+    respond_to do |format|
+      if @list.update_attributes(params[:saved_list])
+        format.html { redirect_to @list }
+      else
+        format.html { render :edit }
+      end
+        format.json { render :json => @list.private? }
     end
   end
 

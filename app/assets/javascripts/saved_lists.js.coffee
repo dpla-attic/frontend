@@ -99,27 +99,34 @@ $(document).ready ->
     # Switch status
     # POST /saved/lists/switch_status
     $('.statusLink').click ->
-      that = $(this)
-      list = that.data 'list'
+      $(this).ajaxStart(->
+        $(this).css cursor: "progress"
+      ).ajaxStop ->
+        $(this).css cursor: "auto"
+
+      e = $(this)
+      list = e.data 'list'
       return false unless list
 
       $.ajax
-        type: 'POST',
-        url: '/saved/lists/switch_status'
+        type: 'PUT',
+        url: '/saved/lists/' + list
+        dataType: 'json'
         data:
-          list: list
-        complete: ->
-          if that.hasClass('icon-lock')
-            that.removeClass('icon-lock').addClass('icon-unlock')
+          'saved_list': {private: !e.hasClass('icon-lock')}
+        success: (result) ->
+          if result
+            e.removeClass('icon-unlock').addClass('icon-lock')
+            e.prop('title', 'Set public status')
           else
-            that.removeClass('icon-unlock').addClass('icon-lock')
+            e.removeClass('icon-lock').addClass('icon-unlock')
+            e.prop('title', 'Set private status')
           if ($(".active." + list).length > 0) #should update right side
             el = $('#selectedListStatus span');
-            if el.hasClass('icon-lock')
-              el.removeClass('icon-lock').addClass('icon-unlock')
-            else
+            if result
               el.removeClass('icon-unlock').addClass('icon-lock')
+            else
+              el.removeClass('icon-lock').addClass('icon-unlock')
 
 
       return false
-
