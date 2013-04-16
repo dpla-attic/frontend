@@ -2935,7 +2935,7 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 #colorbox p { margin: 1em 0; }
 
 #colorbox .itemDetails p { margin-top: 0; }
-#colorbox .itemDetails h5 { margin-top: 0; }
+#colorbox .itemDetails h5 { margin-top: 0; margin-right: 32px; }
 
 #colorbox form h6 {
     font-family: 'source_sans_proitalic';
