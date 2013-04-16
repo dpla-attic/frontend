@@ -19,5 +19,5 @@
               = app.teaser_description
             - else
               = truncate(app.description, :length => 100)
-          - if app.home_page_url
+          - if app.home_page_url.present?
             = link_to 'App Home Page »', app.home_page_url

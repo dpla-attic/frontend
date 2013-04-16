@@ -281,13 +281,13 @@ MapWrapper = L.Class.extend
     $.each points, (i,point) ->
       point = if $.isPlainObject(point) then point else point.data
       item_href = "/item/#{ point.id }?back_uri=#{ encodeURIComponent(back_uri) }"
-      title = point.title
-      if $.isArray(title)
-        title = title[0]
+      item_title = point.title
+      if $.isArray(item_title)
+        item_title = item_title[0]
       content =
         """
           <h6> #{ point.type }</h6>
-          <h4><a href="#{ item_href }">#{ title }</a></h4>
+          <h4><a href="#{ item_href }">#{ item_title }</a></h4>
           <p><span> #{ point.creator }</span></p>
           <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
         """
@@ -295,7 +295,7 @@ MapWrapper = L.Class.extend
         html +=
           """
             <div class="box-row">
-              <div class="box-right"><img src="#{ point.thumbnail }" /></div>
+              <div class="box-right"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" /></div>
               <div class="box-left">#{ content }</div>
             </div>
           """

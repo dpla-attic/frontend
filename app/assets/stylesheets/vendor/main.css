@@ -79,6 +79,11 @@ img {
 .searchMiddle img {
     max-height: 150px;
 }
+.timeline .sectionRight img {
+    max-height: 150px;
+    max-width: 100%;
+    width: auto;
+}
 
 /*
  * Remove default fieldset styles.
