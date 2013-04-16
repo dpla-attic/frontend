@@ -15,8 +15,10 @@
     .rightSide
       %p= @app.description
       %ul.buttons
-        %li.btn= link_to 'App Home page', @app.home_page_url
-        %li.btn= link_to 'Develop this App', @app.develop_app_url
+        - if @app.home_page_url.present?
+          %li.btn= link_to 'App Home page', @app.home_page_url
+        - if @app.develop_app_url.present?
+          %li.btn= link_to 'Develop this App', @app.develop_app_url
       %br
       %ul.buttons
         - if is_admin?
