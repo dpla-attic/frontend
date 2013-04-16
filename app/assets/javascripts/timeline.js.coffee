@@ -51,7 +51,7 @@ jQuery ->
           else ''
         preview =
           if !! doc['object']
-            "<img src=\"#{ doc['object'] }\" />"
+            "<img onerror=\"image_loading_error(this);\" src=\"#{ doc['object'] }\" />"
           else ''
 
         html +=

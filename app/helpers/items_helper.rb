@@ -21,7 +21,7 @@ module ItemsHelper
 
   def item_thumbnail(item)
     if item.preview_image.present?
-      image_tag item.preview_image
+      image_tag item.preview_image, onerror: 'image_loading_error(this);'
     else
       default = Settings.ui.items.default_thumbnails
       case

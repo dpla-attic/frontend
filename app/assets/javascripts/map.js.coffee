@@ -295,7 +295,7 @@ MapWrapper = L.Class.extend
         html +=
           """
             <div class="box-row">
-              <div class="box-right"><img src="#{ point.thumbnail }" /></div>
+              <div class="box-right"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" /></div>
               <div class="box-left">#{ content }</div>
             </div>
           """
