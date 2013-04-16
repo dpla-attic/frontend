@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_filter :save_location
+
   def show
     @item = DPLA::Items.by_ids(params[:id]).first
     return render_404 unless @item
@@ -15,4 +17,10 @@ class ItemsController < ApplicationController
         .exists?('saved_items.item_id' => params[:id], 'saved_item_positions.saved_list_id' => nil)
     end
   end
+
+  private
+
+    def save_location
+      session[:user_return_to] = request.fullpath unless current_user
+    end
 end
