@@ -230,7 +230,7 @@ if ($('.shareSave').length) {
     }
   );
 
-  $('#inline_content .tabs a, .shareSave .btn .share, .resultsBar .btn').click(function() {
+  $('#inline_content .tabs a, .shareSave .btn.share, .resultsBar .btn').click(function() {
     return false;
   });
 
