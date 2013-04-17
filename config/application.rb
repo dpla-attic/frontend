@@ -68,7 +68,7 @@ module DplaPortal
     config.assets.precompile += %w( .svg .eot .woff .ttf lte-ie7.js modernizr-2.6.2.min.js fonts.css)
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '5'
+    config.assets.version = '6'
     config.paths['app/views'] << "app/views/devise"
   end
 end

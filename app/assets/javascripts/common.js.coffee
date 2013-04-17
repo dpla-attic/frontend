@@ -57,6 +57,8 @@ jQuery ->
     $.ajax
       url: window.wordpress_url
       dataType: 'jsonp'
+      cache: true
+      jsonpCallback: 'receive_wordpress_news'
       data:
         json: 1
         count: 2
