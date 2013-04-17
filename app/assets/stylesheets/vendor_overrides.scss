@@ -95,7 +95,7 @@ form {
 
 .box-right {
   text-align: right;
-  
+
   img {
     width: auto;
   }
@@ -119,8 +119,10 @@ form {
 }
 
 .leaflet-container {
-  img {
-    max-width: 100% !important;
+  .leaflet-popup-pane {
+    img {
+      max-width: 100% !important;
+    }
   }
 }
 
