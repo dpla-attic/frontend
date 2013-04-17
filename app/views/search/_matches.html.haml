@@ -5,7 +5,7 @@
       %h4 Exhibition Matches
       = link_to_exhibition @exhibitions.first
       - if @exhibitions.count > 1
-        = link_to "#{@exhibitions.count} More »", '#more_exhibitions', class: 'Viewmore inline cboxElement'
+        = link_to "#{@exhibitions.count - 1} More »", '#more_exhibitions', class: 'Viewmore inline cboxElement'
 
         // Popup
         - content_for :colorbox do
