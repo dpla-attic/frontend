@@ -322,7 +322,6 @@ DPLAPopup = L.Popup.extend
   _updateLayout: ->
     container = this._contentNode
     this._containerWidth = container.offsetWidth
-    container.style.height =  container.offsetHeight + 'px'
     this._container.style.bottom = 50 + 'px'
     this._container.style.left = 50 + 'px'
   openOn: (m, adjust = {x: 10, y: 20})->

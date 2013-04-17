@@ -66,9 +66,38 @@ form {
 }
 
 .box-row {
+  overflow: visible;
+  margin: 0;
+  padding: 15px 0 5px;
+  *zoom: 1;
+
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+
+  &:after {
+    clear: both;
+  }
+
   img {
     max-height: 150px;
     max-width:  150px;
+  }
+
+  .box-rows & {
+    border-top: 1px solid #ccc;
+    padding: 13px 0 0;
+    margin: 13px 0 0;
+  }
+}
+
+.box-right {
+  text-align: right;
+  
+  img {
+    width: auto;
   }
 }
 
@@ -86,6 +115,12 @@ form {
     left: -5px;
     position: relative;
     width: 30px;
+  }
+}
+
+.leaflet-container {
+  img {
+    max-width: 100% !important;
   }
 }
 
