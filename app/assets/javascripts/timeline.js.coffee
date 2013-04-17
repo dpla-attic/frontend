@@ -128,8 +128,7 @@ jQuery ->
       dataType: 'jsonp'
       cache: true
       data:
-        'sourceResource.date.before': year
-        'sourceResource.date.after':  year
+        'sourceResource.date.begin': year
       beforeSend: ->
         $('.prev, .next').hide()
         page.find('.year h3').text year
@@ -186,8 +185,7 @@ jQuery ->
         dataType: 'jsonp'
         cache: true
         data:
-          'sourceResource.date.before': current_year
-          'sourceResource.date.after':  current_year
+          'sourceResource.date.begin':  current_year
           'page': ++fetched_page
         beforeSend: ->
           infinite_scroll_in_progress = true
