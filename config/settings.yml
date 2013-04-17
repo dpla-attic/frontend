@@ -44,7 +44,8 @@ widgets:
   twitter_username: dpla
   # URL of wordpress site.
   # NOTE: JSON API plugin is required to able read Wordpress feed as JSONP requests
-  wordpress_url: http://dp.la
+  wordpress_json_api: http://dp.la/info
+  wordpress_view_all_link: http://dp.la/info/news/
   # Urls for social icons
   social_icons:
     facebook: https://www.facebook.com/theDPLA

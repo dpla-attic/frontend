@@ -1,7 +1,8 @@
-- if  wordpress_url = Settings.widgets.wordpress_url
+- if wordpress_url = Settings.widgets.wordpress_json_api
   :javascript
     window.wordpress_url = "#{ wordpress_url }";
   #wp_news_feed
     .news
       %ul
-      =link_to 'All News »', wordpress_url
+      - if all_news_link = Settings.widgets.wordpress_view_all_link
+        =link_to 'All News »', all_news_link
