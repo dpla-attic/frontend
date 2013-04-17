@@ -170,25 +170,23 @@ if ($('.shareSave').length) {
   });
 
   ///// REFINE SIDEBAR TOGGLE: PHONE
-  $('#toggle.Marticle').click( function() {
+  $('#toggle.Marticle').toggle( function() {
       $('aside').addClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveOut');
-      $('#toggle.Marticle').hide();
-      $('#toggle.Maside').show();
+      $('#toggle.Marticle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Hide');
 
       $('aside').removeClass('moveOut');
       $('.map article, .timeContainer, .slidePopOut').removeClass('moveIn');
-  });
-
-  $('#toggle.Maside').click( function() {
+    },
+    function() {
       $('aside').addClass('moveOut');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveIn');
-      $('#toggle.Marticle').show();
-      $('#toggle.Maside').hide();
+      $('#toggle.Marticle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
 
       $('aside').removeClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').removeClass('moveOut');
-  });
+    }
+  );
 
   $('.mapContainer').click(function() {
     $('.mobile-hover').hide();
