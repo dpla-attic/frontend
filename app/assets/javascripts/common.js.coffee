@@ -63,9 +63,10 @@ jQuery ->
       success: (data)->
         if data.posts
           $.each data.posts, (i,post)->
+            post_date = $.datepicker.parseDate('yy-mm-dd', post.date)
             news_container.append """
             <li>
               <a href="#{ post.url }">#{ post.title }</a>
-              <p><span>#{ $.datepicker.formatDate('M d', new Date(post.date)) }</span></p>
+              <p><span>#{ $.datepicker.formatDate('M d', post_date) }</span></p>
             </li>
             """
