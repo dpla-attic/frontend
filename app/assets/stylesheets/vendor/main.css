@@ -645,6 +645,7 @@ header .active a { border-bottom: 3px solid #2795b6; }
 .module.blue {
     border-top: 8px solid #8b8b8b;
     background: #ededed;
+    width: 21.02%;
 }
 
 .blue h5, .blue h5 a, .module.blue a { color: #2795b6; }
@@ -810,11 +811,7 @@ aside .module span { color: #000; }
 }
 
 .exibition-image {
-    max-width: 200px;
-    max-height: 200px;
-    width: 40%;
-    float: left;
-    margin: 0.5% 4.3% 4% 0;
+    margin: 0 0 4%;
     overflow: hidden;
 }
 
@@ -1203,6 +1200,7 @@ h6.open span {
     display: block;
     padding: 2% 5%;
 }
+.sideNav a:hover { color: inherit; }
 
 .sideNav ul ul {
     padding: 0;
@@ -1213,6 +1211,8 @@ h6.open span {
 
 .sideNav .selected { border: none; }
 
+.sideNav .selected a { color: inherit; cursor: default; }
+.sideNav .selected a:hover { text-decoration: none; }
 
 
 
@@ -2120,7 +2120,7 @@ aside h5 { margin: 5px 0 1em; }
     color: #818285;
     margin: 0 0 0.5em;
 }
-.boxInner h5 { font-size: 1em; }
+.boxInner h5 { font-size: 1em; margin-right: 25px; }
 .closePopUp {
 	position: absolute;
 	right: 12px;
@@ -2572,6 +2572,7 @@ aside h5 { margin: 5px 0 1em; }
 .slides, .flex-control-nav, .flex-direction-nav {margin: 0; padding: 0; list-style: none;}
 
 .flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.flexslider .slides > li:first-child {display: block;} /* But show the first slide to avoid empty box */
 .flexslider .slides img {width: 100%; display: block;}
 .flex-pauseplay span {text-transform: capitalize;}
 
@@ -2584,7 +2585,7 @@ html[xmlns] .slides {display: block;}
 
 /* FlexSlider Default Theme
 *********************************/
-.flexslider {margin: 0; background: #fff; position: relative; zoom: 1;}
+.flexslider {margin: 0; background: #fff; position: relative; zoom: 1; overflow: hidden;}
 .flex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
 .loading .flex-viewport {max-height: 300px;}
 .flexslider .slides {zoom: 1;}
@@ -2934,6 +2935,8 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
 
 #colorbox p { margin: 1em 0; }
 
+#colorbox .itemDetails p { margin-top: 0; }
+#colorbox .itemDetails h5 { margin-top: 0; margin-right: 32px; }
 
 #colorbox form h6 {
     font-family: 'source_sans_proitalic';
@@ -3044,7 +3047,7 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
     padding: 0 0 1%;
     position: absolute;
     right: 0;
-    z-index: 2;
+    z-index: 1000;
 }
 .sideNav {
     width: 31.640212%;
@@ -3061,6 +3064,7 @@ footer .social li span { height: 31px; border-right: 1px solid #000000; border-b
     margin: 4% 5% 0;
     cursor: pointer;
 }
+.sideNav .head:hover { color: inherit; }
 .sideNav .head span {
     float: right;
     font-size: 0.6em;
@@ -3539,8 +3543,6 @@ div.timeline-year {
     .searchViews { width: 40%; }
     .formRow select { float: none; display: block; clear: both; margin: 5px 0 5px; width: auto; }
     aside .module.line { background-position: center 43%; }
-    .exibition-image { width: 100%; margin: 0 0 4%; }
-    .module.blue h5 { clear: left; }
 
 	.DecadesDates, .graph {
 		right: 98.8%;
@@ -3757,6 +3759,10 @@ body .container .upper-left h2 { font-size: 1.4em; }
 .searchRight input[type="text"] {
     width:6%;
 }
+
+#colorbox .itemDetails article { padding: 0; width: 100%;}
+#colorbox .itemDetails .table li { clear: left; width: 100%; }
+
 /* MOBILE HEADER */
     header { margin: 0; }
 	header li { font-size: inherit; }
@@ -4089,6 +4095,11 @@ input[type="text"] { width: 80%; }
     .box h6 { right: 5%; top: 1.4em; }
 .row img { width: 100%; }
 
+.exibition-image {
+    margin: 0 4.3% 0 0;
+    float: left;
+}
+
 .news, .twiiter { padding: 0; }
 
 /* REFINE POPOUT */
@@ -4229,6 +4240,11 @@ aside { height: 100%; }
 .yearsView .scrubber .icon-arrow-down {
     font-size: 0.3em;
 	margin-left: -3px;
+}
+
+.exibition-image {
+    margin: 0 0 4% 0;
+    float: none;
 }
 
 }
