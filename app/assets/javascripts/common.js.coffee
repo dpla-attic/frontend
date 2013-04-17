@@ -19,7 +19,7 @@ jQuery ->
         .replaceWith "<a data-page="+current_page+" href=\"#\">"+current_page+"</a>"
       container.find(".pagination a[data-page=#{ page }]")
         .replaceWith "<span data-page="+page+" class=\"current\">"+page+"</span>"
-      $.colorbox.resize({heigth: $('#cboxContent').outerHeight()})
+      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
       false
 
   $('#more_locations .tabs a').click ->
@@ -33,18 +33,18 @@ jQuery ->
       $("##{ related_tab }").show()
       ul.find('li').removeClass('active')
       li.addClass('active')
-      $.colorbox.resize({heigth: $('#cboxContent').outerHeight()})
+      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
     false
 
   $('#countries .pop-open').click ->
     $('#countries').fadeOut ->
       $('#states').fadeIn()
-      $.colorbox.resize({heigth: $('#cboxContent').outerHeight()})
+      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
 
   $('#states .breadCrumbs li.countries a').click ->
     $('#states').fadeOut ->
       $('#countries').fadeIn()
-      $.colorbox.resize({heigth: $('#cboxContent').outerHeight()})
+      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
     false
 
   if window.twitter_account
@@ -63,9 +63,10 @@ jQuery ->
       success: (data)->
         if data.posts
           $.each data.posts, (i,post)->
+            post_date = $.datepicker.parseDate('yy-mm-dd', post.date)
             news_container.append """
             <li>
               <a href="#{ post.url }">#{ post.title }</a>
-              <p><span>#{ $.datepicker.formatDate('M d', new Date(post.date)) }</span></p>
+              <p><span>#{ $.datepicker.formatDate('M d', post_date) }</span></p>
             </li>
             """
