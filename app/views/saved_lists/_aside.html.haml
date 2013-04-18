@@ -7,19 +7,18 @@
     %ul
       - unlisted_active = 'show' == params[:action] && @list.blank?
       %li{class: unlisted_active ? 'active' : ''}
-        = link_to unlisted_saved_lists_path, class: "name locked" do
-          Your Saved Items
+        %span.name
+          = link_to 'Your Saved Items', unlisted_saved_lists_path
           %span.icon-lock{'aria-hidden' => true}
-          %span.visuallyhidden Private
         %span= @unlisted.count
       - @lists.each do |list|
-        %li{class: list.eql?(@list) ? 'active' : ''}
-          - locked = list.private? ? 'locked' : ''
-          = link_to list, class: "name #{locked}" do
-            = list.title
-            - if list.private?
-              %span.icon-lock{'aria-hidden' => true}
-              %span.visuallyhidden Private
+        %li{class: list.eql?(@list) ? 'active ' + list.id.to_s : ''}
+          - locked = list.private? ? 'icon-lock' : 'icon-unlocked'
+          %span.name
+            = link_to list.title, list
+            %span
+              - list_data = {list: list.id}
+            %span{class: "statusLink #{locked}", data: list_data, title: list.private? ? 'Set public status' : 'Set private status'}
           %span= list.saved_items.count
           = link_to 'edit', edit_saved_list_path(list), class: :edit
           = link_to '×',    list, class: :remove, method: :delete, confirm: 'Are you sure?'

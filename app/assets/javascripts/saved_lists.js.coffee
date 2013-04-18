@@ -95,3 +95,38 @@ $(document).ready ->
           window.location.href = window.location.href
 
       return false
+
+    # Switch status
+    # POST /saved/lists/switch_status
+    $('.statusLink').click ->
+      $(this).ajaxStart(->
+        $(this).css cursor: "progress"
+      ).ajaxStop ->
+        $(this).css cursor: ""
+
+      e = $(this)
+      list = e.data 'list'
+      return false unless list
+
+      $.ajax
+        type: 'PUT',
+        url: '/saved/lists/' + list
+        dataType: 'json'
+        data:
+          'saved_list': {private: !e.hasClass('icon-lock')}
+        success: (result) ->
+          if result
+            e.removeClass('icon-unlocked').addClass('icon-lock')
+            e.prop('title', 'Set public status')
+          else
+            e.removeClass('icon-lock').addClass('icon-unlocked')
+            e.prop('title', 'Set private status')
+          if ($(".active." + list).length > 0) #should update right side
+            el = $('#selectedListStatus span');
+            if result
+              el.removeClass('icon-unlocked').addClass('icon-lock')
+            else
+              el.removeClass('icon-lock').addClass('icon-unlocked')
+
+
+      return false

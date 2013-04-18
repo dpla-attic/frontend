@@ -14,11 +14,11 @@
         .rightSide
           .list-detail
             - if @list.present?
-              %h2{class: @list.private? ? 'private' : ''}
+              %h2
                 = @list.title
-                - if @list.private?
-                  %span
-                    %span.icon-lock{'aria-hidden' => true}
+                - locked = @list.private? ? 'icon-lock' : 'icon-unlocked'
+                %span#selectedListStatus
+                  %span{class: "#{locked}", 'aria-hidden' => true}
                     Private
               - if @list.description.present?
                 %p= @list.description

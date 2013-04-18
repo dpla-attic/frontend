@@ -39,10 +39,13 @@ class SavedListsController < ApplicationController
   end
 
   def update
-    if @list.update_attributes params[:saved_list]
-      redirect_to @list
-    else
-      render :edit
+    respond_to do |format|
+      if @list.update_attributes(params[:saved_list])
+        format.html { redirect_to @list }
+      else
+        format.html { render :edit }
+      end
+        format.json { render :json => @list.private? }
     end
   end
 
@@ -100,6 +103,12 @@ class SavedListsController < ApplicationController
 
   def move_positions
     copy_or_move_position(:move)
+  end
+
+  def switch_status
+    target_list = current_user.saved_lists.find params[:list]
+    target_list.update_attribute(:private, !target_list.private) if target_list
+    redirect_to :back
   end
 
   private
