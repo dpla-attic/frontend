@@ -7,6 +7,8 @@ class Exhibition
 
 	def self.find_by_term(q)
 		begin
+   pattern = /(\+|\-|\!|\(|\)|\{|\}|\[|\]|\^|\"|\~|\*|\?|\:|\\)/
+   q = q.gsub(pattern){|match|"\\"  + match}
 			exhibits = Exhibition.query(field: {title: "*#{q}*"}).query(field: {public: 1})
 			exhibits.any?
 			exhibits
