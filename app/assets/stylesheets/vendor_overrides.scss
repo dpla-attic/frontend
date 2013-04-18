@@ -286,8 +286,9 @@ aside {
   }
 
   .account input[type="text"],
+  .account input[type="file"],
   .account input[type="password"],
-  .account .textarea textarea {
+  .account textarea {
     width: 100%;
   }
 
