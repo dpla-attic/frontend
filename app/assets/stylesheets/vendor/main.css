@@ -1830,6 +1830,7 @@ input[type="checkbox"] {
     color: #7b7b7b;
     font-size: 0.625em;
     margin: 0 0 0 20px;
+    line-height: 1;
 }
 .private span.icon-lock, .private span.icon-unlocked {
     font-size: 1em;

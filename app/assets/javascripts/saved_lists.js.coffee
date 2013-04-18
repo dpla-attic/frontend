@@ -124,9 +124,9 @@ $(document).ready ->
           if ($(".active." + list).length > 0) #should update right side
             el = $('#selectedListStatus span');
             if result
-              el.removeClass('icon-unlocked').addClass('icon-lock')
+              el.show()
             else
-              el.removeClass('icon-lock').addClass('icon-unlocked')
+              el.hide()
 
 
       return false
