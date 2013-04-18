@@ -14,7 +14,7 @@
         .rightSide
           .list-detail
             - if @list.present?
-              %h2
+              %h2{class: @list.private? ? 'private' : ''}
                 = @list.title
                 - locked = @list.private? ? 'icon-lock' : 'icon-unlocked'
                 %span#selectedListStatus

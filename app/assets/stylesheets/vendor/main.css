@@ -1830,16 +1830,21 @@ input[type="checkbox"] {
     text-decoration: none;
 }
 
-#selectedListStatus span, .private span {
+.list-detail h2 span {
     display: inline-block;
     color: #7b7b7b;
     font-size: 0.625em;
     margin: 0 0 0 20px;
+    line-height: 1;
 }
-.private span.icon-lock, .private span.icon-unlocked {
+.list-detail h2 span.icon-lock {
     font-size: 1em;
     margin: 0;
 }
+.list-detail span.icon-unlocked {
+    display: none;
+}
+
 .checkbox {
     float: left;
 }
