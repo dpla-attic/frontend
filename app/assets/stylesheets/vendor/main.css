@@ -1601,16 +1601,17 @@ li.row-4 { width: 6.666666%; padding: 0;}
 
 li.row-4 a:hover { text-decoration: none; }
 
-.itemList .icon-lock, .itemList .icon-unlock  {
+.itemList .icon-lock, .itemList .icon-unlocked  {
     display: none;
     float: none;
     width: auto;
     color: #918f8f;
     margin-left: 3px;
 }
-.itemList li.active .icon-lock, .itemList li.active .icon-unlock { color: #b2c9d3; }
+.itemList li.active .icon-lock, .itemList li.active .icon-unlocked { color: #b2c9d3; }
 .itemList .locked .icon-lock { display: inline; }
-.itemList .icon-lock, .itemList .icon-unlock { display: inline; }
+.itemList .icon-lock, .itemList .icon-unlocked { display: inline; }
+.itemList .statusLink { cursor: pointer; }
 
 .row img { width: 100%; }
 
@@ -1830,7 +1831,7 @@ input[type="checkbox"] {
     font-size: 0.625em;
     margin: 0 0 0 20px;
 }
-.private span.icon-lock, .private span.icon-unlock {
+.private span.icon-lock, .private span.icon-unlocked {
     font-size: 1em;
     margin: 0;
 }

@@ -16,7 +16,7 @@
             - if @list.present?
               %h2
                 = @list.title
-                - locked = @list.private? ? 'icon-lock' : 'icon-unlock'
+                - locked = @list.private? ? 'icon-lock' : 'icon-unlocked'
                 %span#selectedListStatus
                   %span{class: "#{locked}", 'aria-hidden' => true}
                     Private

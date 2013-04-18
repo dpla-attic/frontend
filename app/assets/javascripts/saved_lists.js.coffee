@@ -102,7 +102,7 @@ $(document).ready ->
       $(this).ajaxStart(->
         $(this).css cursor: "progress"
       ).ajaxStop ->
-        $(this).css cursor: "auto"
+        $(this).css cursor: ""
 
       e = $(this)
       list = e.data 'list'
@@ -116,17 +116,17 @@ $(document).ready ->
           'saved_list': {private: !e.hasClass('icon-lock')}
         success: (result) ->
           if result
-            e.removeClass('icon-unlock').addClass('icon-lock')
+            e.removeClass('icon-unlocked').addClass('icon-lock')
             e.prop('title', 'Set public status')
           else
-            e.removeClass('icon-lock').addClass('icon-unlock')
+            e.removeClass('icon-lock').addClass('icon-unlocked')
             e.prop('title', 'Set private status')
           if ($(".active." + list).length > 0) #should update right side
             el = $('#selectedListStatus span');
             if result
-              el.removeClass('icon-unlock').addClass('icon-lock')
+              el.removeClass('icon-unlocked').addClass('icon-lock')
             else
-              el.removeClass('icon-lock').addClass('icon-unlock')
+              el.removeClass('icon-lock').addClass('icon-unlocked')
 
 
       return false

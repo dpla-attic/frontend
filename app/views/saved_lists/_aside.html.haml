@@ -13,12 +13,12 @@
         %span= @unlisted.count
       - @lists.each do |list|
         %li{class: list.eql?(@list) ? 'active ' + list.id.to_s : ''}
-          - locked = list.private? ? 'icon-lock' : 'icon-unlock'
+          - locked = list.private? ? 'icon-lock' : 'icon-unlocked'
           %span.name
             = link_to list.title, list
             %span
               - list_data = {list: list.id}
-            %a{class: "statusLink #{locked}", href: "#", data: list_data, title: list.private? ? 'Set public status' : 'Set private status'}
+            %span{class: "statusLink #{locked}", data: list_data, title: list.private? ? 'Set public status' : 'Set private status'}
           %span= list.saved_items.count
           = link_to 'edit', edit_saved_list_path(list), class: :edit
           = link_to '×',    list, class: :remove, method: :delete, confirm: 'Are you sure?'

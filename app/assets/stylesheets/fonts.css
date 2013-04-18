@@ -75,7 +75,24 @@ Instead of a list of all class selectors,
 you can use the generic selector below, but it's slower:
 [class*="icon-"]:before {
 */
-.icon-view-list:before, .icon-view-map:before, .icon-view-object:before, .icon-view-time:before, .icon-arrow-thin-down:before, .icon-arrow-right:before, .icon-arrow-left:before, .icon-arrow-down:before, .icon-twitter:before, .icon-rss:before, .icon-mag-glass:before, .icon-lock:before, .icon-unlock:before, .icon-facebook:before, .icon-arrow-up:before, .icon-arrow-thin-up:before, .icon-arrow-thin-right:before, .icon-arrow-thin-left:before {
+.icon-view-list:before,
+.icon-view-map:before,
+.icon-view-object:before,
+.icon-view-time:before,
+.icon-arrow-thin-down:before,
+.icon-arrow-right:before,
+.icon-arrow-left:before,
+.icon-arrow-down:before,
+.icon-twitter:before,
+.icon-rss:before,
+.icon-mag-glass:before,
+.icon-lock:before,
+.icon-unlocked:before,
+.icon-facebook:before,
+.icon-arrow-up:before,
+.icon-arrow-thin-up:before,
+.icon-arrow-thin-right:before,
+.icon-arrow-thin-left:before {
     font-family: 'icomoon';
     speak: none;
     font-style: normal;
@@ -126,10 +143,10 @@ you can use the generic selector below, but it's slower:
     content: "\e00a";
 }
 .icon-lock:before {
-    content: "\e00b";
+    content: "\e012";
 }
-.icon-unlock:before {
-    content: "\e009";
+.icon-unlocked:before {
+    content: "\e011";
 }
 .icon-facebook:before {
     content: "\e00c";
