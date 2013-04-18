@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
   has_many :saved_item_positions
 
   validates :name, presence: true
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
 
   def active_for_authentication?
     true
