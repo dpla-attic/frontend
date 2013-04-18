@@ -34,6 +34,7 @@ if ($('.shareSave').length) {
 	});
 
 	$('.forgotPassword').click(function() {
+    $(this).hide();
 		$('.forgotSlide').slideDown();
 		$('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '430px'});
 		return false;
