@@ -24,3 +24,6 @@
 
 # Ignore carrierwave uploads
 /public/uploads
+
+# Ignore generated assets
+/public/assets
