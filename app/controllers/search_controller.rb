@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
   helper_method :permitted_params
+  before_filter :save_location
 
   def show
     @search = Search.new *permitted_params.search
@@ -17,5 +18,9 @@ class SearchController < ApplicationController
       if q.present?
         exhibits = Exhibition.find_by_term q
       end
+    end
+
+    def save_location
+      session[:user_return_to] = request.fullpath unless current_user
     end
 end
