@@ -262,24 +262,6 @@ if ($('.shareSave').length) {
     reposition: false
   });
 
-  $('.login').colorbox({
-    inline:true,
-    width:'100%',
-    maxWidth: '600px',
-    transition: 'none',
-    close: '&times;',
-    reposition: false
-  });
-
-  $('.signUp').colorbox({
-    inline:true,
-    width:'100%',
-    maxWidth: '600px',
-    transition: 'none',
-    close: '&times;',
-    reposition: false
-  });
-
   // $('.pop-open').click(function() {
   //   $('.pop-columns.country').fadeOut(function() {
   //     $('.pop-columns.states').fadeIn();
