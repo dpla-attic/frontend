@@ -279,6 +279,16 @@ aside {
 }
 
 @media only screen and (min-width: 0px) and (max-width: 680px) {
+  .MainNav {
+    width: 51%;
+    border: none;
+  }
+  .topNav {
+    position: relative;
+    margin: 0 0 1.5em;
+    padding: 1px 2.6455% 0 5%;
+    border-left: 1px solid #ccc;
+  }
   #colorbox #cboxClose,
   #cboxClose,
   .closePopUp {
