@@ -8,7 +8,15 @@
         = render partial: 'aside'
         .rightSide
           .list-detail
-            %h2 All Items
+            - if params[:q].present?
+              -if @saved_item_positions.nil?
+                Your search didn't return results
+              -else
+                Your search for
+                %span= params[:q]
+                returned no results.
+            - else
+              %h2 All Items
           - if @saved_item_positions.present?
             = render partial: 'paginator'
             .savedList
