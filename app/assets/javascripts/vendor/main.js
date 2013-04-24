@@ -452,7 +452,7 @@ if ($('.shareSave').length) {
 
 /////TIMELINE MODULE: DECADES
 
-  var moving = false;
+  /*var moving = false;
   $('.Decades .prev').click(function() {
 	if (moving == false) {
 	  moving = true;
@@ -479,7 +479,7 @@ if ($('.shareSave').length) {
 		$('.scrubber').slider('value', $('.scrubber').slider('value') + (slideDistance*1000));
 	  }
 	}
-  });
+  });*/
 
 
 /////TIMELINE MODULE: YEARS

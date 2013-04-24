@@ -6,6 +6,7 @@ class DPLA.Routers.TimelineRouter extends Backbone.Router
 
   initialize: (options) ->
     this.timeline = options.timeline
+    this.timeline.router = this
 
   decadesView: ->
     this.timeline.trigger 'timeline:decadesView'

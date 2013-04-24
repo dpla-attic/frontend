@@ -1,14 +1,14 @@
 jQuery ->
 
   # Backbone
-  timeline = new DPLA.Models.Timeline
+  window.timeline = timeline = new DPLA.Models.Timeline
   new DPLA.Routers.TimelineRouter timeline: timeline
   new DPLA.Views.TimelineScrubber timeline: timeline
   Backbone.history.start pushState: false, root: '/timeline/'
 
-  # container = $('.timelineContainer')
-  # current_sheet = 2 # first page is 1 (not 0), as in CSS
-  # total_sheets = 5
+  container = $('.timelineContainer')
+  current_sheet = 2 # first page is 1 (not 0), as in CSS
+  total_sheets = 5
 
   # fetched_page = 1
   # infinite_scroll_in_progress = false
@@ -147,36 +147,36 @@ jQuery ->
   #       updateLinks()
 
   # $('.timelineContainer').on 'click', '.timeline-row', (event) ->
-  #   current_year = parseInt $(this).find('.year h3').text()
+  #   # current_year = parseInt $(this).find('.year h3').text()
   #   page = container.find(".timeline-row:nth-child("+ current_sheet + ")")
 
-    # If this is a last page or first page we need move
-    # if current_sheet >= total_sheets
-    #   container.append(container.find('.timeline-row:first-child'))
-    #   current_sheet = current_sheet-1
-    #   container.animate { right: '-=100%' }, 0
-    # else if current_sheet <= 1
-    #   container.prepend(container.find('.timeline-row:last-child'))
-    #   current_sheet = current_sheet+1
-    #   container.animate { right: '+=100%' }, 0
+  #   #If this is a last page or first page we need move
+  #   if current_sheet >= total_sheets
+  #     container.append(container.find('.timeline-row:first-child'))
+  #     current_sheet = current_sheet-1
+  #     container.animate { right: '-=100%' }, 0
+  #   else if current_sheet <= 1
+  #     container.prepend(container.find('.timeline-row:last-child'))
+  #     current_sheet = current_sheet+1
+  #     container.animate { right: '+=100%' }, 0
 
-    # if event.target.className == 'next'
-    #   year = current_year+1
-    #   _page = page.next()
-    #   fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
-    #   container.animate { right: '+=100%' }, 500, ->
-    #     $('.prev, .next').show()
-    #   $('.scrubber').slider('value', $('.scrubber').slider('value') + 98.039257);
-    #   current_sheet = current_sheet + 1
+  #   if event.target.className == 'next'
+  #     # year = current_year+1
+  #     _page = page.next()
+  #     # fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
+  #     container.animate { right: '+=100%' }, 500, ->
+  #       $('.prev, .next').show()
+  #     $('.scrubber').slider('value', $('.scrubber').slider('value') + 98.039257);
+  #     current_sheet = current_sheet + 1
 
-    # else if event.target.className == 'prev'
-    #   year = current_year-1
-    #   _page = page.prev()
-    #   fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
-    #   container.animate { right: '-=100%' }, 500, ->
-    #     $('.prev, .next').show()
-    #   $('.scrubber').slider('value', $('.scrubber').slider('value') - 98.039257);
-    #   current_sheet = current_sheet - 1
+  #   else if event.target.className == 'prev'
+  #     # year = current_year-1
+  #     _page = page.prev()
+  #     # fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
+  #     container.animate { right: '-=100%' }, 500, ->
+  #       $('.prev, .next').show()
+  #     $('.scrubber').slider('value', $('.scrubber').slider('value') - 98.039257);
+  #     current_sheet = current_sheet - 1
 
     # updateWindowLocation year: year
 
