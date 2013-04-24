@@ -65,6 +65,7 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     diff-lcs (1.2.2)
+    ejs (1.0.0)
     elastictastic (0.11.2)
       activemodel (~> 3.0)
       activesupport (~> 3.0)
@@ -140,6 +141,10 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails-backbone (0.7.2)
+      coffee-script (~> 2.2.0)
+      ejs (~> 1.0.0)
+      railties (>= 3.1.0)
     rails_config (0.3.2)
       activesupport (>= 3.0)
     railties (3.2.13)
@@ -226,6 +231,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails
+  rails-backbone
   rails_config
   rmagick
   rspec-rails (~> 2.0)

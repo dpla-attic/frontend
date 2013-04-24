@@ -9,6 +9,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'therubyracer'
   gem 'jquery-rails'
+  gem 'rails-backbone'
 end
 
 gem 'haml'
