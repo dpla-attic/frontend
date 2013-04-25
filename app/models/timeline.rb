@@ -6,7 +6,7 @@ class Timeline < Search
     %w(
       id sourceResource.title isShownAt object
       sourceResource.type sourceResource.creator
-      sourceResource.spatial.name sourceResource.spatial.coordinates
+      sourceResource.description
     )
   end
 
