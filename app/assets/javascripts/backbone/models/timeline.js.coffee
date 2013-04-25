@@ -37,13 +37,21 @@ class DPLA.Models.Timeline extends Backbone.Model
 
     this.updateGraph()
 
+    if this.sliderWas && this.yearWas == this.get('year').toString()
+      this.scrubber.$el.slider('value', this.sliderWas)
+
   yearView: (year, item_id) ->
+    try
+      this.yearWas   = this.get('year')
+      this.sliderWas = this.scrubber.$el.slider('value')
+
     this.set 'mode', 'year'
     this.set 'year', year
     this.trigger 'timeline:update_scrubber', this
     $('.timeContainer').removeClass('decadesView').addClass('yearsView');
     $('.timelineContainer').show()
     $('.Decades').hide()
+
 
     page = this.getCurrentSheet()
     if this.get('year') is this.get('maxYear')
@@ -78,7 +86,7 @@ class DPLA.Models.Timeline extends Backbone.Model
 
     timeline = this
     $('.DecadesTab').on 'click', ->
-      timeline.trigger 'timeline:decadesView'
+      timeline.router.navigate "//"
       false
 
   initializeYearView: ->
@@ -92,9 +100,10 @@ class DPLA.Models.Timeline extends Backbone.Model
 
   initializeDecadesPrevNext: ->
     moving = false
+    timeline = this
     $('.Decades span.next, .Decades span.prev').on 'click', ->
-      slideDistance = this.get 'slideDistance'
-      endPoint = this.get 'endPoint'
+      slideDistance = timeline.get 'slideDistance'
+      endPoint = timeline.get 'endPoint'
       direction = $(this).attr('class')
       if moving is false
         moving = true

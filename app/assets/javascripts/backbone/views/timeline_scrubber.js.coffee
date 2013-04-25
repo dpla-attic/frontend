@@ -6,6 +6,8 @@ class DPLA.Views.TimelineScrubber extends Backbone.View
     this.timeline.on 'timeline:update_scrubber', this.updateScrubber, this
     this.timeline.on 'change:mode', this.changeMode, this
 
+    this.isScrubberInitialized = false
+
   changeMode: (timeline) ->
     mode  = timeline.get('mode')
     year  = timeline.get('year')
@@ -13,11 +15,15 @@ class DPLA.Views.TimelineScrubber extends Backbone.View
     if mode is 'decades'
       value -= 100000
     t = this
+
+    this.$el.slider('destroy') if this.isScrubberInitialized
+
     this.$el.slider
       value: value
       min: 0
       max: timeline.get('endPoint') * 1000
       slide: (event, ui) ->
+        mode  = t.timeline.get('mode')
         switch mode
           when 'decades'
             year = t.getSliderYear(t)
@@ -26,6 +32,7 @@ class DPLA.Views.TimelineScrubber extends Backbone.View
           when 'year'
             year = t.getSliderYear(t)
       change: (event, ui) ->
+        mode  = t.timeline.get('mode')
         switch mode
           when 'decades'
             year = t.getSliderYear(t)
@@ -38,6 +45,8 @@ class DPLA.Views.TimelineScrubber extends Backbone.View
 
     unless $('.scrubber a span.arrow').length
       $('.scrubber a').append('<span class="arrow"></span><span class="icon-arrow-down" aria-hidden="true"></span>');
+
+    this.isScrubberInitialized = true
 
     setTimeout ->
       timeline.trigger 'timeline:update_graph', t.$el.slider('value')
