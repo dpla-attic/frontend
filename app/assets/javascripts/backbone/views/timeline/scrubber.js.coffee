@@ -1,4 +1,6 @@
-class DPLA.Views.TimelineScrubber extends Backbone.View
+DPLA.Views.Timeline ||= {}
+
+class DPLA.Views.Timeline.Scrubber extends Backbone.View
   initialize: (options) ->
     this.timeline = options.timeline
     this.timeline.scrubber = this
