@@ -3,38 +3,30 @@ class DPLA.Models.Timeline extends Backbone.Model
     currentSheet: 2 # By design
     totalSheets:  5 # By design
     year: 2000
-    mode: 'decades'
+    minYear: 1000
+    maxYear: 2020
 
-  initialize: (options)->
+  initialize: (options) ->
     this.initializeDecadesView()
     this.initializeYearView()
     this.initializeDecadesPrevNext()
     this.initializeYearPrevNext()
     this.initializeYearRotator()
-    this.on 'timeline:decadesView', this.decadesView, this
-    this.on 'timeline:yearView',    this.yearView,    this
-    this.on 'change:year', this.updateGraph, this
-    this.on 'timeline:update_url', this.updateRoute, this
+    this.on 'timeline:decadesView',  this.decadesView, this
+    this.on 'timeline:yearView',     this.yearView,    this
+    this.on 'timeline:update_graph', this.updateGraph, this
 
-  updateGraph: ->
-    slider_value = (this.get('year') - 1000) / (1020 / 100000)
-    move = slider_value / 1000
+  updateGraph: (value = null) ->
+    if _.isNull value
+      value = $('.scrubber').slider('value')
+    move = value/1000
     $(".DecadesDates, .graph").css right: move + "%"
-    if slider_value is this.get('endPoint') * 1000
+    if value is this.get('endPoint') * 1000
       $(".Decades .next").hide()
-    else if slider_value is 0
+    else if value is 0
       $(".Decades .prev").hide()
     else
       $(".Decades .prev, .Decades .next").show()
-
-  updateRoute: ->
-    year = this.get 'year'
-    switch this.get 'mode'
-      when 'decades'
-        this.router.navigate '', trigger: false
-      when 'year'
-        this.router.navigate "#{year}", trigger: false
-
 
   decadesView: ->
     this.set 'mode', 'decades'
@@ -43,15 +35,34 @@ class DPLA.Models.Timeline extends Backbone.Model
     $('.timelineContainer').hide();
     $('.Decades').show();
 
-  yearView: (year, item_id)->
+    this.updateGraph()
+
+  yearView: (year, item_id) ->
     this.set 'mode', 'year'
     this.set 'year', year
+    this.trigger 'timeline:update_scrubber', this
     $('.timeContainer').removeClass('decadesView').addClass('yearsView');
     $('.timelineContainer').show()
     $('.Decades').hide()
 
+    page = this.getCurrentSheet()
+    if this.get('year') is this.get('maxYear')
+      page.find('.prev').show()
+      page.find('.next').hide()
+    else if this.get('year') is this.get('minYear')
+      page.find('.prev').hide()
+      page.find('.next').show()
+    else
+      page.find('.prev, .next').show()
+
+    items = new DPLA.Collections.TimelineItems page: page
+    items.fetchByYear year
+    if item_id
+      items.fetchById item_id
+
   getCurrentSheet: ->
-    this.sheetsPool[ this.get 'currentSheet' ]
+    current_sheet = timeline.get 'currentSheet'
+    $('.timelineContainer').find(".timeline-row:nth-child("+ current_sheet + ")")
 
   getWindowWidth: ->
     window.innerWidth || document.documentElement.clientWidth
@@ -76,14 +87,14 @@ class DPLA.Models.Timeline extends Backbone.Model
     timeline = this
     $('.graph li').on 'click', ->
       year = $(this).data 'year'
-      timeline.trigger 'timeline:yearView', year
+      timeline.router.navigate "//#{year}"
       false
 
   initializeDecadesPrevNext: ->
-    slideDistance = this.get 'slideDistance'
-    endPoint = this.get 'endPoint'
     moving = false
     $('.Decades span.next, .Decades span.prev').on 'click', ->
+      slideDistance = this.get 'slideDistance'
+      endPoint = this.get 'endPoint'
       direction = $(this).attr('class')
       if moving is false
         moving = true
@@ -120,20 +131,21 @@ class DPLA.Models.Timeline extends Backbone.Model
   initializeYearPrevNext: ->
     timeline = this
     $(".timeline-row .next").click ->
-      $(".scrubber").slider "value", $(".scrubber").slider("value") + 98.039257
       $(".prev, .next").hide()
       $(".timelineContainer").animate
         right: "+=100%"
       , 500, ->
-        if timeline.get('year') is 2013
+        if timeline.get('year') is 2020
           $(".prev").show()
         else
           $(".prev, .next").show()
+      timeline.scrubber.nextYear()
+      year = timeline.scrubber.getSliderYear()
+      timeline.router.navigate "//#{year}"
 
 
     $(".timeline-row .prev").click ->
       if $(this).parent().prev().hasClass("timeline-row")
-        $(".scrubber").slider "value", $(".scrubber").slider("value") - 98.039257
         $(".prev, .next").hide()
         $(".timelineContainer").animate
           right: "-=100%"
@@ -142,11 +154,14 @@ class DPLA.Models.Timeline extends Backbone.Model
             $(".next").show()
           else
             $(".prev, .next").show()
+        timeline.scrubber.prevYear()
+        year = timeline.scrubber.getSliderYear()
+        timeline.router.navigate "//#{year}"
 
   initializeYearRotator: ->
     timeline = this
     container = $('.timelineContainer')
-    $('.timelineContainer .timeline-row').click (event) ->
+    $('.timeline-row .next, .timeline-row .prev').click (event) ->
       current_year = timeline.get 'year'
       current_sheet = timeline.get 'currentSheet'
       total_sheets  = timeline.get 'totalSheets'
@@ -171,7 +186,7 @@ class DPLA.Models.Timeline extends Backbone.Model
         #   $('.prev, .next').show()
         # $('.scrubber').slider('value', $('.scrubber').slider('value') + 98.039257);
         timeline.set
-          'year': current_year + 1
+          'year': current_year
           'currentSheet': current_sheet + 1
 
       else if event.target.className == 'prev'
@@ -182,5 +197,5 @@ class DPLA.Models.Timeline extends Backbone.Model
         #   $('.prev, .next').show()
         # $('.scrubber').slider('value', $('.scrubber').slider('value') - 98.039257);
         timeline.set
-          'year': current_year - 1
+          'year': current_year
           'currentSheet': current_sheet - 1

@@ -11,6 +11,6 @@ class DPLA.Routers.TimelineRouter extends Backbone.Router
   decadesView: ->
     this.timeline.trigger 'timeline:decadesView'
 
-  yearView: (year, item_id)->
+  yearView: (year, item_id) ->
     this.timeline.trigger 'timeline:yearView', year, item_id
 
