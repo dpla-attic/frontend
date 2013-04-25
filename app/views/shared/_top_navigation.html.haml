@@ -45,6 +45,6 @@
     %li.bg.last= link_to "Sign out", destroy_user_session_path
   - else
     %li.bg
-      %a.login.cBoxElement{href: "#loginBox"} Login
+      = link_to 'Login', new_user_session_path, class: 'login cBoxElement'
     %li.bg.last
-      %a.signUp.cBoxElement{href: "#signupBox"} Sign Up
+      = link_to 'Sign Up', new_user_registration_path, class: 'signUp cBoxElement'

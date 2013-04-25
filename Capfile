@@ -23,7 +23,7 @@ stage :staging do
   set :user, 'capistrano'
   set :use_sudo, false
   set :deploy_to, "/var/www/frontend"
-  set :branch, "master"
+  set :branch, "testing"
 
   use_recipe :passenger
 end

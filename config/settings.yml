@@ -64,3 +64,5 @@ ui:
       sound:
         - sound
       video:
+  session:
+    forms_in_popups: false
