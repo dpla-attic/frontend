@@ -4,6 +4,7 @@ class DPLA.Models.TimelineItem extends Backbone.Model
     title = doc['sourceResource.title'] || id
     title = _.first(title) if _.isArray(title)
     description = doc['sourceResource.description'] || ''
+    description = _.first(description) if _.isArray(description)
     description = description.substr(0, 200) + '...' if description.length > 200
     this.set
       id:          id
@@ -15,18 +16,6 @@ class DPLA.Models.TimelineItem extends Backbone.Model
       thumbnail:   doc['object']    || ''
 
 class DPLA.Collections.TimelineItems extends Backbone.Collection
-  fetchByYear: (year) ->
-    this.requestByYear year,
-      beforeSend: ->
-      success: (items) ->
-        console.log items
-      complete: ->
-
-  fetchById: (item_id) ->
-    this.requestById item_id,
-      success: (items) ->
-        console.log items
-
   requestByYear: (year, options = {}) ->
     count   = options.count || 10
     page    = options.page  || 1
@@ -38,14 +27,15 @@ class DPLA.Collections.TimelineItems extends Backbone.Collection
         'sourceResource.date.begin': year
         'page_size': count
         'page': page
-      beforeSend: ->
+      beforeSend: options.beforeSend
       success: (data) ->
         items = []
         if _.isObject(data) && _.isArray(data.docs)
           items = _.map data.docs, (doc) ->
             new DPLA.Models.TimelineItem({}, doc)
+          items.totalCount = data.count if data.count
         options.success(items)
-      complete: ->
+      complete: options.complete
 
   requestById: (item_id, options) ->
     success = options.success
@@ -53,11 +43,7 @@ class DPLA.Collections.TimelineItems extends Backbone.Collection
       url: window.api_item_path.replace '%', item_id
       dataType: 'jsonp'
       cache: true
-      beforeSend: ->
       success: (data) ->
-        items = []
         if _.isObject(data) && _.isArray(data.docs)
-          items = _.map data.docs, (doc) ->
-            new DPLA.Models.TimelineItem({}, doc)
-        success(items)
-      complete: ->
+          success(new DPLA.Models.TimelineItem({}, _.first(data.docs)))
+      complete: options.complete

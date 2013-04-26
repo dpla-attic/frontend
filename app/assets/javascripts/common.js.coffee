@@ -1,5 +1,7 @@
 window.image_loading_error = (image)->
-  $(image).remove()
+  setTimeout ->
+    $(image).remove()
+  , 0
 
 jQuery ->
   if $('input#q').val().length == 0
