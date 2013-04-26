@@ -29,17 +29,13 @@ class DPLA.Views.Timeline.Scrubber extends Backbone.View
         switch mode
           when 'decades'
             year = t.getSliderYear(t)
-            t.timeline.set('year', year)
+            t.timeline.set('year', year + 1000)
             timeline.trigger 'timeline:update_graph', ui.value
           when 'year'
             year = t.getSliderYear(t)
       change: (event, ui) ->
         mode  = t.timeline.get('mode')
         switch mode
-          when 'decades'
-            year = t.getSliderYear(t)
-            t.timeline.set('year', year)
-            timeline.trigger 'timeline:update_graph', ui.value
           when 'year'
             year = t.getSliderYear(t)
             if year.toString() != t.timeline.get('year')

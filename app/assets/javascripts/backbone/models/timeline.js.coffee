@@ -1,6 +1,6 @@
 class DPLA.Models.Timeline extends Backbone.Model
   defaults:
-    currentSheet: 2 # By design
+    currentSheet: 1 # By design
     totalSheets:  5 # By design
     year: 2000
     minYear: 1000
@@ -10,7 +10,7 @@ class DPLA.Models.Timeline extends Backbone.Model
     this.initializeDecadesView()
     this.initializeYearView()
     this.initializeDecadesPrevNext()
-    this.initializeYearPrevNext()
+    this.initializeSheets()
     this.initializeYearRotator()
     this.on 'timeline:decadesView',  this.decadesView, this
     this.on 'timeline:yearView',     this.yearView,    this
@@ -37,12 +37,11 @@ class DPLA.Models.Timeline extends Backbone.Model
 
     this.updateGraph()
 
-    if this.sliderWas && this.yearWas == this.get('year').toString()
+    if this.sliderWas
       this.scrubber.$el.slider('value', this.sliderWas)
 
   yearView: (year, item_id) ->
     try
-      this.yearWas   = this.get('year')
       this.sliderWas = this.scrubber.$el.slider('value')
 
     this.set 'mode', 'year'
@@ -53,24 +52,32 @@ class DPLA.Models.Timeline extends Backbone.Model
     $('.Decades').hide()
 
 
-    page = this.getCurrentSheet()
+    page = this.getCurrentPage()
     if this.get('year') is this.get('maxYear')
-      page.find('.prev').show()
-      page.find('.next').hide()
+      page.$el.find('.prev').show()
+      page.$el.find('.next').hide()
     else if this.get('year') is this.get('minYear')
-      page.find('.prev').hide()
-      page.find('.next').show()
+      page.$el.find('.prev').hide()
+      page.$el.find('.next').show()
     else
-      page.find('.prev, .next').show()
+      page.$el.find('.prev, .next').show()
 
-    items = new DPLA.Collections.TimelineItems page: page
-    items.fetchByYear year
-    if item_id
-      items.fetchById item_id
+    params = year: year
+    params['item_id'] = item_id if item_id
 
-  getCurrentSheet: ->
+    page.$el.find(".prev, .next").hide()
+    if year is this.get('maxYear').toString()
+      page.$el.find(".prev").show()
+    else if year is this.get('minYear').toString()
+      page.$el.find(".next").show()
+    else
+      page.$el.find(".prev, .next").show()
+
+    page.render(params)
+
+  getCurrentPage: ->
     current_sheet = timeline.get 'currentSheet'
-    $('.timelineContainer').find(".timeline-row:nth-child("+ current_sheet + ")")
+    this.pagesPool[ current_sheet ]
 
   getWindowWidth: ->
     window.innerWidth || document.documentElement.clientWidth
@@ -137,74 +144,53 @@ class DPLA.Models.Timeline extends Backbone.Model
                 moving = false
               $(".scrubber").slider "value", $(".scrubber").slider("value") - (slideDistance * 1000)
 
-  initializeYearPrevNext: ->
-    timeline = this
-    $(".timeline-row .next").click ->
-      $(".prev, .next").hide()
-      $(".timelineContainer").animate
-        right: "+=100%"
-      , 500, ->
-        if timeline.get('year') is 2020
-          $(".prev").show()
-        else
-          $(".prev, .next").show()
-      timeline.scrubber.nextYear()
-      year = timeline.scrubber.getSliderYear()
-      timeline.router.navigate "//#{year}"
-
-
-    $(".timeline-row .prev").click ->
-      if $(this).parent().prev().hasClass("timeline-row")
-        $(".prev, .next").hide()
-        $(".timelineContainer").animate
-          right: "-=100%"
-        , 500, ->
-          if timeline.get('year') is 1000
-            $(".next").show()
-          else
-            $(".prev, .next").show()
-        timeline.scrubber.prevYear()
-        year = timeline.scrubber.getSliderYear()
-        timeline.router.navigate "//#{year}"
+  initializeSheets: ->
+    this.pagesPool = pagesPool = []
+    itemsCollections = new DPLA.Collections.TimelineItems
+    $('.timeline-row').each ->
+      pagesPool.push new DPLA.Views.Timeline.Page
+        el: $(this)
+        items: itemsCollections
 
   initializeYearRotator: ->
     timeline = this
     container = $('.timelineContainer')
     $('.timeline-row .next, .timeline-row .prev').click (event) ->
-      current_year = timeline.get 'year'
-      current_sheet = timeline.get 'currentSheet'
-      total_sheets  = timeline.get 'totalSheets'
-
-      page = container.find(".timeline-row:nth-child("+ current_sheet + ")")
 
       # If this is a last page or first page we need move
-      if current_sheet >= 4
-        container.append(container.find('.timeline-row:first-child'))
-        current_sheet = current_sheet-1
+      current = timeline.get 'currentSheet'
+      if current >= 3
+        page = timeline.pagesPool.shift()
+        container.append(page.$el)
+        timeline.pagesPool.push page
+        timeline.set 'currentSheet', current - 1
         container.animate { right: '-=100%' }, 0
-      else if current_sheet <= 2
-        container.prepend(container.find('.timeline-row:last-child'))
-        current_sheet = current_sheet+1
+      else if current <= 1
+        page = timeline.pagesPool.pop()
+        container.prepend(page.$el)
+        timeline.pagesPool.unshift page
+        timeline.set 'currentSheet', current + 1
         container.animate { right: '+=100%' }, 0
 
+      year = timeline.get 'year'
+      current = timeline.get 'currentSheet'
+
+      $(".prev, .next").hide()
       if event.target.className == 'next'
-        year = current_year+1
-        _page = page.next()
-        # fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
-        # container.animate { right: '+=100%' }, 500, ->
-        #   $('.prev, .next').show()
-        # $('.scrubber').slider('value', $('.scrubber').slider('value') + 98.039257);
         timeline.set
-          'year': current_year
-          'currentSheet': current_sheet + 1
+          'year': year + 1
+          'currentSheet': current + 1
+        timeline.scrubber.nextYear()
+        $(".timelineContainer").animate
+          right: "+=100%"
+        , 500
 
       else if event.target.className == 'prev'
-        year = current_year-1
-        _page = page.prev()
-        # fetchPage(year, _page) unless _page.find('.year h3').text() == year.toString()
-        # container.animate { right: '-=100%' }, 500, ->
-        #   $('.prev, .next').show()
-        # $('.scrubber').slider('value', $('.scrubber').slider('value') - 98.039257);
         timeline.set
-          'year': current_year
-          'currentSheet': current_sheet - 1
+          'year': year - 1
+          'currentSheet': current - 1
+        timeline.scrubber.prevYear()
+        $(".timelineContainer").animate
+          right: "-=100%"
+        , 500
+
