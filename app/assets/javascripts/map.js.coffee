@@ -75,12 +75,12 @@ MapWrapper = L.Class.extend
         count
 
   getMapPosition: ->
-    center    = this.map.getCenter()
-    northEast = this.map.getBounds().getNorthEast()
+    center      = this.map.getCenter()
+    northWest: this.map.getBounds().getNorthWest()
+    southEast: this.map.getBounds().getSouthEast()
     lat: center.lat
     lng: center.lng
     zoom: this.map.getZoom()
-    radius: center.distanceTo(northEast) / 1000
 
   turnProgress: (turn)->
     if turn
@@ -195,8 +195,7 @@ MapWrapper = L.Class.extend
     this._requestsPool.push $.ajax
       url: window.api_search_path
       data:
-        'sourceResource.spatial.coordinates': "#{position.lat},#{position.lng}"
-        'sourceResource.spatial.distance': "#{position.radius}km"
+        'sourceResource.spatial.coordinates': "#{position.northWest.lat},#{position.northWest.lng}:#{position.southEast.lat},#{position.southEast.lng}"
         'page_size': 500
       dataType: 'jsonp'
       cache: true
