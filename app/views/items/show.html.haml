@@ -9,7 +9,7 @@
   %article#content{role: "main"}
     .FeatureContent
       .contentBox
-        = link_to @item.url do
+        = link_to @item.url, target: :_blank do
           = item_thumbnail(@item)
         = link_to @item.url, target: :_blank, class:'ViewObject' do
           View Object
