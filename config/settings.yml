@@ -39,7 +39,6 @@ session:
   # Settings for memcache sessions
   dalli_store:
     memcache_server:
-      - localhost
 widgets:
   twitter_username: dpla
   # URL of wordpress site.
