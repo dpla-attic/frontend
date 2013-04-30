@@ -45,4 +45,4 @@ group :test, :development do
   gem 'shoulda-matchers'
 end
 
-gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'
+# gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'

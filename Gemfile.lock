@@ -1,9 +1,3 @@
-GIT
-  remote: git@github.com:dpla/frontend-assets.git
-  revision: d60cc0a976925bcbf303f0e92f0eb6e1e2c6d974
-  specs:
-    dpla_frontend_assets (0.0.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -223,7 +217,6 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   dalli
   devise
-  dpla_frontend_assets!
   elastictastic
   google-analytics-rails
   haml
