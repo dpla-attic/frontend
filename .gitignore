@@ -27,3 +27,6 @@
 
 # Ignore generated assets
 /public/assets
+
+# Ignore deployed bundler gems
+/vendor/bundle
