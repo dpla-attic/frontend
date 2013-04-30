@@ -22,4 +22,23 @@ module ApplicationHelper
   def is_admin?
     user_signed_in? && current_user.is_admin?
   end
+
+  def branding_stylesheets
+    stylesheet_link_tag('dpla-colors') + stylesheet_link_tag('dpla-fonts') if defined? DplaFrontendAssets
+  end
+
+  def branding_img(image_name)
+    if defined? DplaFrontendAssets
+      case image_name
+      when 'logo.png'
+        'dpla-logo.png'
+      when 'footer-logo.png'
+        'dpla-footer-logo.png'
+      else
+        image_name
+      end
+    else
+      image_name
+    end
+  end
 end
