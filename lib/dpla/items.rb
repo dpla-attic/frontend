@@ -5,9 +5,9 @@ module DPLA
     base_uri Settings.api.url
     basic_auth Settings.api.username, Settings.api.password
 
-    def self.by_ids(ids)
+    def self.by_ids(ids, search_param = nil)
       query = Conditions.new(ids)
-      load "/items/#{query}?#{api_key}"
+      load ("/items?id=#{query}&#{api_key}" + (search_param.nil? ? "" : ("&q=" + search_param)))
     end
 
     def self.by_conditions(conditions)

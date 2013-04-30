@@ -10,7 +10,7 @@ class SavedListsController < ApplicationController
       .includes(:saved_list, :saved_item)
       .select('DISTINCT ON (saved_item_id) *')
       .page(params[:page]).per(20)
-    attach_api_items @saved_item_positions
+    @saved_item_positions = attach_api_items @saved_item_positions
   end
 
   def show
@@ -158,13 +158,17 @@ class SavedListsController < ApplicationController
 
     def attach_api_items(saved_items_positions)
       api_items = {}.tap do |hash|
-        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id })
+        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id }, params[:q])
           .each { |item| hash[item.id] = item } rescue nil
+      end
+      if params[:q].present?
+        saved_items_positions = saved_items_positions.reject{|x| !api_items[x.saved_item.item_id]}
       end
       saved_items_positions.each do |position|
         api_item_id = position.saved_item.item_id
         position.item = api_items[api_item_id] || Item.new('id' => api_item_id)
       end
+      saved_items_positions
     end
 
     def prepare_positions_params
