@@ -30,6 +30,7 @@ class DPLA.Views.Timeline.Page extends Backbone.View
       page.topSpinner true
       this.items.requestById params['item_id'],
         success: (item) ->
+          item.set 'highlight', true
           page.renderItem item
         complete: -> page.topSpinner false
 
@@ -44,13 +45,13 @@ class DPLA.Views.Timeline.Page extends Backbone.View
     page = this
     this.$el.find('.timeline_items').append _.inject items, (html, item) ->
       page.totalRendered += 1
-      html += JST['backbone/templates/timeline/item'](item.toJSON())
+      html += JST['backbone/templates/timeline/item'](item: item.toJSON())
     , ''
 
   renderItem: (item) ->
-    html = JST['backbone/templates/timeline/item'](item.toJSON())
+    console.log item
+    html = JST['backbone/templates/timeline/item'](item: item.toJSON())
     this.$el.find('.timeline_item').append html
-    this.dimItems()
 
   renderTotalLabel: (total) ->
     this.$el.find('.items_count span').html total
@@ -63,18 +64,9 @@ class DPLA.Views.Timeline.Page extends Backbone.View
     spinner = this.$el.find('.bottom_spinner')
     (show && spinner.show()) || spinner.hide()
 
-  dimItems: (dim = true) ->
-    opacity = if dim
-      '0.25'
-    else
-      '1'
-    this.$el.find('.timeline_items').css opacity: opacity
-    this.isItemsDimmed = dim
-
   initializeInfinityScroll: ->
     page = this
     this.$el.find('.timelineResults').on 'scroll', (event) ->
-      page.dimItems false if page.isItemsDimmed
       return if page.isRequestInProgress || (page.totalRendered >= page.totalCount)
       if $(this).scrollTop() > this.scrollHeight - $(this).height() - 500
         if page.year
