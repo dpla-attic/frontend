@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:dpla/frontend-assets.git
+  revision: d60cc0a976925bcbf303f0e92f0eb6e1e2c6d974
+  specs:
+    dpla_frontend_assets (0.0.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -65,6 +71,7 @@ GEM
       railties (~> 3.1)
       warden (~> 1.2.1)
     diff-lcs (1.2.2)
+    ejs (1.0.0)
     elastictastic (0.11.2)
       activemodel (~> 3.0)
       activesupport (~> 3.0)
@@ -140,6 +147,10 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
+    rails-backbone (0.7.2)
+      coffee-script (~> 2.2.0)
+      ejs (~> 1.0.0)
+      railties (>= 3.1.0)
     rails_config (0.3.2)
       activesupport (>= 3.0)
     railties (3.2.13)
@@ -212,6 +223,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   dalli
   devise
+  dpla_frontend_assets!
   elastictastic
   google-analytics-rails
   haml
@@ -226,6 +238,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails
+  rails-backbone
   rails_config
   rmagick
   rspec-rails (~> 2.0)

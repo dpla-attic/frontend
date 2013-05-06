@@ -1,0 +1,16 @@
+<section>
+  <div class="sectionRight">
+    <img onerror="image_loading_error(this);" src="<%= thumbnail %>">
+  </div>
+  <div class="sectionLeft">
+    <h6><%= type %></h6>
+    <% back_uri = encodeURIComponent(window.location.href); %>
+    <a href="/item/<%= id %>?back_uri=<%= back_uri %>"><%= title %></a>
+    <p><span><%= creator %></span></p>
+    <p><%= description %></p>
+    <a href="<%= source %>" class="ViewObject" target="_blank">
+      View Object
+      <span class="icon-view-object" aria-hidden="true"></span>
+    </a>
+  </div>
+</section>

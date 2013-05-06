@@ -9,7 +9,7 @@
   %article#content{role: "main"}
     .FeatureContent
       .contentBox
-        = link_to @item.url do
+        = link_to @item.url, target: :_blank do
           = item_thumbnail(@item)
         = link_to @item.url, target: :_blank, class:'ViewObject' do
           View Object
@@ -63,7 +63,7 @@
             .moduleLeft
               %h6 Created Date
               %p= @item.created_date
-              = link_to 'View on timeline »', timeline_path(anchor: "/?year=#{@item.year}&item_id=#{@item.id}")
+              = link_to 'View on timeline »', timeline_path(anchor: "#{@item.year}/#{@item.id}")
             .moduleRight
               %img{:alt => "Timeline", :src => "/assets/moduleImg1.jpg"}/
         / - if is_location_present

@@ -9,6 +9,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'therubyracer'
   gem 'jquery-rails'
+  gem 'rails-backbone'
 end
 
 gem 'haml'
@@ -44,3 +45,6 @@ group :test, :development do
   gem 'shoulda-matchers'
 end
 
+group :dpla_branding do
+  gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'
+end

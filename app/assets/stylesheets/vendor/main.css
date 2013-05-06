@@ -2147,6 +2147,11 @@ aside h5 { margin: 5px 0 1em; }
 	overflow: auto;
 }
 
+.timelineResults .top_spinner,
+.timelineResults .bottom_spinner {
+    margin-top: 15px;
+}
+
 
 .timelineView {
     background: none repeat scroll 0 0 #000000;

@@ -9,6 +9,7 @@ if defined?(Bundler)
   Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
+  Bundler.require(:dpla_branding) if Bundler.settings.without.exclude? :dpla_branding
 end
 
 module DplaPortal
@@ -65,10 +66,11 @@ module DplaPortal
     # Add the fonts path
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
     # Precompile additional assets
-    config.assets.precompile += %w( .svg .eot .woff .ttf lte-ie7.js modernizr-2.6.2.min.js fonts.css)
+    config.assets.precompile += %w( .svg .eot .woff .ttf lte-ie7.js modernizr-2.6.2.min.js fonts.css )
+    config.assets.precompile += %w( dpla-colors.css dpla-fonts.css )
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version = '8'
+    config.assets.version = '10'
     config.paths['app/views'] << "app/views/devise"
   end
 end

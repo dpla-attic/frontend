@@ -8,6 +8,7 @@
       %li= @app.title
   = render 'shared/share_save'
   %article#content.app-detail{role: "main"}
+    %p.author= @app.author
     %h1= @app.title
     - if @app.screenshot.present?
       .leftSide
