@@ -11,6 +11,15 @@ class SavedListsController < ApplicationController
       .select('DISTINCT ON (saved_item_id) *')
       .page(params[:page]).per(20)
     @saved_item_positions = attach_api_items @saved_item_positions
+    if params[:q].present?
+      @saved_item_positions = current_user.saved_item_positions
+        .includes(:saved_list, :saved_item)
+        .select('DISTINCT ON (saved_item_id) *')
+        .where('id in (?)', @saved_item_positions.map { |i| i.id }.join(','))
+        .page(params[:page]).per(20)
+    end
+    p "zzzzzzzzzzzzzzz"
+    p @saved_item_positions
   end
 
   def show
