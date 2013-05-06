@@ -6,20 +6,25 @@ class SavedListsController < ApplicationController
   before_filter :prepare_positions_params, only: [:delete_positions, :reorder_positions, :copy_positions, :move_positions]
 
   def index
-    @saved_item_positions = current_user.saved_item_positions
-      .includes(:saved_list, :saved_item)
-      .select('DISTINCT ON (saved_item_id) *')
-      .page(params[:page]).per(20)
-    @saved_item_positions = attach_api_items @saved_item_positions
     if params[:q].present?
+      @saved_item_positions = current_user.saved_item_positions
+        .includes(:saved_item)
+        .select('DISTINCT ON (saved_item_id) *')
+      api_items = get_api_items(@saved_item_positions, params[:q])
+      @saved_item_positions = @saved_item_positions.reject{|x| !api_items[x.saved_item.item_id]}
+      @search_cnt = @saved_item_positions.size
       @saved_item_positions = current_user.saved_item_positions
         .includes(:saved_list, :saved_item)
         .select('DISTINCT ON (saved_item_id) *')
-        .where('id in (?)', @saved_item_positions.map { |i| i.id }.join(','))
+        .where('id in (?)', @saved_item_positions.map { |i| i.id })
+        .page(params[:page]).per(20)
+    else
+      @saved_item_positions = current_user.saved_item_positions
+        .includes(:saved_list, :saved_item)
+        .select('DISTINCT ON (saved_item_id) *')
         .page(params[:page]).per(20)
     end
-    p "zzzzzzzzzzzzzzz"
-    p @saved_item_positions
+    @saved_item_positions = attach_api_items(@saved_item_positions)
   end
 
   def show
@@ -166,18 +171,19 @@ class SavedListsController < ApplicationController
     end
 
     def attach_api_items(saved_items_positions)
-      api_items = {}.tap do |hash|
-        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id }, params[:q])
-          .each { |item| hash[item.id] = item } rescue nil
-      end
-      if params[:q].present?
-        saved_items_positions = saved_items_positions.reject{|x| !api_items[x.saved_item.item_id]}
-      end
+      api_items = get_api_items(saved_items_positions, nil)
       saved_items_positions.each do |position|
         api_item_id = position.saved_item.item_id
         position.item = api_items[api_item_id] || Item.new('id' => api_item_id)
       end
       saved_items_positions
+    end
+
+    def get_api_items(saved_items_positions, search_param)
+      api_items = {}.tap do |hash|
+        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id }, search_param)
+          .each { |item| hash[item.id] = item } rescue nil
+      end
     end
 
     def prepare_positions_params
