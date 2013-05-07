@@ -129,7 +129,6 @@ class DPLA.Models.Timeline extends Backbone.Model
               , ->
                 moving = false
               $(".scrubber").slider "value", $(".scrubber").slider("value") + (slideDistance * 1000)
-            timeline.updateGraph($(".scrubber").slider("value"))
           when 'prev'
             moveDistance = Math.abs($("article.timeline").offset().left - $(".graph").offset().left)
             if moveDistance < $(".graph").width() * (slideDistance / 100)
@@ -144,7 +143,8 @@ class DPLA.Models.Timeline extends Backbone.Model
               , ->
                 moving = false
               $(".scrubber").slider "value", $(".scrubber").slider("value") - (slideDistance * 1000)
-            timeline.updateGraph($(".scrubber").slider("value"))
+      timeline.updateGraph($(".scrubber").slider("value"))
+
 
   initializeSheets: ->
     this.pagesPool = pagesPool = []
