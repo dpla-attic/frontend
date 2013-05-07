@@ -20,16 +20,15 @@ module ItemsHelper
   end
 
   def item_thumbnail(item)
+    default = Settings.ui.items.default_thumbnails
+    image_type =  Array(default.image).include?(item.type) ? 'icon-image.gif' :
+                  Array(default.sound).include?(item.type) ? 'icon-sound.gif' :
+                  Array(default.video).include?(item.type) ? 'icon-video.gif' :
+                                                             'icon-text.gif'
     if item.preview_image.present?
-      image_tag item.preview_image, onerror: 'image_loading_error(this);'
+      image_tag item.preview_image, onerror: 'image_loading_error(this);', default_uri: asset_path(image_type)
     else
-      default = Settings.ui.items.default_thumbnails
-      case
-      when Array(default.image).include?(item.type) then image_tag 'icon-image.gif'
-      when Array(default.sound).include?(item.type) then image_tag 'icon-sound.gif'
-      when Array(default.video).include?(item.type) then image_tag 'icon-video.gif'
-      else image_tag 'icon-text.gif'
-      end
+      image_tag image_type
     end
   end
 end
