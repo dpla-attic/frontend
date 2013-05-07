@@ -3,7 +3,7 @@ module ItemsHelper
     value = @item.send name
     title = options[:title] || name.to_s.split('_').map(&:capitalize).join(' ')
 
-    if value.present?
+    if (value.present?) && ((value.is_a? Array) ? value.any? : true)
       content_tag(:ul) do
         content_tag(:li, content_tag(:h6, title)) +
         if block_given?
