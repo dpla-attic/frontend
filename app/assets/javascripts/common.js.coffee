@@ -12,9 +12,9 @@ jQuery ->
     current = parent.find '.pagination .current'
     unless current.text() == $(this).text()
       current_page = current.data 'page'
-      parent.find('.pop-columns[data-page='+current_page+']').hide()
-      page = $(this).data 'page'
-      parent.find('.pop-columns[data-page='+page+']').show()
+      parent.find('.pop-columns[data-page='+current_page+']').fadeOut ->
+        page = $(this).data 'page'
+        parent.find('.pop-columns[data-page='+page+']').fadeIn()
 
       container = $(this).parents('.popBar').parent()
       container.find('.pagination span.current')
@@ -34,18 +34,15 @@ jQuery ->
       $("##{ related_tab }").show()
       ul.find('li').removeClass('active')
       li.addClass('active')
-      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
     false
 
   $('#countries .pop-open').click ->
     $('#countries').fadeOut ->
       $('#states').fadeIn()
-      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
 
   $('#states .breadCrumbs li.countries a').click ->
     $('#states').fadeOut ->
       $('#countries').fadeIn()
-      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
     false
 
   if window.twitter_account
