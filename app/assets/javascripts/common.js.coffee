@@ -21,7 +21,6 @@ jQuery ->
         .replaceWith "<a data-page="+current_page+" href=\"#\">"+current_page+"</a>"
       container.find(".pagination a[data-page=#{ page }]")
         .replaceWith "<span data-page="+page+" class=\"current\">"+page+"</span>"
-      $.colorbox.resize({height: $('#cboxContent').outerHeight()})
       false
 
   $('#more_locations .tabs a').click ->
