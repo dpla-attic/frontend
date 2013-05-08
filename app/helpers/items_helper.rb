@@ -1,6 +1,7 @@
 module ItemsHelper
   def item_field(name, options = {}, &block)
     value = @item.send name
+    value.reject!(&:blank?) if value.is_a? Array
     title = options[:title] || name.to_s.split('_').map(&:capitalize).join(' ')
 
     if value.present?

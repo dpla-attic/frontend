@@ -9,7 +9,7 @@
               .slideOverlay
               .slideText
                 %p
-                  %a{:href => '/item/280233fc9e42a02d32d268fe284a7613'} Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO&nbsp;»  
+                  %a{:href => '/item/280233fc9e42a02d32d268fe284a7613'} Laura Clay and group marching for the Madison, Fayette, and Franklin Kentucky Equal Rights Association, at Democratic National Convention in St. Louis, [n.d.] St. Louis, MO&nbsp;»
             %li
               = image_tag "slide/home-slide2.jpg"
               .slideOverlay
@@ -39,7 +39,7 @@
       .searchForm
         %h2 A Wealth of Knowledge
         %p from libraries, archives, and museums
-        = form_tag(search_path, method: :get, authenticity_token: false, id: :searchBox, class: 'search-form') do
+        = form_tag(search_path, method: :get, authenticity_token: false, id: :searchBox, class: 'search-form', role: 'search') do
           = preserved_search_fields without: :q
           = text_field_tag :q, params[:q], placeholder: 'Search the Library'
           = submit_tag 'Search', class: 'searchBtn', name: nil
@@ -66,7 +66,7 @@
             %h2
               Explore
               %span by Date
-            %h6 Timeline » 
+            %h6 Timeline »
           .image
             = image_tag "home-exploretime.jpg"
   .content.bottom
