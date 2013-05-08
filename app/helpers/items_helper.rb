@@ -1,9 +1,10 @@
 module ItemsHelper
   def item_field(name, options = {}, &block)
     value = @item.send name
+    value.reject!(&:blank?) if value.is_a? Array
     title = options[:title] || name.to_s.split('_').map(&:capitalize).join(' ')
 
-    if (value.present?) && ((value.is_a? Array) ? value.any? : true)
+    if value.present?
       content_tag(:ul) do
         content_tag(:li, content_tag(:h6, title)) +
         if block_given?
