@@ -49,7 +49,6 @@ class DPLA.Views.Timeline.Page extends Backbone.View
     , ''
 
   renderItem: (item) ->
-    console.log item
     html = JST['backbone/templates/timeline/item'](item: item.toJSON())
     this.$el.find('.timeline_item').append html
 
