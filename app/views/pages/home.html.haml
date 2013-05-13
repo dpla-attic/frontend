@@ -79,6 +79,6 @@
       = render partial: 'shared/apps/apps_view'
     %section.right
       %h1.border News
-      = render 'shared/social_icons'
+      = render partial: 'shared/social_icons', locals: { block_id: nil }
       = render 'shared/wp_news_widget'
       = render 'shared/twitter_widget'

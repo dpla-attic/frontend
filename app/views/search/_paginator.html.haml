@@ -1,7 +1,8 @@
-%form#pageSizeForm{:method => "post", :name => "pageSizeForm"}
-  .items
-    %label{:for => "page_size"} Items per page:
-    = select_tag 'page_size', page_size_options, class: 'countList'
+%form.pageSizeForm{:method => "post", :name => "pageSizeForm"}
+  .itms
+    %label
+      = 'Items per page:'
+      = select_tag 'page_size', page_size_options, class: 'countList', id: nil
 / %form.sortControl
 /   %label{:for => "sort_by"} Sort by:
 /   = select_tag 'sort_by', sort_by_options

@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('select#page_size, select#sort_by').on 'change', ->
+  $('select.countList, select#sort_by').on 'change', ->
     window.location.href = $(this).val()
 
   $('#searchBox').submit ->
