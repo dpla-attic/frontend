@@ -14,6 +14,7 @@ class DPLA.Models.TimelineItem extends Backbone.Model
       description: description
       source:      doc['isShownAt'] || ''
       thumbnail:   doc['object']    || ''
+      highlight:   false
 
 class DPLA.Collections.TimelineItems extends Backbone.Collection
   requestByYear: (year, options = {}) ->
