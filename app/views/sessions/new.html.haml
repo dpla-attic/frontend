@@ -3,5 +3,6 @@
   %article#content{role: "main"}
     %h1 Sign in
     .account
+      = render "shared/flash_message"
       = render "form"
       = render "devise/shared/links"

@@ -1,6 +1,6 @@
 - unless flash[:notice].blank?
-  %div{ :class => "flash notice" }= flash[:notice]
+  %div{ :class => "flash flash-notice" }= flash[:notice]
 - unless flash[:error].blank?
-  %div{ :class => "flash error" }= flash[:error]
+  %div{ :class => "flash flash-error" }= flash[:error]
 - unless flash[:alert].blank?
-  %div{ :class => "flash alert" }= flash[:alert]
+  %div{ :class => "flash flash-alert" }= flash[:alert]
