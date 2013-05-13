@@ -4,8 +4,8 @@ window.image_loading_error = (image)->
   , 0
 
 jQuery ->
-  if $('input#q').val().length == 0
-    $('input#q').focus()
+  if $('input#searchField').val().length == 0
+    $('input#searchField').focus()
 
   $('#more_subjects, #more_locations, #more_types, #more_providers, #more_partners, #more_languages, #more_exhibitions').on 'click', '.pagination a', ->
     parent = $(this).parents('.popBar').parent()
