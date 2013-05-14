@@ -12,7 +12,7 @@ class PermittedParams < Struct.new(:params)
     filters = params.map do |key, value|
       case key
       when *(%w(before after))
-        if !options.include? :ignore_dates
+        if !options[:ignore_dates].present?
           date = date_from_params(value, end: key == 'before')
           [key, date] unless date.nil?
         end
