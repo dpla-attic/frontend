@@ -4,3 +4,12 @@
   - n.item 'Map', map_path, highlights_on: [{controller: 'map'}]
   - n.item 'Timeline', timeline_path, highlights_on: [{controller: 'timeline'}]
   - n.item 'Apps', apps_path
+%ul.nav-signup
+  - if user_signed_in?
+    %li.welcome
+      = link_to edit_user_registration_path do
+        Welcome,
+        = current_user.name
+  - else
+    %li.login.bg
+      = link_to 'Login', new_user_session_path, class: 'login cBoxElement'

@@ -38,13 +38,13 @@
 
   %li= link_to 'Contact', wordpress_path('/contact/')
   - if user_signed_in?
-    %li
+    %li.welcome
       = link_to edit_user_registration_path do
         Welcome,
         = current_user.name
-    %li.bg.last= link_to "Sign out", destroy_user_session_path
+    %li.signOut.bg.last= link_to "Sign out", destroy_user_session_path
   - else
-    %li.bg
+    %li.login.bg
       = link_to 'Login', new_user_session_path, class: 'login cBoxElement'
-    %li.bg.last
+    %li.signUp.bg.last
       = link_to 'Sign Up', new_user_registration_path, class: 'signUp cBoxElement'
