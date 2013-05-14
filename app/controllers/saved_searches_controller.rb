@@ -4,7 +4,8 @@ class SavedSearchesController < ApplicationController
 
 
   def index
-    @saved_searches = current_user.saved_searches.page(params[:page]).per(20)
+    sort = params[:sort] ? 'term ' + params[:sort] : 'updated_at DESC'
+    @saved_searches = current_user.saved_searches.order(sort).page(params[:page]).per(20)
   end
 
   def create
