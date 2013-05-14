@@ -282,17 +282,75 @@ aside {
 .resultsBar .countList {
   float: none;
 }
+.MainNav {
+  .nav-signup {
+    display: none;
+  }
+}
 
 @media only screen and (min-width: 0px) and (max-width: 680px) {
+  header {
+    li {
+      float: none;
+    }
+  }
+
   .MainNav {
-    width: 51%;
+    width: 47%;
     border: none;
+
+    li {
+
+      a {
+        padding-bottom: 0;
+      }
+    }
+
+    .nav-signup {
+      display: block;
+      margin-top: 5.25em;
+
+      .bg {
+        margin: 0 0 1px;
+        padding: 0.8em;
+        float: none;
+        width: auto;
+
+        a {
+          color: #fff;
+        }
+
+        &:hover {
+          background: #000;
+          -webkit-transition: 0.3s ease;
+             -moz-transition: 0.3s ease;
+              -ms-transition: 0.3s ease;
+               -o-transition: 0.3s ease;
+                  transition: 0.3s ease;
+        }
+      }
+
+      .signUp,
+      .signOut {
+        display: none;
+      }
+
+      .welcome {
+        margin: 0;
+        padding: 0.8em 0;
+      }
+    }
   }
   .topNav {
     position: relative;
     margin: 0 0 1.5em;
     padding: 1px 2.6455% 0 5%;
     border-left: 1px solid #ccc;
+
+    .welcome,
+    .login {
+      display: none;
+    }
   }
   #colorbox #cboxClose,
   #cboxClose,
