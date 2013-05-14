@@ -1,6 +1,6 @@
 - aside_collapsed = params[:controller] != 'search'
 
-%aside{class: aside_collapsed ? 'moveOut' : 'moveIn'}
+%aside{class: aside_collapsed ? 'moveOut' : nil}
   - if params[:controller] == 'search'
     %h5 Refine
   = render 'shared/sidebar/refine_by_type'
