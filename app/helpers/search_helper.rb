@@ -9,11 +9,11 @@ module SearchHelper
     ''.tap do |html|
       to_preserve.each do |field|
         if params[field].is_a? Array
-          params[field].each { |value| html << hidden_field_tag("#{field}[]", value) if value.present? }
+          params[field].each { |value| html << hidden_field_tag("#{field}[]", value, id: nil) if value.present? }
         elsif params[field].is_a? Hash
-          params[field].each { |subfield,value| html << hidden_field_tag("#{field}[#{subfield}]", value) if value.present? }
+          params[field].each { |subfield,value| html << hidden_field_tag("#{field}[#{subfield}]", value, id: nil) if value.present? }
         elsif params[field]
-          html << hidden_field_tag(field, params[field])
+          html << hidden_field_tag(field, params[field], id: nil)
         end
       end
     end.html_safe

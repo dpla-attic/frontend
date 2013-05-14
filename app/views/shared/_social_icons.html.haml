@@ -1,5 +1,5 @@
 - icons = Settings.widgets.social_icons
-%ul.social.icons#social
+%ul.social.icons{id: defined?(block_id) ? block_id : 'social'}
   %li.facebook
     %a{href: icons.facebook}
       %span.icon-facebook{"aria-hidden" => "true"}

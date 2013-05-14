@@ -147,12 +147,12 @@ if ($('.shareSave').length) {
   }
 
   ///// REFINE SIDEBAR TOGGLE: DESKTOP AND TABLET
-  $('.timeline #toggle, .map #toggle').click(function() {
+  $('.timeline .toggle, .map .toggle').click(function() {
     if ($('aside').is(':visible')) {
       $('aside').addClass('moveOut');
       $('.slidePopOut').addClass('moveIn');
       $('.map article, .timeContainer').addClass('widthL');
-      $('#toggle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
+      $('.toggle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
 
       $('aside').removeClass('moveIn');
       $('.slidePopOut').removeClass('moveOut');
@@ -162,7 +162,7 @@ if ($('.shareSave').length) {
       $('aside').addClass('moveIn');
       $('.slidePopOut').addClass('moveOut');
       $('.map article, .timeContainer').addClass('widthS');
-      $('#toggle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Hide');
+      $('.toggle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Hide');
 
       $('aside').removeClass('moveOut');
       $('.slidePopOut').removeClass('moveIn');
@@ -171,10 +171,10 @@ if ($('.shareSave').length) {
   });
 
   ///// REFINE SIDEBAR TOGGLE: PHONE
-  $('#toggle.Marticle').toggle( function() {
+  $('.toggle.Marticle').toggle( function() {
       $('aside').addClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveOut');
-      $('#toggle.Marticle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Hide');
+      $('.toggle.Marticle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Hide');
 
       $('aside').removeClass('moveOut');
       $('.map article, .timeContainer, .slidePopOut').removeClass('moveIn');
@@ -182,7 +182,7 @@ if ($('.shareSave').length) {
     function() {
       $('aside').addClass('moveOut');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveIn');
-      $('#toggle.Marticle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
+      $('.toggle.Marticle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
 
       $('aside').removeClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').removeClass('moveOut');

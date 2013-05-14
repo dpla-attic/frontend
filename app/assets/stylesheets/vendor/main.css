@@ -695,7 +695,7 @@ aside .module span { color: #000; }
     transition: 0.3s ease;
 }
 
-.btn:hover, .btn a:hover, .shareSave .btn a:hover, .menu-btn:hover, #toggle:hover {
+.btn:hover, .btn a:hover, .shareSave .btn a:hover, .menu-btn:hover, .toggle:hover {
     background: black;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
@@ -1429,7 +1429,7 @@ aside .moduleSection p { margin: 0 0 10px; }
 	margin-left: -5px;
 }
 
-.timeline #toggle {
+.timeline .toggle {
     display: inline-block;
     margin: 6px 0 10px;
 }
@@ -2010,7 +2010,7 @@ input[type="checkbox"] {
     margin-left: 0;
 }
 
-#toggle {
+.toggle {
     background: none repeat scroll 0 0 #808080;
     color: #FFFFFF;
     cursor: pointer;
@@ -2021,14 +2021,14 @@ input[type="checkbox"] {
     width: auto;
 }
 
-#toggle.mobile, .map #toggle.mobile { display: none; }
+.toggle.mobile, .map .toggle.mobile { display: none; }
 
 
-#toggle span { font-size: 13px; display: inline-block; }
-#toggle .icon-arrow-thin-left { margin-left: -6px; }
-#toggle .icon-arrow-thin-right { margin-right: -6px; }
+.toggle span { font-size: 13px; display: inline-block; }
+.toggle .icon-arrow-thin-left { margin-left: -6px; }
+.toggle .icon-arrow-thin-right { margin-right: -6px; }
 
-.map #toggle { display: inline-block; }
+.map .toggle { display: inline-block; }
 
 aside .module:first-child { margin: 0 0 5%; }
 
@@ -2712,7 +2712,7 @@ footer .social.icons li { border: 1px solid #494949; }
 
 }
 
-.map #toggle.Maside { display: none; }
+.map .toggle.Maside { display: none; }
 
 .social li span {
    /* margin-left: -5px; */
@@ -3447,7 +3447,7 @@ div.timeline-year {
 /* NO JAVASCRIPT RULES */
 .no-js .timelineModuleOuter,
 .no-js .timelineView,
-.no-js #toggle,
+.no-js .toggle,
 .no-js .next,
 .no-js .prev,
 .no-js .moreInfo,
@@ -3748,8 +3748,8 @@ article.home {
 }
 .popBar h6 { float: left; margin-top: 5px; }
 
-.search-page #toggle.mobile { display: inline-block; }
-.search-page #toggle.mobile.Maside { display: none; float: left; }
+.search-page .toggle.mobile { display: inline-block; }
+.search-page .toggle.mobile.Maside { display: none; float: left; }
 .search-page .Maside { float: none; }
 
 .matches { min-height: inherit; }
@@ -4127,7 +4127,7 @@ input[type="text"] { width: 80%; }
 .slidePopOut { position: relative; }
 .refine { display: none; }
 aside { height: 100%; }
-#toggle { display: inline-block; }
+.toggle { display: inline-block; }
 
 /* HOME SLIDESHOW*/
 .moreInfo,
@@ -4166,9 +4166,9 @@ aside { height: 100%; }
 .mapContainer { position: relative; }
 .mobile-hover { height: 100%; position: absolute; width: 100%; z-index: 2; }
 .map .searchRow { margin: 0 0 5%; }
-.map #toggle { margin: 4% 0 5%; display: none; }
-.map #toggle.mobile { display: inline-block; }
-.map #toggle.Maside { display: none; }
+.map .toggle { margin: 4% 0 5%; display: none; }
+.map .toggle.mobile { display: inline-block; }
+.map .toggle.Maside { display: none; }
 .map .pagination { width: 100%; }
 .map aside { clear: none; }
 .map article { clear: none; }
@@ -4194,9 +4194,9 @@ aside { height: 100%; }
 }
 .next { background-position: -582px center; }
 .timelineContent { padding: 0 5%; }
-.timeline #toggle.mobile { display: inline-block; }
-.timeline #toggle.mobile.Maside { display: none; }
-.timeline #toggle { display: none; }
+.timeline .toggle.mobile { display: inline-block; }
+.timeline .toggle.mobile.Maside { display: none; }
+.timeline .toggle { display: none; }
 
 .DecadesDates, .graph {
 	right: 98.8%;
