@@ -1,4 +1,5 @@
 //= require vendor/jquery-1.8.3.min.js
+//= require vendor/fastclick.js
 //= require vendor/jquery.colorbox-min.js
 //= require vendor/jquery.galleriffic.js
 //= require vendor/jquery.jcarousel.min.js
