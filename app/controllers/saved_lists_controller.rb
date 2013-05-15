@@ -1,5 +1,5 @@
 class SavedListsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: :show
   before_filter :load_list,  only: [:show, :edit, :update, :destroy, :add_item]
   before_filter :load_lists, only: [:show, :index]
   before_filter :load_saved_item, only: :add_item
@@ -141,15 +141,23 @@ class SavedListsController < ApplicationController
     def load_list
       if params[:id].present?
         @list = current_user.saved_lists.find params[:id] rescue nil
+        if @list.nil?
+          @is_my_list = false
+          @list = SavedList.find(params[:id], :conditions => { private: false }) rescue nil
+        else
+          @is_my_list = true
+        end
         render_404 unless @list
       end
     end
 
     def load_lists
-      @lists = current_user.saved_lists
-      @unlisted = current_user.saved_item_positions
-        .includes(:saved_item)
-        .where('saved_list_id' => nil)
+      if user_signed_in?
+        @lists = current_user.saved_lists
+        @unlisted = current_user.saved_item_positions
+          .includes(:saved_item)
+          .where('saved_list_id' => nil)
+      end
     end
 
     def load_saved_item

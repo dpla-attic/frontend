@@ -1,32 +1,33 @@
 - is_list = 'show'  == params[:action]
-.resultsBar{id: @is_bottom ? 'resultsBarBottom' : 'resultsBarTop'}
-  %ul
-    - if is_list
-      - lists = @lists - [@list]
-      - if lists.present?
-        %li{id: :copy_items_to}
-          = link_to @list, class: :btn do
-            = 'Copy to...'
-            %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
-          %ul
-            - lists.each do |list|
-              %li
-                = link_to list.title, list, data: {list: list.id}
-    - else
-      - if @lists.present?
-        %li{id: :move_items_to}
-          = link_to @list, class: :btn do
-            = 'Add to...'
-            %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
-          %ul
-            - @lists.each do |list|
-              %li
-                = link_to list.title, list, data: {list: list.id}
-    %li
-      = link_to 'Remove', @list, class: 'btn remove_items'
-    - if is_list
+-if @is_my_list
+  .resultsBar{id: @is_bottom ? 'resultsBarBottom' : 'resultsBarTop'}
+    %ul
+      - if is_list
+        - lists = @lists - [@list]
+        - if lists.present?
+          %li{id: :copy_items_to}
+            = link_to @list, class: :btn do
+              = 'Copy to...'
+              %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
+            %ul
+              - lists.each do |list|
+                %li
+                  = link_to list.title, list, data: {list: list.id}
+      - else
+        - if @lists.present?
+          %li{id: :move_items_to}
+            = link_to @list, class: :btn do
+              = 'Add to...'
+              %span{'aria-hidden' => true, class: @is_bottom ? 'icon-arrow-up' : 'icon-arrow-down'}
+            %ul
+              - @lists.each do |list|
+                %li
+                  = link_to list.title, list, data: {list: list.id}
       %li
-        = link_to 'Reorder', @list, class: 'btn reorder_items'
+        = link_to 'Remove', @list, class: 'btn remove_items'
+      - if is_list
+        %li
+          = link_to 'Reorder', @list, class: 'btn reorder_items'
 
 
   .pagination.drop= paginate @saved_item_positions

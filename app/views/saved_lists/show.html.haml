@@ -4,6 +4,7 @@
   - page_title! t('.title_unlisted')
 
 .layout.fullWidth
+-if @is_my_list
   = render 'shared/search_panel'
   %article#content{role: "main"}
     %h1 Your Profile
@@ -12,58 +13,9 @@
       .tab-content
         = render partial: 'aside'
         .rightSide
-          .list-detail
-            - if @list.present?
-              %h2{class: @list.private? ? 'private' : ''}
-                = @list.title
-                - locked = @list.private? ? 'icon-lock' : 'icon-unlocked'
-                %span#selectedListStatus
-                  %span{class: "#{locked}", 'aria-hidden' => true}
-                    Private
-              - if @list.description.present?
-                %p= @list.description
-            - else
-              %h2{class: 'private'}
-                Your Saved Items
-                %span
-                  %span.icon-lock{'aria-hidden' => true}
-                  Private
-          - if @saved_item_positions.present?
-            = render partial: 'paginator'
-            .savedList
-              %form
-                %section
-                  = check_box_tag nil, nil, nil, class: 'checkbox select-all'
-                  .searchLeft
-                  .searchMiddle
-                  .searchRight
-                    %h5 Order
-                  .delete
-                    %h5 Remove
-                - @saved_item_positions.each do |position|
-                  - saved_item = position.saved_item
-                  %section
-                    - checkbox_data = { position: position.id, list: @list ? @list.id : 'unlisted' }
-                    = check_box_tag :position, nil, nil, id: nil, class: 'checkbox item', data: checkbox_data
-                    .searchLeft
-                      %h4= link_to position.item.title, item_path(position.item.id)
-                      %p= position.item.description
-                      = link_to position.item.url, target: :_blank, class:'ViewObject' do
-                        View Object
-                        %span.icon-view-object{"aria-hidden" => "true"}
-                    .searchMiddle
-                      = item_thumbnail(position.item)
-                    .searchRight
-                      - position_value = position.position.to_i.zero? ? nil : position.position
-                      = text_field_tag :position, position_value, placeholder: 0, id: nil, class: 'position item', data: {position: position.id}
-                    .delete
-                      - delete_path = delete_saved_item_path(item_id: saved_item, id: @list || 'unlisted')
-                      = link_to '×', delete_path, class: :remove, method: :delete, confirm: 'Are you sure?'
-          - else
-            %p Empty list
-          - if @saved_item_positions.present?
-            // TODO: I'm very sorry for this dirty passing params, but locals: {is_bottom: true}
-            // absolutely doesn't work. Very strange, may by is's bug in Rails.
-            // I'll come back to this problem later
-            - @is_bottom = true
-            = render partial: 'paginator'
+          = render partial: 'lists'
+-else
+  %article#content{role: "main"}
+    .profile
+      .tab-content
+        = render partial: 'list'
