@@ -8,12 +8,14 @@ class PermittedParams < Struct.new(:params)
     params[:q] || ''
   end
 
-  def filters
+  def filters(options = {})
     filters = params.map do |key, value|
       case key
       when *(%w(before after))
-        date = date_from_params(value, end: key == 'before')
-        [key, date] unless date.nil?
+        if !options[:ignore_dates].present?
+          date = date_from_params(value, end: key == 'before')
+          [key, date] unless date.nil?
+        end
       when *(%w(type language subject country state place provider partner))
         [key, value]
       end
