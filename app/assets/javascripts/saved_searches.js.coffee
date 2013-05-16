@@ -1,13 +1,4 @@
 $(document).ready ->
-  href = window.location.href
-  sort_option = 'asc'
-  if href.indexOf("sort=desc") > 0
-    $('#termSortLink').find('span').addClass('icon-arrow-down');
-  else if href.indexOf("sort=asc") > 0
-    sort_option = 'desc'
-    $('#termSortLink').find('span').addClass('icon-arrow-up');
-
-  $('#termSortLink').attr('href', '?sort=' + sort_option)
   # Retrieving count for saved searches
   $('.count').each ->
     that = $(this)
