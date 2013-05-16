@@ -1,6 +1,6 @@
 <section class="<%= item.highlight ? 'highlight' : '' %>">
   <div class="sectionRight">
-    <img onerror="image_loading_error(this);" src="<%= item.thumbnail %>">
+    <img onerror="image_loading_error(this);" src="<%= item.thumbnail %>" data-default-src="<%= window.default_img_path %>">
   </div>
   <div class="sectionLeft">
     <h6><%= item.type %></h6>

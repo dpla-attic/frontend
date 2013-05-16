@@ -1,6 +1,9 @@
 window.image_loading_error = (image)->
   setTimeout ->
-    $(image).attr('src', $(image).data('default-src'));
+    if default_src = $(image).data('default-src')
+      $(image).attr('src', default_src);
+    else
+      $(image).remove()
   , 0
 
 jQuery ->
