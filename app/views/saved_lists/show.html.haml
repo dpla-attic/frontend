@@ -13,7 +13,10 @@
       .tab-content
         = render partial: 'aside'
         .rightSide
-          = render partial: 'lists'
+          = render partial: 'list'
+-elsif @list.private
+  %article#content{role: "main"}
+    This list is private.
 -else
   %article#content{role: "main"}
     .profile

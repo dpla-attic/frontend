@@ -143,7 +143,7 @@ class SavedListsController < ApplicationController
         @list = current_user.saved_lists.find params[:id] rescue nil
         if @list.nil?
           @is_my_list = false
-          @list = SavedList.find(params[:id], :conditions => { private: false }) rescue nil
+          @list = SavedList.find(params[:id]) rescue nil
         else
           @is_my_list = true
         end
