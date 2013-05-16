@@ -74,9 +74,14 @@ jQuery ->
             </li>
             """
 
-  $('.login, .signUp').colorbox
+  colorbox_options = 
+    initialWidth: '558px'
     width:'100%'
     maxWidth: '600px'
     transition: 'none'
     close: '&times;'
     reposition: false
+
+  $('.login').colorbox _.extend(colorbox_options, initialHeight: '289px')
+
+  $('.signUp').colorbox _.extend(colorbox_options, initialHeight: '562px')
