@@ -203,6 +203,10 @@ form {
     border: none;
     background: transparent;
   }
+
+  #cboxLoadingOverlay, #cboxLoadingGraphic {
+    display: none;
+  }
 }
 
 .closePopUp:hover {

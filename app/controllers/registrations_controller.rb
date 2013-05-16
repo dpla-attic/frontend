@@ -10,4 +10,9 @@ class RegistrationsController < Devise::RegistrationsController
     flag = Settings.session.logged_in_flag.to_sym
     cookies[flag] = { value: 1, httponly: true } if not cookies[flag]
   end
+
+  def new
+    resource = build_resource({})
+    render request.xhr? ? { partial: 'shared/modals/signup', layout: false } : {}
+  end
 end

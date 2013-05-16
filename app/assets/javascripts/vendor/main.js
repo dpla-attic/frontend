@@ -35,16 +35,10 @@ if ($('.shareSave').length) {
 	    $('.flex-active-slide .slideText').addClass('on');
 	});
 
-	$('.forgotPassword').click(function() {
+	$('#cboxContent').on('click', '.forgotPassword', function() {
     $(this).hide();
 		$('.forgotSlide').slideDown();
 		$('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '430px'});
-		return false;
-	});
-
-	$('#cboxOverlay, #cboxClose').click(function() {
-		$('.forgotSlide').slideUp();
-		$('#cboxLoadedContent, #cboxWrapper, #colorbox, #cboxContent').animate({height: '320px'});
 		return false;
 	});
 

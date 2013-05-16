@@ -1,9 +1,7 @@
-- if Settings.ui.session.forms_in_popups
-  .overlay
-    #loginBox
-      %h1 Log In
-      = render "sessions/form"
+#loginBox
+  %h1 Log In
+  = render "sessions/form"
 
-      .forgotSlide
-        = render "passwords/form"
-      %a.forgotPassword{href: ""} Forgot password?
+  .forgotSlide
+    = render "passwords/form"
+  %a.forgotPassword{href: ""} Forgot password?

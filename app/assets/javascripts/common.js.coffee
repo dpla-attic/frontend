@@ -73,3 +73,10 @@ jQuery ->
               <p><span>#{ $.datepicker.formatDate('M d', post_date) }</span></p>
             </li>
             """
+
+  $('.login, .signUp').colorbox
+    width:'100%'
+    maxWidth: '600px'
+    transition: 'none'
+    close: '&times;'
+    reposition: false
