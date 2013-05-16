@@ -4,8 +4,8 @@ class SavedSearchesController < ApplicationController
 
 
   def index
-    sort = params[:sort] ? 'term ' + params[:sort] : 'updated_at DESC'
-    @saved_searches = current_user.saved_searches.order(sort).page(params[:page]).per(20)
+    @saved_searches = current_user.saved_searches.page(params[:page]).per(20)
+    @saved_searches = @saved_searches.reorder("term #{params[:sort]}") if params[:sort].present? and ['desc', 'asc'].include?(params[:sort].downcase)
   end
 
   def create

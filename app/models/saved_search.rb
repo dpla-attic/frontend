@@ -4,6 +4,8 @@ class SavedSearch < ActiveRecord::Base
 
   belongs_to :user
 
+  default_scope order('updated_at DESC')
+
   # TODO: DRY! Refactoring needed, this is bad way to store dates
   def to_params
     a = {q: term}.tap do |f|
