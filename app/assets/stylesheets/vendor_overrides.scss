@@ -285,6 +285,10 @@ aside {
   }
 }
 
+.fb_reset iframe {
+    border: 0px none; width: 0px; height: 0px;
+}
+
 @media only screen and (min-width: 0px) and (max-width: 680px) {
   header {
     li {
@@ -376,4 +380,9 @@ aside {
       display: block;
     }
   }
+  
+  .fb_edge_widget_with_comment {
+    height: 20px;
+    overflow: hidden;
+  }  
 }
