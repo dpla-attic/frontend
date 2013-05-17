@@ -13,7 +13,7 @@ module DPLA
     def transform(conditions)
       case conditions
       when Array
-        conditions.map { |i| encode_uri(i) }.join(',')
+        encode_uri(conditions.map { |i| i }.join(' OR '))
       when Hash
         conditions = convert_conditions(conditions)
         transform_hash(conditions)

@@ -10,7 +10,16 @@ class SavedListsController < ApplicationController
       .includes(:saved_list, :saved_item)
       .select('DISTINCT ON (saved_item_id) *')
       .page(params[:page]).per(20)
-    attach_api_items @saved_item_positions
+    if params[:q].present?
+      @searched_item_positions = current_user.saved_item_positions
+        .includes(:saved_item)
+        .select('DISTINCT ON (saved_item_id) *')
+      api_items = get_api_items(@searched_item_positions, params[:q])
+      @searched_item_positions.reject! {|x| !api_items[x.saved_item.item_id]}
+      @count = @searched_item_positions.size
+      @saved_item_positions = @saved_item_positions.where('id in (?)', @searched_item_positions.map { |i| i.id })
+    end
+    @saved_item_positions = attach_api_items(@saved_item_positions)
   end
 
   def show
@@ -166,13 +175,18 @@ class SavedListsController < ApplicationController
     end
 
     def attach_api_items(saved_items_positions)
-      api_items = {}.tap do |hash|
-        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id })
-          .each { |item| hash[item.id] = item } rescue nil
-      end
+      api_items = get_api_items(saved_items_positions, nil)
       saved_items_positions.each do |position|
         api_item_id = position.saved_item.item_id
         position.item = api_items[api_item_id] || Item.new('id' => api_item_id)
+      end
+      saved_items_positions
+    end
+
+    def get_api_items(saved_items_positions, search_param)
+      api_items = {}.tap do |hash|
+        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id }, {q: search_param})
+          .each { |item| hash[item.id] = item } rescue nil
       end
     end
 

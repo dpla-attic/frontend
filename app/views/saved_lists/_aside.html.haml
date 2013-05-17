@@ -23,3 +23,7 @@
           = link_to 'edit', edit_saved_list_path(list), class: :edit
           = link_to '×',    list, class: :remove, method: :delete, confirm: 'Are you sure?'
     = link_to 'Add New', new_saved_list_path, class: :btn
+  .div.search-module
+    = form_tag(saved_lists_path, method: :get, class: "search-form") do
+      = text_field_tag :q, params[:q], placeholder: 'Search the Library'
+      = submit_tag 'Search', class: 'searchBtn', name: nil

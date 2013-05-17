@@ -5,9 +5,10 @@ module DPLA
     base_uri Settings.api.url
     basic_auth Settings.api.username, Settings.api.password
 
-    def self.by_ids(ids)
-      query = Conditions.new(ids)
-      load "/items/#{query}?#{api_key}"
+    def self.by_ids(ids, conditions)
+      ids_query = Conditions.new(ids)
+      search_query = Conditions.new(conditions)
+      load ("/items?id=#{ids_query}&#{api_key}&#{search_query}")
     end
 
     def self.by_conditions(conditions)

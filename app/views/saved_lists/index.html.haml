@@ -8,7 +8,20 @@
         = render partial: 'aside'
         .rightSide
           .list-detail
-            %h2 All Items
+            - if params[:q].present?
+              %h4
+                -if @saved_item_positions.nil?
+                  Your search for
+                  %span= params[:q]
+                  returned no results.
+                -else
+                  Your search for
+                  %span= params[:q]
+                  returned
+                  = number_with_delimiter @count, delimiter: ','
+                  results.
+            - else
+              %h2 All Items
           - if @saved_item_positions.present?
             = render partial: 'paginator'
             .savedList
