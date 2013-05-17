@@ -15,15 +15,17 @@ jQuery ->
     current = parent.find '.pagination .current'
     unless current.text() == $(this).text()
       current_page = current.data 'page'
+      page = $(this).data 'page'
       parent.find('.pop-columns[data-page='+current_page+']').fadeOut ->
-        page = $(this).data 'page'
         parent.find('.pop-columns[data-page='+page+']').fadeIn()
+        $.colorbox.resize()
 
       container = $(this).parents('.popBar').parent()
       container.find('.pagination span.current')
         .replaceWith "<a data-page="+current_page+" href=\"#\">"+current_page+"</a>"
       container.find(".pagination a[data-page=#{ page }]")
         .replaceWith "<span data-page="+page+" class=\"current\">"+page+"</span>"
+
       false
 
   $('#more_locations .tabs a').click ->
