@@ -176,7 +176,7 @@ class SavedListsController < ApplicationController
 
     def get_api_items(saved_items_positions, search_param)
       api_items = {}.tap do |hash|
-        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id }, search_param)
+        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id }, {q: search_param})
           .each { |item| hash[item.id] = item } rescue nil
       end
     end
