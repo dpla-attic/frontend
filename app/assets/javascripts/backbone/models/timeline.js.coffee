@@ -2,7 +2,7 @@ class DPLA.Models.Timeline extends Backbone.Model
   defaults:
     currentSheet: 1 # By design
     totalSheets:  5 # By design
-    year: 2000
+    year: window.year
     minYear: 1000
     maxYear: 2020
 
