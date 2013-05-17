@@ -9,16 +9,17 @@
         .rightSide
           .list-detail
             - if params[:q].present?
-              -if @saved_item_positions.nil?
-                Your search for
-                %span= params[:q]
-                returned no results.
-              -else
-                Your search for
-                %span= params[:q]
-                returned
-                = number_with_delimiter @search_cnt, delimiter: ','
-                results.
+              %h4
+                -if @saved_item_positions.nil?
+                  Your search for
+                  %span= params[:q]
+                  returned no results.
+                -else
+                  Your search for
+                  %span= params[:q]
+                  returned
+                  = number_with_delimiter @count, delimiter: ','
+                  results.
             - else
               %h2 All Items
           - if @saved_item_positions.present?

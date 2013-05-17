@@ -6,23 +6,18 @@ class SavedListsController < ApplicationController
   before_filter :prepare_positions_params, only: [:delete_positions, :reorder_positions, :copy_positions, :move_positions]
 
   def index
+    @saved_item_positions = current_user.saved_item_positions
+      .includes(:saved_list, :saved_item)
+      .select('DISTINCT ON (saved_item_id) *')
+      .page(params[:page]).per(20)
     if params[:q].present?
-      @saved_item_positions = current_user.saved_item_positions
+      @searched_item_positions = current_user.saved_item_positions
         .includes(:saved_item)
         .select('DISTINCT ON (saved_item_id) *')
-      api_items = get_api_items(@saved_item_positions, params[:q])
-      @saved_item_positions = @saved_item_positions.reject{|x| !api_items[x.saved_item.item_id]}
-      @search_cnt = @saved_item_positions.size
-      @saved_item_positions = current_user.saved_item_positions
-        .includes(:saved_list, :saved_item)
-        .select('DISTINCT ON (saved_item_id) *')
-        .where('id in (?)', @saved_item_positions.map { |i| i.id })
-        .page(params[:page]).per(20)
-    else
-      @saved_item_positions = current_user.saved_item_positions
-        .includes(:saved_list, :saved_item)
-        .select('DISTINCT ON (saved_item_id) *')
-        .page(params[:page]).per(20)
+      api_items = get_api_items(@searched_item_positions, params[:q])
+      @searched_item_positions.reject! {|x| !api_items[x.saved_item.item_id]}
+      @count = @searched_item_positions.size
+      @saved_item_positions = @saved_item_positions.where('id in (?)', @searched_item_positions.map { |i| i.id })
     end
     @saved_item_positions = attach_api_items(@saved_item_positions)
   end
