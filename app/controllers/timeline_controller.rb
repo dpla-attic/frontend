@@ -7,10 +7,8 @@ class TimelineController < ApplicationController
     @api_search_path = @timeline.api_search_path
     @api_item_path   = @timeline.api_item_path
 
-    @year = @timeline.years.max_by{|k,v| k}.first
-    p "AAAAAAAAAAAAAAAA"
-    p @timeline.years
-    p @year
+    @finalYear = @timeline.years.max_by{|k,v| k}.first
+    @finalYear = Time.now.year if @finalYear.to_i > Time.now.year
   end
 
   private
