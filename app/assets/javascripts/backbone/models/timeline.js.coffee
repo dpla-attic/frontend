@@ -4,7 +4,7 @@ class DPLA.Models.Timeline extends Backbone.Model
     totalSheets:  5 # By design
     year: window.finalYear
     minYear: 1000
-    maxYear: 2020
+    maxYear: window.finalYear
 
   initialize: (options) ->
     this.initializeDecadesView()
