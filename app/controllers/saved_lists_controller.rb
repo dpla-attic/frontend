@@ -19,8 +19,11 @@ class SavedListsController < ApplicationController
         .includes(:saved_item)
         .order('position ASC')
         .page(params[:page]).per(20)
-    else
+    elsif user_signed_in?
       @saved_item_positions = @unlisted.page(params[:page]).per(20)
+    else
+      redirect_to :new_user_session
+      return
     end
     attach_api_items @saved_item_positions
   end
@@ -139,13 +142,12 @@ class SavedListsController < ApplicationController
     end
 
     def load_list
+      @is_my_list = true
       if params[:id].present?
         @list = current_user.saved_lists.find params[:id] rescue nil
         if @list.nil?
           @is_my_list = false
           @list = SavedList.find(params[:id]) rescue nil
-        else
-          @is_my_list = true
         end
         render_404 unless @list
       end
