@@ -33,12 +33,19 @@ class DPLA.Views.Timeline.Scrubber extends Backbone.View
             timeline.trigger 'timeline:update_graph', ui.value
           when 'year'
             year = t.getSliderYear(t)
+            if year > window.finalYear
+              year = window.finalYear
       change: (event, ui) ->
         mode  = t.timeline.get('mode')
         switch mode
           when 'year'
             year = t.getSliderYear(t)
-            if year.toString() != t.timeline.get('year')
+            oldYear = t.timeline.get('year')
+            if year > window.finalYear
+              year = window.finalYear
+              t.timeline.set('year', year)
+              t.updateScrubber(t.timeline)
+            if year.toString() != oldYear
               t.timeline.router.navigate "//#{year}"
 
     unless $('.scrubber a span.arrow').length
