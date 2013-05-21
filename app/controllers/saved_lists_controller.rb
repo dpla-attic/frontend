@@ -23,7 +23,7 @@ class SavedListsController < ApplicationController
   end
 
   def show
-    if @list
+    if @list && (user_signed_in? || !@list.private)
       @saved_item_positions = @list.saved_item_positions
         .includes(:saved_item)
         .order('position ASC')
