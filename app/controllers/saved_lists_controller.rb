@@ -31,7 +31,7 @@ class SavedListsController < ApplicationController
     elsif user_signed_in?
       @saved_item_positions = @unlisted.page(params[:page]).per(20)
     else
-      redirect_to :new_user_session
+      redirect_to :new_user_session, flash: { error: 'This list is private' }
       return
     end
     attach_api_items @saved_item_positions
