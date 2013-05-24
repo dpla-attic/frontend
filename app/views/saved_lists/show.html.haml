@@ -15,9 +15,11 @@
         .rightSide
           = render partial: 'list'
 -elsif @list.private
+  = render 'shared/search_panel'
   %article#content{role: "main"}
     This list is private.
 -else
+  = render 'shared/search_panel'
   %article#content{role: "main"}
     .profile
       .tab-content
