@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414123734) do
+ActiveRecord::Schema.define(:version => 20130528094251) do
 
   create_table "apps", :force => true do |t|
     t.string   "title"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20130414123734) do
 
   create_table "saved_searches", :force => true do |t|
     t.string   "term"
-    t.string   "filters"
+    t.text     "filters"
     t.integer  "count"
     t.integer  "user_id"
     t.datetime "created_at", :null => false
