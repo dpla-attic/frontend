@@ -108,10 +108,10 @@ class DPLA.Models.Timeline extends Backbone.Model
   initializeDecadesPrevNext: ->
     moving = false
     timeline = this
-    $('.Decades span.next, .Decades span.prev').on 'click', ->
+
+    move = (direction) ->
       slideDistance = timeline.get 'slideDistance'
       endPoint = timeline.get 'endPoint'
-      direction = $(this).attr('class')
       if moving is false
         moving = true
         switch direction
@@ -145,6 +145,12 @@ class DPLA.Models.Timeline extends Backbone.Model
               $(".scrubber").slider "value", $(".scrubber").slider("value") - (slideDistance * 1000)
       timeline.updateGraph($(".scrubber").slider("value"))
 
+    $('.Decades').on 'swipeleft', ->
+      move('next')
+    $('.Decades').on 'swiperight', ->
+      move('prev')
+    $('.Decades span.next, .Decades span.prev').on 'click', ->
+      move($(this).attr('class'))
 
   initializeSheets: ->
     this.pagesPool = pagesPool = []
@@ -157,8 +163,8 @@ class DPLA.Models.Timeline extends Backbone.Model
   initializeYearRotator: ->
     timeline = this
     container = $('.timelineContainer')
-    $('.timeline-row .next, .timeline-row .prev').click (event) ->
 
+    move = (direction) ->
       # If this is a last page or first page we need move
       current = timeline.get 'currentSheet'
       if current >= 3
@@ -178,7 +184,7 @@ class DPLA.Models.Timeline extends Backbone.Model
       current = timeline.get 'currentSheet'
 
       $(".prev, .next").hide()
-      if event.target.className == 'next'
+      if direction == 'next'
         timeline.set
           'year': year + 1
           'currentSheet': current + 1
@@ -187,7 +193,7 @@ class DPLA.Models.Timeline extends Backbone.Model
           right: "+=100%"
         , 500
 
-      else if event.target.className == 'prev'
+      else if direction == 'prev'
         timeline.set
           'year': year - 1
           'currentSheet': current - 1
@@ -195,4 +201,10 @@ class DPLA.Models.Timeline extends Backbone.Model
         $(".timelineContainer").animate
           right: "-=100%"
         , 500
-
+    $('.timeline-row').on 'swipeleft', ->
+      move("next")
+    $('.timeline-row').on 'swiperight', ->
+      move("prev")
+    $('.timeline-row .next, .timeline-row .prev').click (event) ->
+      move(event.target.className)
+ 
