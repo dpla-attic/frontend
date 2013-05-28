@@ -9,7 +9,7 @@
         .savedItems
           = form_tag destroy_bulk_saved_searches_path do
             .resultsBar#resultsBarTop
-              %a.btn{href: ""} Delete
+              %a.btn.remove_searches{href: ""} Delete
               .pagination= paginate @saved_searches
             .saved-rows
               %ul
@@ -23,5 +23,5 @@
                 %li.row-4 Delete
               = render partial: 'saved_search', collection: @saved_searches
             .resultsBar#resultsBarBottom
-              %a.btn{id:"remove_searches", href: ""} Delete
+              %a.btn.remove_searches{href: ""} Delete
               .pagination= paginate @saved_searches

@@ -21,7 +21,7 @@ $(document).ready ->
 
   # Remove items
   # DELETE /saved/searches/destroy_bulk
-  $('#remove_searches').click ->
+  $('.remove_searches').click ->
     form = $(this).parents('.savedItems').find('form')
     affected = form.find('.checkbox.item:checked')
     return false unless affected.length
