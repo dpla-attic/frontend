@@ -1,5 +1,5 @@
 - is_list = 'show'  == params[:action]
--if @is_my_list
+-if @is_my_list || current_page?(action: 'index')
   .resultsBar{id: @is_bottom ? 'resultsBarBottom' : 'resultsBarTop'}
     %ul
       - if is_list
