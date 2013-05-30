@@ -1,4 +1,5 @@
 class PermittedParams < Struct.new(:params)
+  YEARS = 1000..2100
 
   def search
     [term, filters]
@@ -37,9 +38,21 @@ class PermittedParams < Struct.new(:params)
 
   def date_from_params(date, options = {})
     if date.is_a? Hash and date[:year].present?
-      month = date[:month].present? ? date[:month] : (options[:end] ? '12' : '1')
-      day   = date[:day].present?   ? date[:day]   : (options[:end] ? '31' : '1')
-      Date.new *[date[:year], month, day].map(&:to_i) rescue nil
+      year, month, day = *[date[:year], date[:month], date[:day]].map(&:to_i)
+
+      unless YEARS.include? year
+        year = options[:end] ? YEARS.last : YEARS.first
+      end
+      unless (1..12).include? month
+        month = options[:end] ? 12 : 1
+      end
+
+      adate = Date.new(year, month)
+      unless (adate.day..adate.end_of_month.day).include? day
+        day = options[:end] ? adate.end_of_month.day : adate.day
+      end
+      
+      Date.new(year, month, day) rescue nil
     end
   end
 
