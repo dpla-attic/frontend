@@ -30,7 +30,7 @@ module ItemsHelper
     end
 
     if item.preview_image.present?
-      image_tag item.preview_image, onerror: 'image_loading_error(this);', data: { 'default-src' => asset_path(image_type) }
+      image_tag item.preview_image, onerror: 'this.src=this.getAttribute("data-default-src");', data: { 'default-src' => asset_path(image_type) }
     else
       image_tag image_type
     end
