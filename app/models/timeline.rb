@@ -1,6 +1,15 @@
 require_dependency 'dpla/items'
 
 class Timeline < Search
+  YEARS = 1000..Time.now.year
+
+  def final_year
+    year = self.years.max_by{|k,v| k}.first.to_i
+    raise unless YEARS.include? year
+    year
+  rescue
+    Time.now.year
+  end
 
   def fields
     %w(
@@ -29,11 +38,3 @@ class Timeline < Search
   end
 
 end
-
-  # def items_by_year
-  #   @search = Timeline.new permitted_params.term, permitted_params.filters
-  #   page = params[:page].to_i if params[:page]
-  #   @year = params[:year] ? params[:year].to_i : Time.now.year
-  #   @items = @search.items(@year, page || 0)
-  #   render partial: "timeline/items", locals: { items: @items }, layout: false
-  # end
