@@ -36,4 +36,6 @@ DplaPortal::Application.configure do
   }
 
   config.action_mailer.default_url_options = { host: Settings.url.host, port: Settings.url.port }
+
+  GA.tracker = Settings.googleanalytics.tracker
 end

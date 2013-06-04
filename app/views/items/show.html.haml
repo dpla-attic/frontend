@@ -81,3 +81,6 @@
     /   %h5
     /     %a{:href => ""} Smithsonian Civil War Collection
     /   %p Description of this collection lorem ipsum dolor sit amet, consectetur adipiscing elit. In ac est leo. Cras sollicitudin volutpat nibh in blandit. Morbi ornare quam quis tortor pretium at hendrerit magna molestie. Cras facilisis, nulla non lobortis varius, tellus nibh elementum nibh, non accumsan augue augue ut augue.
+
+:javascript
+  #{analytics_track_event "View Item : #{@item.try(:data_provider)}", "#{@item.try(:provider)}", "#{@item.id} : #{@item.try(:title)}"}
