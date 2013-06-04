@@ -126,6 +126,7 @@ MapWrapper = L.Class.extend
         spiderfyOnMaxZoom: false
         showCoverageOnHover: false
         zoomToBoundsOnClick: false
+        maxClusterRadius: 43
       markerCluster.addLayers statesMarkers
       markerCluster.on 'clusterclick', (cluster)->
         relevantChilds = cluster.layer.getAllChildMarkers().sort (a,b)->
