@@ -43,6 +43,7 @@ MapWrapper = L.Class.extend
     this.updateMapMarkers()
 
   navigateToHashParams: ->
+    return unless $.address
     pos =
       lat: $.address.parameter 'lat'
       lng: $.address.parameter 'lng'
@@ -292,10 +293,15 @@ MapWrapper = L.Class.extend
           <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
         """
       if point.thumbnail
+        default_image = switch
+          when point.type == "image" then window.default_images.image
+          when point.type == "sound" then window.default_images.sound
+          when point.type == "video" then window.default_images.video
+          else default_images.text
         html +=
           """
             <div class="box-row">
-              <div class="box-right"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" /></div>
+              <div class="box-right"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" data-default-src="#{ default_image }" /></div>
               <div class="box-left">#{ content }</div>
             </div>
           """

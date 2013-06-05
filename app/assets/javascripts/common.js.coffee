@@ -1,3 +1,12 @@
+window.image_loading_error = (image)->
+  setTimeout ->
+    if default_src = $(image).data('default-src')
+      $(image).attr('src', default_src);
+    else
+      $(image).remove()
+  , 0
+
+
 jQuery ->
   if $('input#searchField').val().length == 0
     $('input#searchField').focus()
