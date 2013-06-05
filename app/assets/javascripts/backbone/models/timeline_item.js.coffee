@@ -31,6 +31,7 @@ class DPLA.Collections.TimelineItems extends Backbone.Collection
       beforeSend: options.beforeSend
       success: (data) ->
         items = []
+        data = $.parseJSON(data) unless _.isObject(data)
         if _.isObject(data) && _.isArray(data.docs)
           items = _.map data.docs, (doc) ->
             new DPLA.Models.TimelineItem({}, doc)
