@@ -5,7 +5,7 @@
 
   %h1 Map
   = render 'shared/results/search_results', query: params[:q], search: @search
-  - if !@search.result.empty?
+  - if @search.count > 0
     = render 'shared/refine_control'
 
     - aside_collapses = params[:controller] != 'search'
@@ -22,8 +22,8 @@
 
 :javascript
   window.states   = #{@search.geocoded_states.to_json};
-  window.api_search_path = '#{@api_search_path}';
-  window.app_search_path = '#{@app_search_path}';
+  window.api_search_path = '#{@search.api_search_path}';
+  window.app_search_path = '#{@search.app_search_path}';
   window.default_images = {
     image: '#{asset_path("icon-image.gif")}',
     sound: '#{asset_path("icon-sound.gif")}',
