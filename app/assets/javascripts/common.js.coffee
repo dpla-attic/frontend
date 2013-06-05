@@ -19,7 +19,7 @@ jQuery ->
       page = $(this).data 'page'
       parent.find('.pop-columns[data-page='+current_page+']').fadeOut ->
         parent.find('.pop-columns[data-page='+page+']').fadeIn()
-        $.colorbox.resize()
+        
 
       container = $(this).parents('.popBar').parent()
       container.find('.pagination span.current')
