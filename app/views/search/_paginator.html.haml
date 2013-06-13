@@ -3,8 +3,9 @@
     %label
       = 'Items per page:'
       = select_tag 'page_size', page_size_options, class: 'countList', id: nil
-/ %form.sortControl
-/   %label{:for => "sort_by"} Sort by:
-/   = select_tag 'sort_by', sort_by_options
+%form.sortControl
+  %label
+    = 'Sort by:'
+    = select_tag 'sort_by', sort_by_options, class: 'sortList'
 .pagination
   = paginate @search.result

@@ -29,7 +29,7 @@ class PermittedParams < Struct.new(:params)
       case key
       when 'page'       then [key, value]
       when 'page_size'  then [key, value] if %w(10 20 50 100).include?(value)
-      when 'sort_by'    then [key, value] if %w(subject created).include?(value)
+      when 'sort_by'    then [key, value] if %w(title created).include?(value)
       when 'sort_order' then [key, value] if %w(asc desc).include?(value)
       end
     end

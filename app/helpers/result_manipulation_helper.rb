@@ -22,8 +22,8 @@ module ResultManipulationHelper
     options = [].tap do |result|
       {
         relevance: { sort_by: nil, sort_order: nil },
-        a2z:       { sort_by: 'subject', sort_order: 'asc' },
-        z2a:       { sort_by: 'subject', sort_order: 'desc' },
+        a2z:       { sort_by: 'title', sort_order: 'asc' },
+        z2a:       { sort_by: 'title', sort_order: 'desc' },
         old2new:   { sort_by: 'created', sort_order: 'asc' },
         new2old:   { sort_by: 'created', sort_order: 'desc' }
       }

@@ -40,7 +40,7 @@ module DPLA
           when 'after'    then result['sourceResource.date.after'] = value
           when 'sort_by'
             case value.to_s
-            when 'subject' then result[key] = 'sourceResource.subject.name'
+            when 'title' then result[key] = 'sourceResource.title'
             when 'created' then result[key] = 'sourceResource.date.begin'
             end
           when 'facets'
