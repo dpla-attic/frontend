@@ -3,6 +3,7 @@ class PagesController < ApplicationController
 
   def home
     @apps = App.where(is_promo: true).limit(2)
+    @search = Search.new nil, {page_size: 0}
   end
 
   def overview

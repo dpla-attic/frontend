@@ -2380,6 +2380,10 @@ aside h5 { margin: 5px 0 1em; }
         font: 1.2em/1.1em 'source_sans_proregular', arial, sans-serif;
         margin: 0 0 0.5em;
     }
+    .searchForm p span {
+      font-size: 1em;
+      line-height: 1.1em;
+    }
 
 .search {
     clear: both;
@@ -3551,6 +3555,15 @@ div.timeline-year {
         clear: left;
     }
 }
+
+@media only screen and (min-width: 980px) and (max-width: 1051px) {
+  body .container .searchForm p span {display: none; }
+}
+
+@media only screen and (min-width: 675px) and (max-width: 770px) {
+  body .container .searchForm p span {display: none; }
+}
+
 
 @media only screen and (min-width: 681px) and (max-width: 980px) {
     body .container .home h2, body .container .home h1.border { font-size: 1.4em; }
