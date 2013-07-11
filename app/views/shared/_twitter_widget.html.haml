@@ -1,7 +1,21 @@
-- if  twitter_name = Settings.widgets.twitter_username
-  :javascript
-    window.twitter_account = "#{ twitter_name }";
+- if  (twitter_name = Settings.widgets.twitter_username) && (twitter_widget_name = Settings.widgets.twitter_widget_id)
+  :javascript                                                                             
+    ! function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            p = /^http:/.test(d.location) ? 'http' : 'https';
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = p + "://platform.twitter.com/widgets.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, "script", "twitter-wjs");
   .twitter
     %h2.border
       = link_to "@#{twitter_name} on Twitter", "https://twitter.com/#{twitter_name}"
-    #tweets
+    %a.twitter-timeline{:href => "https://twitter.com/#{twitter_name}",
+                        :data => {:widget_id => "#{Settings.widgets.twitter_widget_id}", 
+                                  :link_color=> "#4691b9", 
+                                  :theme => "light", 
+                                  :chrome => "nofooter noheader noborders", 
+                                  :tweet_limit => 2}} 

@@ -41,6 +41,7 @@ session:
     memcache_server:
 widgets:
   twitter_username: dpla
+  twitter_widget_id: 355150869337096192
   # URL of wordpress site.
   # NOTE: JSON API plugin is required to able read Wordpress feed as JSONP requests
   wordpress_json_api: http://dp.la/info

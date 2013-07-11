@@ -50,11 +50,6 @@ jQuery ->
       $('#countries').fadeIn()
     false
 
-  if window.twitter_account
-    $('.twitter #tweets').tweet
-      username: window.twitter_account
-      count: 2
-
   if window.wordpress_url && $('#wp_news_feed').length > 0
     news_container = $('#wp_news_feed ul')
     $.ajax

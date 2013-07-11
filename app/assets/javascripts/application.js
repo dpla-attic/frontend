@@ -6,7 +6,6 @@
 //= require vendor/jquery.mobile-1.2.0.min.js
 //= require vendor/jquery.opacityrollover.js
 //= require vendor/jquery-ui-1.9.2.custom.min.js
-//= require vendor/jquery.tweet.js
 //= require vendor/jquery.jfeed.js
 //= require vendor/main.js
 //= require vendor/plugins.js
