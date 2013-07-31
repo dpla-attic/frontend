@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:dpla/frontend-assets.git
-  revision: 0d3846048bade42c70f29cc52a1e0da7cfa56140
+  revision: 77cacb97bb232925590d481a1cc86ad0251a8447
   specs:
-    dpla_frontend_assets (0.0.1)
+    dpla_frontend_assets (0.0.2)
 
 GEM
   remote: https://rubygems.org/
