@@ -9,6 +9,7 @@
       %li= link_to "Policies", wordpress_path('/about/policies/')
       %li= link_to "Funding", wordpress_path('/about/funding/')
       %li= link_to "FAQ", wordpress_path('/about/faq/')
+      %li= link_to "Jobs", wordpress_path('/about/jobs/')
 
   %li.aboutMenu
     = link_to wordpress_path '/get-involved/' do
@@ -26,6 +27,8 @@
       %span.icon-arrow-thin-down{"aria-hidden" => "true"}
     %ul
       %li= link_to "API Codex", wordpress_path('/developers/codex/')
+
+  %li= link_to "Teaching Tools", wordpress_path('/teaching-tools/')
 
   %li= link_to "Help", wordpress_path('/help/')
 
