@@ -70,7 +70,7 @@ class State
   end
 
   def self.find_by_name(name)
-    state = LIST.select { |k| k =~ Regexp.new(name, true) }.to_a.first
+    state = LIST.select { |k| k =~ Regexp.new("^#{name}$", true) }.to_a.first
     if state
       self.new state.last
     end
