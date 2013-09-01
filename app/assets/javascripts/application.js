@@ -22,7 +22,7 @@
 //= require timeline.js.coffee
 //= require spikes.js.coffee
 //= require common.js.coffee
-//= require map.js.coffee
+//= require map2.js.coffee
 //= require saved_searches.js.coffee
 //= require saved_lists.js.coffee
 //= require subjects.js.coffee
