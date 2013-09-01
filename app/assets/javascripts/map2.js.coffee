@@ -27,6 +27,7 @@ DPLAMap = L.Class.extend
       normal: []
 
     this.loadingStack = []
+    this.openPopups   = []
 
     # Map initialization
     map = this.initializeMap()
@@ -63,7 +64,6 @@ DPLAMap = L.Class.extend
   # - beforeSend
   # - success
   # - complete
-  # - requiredState
   requestItems: (options = {})->
     t = this
     data = page_size: if _.isUndefined(options['page_size']) then this.page_size else options['page_size']
@@ -71,8 +71,6 @@ DPLAMap = L.Class.extend
     if options['bounds'] then data['sourceResource.spatial.coordinates'] = [
       "#{options['bounds'].getNorthWest().lat},#{options['bounds'].getNorthWest().lng}"
       "#{options['bounds'].getSouthEast().lat},#{options['bounds'].getSouthEast().lng}"].join(':')
-
-    requiredState = options['requiredState'] || -> true
 
     $.ajax
       url: window.api_search_path
@@ -119,23 +117,100 @@ DPLAMap = L.Class.extend
   getPositionHash: ->
     [this.map.getCenter().lat, this.map.getCenter().lng, this.map.getZoom()].join(':')
 
+  getBackUri: ->
+
   # Get layer with points
   getMarkersLayer: ->
+    t = this
     return this.markersLayer if this.markersLayer
     this.markersLayer = new L.MarkerClusterGroup
       spiderfyOnMaxZoom: false
       showCoverageOnHover: false
       zoomToBoundsOnClick: false
-      iconCreateFunction: this.clusterIconBuilder
+      iconCreateFunction: (cluster) ->
+        count = _.reduce cluster.getAllChildMarkers(), (total, point) ->
+          total += point.count
+        , 0
+        new L.DivIcon
+          iconSize: new L.Point(20, 20)
+          className: 'dot more-results'
+          html: '<div class="mapCluster"><span class="resultnumber">' + int2human(count) + '</span></div>'
+    this.markersLayer.on 'clusterclick', (cluster) ->
+      childs = cluster.layer.getAllChildMarkers()
+      switch _.first(_.map childs, (c) -> c.type)
+        when 'state'
+          state = _.first(childs.sort (a,b) -> b.count - a.count)
+          t.openStatePopup latlng: cluster.layer.getLatLng(), state: state.data.name
+        when 'normal'
+          t.openPopup latlng: cluster.layer.getLatLng(), points: _.map(childs, (m) -> m.data )
 
-  clusterIconBuilder: (cluster) ->
-    count = _.reduce cluster.getAllChildMarkers(), (total, point) ->
-      total += point.count
-    , 0
-    new L.DivIcon
-      iconSize: new L.Point(20, 20)
-      className: 'dot more-results'
-      html: '<div class="mapCluster"><span class="resultnumber">' + int2human(count) + '</span></div>'
+  renderPopup: (options) ->
+    t = this
+    html = ''
+    _.each options.points, (point) ->
+      item_href = "/item/#{ point.id }?back_uri=#{ t.getBackUri() }"
+      item_title = point.title
+      if $.isArray(item_title)
+        item_title = item_title[0]
+      content =
+        """
+          <h6> #{ point.type }</h6>
+          <h4><a href="#{ item_href }">#{ item_title }</a></h4>
+          <p><span> #{ point.creator }</span></p>
+          <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
+        """
+      if point.thumbnail
+        default_image = switch
+          when point.type == "image" then window.default_images.image
+          when point.type == "sound" then window.default_images.sound
+          when point.type == "video" then window.default_images.video
+          else default_images.text
+        html +=
+          """
+            <div class="box-row">
+              <div class="box-right"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" data-default-src="#{ default_image }" /></div>
+              <div class="box-left">#{ content }</div>
+            </div>
+          """
+      else
+        html += "<div class=\"box-row\">#{ content }</div>"
+
+    html = '<div class="box-rows">' + html + '</div>' if options.points.length > 1
+    html = "<h5>#{ options.title }</h5>" + html if options.title
+    html
+
+  # Open popup
+  # Options
+  # - latlng
+  # - points
+  # - title
+  openPopup: (options) ->
+    title = ''
+
+    popup = new DPLAPopup offset: new L.Point(-10,-30)
+    popup.setContent this.renderPopup(title: title, points: options.points)
+    popup.setLatLng(options.latlng)
+    this.openPopups.push popup.openOn(this.map, {x: 20, y: 10})
+
+  # Open state popup
+  # Options:
+  # - latlng
+  # - name
+  openStatePopup: (options) ->
+    t = this
+    this.requestItems
+      state: options.state
+      success: (data) -> t.openPopup latlng: options.latlng, points: data.docs
+
+  # Open grid popup
+  # Options:
+  # - latlng
+  # - bounds
+  openGridPopup: (options) ->
+    t = this
+    this.requestItems
+      bounds: options.bounds
+      success: (data) -> t.openPopup latlng: options.latlng, points: data.docs
 
   # Update markers on map
   updateMarkers: ->
@@ -145,6 +220,7 @@ DPLAMap = L.Class.extend
       else this.updateNormalMarkers(this.map.getBounds())
 
   updateStateMarkers: ->
+    t = this
     unless this.stateMarkers
       this.stateMarkers = _.map states, (state) ->
         icon = new L.DivIcon
@@ -152,7 +228,10 @@ DPLAMap = L.Class.extend
           className: 'dot more-results'
           iconSize: new L.Point 20, 20
         marker = new L.Marker [state.lat, state.lng], icon: icon
-        _.extend marker, _.pick(state, 'name', 'count')
+        marker.type = 'state'
+        marker.count = state.count
+        marker.data = _.pick(state, 'name')
+        marker.on 'click', (e) -> t.openStatePopup latlng: e.target.getLatLng(), state: e.target.data.name
         marker
 
     this.markers.state = this.stateMarkers
@@ -183,6 +262,9 @@ DPLAMap = L.Class.extend
               iconSize: new L.Point 20, 20
             marker = new L.Marker cellBounds.getCenter(), icon: icon
             marker.count = data.count
+            marker.type = 'grid'
+            marker.on 'click', (e) -> t.openGridPopup latlng: e.target.getLatLng(), bounds: cellBounds
+
             t.markers.grid.push(marker)
             t.getMarkersLayer().addLayer(marker)
 
@@ -203,11 +285,12 @@ DPLAMap = L.Class.extend
             iconSize: new L.Point 0, 0
           marker = new L.Marker [point.lat, point.lng], icon: icon
           marker.count = 1
-          marker
+          marker.type = 'normal'
+          marker.data = point
+          marker.on 'click', (e) -> t.openPopup latlng: e.target.getLatLng(), points: [e.target.data]
 
         t.markers.normal = t.markers.normal.concat(markers)
         t.getMarkersLayer().addLayers(markers)
-
 
   removeStateMarkers: (bounds) ->
     if bounds
@@ -269,3 +352,26 @@ DPLAMap = L.Class.extend
       url: doc['isShownAt']
       lat: coordinates.shift()
       lng: coordinates.shift()
+
+
+DPLAPopup = L.Popup.extend
+  _initLayout: ->
+    this._container = mapBox = L.DomUtil.create 'div', 'mapBox'
+    L.DomEvent.disableClickPropagation mapBox
+    closeButton = L.DomUtil.create 'a', 'closePopUp', mapBox
+    closeButton.href = '#close'
+    closeButton.innerHTML = '&#215;'
+    L.DomEvent.on closeButton, 'click', this._onCloseButtonClick, this
+    this._contentNode = L.DomUtil.create 'div', 'boxInner', mapBox
+    L.DomEvent.on(this._contentNode, 'mousewheel', L.DomEvent.stopPropagation)
+    this._tip = L.DomUtil.create('div', 'mapArrow', mapBox)
+  _updateLayout: ->
+    container = this._contentNode
+    this._containerWidth = container.offsetWidth
+    this._container.style.bottom = 50 + 'px'
+    this._container.style.left = 50 + 'px'
+  openOn: (m, adjust = {x: 10, y: 20})->
+    L.Popup.prototype.openOn.call(this, m)
+    this._container.style.left = (this._containerLeft + adjust.x) + 'px'
+    this._container.style.bottom = (this._containerBottom + adjust.y) + 'px'
+    return this;
