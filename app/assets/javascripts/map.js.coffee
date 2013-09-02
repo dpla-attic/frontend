@@ -1,289 +1,165 @@
-$(document).ready ->
+$ ->
   if $('.map-controller').length
-    wrapper = new MapWrapper('map')
-    map = wrapper.map
-    $('#toggle').on 'click', ->
-      setTimeout ->
-        map.invalidateSize()
-      , 500
+    window.map = new DPLAMap()
 
-  # map variable for debugging purposes
-  window.map     = map
-  window.wrapper = wrapper
+window.int2human = (int) ->
+  switch
+    when int > 999 && int <= 999999
+      "#{ Math.round(int / 1000) }K"
+    when int > 999999
+      "#{ Math.round(int / 1000 / 1000) }M"
+    else
+      int
 
-MapWrapper = L.Class.extend
-  _layers:       {}
-  _drawedItems:  {}
-  _requestsPool: []
-  _openPopups:   []
+DPLAMap = L.Class.extend
+  initialize: ->
+    # configurable params
+    this.mapCenter  = lat: _.first(config.center), lng: _.last(config.center)
+    this.zoom       = config.zoom
+    this.gridSize   = config.grid_size
+    this.stateLevel = [_.first(config.state_level).._.last(config.state_level)]
+    this.gridLevel  = [_.first(config.grid_level).._.last(config.grid_level)]
+    this.page_size  = config.page_size
+    this.popup_page_size  = config.popup_page_size
 
-  initialize: (domId)->
-    this.map = L.map 'map',
-      center: new L.LatLng(38, -93)
-      zoom: 4
-      layers: this.getBaseLayer()
+    this.markers =
+      state:  []
+      grid:   []
+      normal: []
+
+    this.loadingStack = []
+    this.openPopups   = []
+
+    # Map initialization
+    map = this.initializeMap()
+    markers = this.getMarkersLayer()
+    map.addLayer markers
+
     t = this
     this.map.on
-      dragend: ->
-        t.onDragend()
+      dragstart: ->
+        t.closeAllPopups()
       zoomstart: ->
-        t.onZoomstart()
+        t.closeAllPopups()
+      dragend: ->
+        t.updateMarkers()
       zoomend: ->
-        t.onZoomend()
-    this.updateMapMarkers()
-    this.navigateToHashParams()
+        t.updateMarkers()
 
-  onDragend: ->
-    this.updateMapMarkers()
+    # Start here
+    this.updateMarkers()
 
-  onZoomstart: ->
-    this.closeAllOpenPopups()
+  # Initialize map with tiles layer from OSM
+  initializeMap: ->
+    return this.map if this.map
+    this.map = L.map 'map',
+      center: new L.LatLng(this.mapCenter.lat, this.mapCenter.lng)
+      zoom: this.zoom.start
+      layers: L.tileLayer 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        minZoom: this.zoom.min
+        maxZoom: this.zoom.max
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 
-  onZoomend: ->
-    this.updateMapMarkers()
-
-  navigateToHashParams: ->
-    return unless $.address
-    pos =
-      lat: $.address.parameter 'lat'
-      lng: $.address.parameter 'lng'
-      zoom: $.address.parameter 'zoom'
-    if pos.lat && pos.lng
-      this.map.panTo(new L.LatLng(pos.lat, pos.lng))
-    if pos.zoom
-      this.map.setZoom(pos.zoom)
-
-
-  updateMapMarkers: ->
-    stateLayer  = this.getStateLayer()
-    pointsLayer = this.getRegularLayer()
-
-    this.map.addLayer stateLayer
-    switch
-      when this.map.getZoom() in [4..6]
-        this.map.removeLayer pointsLayer
-        this.map.addLayer stateLayer
-      else
-        this.requestRegularMarkers(this.getMapPosition())
-        this.map.addLayer pointsLayer
-        this.map.removeLayer stateLayer
-
-  roundMapClusterCount: (count)->
-    switch
-      when count > 999
-        "#{ Math.round(count / 1000) }K"
-      when count > 999999
-        "#{ Math.round(count / 1000 / 1000) }M"
-      else
-        count
-
-  getMapPosition: ->
-    center      = this.map.getCenter()
-    northWest: this.map.getBounds().getNorthWest()
-    southEast: this.map.getBounds().getSouthEast()
-    lat: center.lat
-    lng: center.lng
-    zoom: this.map.getZoom()
-
-  turnProgress: (turn)->
-    if turn
-      $('#loading').show()
-    else
-      $('#loading').hide()
-
-  closeAllOpenPopups: ->
-    $.each this._openPopups, (i,popup)->
-      popup._close()
-
-  getBaseLayer: ->
-    unless this._layers.base
-      tileUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      copyright = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
-      this._layers.base = L.tileLayer tileUrl, attribution: copyright, minZoom: 4, maxZoom: 18
-    this._layers.base
-
-  getStateLayer: ->
-    unless this._layers.state
-      statesMarkers = []
-      if window.states instanceof Array
-        t = this
-        $.each window.states, (i,state)->
-          roundedTotalCount = t.roundMapClusterCount state.count
-          marker = new L.marker [state.lat, state.lng],
-            icon: new L.DivIcon
-              html: '<div class="mapCluster"><span class="resultnumber">' + roundedTotalCount + '</span></div>'
-              className: 'dot more-results'
-              iconSize: new L.Point 20, 20
-          marker.data = state
-          marker.on 'click', (e)->
-            state = e.target.data
-            t.openStatePopup state, e.target.getLatLng()
-          statesMarkers.push marker
-      markerCluster = new L.MarkerClusterGroup
-        iconCreateFunction: (cluster) ->
-          totalCount = 0
-          $.each cluster.getAllChildMarkers(), (i,point)->
-            totalCount += point.data.count if point.data.count
-          roundedTotalCount = t.roundMapClusterCount totalCount
-          new L.DivIcon({html: '<div class="mapCluster"><span class="resultnumber">' + roundedTotalCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)})
-        spiderfyOnMaxZoom: false
-        showCoverageOnHover: false
-        zoomToBoundsOnClick: false
-        maxClusterRadius: 43
-      markerCluster.addLayers statesMarkers
-      markerCluster.on 'clusterclick', (cluster)->
-        relevantChilds = cluster.layer.getAllChildMarkers().sort (a,b)->
-          b.data.count - a.data.count
-        t.openStatePopup relevantChilds.shift().data, cluster.layer.getLatLng()
-
-
-      this._layers.state = markerCluster
-    this._layers.state
-
-  openStatePopup: (state, latlng)->
-    while this._requestsPool.length > 0
-      this._requestsPool.shift().abort()
-
+  # Perform JSONP request to DPLA API
+  # Options:
+  # - bounds
+  # - state
+  # - page_size
+  # - beforeSend
+  # - success
+  # - complete
+  requestItems: (options = {})->
     t = this
-    this._requestsPool.push $.ajax
+    data = page_size: if _.isUndefined(options['page_size']) then this.page_size else options['page_size']
+    if options['state']  then data['sourceResource.spatial.state'] = options['state']
+    if options['bounds'] then data['sourceResource.spatial.coordinates'] = [
+      "#{options['bounds'].getNorthWest().lat},#{options['bounds'].getNorthWest().lng}"
+      "#{options['bounds'].getSouthEast().lat},#{options['bounds'].getSouthEast().lng}"].join(':')
+
+    $.ajax
       url: window.api_search_path
-      data:
-        'sourceResource.spatial.state': state.name
-        'page_size': 50
+      data: data
       dataType: 'jsonp'
       cache: true
-      beforeSend: ->
-        t.turnProgress true
-      success: (data)->
-        if $.isPlainObject(data) and $.isArray(data.docs)
-          points = $.map data.docs, (doc)->
-            t.doc2point doc
-          state_search_href = "/search?#{ window.app_search_path }&state[]=#{ state.name }"
-          link_to_state_search = """
-            <a href="#{ state_search_href }">#{ state.name }</a>
-          """
-          popup = t.generatePopup(points, link_to_state_search).setLatLng(latlng)
-          t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
-      complete: (jqXHR, textStatus)->
-        t.turnProgress false
+      beforeSend: (jqXHR, settings) ->
+        t.turnProgress()
+        options.beforeSend(jqXHR, settings) if options.beforeSend
+        true
+      success: (data, textStatus, jqXHR) ->
+        data.docs = _.map data.docs, (doc) -> t.doc2point(doc) unless _.isEmpty data.docs
+        options.success(data, textStatus, jqXHR) if options.success
+        true
+      complete: (jqXHR, textStatus) ->
+        t.turnProgress(false)
+        options.complete(jqXHR, textStatus) if options.complete
 
-  getRegularLayer: ->
+  # Get grid boundaries splitted by map
+  getGrid: ->
     t = this
-    unless this._layers.points
-      markerCluster = new L.MarkerClusterGroup
-        iconCreateFunction: (cluster) ->
-          totalCount = cluster.getChildCount()
-          roundedTotalCount = t.roundMapClusterCount totalCount
-          new L.DivIcon({html: '<div class="mapCluster"><span class="resultnumber">' + roundedTotalCount + '</span></div>', className: 'dot more-results', iconSize: new L.Point(20, 20)})
-        spiderfyOnMaxZoom: false
-        showCoverageOnHover: false
-        zoomToBoundsOnClick: false
-      markerCluster.on 'clusterclick', (cluster)->
-        points = cluster.layer.getAllChildMarkers()
-        location = t.getClusterLocation(points)
-        location_search_href = "/search?#{ window.app_search_path }&place[]=#{ location }"
-        link_to_location_search = """
-          <a href="#{ location_search_href }">#{ location }</a>
-        """
-        popup = t.generatePopup(points.slice(0,50), link_to_location_search)
-          .setLatLng(cluster.layer.getLatLng())
-        t._openPopups.push popup.openOn(t.map, {x: 20, y: 10})
-      this._layers.points = markerCluster
-    this._layers.points
+    pos = this.getPosition()
+    colWidth  = Math.abs(pos.northWest.lng - pos.northEast.lng) / this.gridSize.cols
+    rowHeight = Math.abs(pos.northWest.lat - pos.southWest.lat) / this.gridSize.rows
 
-  requestRegularMarkers: (position)->
-    while this._requestsPool.length > 0
-      this._requestsPool.shift().abort()
+    _.map [0..t.gridSize.cols - 1], (colNumber) ->
+      _.map [0..t.gridSize.rows - 1], (rowNumber) ->
+        topLeft = new L.LatLng(
+          pos.northWest.lat - rowHeight * rowNumber,
+          pos.northWest.lng + colWidth * colNumber)
+        bottomRight = new L.LatLng(topLeft.lat - rowHeight, topLeft.lng + colWidth)
+        new L.LatLngBounds(topLeft, bottomRight)
 
-    t = this
-    this._requestsPool.push $.ajax
-      url: window.api_search_path
-      data:
-        'sourceResource.spatial.coordinates': "#{position.northWest.lat},#{position.northWest.lng}:#{position.southEast.lat},#{position.southEast.lng}"
-        'page_size': 500
-      dataType: 'jsonp'
-      cache: true
-      beforeSend: ->
-        t.turnProgress true
-      success: (data)->
-        if $.isPlainObject(data) and $.isArray(data.docs)
-          t.drawRegularItems data.docs
-      complete: (jqXHR, textStatus)->
-        t.turnProgress false
+  # Get current map position and zoom
+  getPosition: ->
+    bounds = this.map.getBounds()
+    southWest: bounds.getSouthWest()
+    northWest: bounds.getNorthWest()
+    southEast: bounds.getSouthEast()
+    northEast: bounds.getNorthEast()
+    center:    this.map.getCenter()
+    zoom:      this.map.getZoom()
 
-  drawRegularItems: (docs)->
-    t = this
-    toDraw = []
-    $.each docs, (i, doc)->
-      unless t._drawedItems[doc.id]
-        t._drawedItems[doc.id] = true
-        point = t.doc2point doc
-        if point
-          myIcon = L.divIcon
-            className: 'dot'
-            iconSize: new L.Point 0, 0
-          marker = new L.marker([point.lat, point.lng], {icon: myIcon})
-          marker.data = point
-          marker.on 'click', (e)->
-            popup = t.generatePopup(e.target).setLatLng(e.target.getLatLng())
-            t._openPopups.push popup.openOn(t.map, {x: 20, y: 0})
-          toDraw.push marker
+  getPositionHash: ->
+    [this.map.getCenter().lat, this.map.getCenter().lng, this.map.getZoom()].join(':')
 
-    t.getRegularLayer().addLayers toDraw
-
-  getClusterLocation: (points)->
-    locations = {}
-    $.each points, (i, point)->
-      $.each point.data.location, (i,loc)->
-        if locations[loc]
-          locations[loc]++
-        else
-          locations[loc] = 1
-    locationName = ''
-    locationScore = 0
-    $.each locations, (name, score)->
-      if locationScore < score
-        locationName = name
-        locationScore = score
-    locationName
-
-  doc2point: (doc)->
-    coordinates = []
-    if $.isArray(doc['sourceResource.spatial.coordinates'])
-      coordinates = try
-        doc['sourceResource.spatial.coordinates'][0].split ','
-      catch error
-        []
-    else if doc['sourceResource.spatial.coordinates']
-      coordinates = doc['sourceResource.spatial.coordinates'].split ','
-    location = doc['sourceResource.spatial.name']
-    location = [location] unless location instanceof Array
-    point =
-      id: doc.id
-      title: doc['sourceResource.title'] || doc['id']
-      thumbnail: doc['object']
-      type: doc['sourceResource.type'] || ''
-      creator: doc['sourceResource.creator'] || ''
-      location: location
-      url: doc['isShownAt']
-      lat: coordinates.shift()
-      lng: coordinates.shift()
-
-
-  generatePopup: (points, title) ->
-    t = this
-    points = [points] unless points instanceof Array
-
+  getBackUri: ->
     base_uri = window.location.href
     if window.location.href.indexOf('#') > 0
       base_uri = base_uri.substr(0, window.location.href.indexOf('#'))
-    pos = t.getMapPosition()
-    back_uri = "#{ base_uri }#/?lat=#{ pos.lat }&lng=#{ pos.lng }&zoom=#{ pos.zoom }"
+    pos = this.getPosition()
+    back_uri = "#{ base_uri }#/?lat=#{ pos.center.lat }&lng=#{ pos.center.lng }&zoom=#{ pos.zoom }"
+    encodeURIComponent(back_uri)
 
+  # Get layer with points
+  getMarkersLayer: ->
+    t = this
+    return this.markersLayer if this.markersLayer
+    this.markersLayer = new L.MarkerClusterGroup
+      spiderfyOnMaxZoom: false
+      showCoverageOnHover: false
+      zoomToBoundsOnClick: false
+      maxClusterRadius: 45
+      iconCreateFunction: (cluster) ->
+        count = _.reduce cluster.getAllChildMarkers(), (total, point) ->
+          total += point.count
+        , 0
+        new L.DivIcon
+          iconSize: new L.Point(20, 20)
+          className: 'dot more-results'
+          html: '<div class="mapCluster"><span class="resultnumber">' + int2human(count) + '</span></div>'
+    this.markersLayer.on 'clusterclick', (cluster) ->
+      childs = cluster.layer.getAllChildMarkers()
+      switch _.first(_.map childs, (c) -> c.type)
+        when 'state'
+          state = _.first(childs.sort (a,b) -> b.count - a.count)
+          t.openStatePopup latlng: cluster.layer.getLatLng(), state: state.data.name
+        when 'normal'
+          t.openPopup latlng: cluster.layer.getLatLng(), points: _.map(childs, (m) -> m.data )
+
+  renderPopup: (options) ->
+    t = this
     html = ''
-    $.each points, (i,point) ->
-      point = if $.isPlainObject(point) then point else point.data
-      item_href = "/item/#{ point.id }?back_uri=#{ encodeURIComponent(back_uri) }"
+    _.each options.points, (point) ->
+      item_href = "/item/#{ point.id }?back_uri=#{ t.getBackUri() }"
       item_title = point.title
       if $.isArray(item_title)
         item_title = item_title[0]
@@ -310,10 +186,209 @@ MapWrapper = L.Class.extend
       else
         html += "<div class=\"box-row\">#{ content }</div>"
 
-    html = '<div class="box-rows">' + html + '</div>' if points.length > 1
-    html = "<h5>#{ title }</h5>" + html if title
+    html = '<div class="box-rows">' + html + '</div>' if options.points.length > 1
+    html = "<h5>#{ options.title }</h5>" + html if options.title
+    html
+
+  # Open popup
+  # Options
+  # - latlng
+  # - points
+  # - title
+  openPopup: (options) ->
+    if options.points.length > 1 and _.isEmpty(options.title)
+      location = this.getClusterLocation(options.points)
+      titleHref = "/search?#{ window.app_search_path }&place[]=#{ location }"
+      options.title = "<a href=\"#{ titleHref }\">#{ location }</a>"
+
     popup = new DPLAPopup offset: new L.Point(-10,-30)
-    popup.setContent html
+    popup.setContent this.renderPopup(title: options.title, points: options.points)
+    popup.setLatLng(options.latlng)
+    this.openPopups.push popup.openOn(this.map, {x: 20, y: 10})
+
+  # Open state popup
+  # Options:
+  # - latlng
+  # - state
+  openStatePopup: (options) ->
+    t = this
+    titleHref = "/search?#{ window.app_search_path }&state[]=#{ options.state }"
+    title = "<a href=\"#{ titleHref }\">#{ options.state }</a>"
+    this.requestItems
+      page_size: t.popup_page_size
+      state: options.state
+      success: (data) -> t.openPopup latlng: options.latlng, points: data.docs, title: title
+
+  # Open grid popup
+  # Options:
+  # - latlng
+  # - bounds
+  openGridPopup: (options) ->
+    t = this
+    this.requestItems
+      page_size: t.popup_page_size
+      bounds: options.bounds
+      success: (data) -> t.openPopup latlng: options.latlng, points: data.docs
+
+  # Update markers on map
+  updateMarkers: ->
+    switch
+      when this.isStateLevel() then this.updateStateMarkers()
+      when this.isGridLevel()  then this.updateGridMarkers()
+      else this.updateNormalMarkers(this.map.getBounds())
+
+  updateStateMarkers: ->
+    t = this
+    unless this.stateMarkers
+      this.stateMarkers = _.map states, (state) ->
+        icon = new L.DivIcon
+          html: '<div class="mapCluster"><span class="resultnumber">' + int2human(state.count) + '</span></div>'
+          className: 'dot more-results'
+          iconSize: new L.Point 20, 20
+        marker = new L.Marker [state.lat, state.lng], icon: icon
+        marker.type = 'state'
+        marker.count = state.count
+        marker.data = _.pick(state, 'name')
+        marker.on 'click', (e) -> t.openStatePopup latlng: e.target.getLatLng(), state: e.target.data.name
+        marker
+
+    this.markers.state = this.stateMarkers
+    this.getMarkersLayer().addLayers(this.markers.state)
+
+    this.removeGridMarkers()
+    this.removeNormalMarkers()
+
+  updateGridMarkers: ->
+    t = this
+    positionHash = t.getPositionHash()
+    _.each _.flatten(t.getGrid()), (cellBounds) ->
+      t.requestItems
+        page_size: 0
+        bounds: cellBounds,
+        success: (data) ->
+          return if t.getPositionHash() isnt positionHash
+          if data.count < t.page_size
+            t.updateNormalMarkers(cellBounds)
+          else
+            t.removeStateMarkers(cellBounds)
+            t.removeGridMarkers(cellBounds)
+            t.removeNormalMarkers(cellBounds)
+
+            icon = new L.DivIcon
+              html: '<div class="mapCluster"><span class="resultnumber">' + int2human(data.count) + '</span></div>'
+              className: 'dot more-results'
+              iconSize: new L.Point 20, 20
+            marker = new L.Marker cellBounds.getCenter(), icon: icon
+            marker.count = data.count
+            marker.type = 'grid'
+            marker.on 'click', (e) -> t.openGridPopup latlng: e.target.getLatLng(), bounds: cellBounds
+
+            t.markers.grid.push(marker)
+            t.getMarkersLayer().addLayer(marker)
+
+  updateNormalMarkers: (bounds) ->
+    t = this
+    positionHash = t.getPositionHash()
+    t.requestItems
+      bounds: bounds
+      success: (data) ->
+        return if t.getPositionHash() isnt positionHash
+        t.removeStateMarkers(bounds)
+        t.removeGridMarkers(bounds)
+        t.removeNormalMarkers(bounds)
+
+        markers = _.map data.docs, (point) ->
+          icon = new L.DivIcon
+            className: 'dot'
+            iconSize: new L.Point 0, 0
+          marker = new L.Marker [point.lat, point.lng], icon: icon
+          marker.count = 1
+          marker.type = 'normal'
+          marker.data = point
+          marker.on 'click', (e) -> t.openPopup latlng: e.target.getLatLng(), points: [e.target.data]
+
+        t.markers.normal = t.markers.normal.concat(markers)
+        t.getMarkersLayer().addLayers(markers)
+
+  removeStateMarkers: (bounds) ->
+    if bounds
+      toDelete = _.filter this.markers.state, (marker) -> bounds.contains marker.getLatLng()
+      this.markers.state = _.difference(this.markers.state, toDelete)
+    else
+      toDelete = this.markers.state
+      this.markers.state = []
+    this.getMarkersLayer().removeLayers(toDelete)
+
+
+  removeGridMarkers: (bounds) ->
+    if bounds
+      toDelete = _.filter this.markers.grid, (marker) -> bounds.contains marker.getLatLng()
+      this.markers.grid = _.difference(this.markers.grid, toDelete)
+    else
+      toDelete = this.markers.grid
+      this.markers.grid = []
+    this.getMarkersLayer().removeLayers(toDelete)
+
+  removeNormalMarkers: (bounds) ->
+    if bounds
+      toDelete = _.filter this.markers.normal, (marker) -> bounds.contains marker.getLatLng()
+      this.markers.normal = _.difference(this.markers.normal, toDelete)
+    else
+      toDelete = this.markers.normal
+      this.markers.normal = []
+    this.getMarkersLayer().removeLayers(toDelete)
+
+  isStateLevel: -> _.indexOf(this.stateLevel, this.getPosition().zoom) isnt -1
+
+  isGridLevel: -> _.indexOf(this.gridLevel, this.getPosition().zoom) isnt -1
+
+  turnProgress: (state = true) ->
+    if state then this.loadingStack.push(true) else this.loadingStack.pop()
+    if _.isEmpty(this.loadingStack)
+      $('#loading').hide()
+    else
+      $('#loading').show()
+
+  getClusterLocation: (points) ->
+    locations = {}
+    $.each points, (i, point) ->
+      $.each point.location, (i,loc) ->
+        if locations[loc]
+          locations[loc]++
+        else
+          locations[loc] = 1
+    locationName = ''
+    locationScore = 0
+    $.each locations, (name, score) ->
+      if locationScore < score
+        locationName = name
+        locationScore = score
+    locationName
+
+  closeAllPopups: ->
+    _.each this.openPopups, (popup) -> popup._close()
+
+  doc2point: (doc)->
+    coordinates = []
+    if $.isArray(doc['sourceResource.spatial.coordinates'])
+      coordinates = try
+        doc['sourceResource.spatial.coordinates'][0].split ','
+      catch error
+        []
+    else if doc['sourceResource.spatial.coordinates']
+      coordinates = doc['sourceResource.spatial.coordinates'].split ','
+    location = doc['sourceResource.spatial.name']
+    location = [location] unless location instanceof Array
+    point =
+      id: doc.id
+      title: doc['sourceResource.title'] || doc['id']
+      thumbnail: doc['object']
+      type: doc['sourceResource.type'] || ''
+      creator: doc['sourceResource.creator'] || ''
+      location: location
+      url: doc['isShownAt']
+      lat: coordinates.shift()
+      lng: coordinates.shift()
 
 
 DPLAPopup = L.Popup.extend
