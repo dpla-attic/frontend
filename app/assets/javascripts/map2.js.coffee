@@ -14,12 +14,13 @@ window.int2human = (int) ->
 DPLAMap = L.Class.extend
   initialize: ->
     # configurable params
-    this.mapCenter  = lat: 38, lng: -93
-    this.zoom       = start: 4, min:  4, max: 18
-    this.gridSize   = rows: 3, cols: 3
-    this.page_size  = 500
-    this.stateLevel = [4..6]
-    this.gridLevel  = [7..12]
+    this.mapCenter  = lat: _.first(config.center), lng: _.last(config.center)
+    this.zoom       = config.zoom
+    this.gridSize   = config.grid_size
+    this.stateLevel = [_.first(config.state_level).._.last(config.state_level)]
+    this.gridLevel  = [_.first(config.grid_level).._.last(config.grid_level)]
+    this.page_size  = config.page_size
+    this.popup_page_size  = config.popup_page_size
 
     this.markers =
       state:  []
@@ -36,9 +37,12 @@ DPLAMap = L.Class.extend
 
     t = this
     this.map.on
+      dragstart: ->
+        t.closeAllPopups()
+      zoomstart: ->
+        t.closeAllPopups()
       dragend: ->
         t.updateMarkers()
-      zoomstart: ->
       zoomend: ->
         t.updateMarkers()
 
@@ -118,6 +122,12 @@ DPLAMap = L.Class.extend
     [this.map.getCenter().lat, this.map.getCenter().lng, this.map.getZoom()].join(':')
 
   getBackUri: ->
+    base_uri = window.location.href
+    if window.location.href.indexOf('#') > 0
+      base_uri = base_uri.substr(0, window.location.href.indexOf('#'))
+    pos = this.getPosition()
+    back_uri = "#{ base_uri }#/?lat=#{ pos.center.lat }&lng=#{ pos.center.lng }&zoom=#{ pos.zoom }"
+    encodeURIComponent(back_uri)
 
   # Get layer with points
   getMarkersLayer: ->
@@ -127,6 +137,7 @@ DPLAMap = L.Class.extend
       spiderfyOnMaxZoom: false
       showCoverageOnHover: false
       zoomToBoundsOnClick: false
+      maxClusterRadius: 45
       iconCreateFunction: (cluster) ->
         count = _.reduce cluster.getAllChildMarkers(), (total, point) ->
           total += point.count
@@ -185,22 +196,28 @@ DPLAMap = L.Class.extend
   # - points
   # - title
   openPopup: (options) ->
-    title = ''
+    if options.points.length > 1 and _.isEmpty(options.title)
+      location = this.getClusterLocation(options.points)
+      titleHref = "/search?#{ window.app_search_path }&place[]=#{ location }"
+      options.title = "<a href=\"#{ titleHref }\">#{ location }</a>"
 
     popup = new DPLAPopup offset: new L.Point(-10,-30)
-    popup.setContent this.renderPopup(title: title, points: options.points)
+    popup.setContent this.renderPopup(title: options.title, points: options.points)
     popup.setLatLng(options.latlng)
     this.openPopups.push popup.openOn(this.map, {x: 20, y: 10})
 
   # Open state popup
   # Options:
   # - latlng
-  # - name
+  # - state
   openStatePopup: (options) ->
     t = this
+    titleHref = "/search?#{ window.app_search_path }&state[]=#{ options.state }"
+    title = "<a href=\"#{ titleHref }\">#{ options.state }</a>"
     this.requestItems
+      page_size: t.popup_page_size
       state: options.state
-      success: (data) -> t.openPopup latlng: options.latlng, points: data.docs
+      success: (data) -> t.openPopup latlng: options.latlng, points: data.docs, title: title
 
   # Open grid popup
   # Options:
@@ -209,6 +226,7 @@ DPLAMap = L.Class.extend
   openGridPopup: (options) ->
     t = this
     this.requestItems
+      page_size: t.popup_page_size
       bounds: options.bounds
       success: (data) -> t.openPopup latlng: options.latlng, points: data.docs
 
@@ -330,6 +348,25 @@ DPLAMap = L.Class.extend
       $('#loading').hide()
     else
       $('#loading').show()
+
+  getClusterLocation: (points) ->
+    locations = {}
+    $.each points, (i, point) ->
+      $.each point.location, (i,loc) ->
+        if locations[loc]
+          locations[loc]++
+        else
+          locations[loc] = 1
+    locationName = ''
+    locationScore = 0
+    $.each locations, (name, score) ->
+      if locationScore < score
+        locationName = name
+        locationScore = score
+    locationName
+
+  closeAllPopups: ->
+    _.each this.openPopups, (popup) -> popup._close()
 
   doc2point: (doc)->
     coordinates = []
