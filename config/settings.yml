@@ -64,3 +64,16 @@ ui:
       sound:
         - sound
       video:
+  maps:
+    center: [38, -93]
+    zoom:
+      start: 4
+      min:  4
+      max: 18
+    grid_size:
+      cols: 3
+      rows: 3
+    state_level: [4, 6]
+    grid_level: [7, 12]
+    page_size: 500
+    popup_page_size: 50

@@ -1,4 +1,5 @@
 jQuery ->
+  return unless $('.timeline-controller').length
   window.timeline = timeline = new DPLA.Models.Timeline
   new DPLA.Routers.TimelineRouter timeline: timeline
   new DPLA.Views.Timeline.Scrubber timeline: timeline
