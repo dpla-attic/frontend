@@ -166,7 +166,7 @@ DPLAMap = L.Class.extend
       content =
         """
           <h6> #{ point.type }</h6>
-          <h4><a href="#{ item_href }">#{ item_title }</a></h4>
+          <h4><a href="#{ item_href }" target="_blank">#{ item_title }</a></h4>
           <p><span> #{ point.creator }</span></p>
           <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
         """
