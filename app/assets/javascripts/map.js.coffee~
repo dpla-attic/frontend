@@ -263,7 +263,7 @@ DPLAMap = L.Class.extend
     positionHash = t.getPositionHash()
     _.each _.flatten(t.getGrid()), (cellBounds) ->
       t.requestItems
-        page_size: t.page_size
+        page_size: 0
         bounds: cellBounds,
         success: (data) ->
           return if t.getPositionHash() isnt positionHash
