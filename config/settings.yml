@@ -71,7 +71,7 @@ ui:
       min:  4
       max: 18
     grid_size:
-      cols: 3
+      cols: 5
       rows: 3
     state_level: [4, 6]
     grid_level: [7, 12]
