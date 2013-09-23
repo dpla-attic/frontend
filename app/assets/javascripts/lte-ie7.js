@@ -9,6 +9,7 @@ window.onload = function() {
 			'icon-view-list' : '&#xe000;',
 			'icon-view-map' : '&#xe001;',
 			'icon-view-object' : '&#xe002;',
+			'icon-view-stack' : '&#xe00b;',
 			'icon-view-time' : '&#xe003;',
 			'icon-arrow-thin-down' : '&#xe004;',
 			'icon-arrow-right' : '&#xe005;',

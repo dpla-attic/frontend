@@ -15,9 +15,10 @@ DplaPortal::Application.routes.draw do
   resources :partners, only: :index
 
   scope only: :show do
-    resource :search,   controller: :search
-    resource :timeline, controller: :timeline
-    resource :map,      controller: :map
+    resource :search,    controller: :search
+    resource :timeline,  controller: :timeline
+    resource :map,       controller: :map
+    resource :bookshelf, controller: :bookshelf
   end
 
   scope '/saved' do
