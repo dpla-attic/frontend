@@ -94,7 +94,7 @@ class Search
 
   def conditions
     facets = %w(subject language type provider partner country state place)
-    { q: @term, facets: facets, facet_size: 100 }.merge(@filters).merge(@args)
+    { q: @term, facets: facets, facet_size: 150 }.merge(@filters).merge(@args)
   end
 
   private
