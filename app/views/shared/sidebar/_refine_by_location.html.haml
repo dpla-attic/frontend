@@ -28,7 +28,7 @@
                 %li
                   = link_to name, refine_path(:place, name)
                   %span= count
-    - if country_facets.present?
+    - if country_facets.present? or place_facets.present?
       .more= link_to 'More »', '#more_locations', class: 'inline cboxElement'
 
 // Popup

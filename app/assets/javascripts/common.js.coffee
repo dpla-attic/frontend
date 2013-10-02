@@ -19,14 +19,14 @@ jQuery ->
       page = $(this).data 'page'
       parent.find('.pop-columns[data-page='+current_page+']').fadeOut ->
         parent.find('.pop-columns[data-page='+page+']').fadeIn()
+        $.colorbox.resize()
 
       container = $(this).parents('.popBar').parent()
       container.find('.pagination span.current')
         .replaceWith "<a data-page="+current_page+" href=\"#\">"+current_page+"</a>"
       container.find(".pagination a[data-page=#{ page }]")
         .replaceWith "<span data-page="+page+" class=\"current\">"+page+"</span>"
-
-      false
+    false
 
   $('#more_locations .tabs a').click ->
     link = $(this)
@@ -39,6 +39,7 @@ jQuery ->
       $("##{ related_tab }").show()
       ul.find('li').removeClass('active')
       li.addClass('active')
+      $.colorbox.resize()
     false
 
   $('#countries .pop-open').click ->
@@ -71,7 +72,7 @@ jQuery ->
             </li>
             """
 
-  colorbox_options = 
+  colorbox_options =
     initialWidth: '558px'
     width:'100%'
     maxWidth: '600px'
