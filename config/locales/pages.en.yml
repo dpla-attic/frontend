@@ -6,6 +6,8 @@ en:
       title: Welcome
     error_404:
       title: Page Not Found
+    error_500:
+      title: Server Error
   users:
     welcome:
       title: Welcome
