@@ -39,6 +39,8 @@
       %li= link_to "Press", wordpress_path('/news/press/')
 
   %li= link_to 'Contact', wordpress_path('/contact/')
+  %li.hilight
+    = link_to 'Donate', wordpress_path('/donate/')
   - if user_signed_in?
     %li.welcome
       = link_to edit_user_registration_path do

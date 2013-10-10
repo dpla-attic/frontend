@@ -317,8 +317,7 @@ aside {
 
     .nav-signup {
       display: block;
-      margin-top: 5.28em;
-      
+      margin-top: 7.92em;
       .bg {
         margin: 0 0 1px;
         padding: 0.8em;
@@ -355,8 +354,10 @@ aside {
     position: relative;
     margin: 0 0 1.5em;
     padding: 1px 2.6455% 0 5%;
-    border-left: 1px solid #ccc;
-
+    border-left: 1px solid #ccc;                      
+    .hilight a {
+      background-color: white !important;
+    }
     .welcome,
     .login {
       display: none;
