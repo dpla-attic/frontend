@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   after_filter :set_cache_flag!
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from Exception, with: :render_500
 
   def authenticate_admin!
     if !user_signed_in?
@@ -22,5 +23,9 @@ class ApplicationController < ActionController::Base
 
   def render_404
     render 'pages/error_404', status: 404
+  end
+
+  def render_500
+    render 'pages/error_500', status: 500
   end
 end

@@ -297,6 +297,14 @@ aside {
     border: 0px none; width: 0px; height: 0px;
 }
 
+@media only screen and (min-width: 680px) and (max-width: 885px) {
+  .topNav .icon-arrow-thin-down { display: none; }
+  .topNav ul li a { padding: 5px 4px; }    
+}                                      
+@media only screen and (min-width: 750px) and (max-width: 885px) {
+  .topNav ul li a { padding: 5px 7px; }    
+}
+
 @media only screen and (min-width: 0px) and (max-width: 680px) {
   header {
     li {
@@ -317,8 +325,7 @@ aside {
 
     .nav-signup {
       display: block;
-      margin-top: 5.28em;
-      
+      margin-top: 7.92em;
       .bg {
         margin: 0 0 1px;
         padding: 0.8em;
@@ -355,8 +362,10 @@ aside {
     position: relative;
     margin: 0 0 1.5em;
     padding: 1px 2.6455% 0 5%;
-    border-left: 1px solid #ccc;
-
+    border-left: 1px solid #ccc;                      
+    .hilight a {
+      background-color: white !important;
+    }
     .welcome,
     .login {
       display: none;

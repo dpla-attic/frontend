@@ -7,6 +7,7 @@ notifications:
   from: welcome@portal.dp.la
 # DPLA API URL and credentials
 api:
+  # Without trailing slash, please
   url: http://api.dp.la/v2
   # Username and password for Basic HTTP Auth to API
   username:

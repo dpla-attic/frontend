@@ -543,6 +543,9 @@ header .active a { border-bottom: 3px solid #2795b6; }
 			.topNav .aboutMenu ul li {
 				display: block;
 				float: none;
+			}                            
+			.topNav .hilight a {
+			  background-color: #E6A425;
 			}
 
 .MainNav {
