@@ -30,6 +30,7 @@ module DPLA
           when 'subject'  then result['sourceResource.subject.name'] = value
           when 'language' then result['sourceResource.language.name'] = value
           when 'type'     then result['sourceResource.type'] = value
+          when 'spec_type' then result['sourceResource.specType'] = value
           when 'provider' then result['dataProvider'] = value
           when 'partner'  then result['provider.name'] = value
           when 'country'  then result['sourceResource.spatial.country'] = value
@@ -50,6 +51,7 @@ module DPLA
               when 'subject'  then result[key] << 'sourceResource.subject.name'
               when 'language' then result[key] << 'sourceResource.language.name'
               when 'type'     then result[key] << 'sourceResource.type'
+              when 'spec_type' then result[key] << 'sourceResource.specType'
               when 'provider' then result[key] << 'dataProvider'
               when 'partner'  then result[key] << 'provider.name'
               when 'date'     then result[key] << 'sourceResource.date.begin.year'
@@ -70,7 +72,7 @@ module DPLA
         conditions.each do |key, value|
           next unless value.present?
           comma_separated = [:facets, :fields].include?(key.to_sym)
-          wrap = /subject|language|type|dataProvider|provider\.name|country|state|spatial\.name/i.match key.to_s
+          wrap = /subject|language|type|spec_type|dataProvider|provider\.name|country|state|spatial\.name/i.match key.to_s
           value = Array(value).select { |v| v.present? }
           value.map! { |v| ['"', v, '"'].join } if !comma_separated and wrap
           value.map! { |v| encode_uri(v) }

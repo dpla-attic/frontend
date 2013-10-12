@@ -746,7 +746,7 @@ aside .module span { color: #000; }
 
 .searchRow form {
     margin: 14px 2.7% 0 0;
-    width: 67.9%;
+    width: 64.9%;
     float: right;
 	position: relative;
 }
@@ -781,7 +781,7 @@ aside .module span { color: #000; }
 .searchViews {
     float: left;
     margin: 23px 0 0;
-    width: 25%;
+    width: 28%;
 }
 .searchViews span {
     float: left;
@@ -823,6 +823,10 @@ aside .module span { color: #000; }
 .searchViews a.viewThree {
     height: 20px;
     margin-top: -1px;
+}
+.searchViews a.viewFour {
+    height: 20px;
+    margin-top: -3px;
 }
 
 .exibition-image {
@@ -3592,7 +3596,7 @@ div.timeline-year {
     .row img { width: 100%; }
     .box { width: 32.80%; }
     .right .social { top: 2%; }
-    .searchRow form { width: 57%; }
+    .searchRow form { width: 52%; }
     .searchViews { width: 40%; }
     .formRow select { float: none; display: block; clear: both; margin: 5px 0 5px; width: auto; }
     aside .module.line { background-position: center 43%; }

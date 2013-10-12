@@ -30,6 +30,7 @@ you can use the generic selector below, but it's slower:
 .icon-view-list:before,
 .icon-view-map:before,
 .icon-view-object:before,
+.icon-view-stack:before,
 .icon-view-time:before,
 .icon-arrow-thin-down:before,
 .icon-arrow-right:before,
@@ -66,6 +67,11 @@ you can use the generic selector below, but it's slower:
     font-size: 16px;
     margin: 0 0 0 4px;
     vertical-align: bottom;
+}
+.icon-view-stack:before {
+    content: "\e00b";
+    font-size: 26px;
+    margin: 0 0 0 5px;
 }
 .icon-view-time:before {
     content: "\e003";
