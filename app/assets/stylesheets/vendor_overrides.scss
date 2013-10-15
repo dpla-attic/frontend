@@ -282,6 +282,15 @@ aside {
 .aboutMenu {
   position: relative;
 }
+                         
+.topNav .hilight a {
+  background-color: #E6A425;  
+  border-radius: 14px;
+  margin-top: 2px;
+  padding: 3px 20px;
+  line-height: 14px;
+}
+
 
 .resultsBar .countList,
 .resultsBar .sortList {
@@ -298,10 +307,6 @@ aside {
 }
 
 @media only screen and (min-width: 680px) and (max-width: 885px) {
-  .topNav .icon-arrow-thin-down { display: none; }
-  .topNav ul li a { padding: 5px 4px; }    
-}                                      
-@media only screen and (min-width: 750px) and (max-width: 885px) {
   .topNav ul li a { padding: 5px 7px; }    
 }
 
@@ -325,7 +330,7 @@ aside {
 
     .nav-signup {
       display: block;
-      margin-top: 10.56em;
+      margin-top: 8.1em;
       .bg {
         margin: 0 0 1px;
         padding: 0.8em;
@@ -364,7 +369,8 @@ aside {
     padding: 1px 2.6455% 0 5%;
     border-left: 1px solid #ccc;                      
     .hilight a {
-      background-color: white !important;
+      background-color: white !important;    
+      padding: 0 !important;
     }
     .welcome,
     .login {
