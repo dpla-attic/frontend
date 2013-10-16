@@ -13,6 +13,8 @@
       %p.message Only results with location data are shown below.
     - elsif 'timeline' == params[:controller]
       %p.message Only results with time data are shown below.
+    - elsif 'bookshelf' == params[:controller]
+      %p.message Only book and periodical results are shown below.
     = render 'shared/results/refined_by', search: search
 - else
   .searchResults.no-results#content{role: "main"}

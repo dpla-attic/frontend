@@ -17,7 +17,7 @@ class PermittedParams < Struct.new(:params)
           date = date_from_params(value, end: key == 'before')
           [key, date] unless date.nil?
         end
-      when *(%w(type language subject country state place provider partner))
+      when *(%w(type spec_type language subject country state place provider partner))
         [key, value]
       end
     end
@@ -51,7 +51,7 @@ class PermittedParams < Struct.new(:params)
       unless (adate.day..adate.end_of_month.day).include? day
         day = options[:end] ? adate.end_of_month.day : adate.day
       end
-      
+
       Date.new(year, month, day) rescue nil
     end
   end
