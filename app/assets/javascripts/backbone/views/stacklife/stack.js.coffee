@@ -10,7 +10,8 @@ Backbone.on 'bookshelf:init', ->
       super options
       currentStack = @
       @$('.stackview').on 'stackview.pageload', _.bind(@highlightPivot, @)
-      jQuery(window).on 'resize', _.throttle(_.bind(@handleResize, @), 100)
+      $(window).on 'resize', _.throttle(_.bind(@handleResize, @), 100)
+      $(document).on 'accordion.toggled', _.bind(@handleResize, @)
       @handleResize()
 
     render: ->

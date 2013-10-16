@@ -11,12 +11,14 @@ Backbone.on 'bookshelf:init', ->
 
     undelegateEvents: ->
       $(window).off 'resize.relateds'
+      $(document).off 'accordion.toggled'
       super
 
     render: ->
       super
       @$('.dpla-relateds').imagesLoaded _.bind(@masonize, @)
       $(window).on 'resize.relateds', _.debounce(_.bind(@handleResize, @), 200)
+      $(document).on 'accordion.toggled', _.bind(@handleResize, @)
       @resizeToWindow()
 
     masonize: ->
