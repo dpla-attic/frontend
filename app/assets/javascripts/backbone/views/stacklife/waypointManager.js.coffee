@@ -17,3 +17,5 @@ Backbone.on 'bookshelf:init', ->
     offset: ->
       $.waypoints('viewportHeight') + 30
 
+$(document).on 'accordion.toggled', -> $.waypoints('refresh')
+
