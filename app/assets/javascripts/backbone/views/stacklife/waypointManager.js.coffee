@@ -13,7 +13,6 @@ Backbone.on 'bookshelf:init', ->
   $footer.waypoint
     handler: (direction) ->
       $stickyWrapper.toggleClass 'unstuck', direction is 'down'
-      $stickyWrapper.toggleClass 'stuck', direction is 'up'
     offset: ->
       $.waypoints('viewportHeight') + 30
 
