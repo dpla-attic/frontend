@@ -192,12 +192,16 @@ if ($('.shareSave').length) {
 
   $('.open').click(function() {
     if ($(this).next('.slidingDiv').is(':visible')) {
-      $(this).next('.slidingDiv').slideUp();
+      $(this).next('.slidingDiv').slideUp(function() {
+        $(document).trigger('accordion.toggled');
+      });
       $(this).children('span').addClass('icon-arrow-down');
       $(this).children('span').removeClass('icon-arrow-up');
     }
     else {
-      $(this).next('.slidingDiv').slideDown();
+      $(this).next('.slidingDiv').slideDown(function() {
+        $(document).trigger('accordion.toggled');
+      });
       $(this).children('span').addClass('icon-arrow-up');
       $(this).children('span').removeClass('icon-arrow-down');
     }

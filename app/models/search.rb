@@ -8,7 +8,7 @@ class Search
   #    {subject: 'Ships', type: ['image', 'text']}
   #
   def initialize(term, filters = {}, args = {})
-    @term, @filters, @args = term, filters, {}
+    @term, @filters, @args = term, filters, args
   end
 
   # Returns search results
