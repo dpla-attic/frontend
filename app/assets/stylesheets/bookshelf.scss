@@ -88,21 +88,20 @@ https://github.com/thoughtbot/bourbon/blob/master/app/assets/stylesheets/functio
       left:0;
       padding:0 2.6455026%;
     }
-  }
 
-  &.unstuck {
-    @media all and (min-width:680px) {
-      position:absolute;
-      bottom:0;
-      right:0;
-      left:0;
-      height:0;
-      overflow:visible;
-
-      .bookshelf-container {
+    &.unstuck {
+      @media all and (min-width:680px) {
         position:absolute;
-        right:0;
         bottom:0;
+        right:0;
+        left:0;
+        top:auto;
+
+        .bookshelf-container {
+          position:absolute;
+          right:0;
+          bottom:0;
+        }
       }
     }
   }
@@ -534,12 +533,11 @@ $baseborder: #4691b9;
   float:left;
   width:50%;
 
-  @media all and (max-width:640px) {
+  @media all and (max-width:680px) {
     position:relative;
     min-height:100%;
     padding-left:20px;
     padding-right:20px;
-    @include border-box();
     z-index:3;
     background:#fff;
     -webkit-transform:translate(0,0);

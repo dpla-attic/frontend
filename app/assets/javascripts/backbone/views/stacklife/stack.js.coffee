@@ -1,6 +1,7 @@
 Backbone.on 'bookshelf:init', ->
   pivotID = null
   currentStack = null
+  $window = $ window
 
   class DPLA.Views.Bookshelf.Stack extends DPLA.Views.Bookshelf.Base
     el: '.stack-wrapper'
@@ -10,7 +11,7 @@ Backbone.on 'bookshelf:init', ->
       super options
       currentStack = @
       @$('.stackview').on 'stackview.pageload', _.bind(@highlightPivot, @)
-      $(window).on 'resize', _.throttle(_.bind(@handleResize, @), 100)
+      $window.on 'resize', _.throttle(_.bind(@handleResize, @), 100)
       $(document).on 'accordion.toggled', _.bind(@handleResize, @)
       @handleResize()
 
@@ -36,9 +37,14 @@ Backbone.on 'bookshelf:init', ->
       @$('.stack-pivot').removeClass 'stack-pivot'
 
     handleResize: ->
-      windowHeight = $(window).height()
+      windowHeight = $window.height()
       resultBarHeight = $('#resultsBarTop').outerHeight()
-      @$('.stackview').height windowHeight - resultBarHeight
+      asideHeight = 9999
+      if $window.width() > 680
+        asideHeight = $('.bookshelf > aside').outerHeight()
+        asideHeight -= $('.bookshelf > aside h5').outerHeight(true)
+      stackHeight = Math.min(windowHeight, asideHeight) - resultBarHeight
+      @$('.stackview').height stackHeight
 
   Backbone.on 'bookshelf:previewload', (id) ->
     pivotID = id
