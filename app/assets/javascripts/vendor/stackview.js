@@ -1,4 +1,5 @@
 //= require ./stackview/jquery.easing.1.3.js
+//= require ./stackview/jquery.ba-deparam.js
 //= require ./stackview/microtemplating.js
 //= require ./stackview/jquery.stackview.base.js
 //= require ./stackview/jquery.stackview.templates.js

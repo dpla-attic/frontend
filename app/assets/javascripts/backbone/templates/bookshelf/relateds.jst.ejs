@@ -4,12 +4,14 @@
     <% if (collection.length) { %>
       <div class="dpla-relateds">
         <% collection.each(function(item) { %>
-          <div class="dpla-related-item">
-            <a href="http://dp.la/item/<%= item.get('id') %>" target="_blank" class="view-dpla-item">
-              <img src="<%= item.get('object') %>" alt="<%= item.get('sourceResource').title %>">
-              <span><%= item.get('sourceResource').title %></span>
-            </a>
-          </div>
+          <% if (item.get('object')) { %>
+            <div class="dpla-related-item">
+              <a href="http://dp.la/item/<%= item.get('id') %>" target="_blank" class="view-dpla-item">
+                <img src="<%= item.get('object') %>" alt="<%= item.get('sourceResource').title %>" onerror="image_loading_error(this)">
+                <span><%= item.get('sourceResource').title %></span>
+              </a>
+            </div>
+          <% } %>
         <% }); %>
       </div>
     <% } else { %>
