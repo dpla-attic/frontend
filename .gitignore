@@ -19,8 +19,9 @@
 /config/settings/*.local.yml
 /config/environments/*.local.yml
 
-# Ignore database config
+# Ignore database config & global settings with API key
 /config/database.yml
+/config/settings.yml
 
 # Ignore carrierwave uploads
 /public/uploads
