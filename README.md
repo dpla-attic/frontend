@@ -45,22 +45,15 @@ other operating systems.
     sudo apt-get install ruby ruby-dev build-essential
     sudo apt-get install imagemagick libmagickwand-dev 
 
-4. Edit Gemfile to comment out the following line at the bottom of the file:
+4. Install necessary Ruby Gems
 
-    #  gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'
-(This probably shouldn't be necessary, but so if someone knows how to get
-the next command to work without editing the file, please update these
-instructions)
+    bundle install --deployment --without dpla_branding
 
-5. Install necessary Ruby Gems
-
-    bundle install --without dpla_branding
-
-6. Install PostgreSQL
+5. Install PostgreSQL
 
     sudo apt-get postgresql-common, postgresql, pgadmin3
 
-7. Configure PostgreSQL & create development database
+6. Configure PostgreSQL & create development database
 
     sudo -u postgres psql postgres
     psql (9.1.10)
@@ -89,13 +82,13 @@ configuration:
       password: <postgres password>
 
 
-6. Edit `config/settings.yml` and provide your DPLA API key
+7. Edit `config/settings.yml` and provide your DPLA API key
 
-7. Build the front end assets
+8. Build the front end assets
 
     rake assets:precompile
 
-8. Start the local Rails server
+9. Start the local Rails server
 
     rails server
 
