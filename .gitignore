@@ -30,3 +30,6 @@
 
 # Ignore deployed bundler gems
 /vendor/bundle
+
+# Ignore generated docs
+/doc/app
