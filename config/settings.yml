@@ -28,7 +28,7 @@ apps:
   become_app_developer: http://dp.la/info/developers
 # Google Analytics account
 googleanalytics:
-  tracker: UA-28197764-1
+  tracker: 
 # Sessions settings
 session:
   # Name of cookie indicator is user signed in or not
