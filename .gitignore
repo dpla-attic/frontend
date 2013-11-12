@@ -17,7 +17,9 @@
 # Ignore local settings
 /config/settings.local.yml
 /config/settings/*.local.yml
-/config/environments/*.local.yml
+
+# Ignore environment-specific settings
+/config/environments/*.yml
 
 # Ignore database config & global settings with API key
 /config/database.yml
