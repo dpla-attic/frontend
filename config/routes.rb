@@ -9,7 +9,8 @@ DplaPortal::Application.routes.draw do
     :passwords     => "passwords"
   }
 
-  get '/item/:id', to: 'items#show', as: 'item'
+  get '/item/:id', to: 'items#show', as: 'item', format: 'html'
+  get '/item/:id.json', to: 'items#show', as: 'item', format: 'json'
 
   resources :subjects, only: :index
   resources :partners, only: :index
