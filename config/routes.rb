@@ -10,7 +10,7 @@ DplaPortal::Application.routes.draw do
   }
 
   get '/item/:id', to: 'items#show', as: 'item', format: 'html'
-  get '/item/:id.json', to: 'items#show', as: 'item', format: 'json'
+  get '/item/:id.json', to: 'items#show', as: 'item_json', format: 'json'
 
   resources :subjects, only: :index
   resources :partners, only: :index
