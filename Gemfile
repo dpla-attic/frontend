@@ -44,6 +44,10 @@ group :test, :development do
   gem 'shoulda'
   gem 'shoulda-matchers'
 end
+   
+group :production do
+  gem 'unicorn'
+end
 
 group :dpla_branding do
   gem 'dpla_frontend_assets', git: 'git@github.com:dpla/frontend-assets.git'

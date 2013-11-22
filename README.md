@@ -47,7 +47,7 @@ other operating systems.
 
 4. Install necessary Ruby Gems
 
-    bundle install --deployment --without dpla_branding
+    bundle install --deployment --without dpla_branding production
 
 5. Install PostgreSQL
 

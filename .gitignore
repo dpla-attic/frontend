@@ -36,3 +36,6 @@
 
 # Ignore generated docs
 /doc/app
+
+# Ignore unicorn configuration
+/config/unicorn.rb
