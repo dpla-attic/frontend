@@ -82,7 +82,8 @@ configuration:
       password: <postgres password>
 
 
-7. Edit `config/settings.yml` and provide your DPLA API key
+7. Copy `config/environments/development.yml.example` to 
+`config/environments/development.yml`, and edit it to provide your DPLA API key
 
 8. Build the front end assets
 

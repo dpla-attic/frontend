@@ -17,10 +17,13 @@
 # Ignore local settings
 /config/settings.local.yml
 /config/settings/*.local.yml
-/config/environments/*.local.yml
 
-# Ignore database config
+# Ignore environment-specific settings
+/config/environments/*.yml
+
+# Ignore database config & global settings with API key
 /config/database.yml
+/config/settings.yml
 
 # Ignore carrierwave uploads
 /public/uploads
@@ -30,3 +33,6 @@
 
 # Ignore deployed bundler gems
 /vendor/bundle
+
+# Ignore generated docs
+/doc/app
