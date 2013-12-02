@@ -3,7 +3,7 @@ class AppsController < ApplicationController
   before_filter :authenticate_admin!, except: [:index, :show]
 
   def index
-    @apps = App.page(params[:page]).per(6)
+    @apps = App.page(params[:page]).per(12)
 
     respond_to do |format|
       format.html # index.html.erb
