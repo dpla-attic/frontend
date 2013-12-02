@@ -1,7 +1,7 @@
 - if provider_refines.present? or provider_facets.present?
   .module.yellow
     %h6.open
-      Owning Institution
+      Contributing Institution
       %span.icon-arrow-up{"aria-hidden" => "true"}
     .slidingDiv
       - if provider_refines.present?
@@ -23,7 +23,7 @@
 // Popup
 - content_for :colorbox do
   #more_providers.inline_content
-    %h1 Owning Institution
+    %h1 Contributing Institution
     - if provider_facets.count > 30
       .popBar
         .pagination
