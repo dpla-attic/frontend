@@ -33,33 +33,33 @@ other operating systems.
 
 1. Install Git
 
-    sudo apt-get install git
+`sudo apt-get install git`
 
 2. Download sources
 
-    git clone https://github.com/dpla/frontend.git dpla-frontend
-    cd dpla-frontend
+```git clone https://github.com/dpla/frontend.git dpla-frontend
+cd dpla-frontend```
 
 3. Install Ruby & related dependencies
 
-    sudo apt-get install ruby ruby-dev build-essential
-    sudo apt-get install imagemagick libmagickwand-dev 
+```sudo apt-get install ruby ruby-dev build-essential
+sudo apt-get install imagemagick libmagickwand-dev```
 
 4. Install necessary Ruby Gems
 
-    bundle install --deployment --without dpla_branding production
+`bundle install --deployment --without dpla_branding production`
 
 5. Install PostgreSQL
 
-    sudo apt-get postgresql-common, postgresql, pgadmin3
+`sudo apt-get postgresql-common, postgresql, pgadmin3`
 
 6. Configure PostgreSQL & create development database
 
-    sudo -u postgres psql postgres
-    psql (9.1.10)
-    Type "help" for help.
-    postgres=# pwd
-    postgres-# \password postgres
+```sudo -u postgres psql postgres
+psql (9.1.10)
+Type "help" for help.
+postgres=# pwd
+postgres-# \password postgres```
 
 ie enter the command `\password postgres` at the `postgres-#` prompt
 
@@ -81,17 +81,20 @@ configuration:
       username: postgres
       password: <postgres password>
 
-
 7. Copy `config/environments/development.yml.example` to 
 `config/environments/development.yml`, and edit it to provide your DPLA API key
 
 8. Build the front end assets
 
-    rake assets:precompile
+`rake assets:precompile`
 
-9. Start the local Rails server
+9. Run the database migrations
 
-    rails server
+`rake db:migrate`
+
+10. Start the local Rails server
+
+`rails server`
 
 You should now be able to point your browser at `http://localhost:3000/` and
 see your local copy of the DPLA front end.
