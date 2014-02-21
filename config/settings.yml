@@ -49,7 +49,7 @@ widgets:
   wordpress_view_all_link: http://dp.la/info/news/
   # Urls for social icons
   social_icons:
-    facebook: https://www.facebook.com/theDPLA
+    facebook: https://www.facebook.com/digitalpubliclibraryofamerica
     twitter: https://twitter.com/dpla
     rss: http://dp.la/info/feed
 # User interface tweaks
