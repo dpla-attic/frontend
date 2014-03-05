@@ -5,5 +5,5 @@ class App < ActiveRecord::Base
   mount_uploader :icon, AppIconUploader
   mount_uploader :screenshot, AppScreenshotUploader
 
-  default_scope order('created_at ASC')
+  default_scope order('created_at DESC')
 end
