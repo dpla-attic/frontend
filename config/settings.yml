@@ -51,6 +51,7 @@ widgets:
   social_icons:
     facebook: https://www.facebook.com/digitalpubliclibraryofamerica
     twitter: https://twitter.com/dpla
+    tumblr: http://digitalpubliclibraryofamerica.tumblr.com/
     rss: http://dp.la/info/feed
 # User interface tweaks
 ui:
