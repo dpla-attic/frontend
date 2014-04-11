@@ -24,7 +24,8 @@ window.onload = function() {
 			'icon-arrow-up' : '&#xe00d;',
 			'icon-arrow-thin-up' : '&#xe00e;',
 			'icon-arrow-thin-right' : '&#xe00f;',
-			'icon-arrow-thin-left' : '&#xe010;'
+			'icon-arrow-thin-left' : '&#xe010;',
+			'icon-tumblr': '&#xe600;'
 		},
 		els = document.getElementsByTagName('*'),
 		i, attr, html, c, el;
