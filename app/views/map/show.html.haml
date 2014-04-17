@@ -1,4 +1,5 @@
 - page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+- set_meta_tags :og => {:description => "Curious to see what resources the DPLA has from your home state? Hundreds of thousands of the objects in our database can be viewed on our Map."}
 
 .layoutTwo.map
   = render 'shared/search_panel'

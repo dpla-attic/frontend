@@ -1,4 +1,5 @@
 - page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+- set_meta_tags :og => {:description => "DPLA Bookshelf lets the user scroll a visual representation of a bookshelf that provides all the instantaneous power the digital world provides."}
 
 .layoutTwo.bookshelf.search-page
   = render 'shared/search_panel'
