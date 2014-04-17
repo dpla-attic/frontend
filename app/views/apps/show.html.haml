@@ -1,4 +1,5 @@
 - page_title! t('.title', name: @app.title )
+- set_meta_tags :og => {:description => @app.teaser_description, :image => @app.icon}
 
 .layout.fullWidth.app
   = render 'shared/search_panel'

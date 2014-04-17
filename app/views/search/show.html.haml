@@ -1,3 +1,4 @@
+- set_meta_tags :twitter => {:description => "This search returned #{@search.count} results."}
 - page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
 
 .layoutTwo.search-page

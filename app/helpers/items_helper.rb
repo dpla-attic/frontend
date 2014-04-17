@@ -20,7 +20,7 @@ module ItemsHelper
     end
   end
 
-  def item_thumbnail(item)
+  def item_type_image(item)
     default = Settings.ui.items.default_thumbnails
     case
     when Array(default.image).include?(item.type) then image_type = 'icon-image.gif'
@@ -28,11 +28,37 @@ module ItemsHelper
     when Array(default.video).include?(item.type) then image_type = 'icon-video.gif'
     else image_type = 'icon-text.gif'
     end
+    image_type
+  end
 
+  def item_thumbnail(item)
+    image_type = item_type_image(item)
     if item.preview_image.present?
       image_tag item.preview_image, onerror: 'this.src=this.getAttribute("data-default-src");', data: { 'default-src' => asset_path(image_type) }
     else
       image_tag image_type
     end
+  end
+
+  def item_thumbnail_url(item)
+    if item.preview_image.present?
+      item.preview_image
+    else
+      asset_path(item_type_image(item))
+    end
+  end
+
+  def item_ogp_meta(item)
+    ogp = {}
+    ogp[:image] = item_thumbnail_url(@item)
+    partner = item.data_provider.present? ? item.data_provider : item.provider
+    ogp[:description] = "Source: #{partner}."
+    if item.creator.present?
+      ogp[:description] += " Creator: #{item.creator}."
+    end
+    if item.description.present?
+      ogp[:description] += " #{item.description}"
+    end
+    ogp
   end
 end

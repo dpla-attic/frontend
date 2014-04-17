@@ -39,3 +39,4 @@
 
 # Ignore unicorn configuration
 /config/unicorn.rb
+.DS_Store
