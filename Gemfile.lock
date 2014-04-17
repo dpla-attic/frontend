@@ -113,6 +113,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    meta-tags (2.0.0)
+      actionpack (>= 3.0.0)
     mime-types (1.23)
     multi_json (1.7.3)
     multi_xml (0.5.3)
@@ -242,6 +244,7 @@ DEPENDENCIES
   kaminari
   leaflet-markercluster-rails (~> 0.2.1)
   leaflet-rails (~> 0.5.0)
+  meta-tags
   navigasmic
   page_title_helper
   pg
