@@ -1,4 +1,5 @@
 - page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+- set_meta_tags :og => {:description => "The objects in the DPLA cover hundreds of years of our cultural heritage. You can browse by century, decade, and year using our Timeline."}
 
 .layoutTwo.timeline
   = render 'shared/search_panel'
