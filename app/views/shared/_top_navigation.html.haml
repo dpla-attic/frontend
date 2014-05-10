@@ -4,26 +4,20 @@
       About
       %span.icon-arrow-thin-down{"aria-hidden" => "true"}
     %ul
+      %li= link_to "Staff", wordpress_path('/about/staff/')
+      %li= link_to "Board & Committees", wordpress_path('/about/board-committees/')
+      %li= link_to "Funding", wordpress_path('/about/funding/')
       %li= link_to "History", wordpress_path('/about/history/')
-      %li= link_to "Who we are", wordpress_path('/about/who/')
       %li= link_to "Policies", wordpress_path('/about/policies/')
       %li= link_to "Projects", wordpress_path('/about/projects/')
-      %li= link_to "Funding", wordpress_path('/about/funding/')
-      %li= link_to "Awards", wordpress_path('/about/accolades-and-awards/')                          
-      %li= link_to "FAQ", wordpress_path('/about/faq/')
-      %li= link_to "Jobs", wordpress_path('/about/jobs/')
+      %li= link_to "Awards", wordpress_path('/about/awards/')
 
   %li.aboutMenu
-    = link_to wordpress_path '/get-involved/' do
-      Get Involved
+    = link_to wordpress_path '/hubs/' do
+      Hubs
       %span.icon-arrow-thin-down{"aria-hidden" => "true"}
     %ul
-      %li= link_to "Become a Partner", wordpress_path('/get-involved/partnerships/')
-      %li= link_to "Community Reps", wordpress_path('/get-involved/reps/')                 
-      %li= link_to "Open Committee Calls", wordpress_path('/get-involved/open-committee-calls/')
-      %li= link_to "Events", wordpress_path('/get-involved/events/')
-      %li= link_to "Forums", wordpress_path('/forums/')
-      %li= link_to "DPLAfest 2013", wordpress_path('/get-involved/events/dplafest2013')
+      %li= link_to "Become a Hub", wordpress_path('/hubs/become-a-hub/')
 
   %li.aboutMenu
     = link_to wordpress_path '/developers/' do
@@ -31,24 +25,47 @@
       %span.icon-arrow-thin-down{"aria-hidden" => "true"}
     %ul
       %li= link_to "API Codex", wordpress_path('/developers/codex/')
-      %li= link_to "Hacking Projects", wordpress_path('/developers/hacking-projects/')
+      %li= link_to "Ideas & Projects", wordpress_path('/developers/ideas-and-projects/')
+      %li= link_to "Bulk Download", wordpress_path('/developers/download/')
+      %li= link_to "Sample Code & Libraries", wordpress_path('/developers/sample-code-and-libraries')
+      %li= link_to "Metadata Application Profile", wordpress_path('/developers/map')
+
+  %li.aboutMenu
+    = link_to wordpress_path '/get-involved/' do
+      Get Involved
+      %span.icon-arrow-thin-down{"aria-hidden" => "true"}
+    %ul
+      %li= link_to "Community Reps", wordpress_path('/get-involved/reps/')             
+      %li= link_to "Open Calls", wordpress_path('/get-involved/open-calls/')
+      %li= link_to "Events", wordpress_path('/get-involved/events/')
+      %li= link_to "DPLAfest", wordpress_path('/get-involved/dplafest')
+      %li= link_to "Follow Us", wordpress_path('/get-involved/follow/')
+      %li= link_to "Forums", wordpress_path('/forums/')
+      %li= link_to "Shop", wordpress_path('/get-involved/shop/')
 
   %li.aboutMenu
     = link_to wordpress_path '/help/' do
       Help
       %span.icon-arrow-thin-down{"aria-hidden" => "true"}
     %ul
-      %li= link_to 'Tutorials', wordpress_path('/teaching-tools/')
+      %li= link_to "Intro Videos", wordpress_path('/help/intro-videos/')
+      %li= link_to "FAQ", wordpress_path('/help/faq/')
+      %li= link_to "DPLA Accounts", wordpress_path('/help/accounts/')
 
   %li.aboutMenu
     = link_to wordpress_path '/news/' do
-      Follow
+      News
       %span.icon-arrow-thin-down{"aria-hidden" => "true"}
     %ul
-      %li= link_to "Blog", wordpress_path('/news/blog/')
       %li= link_to "Press", wordpress_path('/news/press/')
 
-  %li= link_to 'Contact', wordpress_path('/contact/')
+  %li.aboutMenu
+    = link_to wordpress_path '/contact/' do
+      Contact
+      %span.icon-arrow-thin-down{"aria-hidden" => "true"}
+    %ul
+      %li= link_to "Jobs", wordpress_path('/contact/jobs/')
+
   %li.hilight
     = link_to 'Donate', wordpress_path('/donate/')
   - if user_signed_in?
