@@ -23,7 +23,6 @@
 
 # Ignore database config & global settings with API key
 /config/database.yml
-/config/settings.yml
 
 # Ignore carrierwave uploads
 /public/uploads

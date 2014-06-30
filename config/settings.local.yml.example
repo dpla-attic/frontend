@@ -1,0 +1,53 @@
+#Use this file to define settings related to application configuration
+#Use this file to define settings that are ENVIRONMENT SPECIFIC and/or PRIVATE
+#This file will be ignored by git
+#Declarations in this file override declarations in config/settings.yml
+
+# Used for generating links in emails
+url:
+  host: dev.example.org
+  port: 80
+# Email notifications to users sent from
+notifications:
+  from: info@example.org
+# DPLA API URL and credentials
+api:
+  # Without trailing slash, please
+  url: http://api.example.org/v2
+  # API key, will be added to all API requests as &api_key=
+  key: changeme1cf00d59cb516af7d712179f
+exhibitions:
+  # Omeka exhibition site address. Used for generating link
+  site: http://dev.example.org/exhibitions
+  # Elasticsearch instance for searching exhibitions
+  elasticsearch:
+    host: 
+    default_index: 
+wordpress:
+  # Wordpress site for building links to pages served by WP
+   # NOTE: JSON API plugin is required to able read Wordpress feed as JSONP requests
+  site: http://dev.example.org/info
+# Google Analytics account
+googleanalytics:
+  tracker: 
+# Session settings
+session:
+  # Name of cookie indicator is user signed in or not
+  # Useful for serving cached pages for guest users
+  logged_in_flag: _no_cache
+  # Store settings. cookie_store and dalli_store are available
+  store: dalli_store
+  key: _changeme
+  # Settings for memcache sessions
+  dalli_store:
+    memcache_server:
+widgets:
+  twitter_username: changeme
+  twitter_widget_id: 1234323132314
+  # Urls for social icons
+  social_icons:
+    facebook: https://www.facebook.com/exampleorg
+    twitter: https://twitter.com/exampleorg
+    tumblr: http://exampleorg.tumblr.com/
+    rss: http://dev.example.org/info/feed
+
