@@ -25,7 +25,12 @@ class Item
   end
 
   def description
-    Array(@sourceResource['description']).join('. ')
+    description = Array(@sourceResource['description']).each do |x|
+      if x !~ /[.,?!;:]$/
+        x << "."
+      end
+    end
+    description.join(" ")
   end
 
   def title

@@ -9,7 +9,7 @@
 
     - if is_admin?
       = link_to 'Add New App', new_app_path, class: :btn
-    = link_to 'Become an App Developer', Settings.apps.become_app_developer, class: :btn
+    = link_to 'Become an App Developer', wordpress_path('/developers/'), class: :btn
     .pagination= paginate @apps
 
     = render partial: 'shared/apps/apps_view'

@@ -30,9 +30,6 @@ class SavedSearch < ActiveRecord::Base
 
   def api_base_path
     api_path = Settings.api.url
-    if Settings.api.username && Settings.api.password
-      api_path = api_path.gsub '://', "://#{Settings.api.username}:#{Settings.api.password }@"
-    end
     api_path
   end
 
