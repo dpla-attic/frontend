@@ -3,14 +3,17 @@ class Item
 
   def initialize(doc)
     doc = transform_dotted_keys doc
-    @id             = doc['id']
-    @sourceResource = doc['sourceResource'] || {}
-    @originalRecord = doc['originalRecord'] || {}
-    @object         = doc['object']
-    @isShownAt      = doc['isShownAt']
-    @dataProvider   = doc['dataProvider']
-    @provider       = doc['provider']['name'] if doc['provider']
-    @score          = doc['score']
+    @id                     = doc['id']
+    @sourceResource         = doc['sourceResource'] || {}
+    @originalRecord         = doc['originalRecord'] || {}
+    @object                 = doc['object']
+    @isShownAt              = doc['isShownAt']
+    @dataProvider           = doc['dataProvider']
+    @intermediateProvider   = doc['intermediateProvider']
+    @edmRights              = doc['rights']
+    @hasViewEdmRights       = doc['hasView']['edmRights'] if doc['hasView'] 
+    @provider               = doc['provider']['name'] if doc['provider']
+    @score                  = doc['score']
     if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
       @sourceResource['spatial'] = [ @sourceResource['spatial'] ]
     end
@@ -47,6 +50,10 @@ class Item
 
   def rights
     @sourceResource['rights']
+  end
+
+  def standardized_rights_statement
+    [@edmRights, @hasViewEdmRights].compact
   end
 
   def created_date
@@ -97,6 +104,10 @@ class Item
 
   def data_provider
     @dataProvider
+  end
+
+  def contributing_institution 
+    [@dataProvider, @intermediateProvider].compact
   end
 
   def provider
