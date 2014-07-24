@@ -19,8 +19,8 @@ ui:
   maps:
     center: [38, -93]
     zoom:
-      start: 3
-      min:  2
+      start: 4
+      min:  4
       max: 18
     grid_size:
       cols: 5
