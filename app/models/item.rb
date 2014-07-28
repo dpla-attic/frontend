@@ -11,7 +11,7 @@ class Item
     @dataProvider           = doc['dataProvider']
     @intermediateProvider   = doc['intermediateProvider']
     @edmRights              = doc['rights']
-    @hasViewEdmRights       = doc['hasView']['edmRights'] if doc['hasView'] 
+    @hasView                = doc['hasView'] || {}
     @provider               = doc['provider']['name'] if doc['provider']
     @score                  = doc['score']
     if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
@@ -52,8 +52,15 @@ class Item
     @sourceResource['rights']
   end
 
+  #returns and array of statements
   def standardized_rights_statement
-    [@edmRights, @hasViewEdmRights].compact
+    statement = [@edmRights]
+    if @hasView.is_a? Array
+      @hasView.each { |view| statement.push( view['edmRights'] ) }
+    else
+      statement.push @hasView['edmRights']
+    end
+    statement.compact
   end
 
   def created_date
