@@ -98,6 +98,9 @@ class Item
   end
 
   def url
+    if @isShownAt.is_a? Array
+      return @isShownAt[0]
+    end
     @isShownAt
   end
 
