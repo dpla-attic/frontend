@@ -21,7 +21,7 @@ gem 'navigasmic'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'page_title_helper'
-
+gem 'awesome_print'
 gem 'dalli'
 gem 'httparty'
 gem 'elastictastic'
