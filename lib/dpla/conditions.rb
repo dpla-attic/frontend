@@ -31,7 +31,7 @@ module DPLA
           when 'language' then result['sourceResource.language.name'] = value
           when 'type'     then result['sourceResource.type'] = value
           when 'spec_type' then result['sourceResource.specType'] = value
-          when 'provider' then result['dataProvider'] = value
+          when 'provider' then result['admin.contributingInstitution'] = value
           when 'partner'  then result['provider.name'] = value
           when 'country'  then result['sourceResource.spatial.country'] = value
           when 'state'    then result['sourceResource.spatial.state'] = value
@@ -52,7 +52,7 @@ module DPLA
               when 'language' then result[key] << 'sourceResource.language.name'
               when 'type'     then result[key] << 'sourceResource.type'
               when 'spec_type' then result[key] << 'sourceResource.specType'
-              when 'provider' then result[key] << 'dataProvider'
+              when 'provider' then result[key] << 'admin.contributingInstitution'
               when 'partner'  then result[key] << 'provider.name'
               when 'date'     then result[key] << 'sourceResource.date.begin.year'
               when 'country'  then result[key] << 'sourceResource.spatial.country'
