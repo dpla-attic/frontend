@@ -21,7 +21,6 @@ gem 'navigasmic'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'page_title_helper'
-
 gem 'dalli'
 gem 'httparty'
 gem 'elastictastic'
@@ -44,6 +43,7 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem 'shoulda'
   gem 'shoulda-matchers'
+  gem 'awesome_print'
 end
    
 group :production do
