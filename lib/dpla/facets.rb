@@ -17,7 +17,7 @@ module DPLA
           @type = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
-        when 'dataProvider'
+        when 'admin.contributingInstitution'
           @provider = {}.tap do |subject|
             value['terms'].each { |term| subject[term['term']] = term['count'] }
           end if value['terms'].is_a? Array
