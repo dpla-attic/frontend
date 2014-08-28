@@ -105,7 +105,7 @@ class Item
   end
 
   def format
-    @originalRecord['format']
+    @sourceResource['format']
   end
 
   def preview_image
