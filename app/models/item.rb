@@ -5,7 +5,6 @@ class Item
     doc = transform_dotted_keys doc
     @id                     = doc['id']
     @sourceResource         = doc['sourceResource'] || {}
-    @originalRecord         = doc['originalRecord'] || {}
     @object                 = doc['object']
     @isShownAt              = doc['isShownAt']
     @dataProvider           = doc['dataProvider']
