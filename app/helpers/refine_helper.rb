@@ -84,4 +84,20 @@ module RefineHelper
   def place_refines
     Array @search.filters :place
   end
+
+  def all_refine_terms
+    terms = [].concat(subject_refines)
+      
+    terms.push("After " + after_refine.strftime('%b %-d, %Y')) if after_refine.present?
+    terms.push("Before " + before_refine.strftime('%b %-d, %Y')) if before_refine.present?
+
+    terms.concat(type_refines)
+      .concat(provider_refines)
+      .concat(partner_refines)
+      .concat(language_refines)
+      .concat(country_refines)
+      .concat(state_refines)
+      .concat(place_refines)
+  end
+
 end

@@ -27,4 +27,11 @@ module SearchHelper
   def link_to_subject(subject)
     link_to subject, search_path(subject: subject)
   end
+
+  def query_and_filter_terms
+    terms = []
+    terms.push(params[:q]) if params[:q]
+    terms.concat(all_refine_terms)
+    terms.count > 0 ? terms : ["All Items"]
+  end
 end
