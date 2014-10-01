@@ -2,13 +2,12 @@
 - if @search.count > 0
   .searchResults
     %h4
-      Your search
-      - if query.present?
-        for
-        %span= query
-      returned
+      Your search returned
       = number_with_delimiter search.count, delimiter: ','
-      results.
+      - if search.count == 1
+        result.
+      - else
+        results.
     - if 'map' == params[:controller]
       %p.message Only results with location data are shown below.
     - elsif 'timeline' == params[:controller]

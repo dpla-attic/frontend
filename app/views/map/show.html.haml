@@ -1,10 +1,11 @@
-- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+- page_title! t('.title_with_query', title: t('.title'), query: query_and_filter_terms.join(" - "))
 - set_meta_tags :og => {:description => "Curious to see what resources the DPLA has from your home state? Hundreds of thousands of the objects in our database can be viewed on our Map."}
 
 .layoutTwo.map
   = render 'shared/search_panel'
 
-  %h1 Map
+  %h1 
+    = query_and_filter_terms.join(" - ")
   = render 'shared/results/search_results', query: params[:q], search: @search
   - if @search.count > 0
     = render 'shared/refine_control'

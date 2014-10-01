@@ -1,11 +1,12 @@
 - set_meta_tags :og => {:description => "This search returned #{@search.count} results."}
-- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
+- page_title! t('.title_with_query', title: t('.title'), query: query_and_filter_terms.join(" - ")) 
 
 .layoutTwo.search-page
   = render 'shared/search_panel'
   = render 'shared/share_save'
   = render 'shared/aside_toggle'
-  %h1 Search Results
+  %h1 
+    = query_and_filter_terms.join(" - ")
   = render 'shared/results/search_results', query: params[:q], search: @search
   - if @search.count > 0
     .slidePopOut#content{role: "main"}

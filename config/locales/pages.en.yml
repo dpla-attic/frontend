@@ -29,20 +29,20 @@ en:
   search:
     show:
       title: Search
-      title_with_query: '“%{query}” - %{title}'
+      title_with_query: '“%{query}” · %{title}'
   timeline:
     show:
       title: Timeline
-      title_with_query: '“%{query}” - %{title}'
+      title_with_query: '“%{query}” · %{title}'
   map:
     show:
       title: Map
-      title_with_query: '“%{query}” - %{title}'
+      title_with_query: '“%{query}” · %{title}'
       map:
   bookshelf:
     show:
       title: Bookshelf
-      title_with_query: '“%{query}” - %{title}'
+      title_with_query: '“%{query}” · %{title}'
   saved_searches:
     index:
       title: Saved Searches
