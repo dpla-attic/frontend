@@ -19,7 +19,7 @@
               .searchRight
                 = item_thumbnail(item)
               .searchLeft
-                %h6= item.type
+                %h6= item.type.join(", ")
                 - if item.id.present?
                   %h4= link_to item.title || item.id, item_path(item.id, back_uri: request.url)
                 - else

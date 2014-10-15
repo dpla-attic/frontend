@@ -10,119 +10,189 @@ class Item
     @dataProvider           = doc['dataProvider']
     @intermediateProvider   = doc['intermediateProvider']
     @edmRights              = doc['rights']
-    @hasView                = doc['hasView'] || {}
+    @hasView                = doc['hasView'] || [{}]
     @provider               = doc['provider']['name'] if doc['provider']
     @score                  = doc['score']
     if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
       @sourceResource['spatial'] = [ @sourceResource['spatial'] ]
     end
+    if @sourceResource['date'].present? and not @sourceResource['date'].is_a? Array
+      @sourceResource['date'] = [ @sourceResource['date'] ]
+    end
+    if @sourceResource['subject'].present? and not @sourceResource['subject'].is_a? Array
+      @sourceResource['subject'] = [ @sourceResource['subject'] ]
+    end
+    if @hasView.present? and not @hasView.is_a? Array
+      @hasView = [@hasView]
+    end
   end
 
-  def id
+  def id 
     @id
   end
 
-  def publisher
-    Array @sourceResource['publisher']
+  # Expected data type from API: String or Array of Strings
+  # Returns: Array of Strings
+  def publisher 
+    publisher = Array(@sourceResource['publisher'])
+    is_array_of_strings?(publisher, "sourceResource.publisher") ? publisher : nil
   end
 
-  def description
-    description = Array(@sourceResource['description']).each do |x|
+  # Expected data type from API: String or Array of Strings
+  # Returns: String
+  def description 
+    description = Array(@sourceResource['description'])
+    return nil if !is_array_of_strings?(description, "sourceResource.description")
+
+    description = description.each do |x|
       if x !~ /[.,?!;:]$/
         x << "."
       end
     end
+
     description.join(" ")
   end
 
-  def title
-    Array(@sourceResource['title']).first
+  # Expected data type from API: String or Array of Strings
+  # Returns: String
+  def title 
+    title = Array(@sourceResource['title']).first
+    is_valid_string?(title, "first value of sourceResource.title") ? title : nil
   end
 
-  def titles(options = {})
-    if options[:with_first]
-      Array(@sourceResource['title'])
+  # Expected data type from API: String or Array of Strings
+  # Returns: Array of Strings
+  def titles(options = {}) 
+    titles = []
+    if options[:with_first] 
+      titles = Array(@sourceResource['title'])
     else
-      Array(@sourceResource['title'])[1..-1]
+      titles = Array(@sourceResource['title'])[1..-1]
     end
+    is_array_of_strings?(titles, "sourceResource.title") ? titles : nil
   end
 
+  # Expected data type from API: String or Array of Strings
+  # Returns: Array of Strings
   def rights
-    @sourceResource['rights']
+    rights = Array(@sourceResource['rights'])
+    is_array_of_strings?(rights, "sourceResource.rights") ? rights : nil
   end
 
-  #returns and array of statements
+  # Expected data type from API: String or Array of Strings
+  # Returns: Array of Strings
   def standardized_rights_statement
-    statement = [@edmRights]
-    if @hasView.is_a? Array
-      @hasView.each { |view| statement.push( view['edmRights'] ) }
-    else
-      statement.push @hasView['edmRights']
+    statement = Array(@edmRights)
+    @hasView.each { |view| statement.push( view['edmRights'] ) }
+    is_array_of_strings?(statement.compact, 'edmRights and hasView.edmRights') ? statement.compact : nil
+  end
+
+  # Expected data type from API: Strings
+  # Returns: String
+  def created_date 
+    created_date = []
+
+    @sourceResource['date'].each do |date|
+      if is_valid_string?(date['displayDate'], 'sourceResource.date.displayDate')
+        created_date << date['displayDate']
+      end
     end
-    statement.compact
+
+    created_date.join("; ")
   end
 
-  def created_date
-    @sourceResource['date']['displayDate'] rescue nil
+  # Expected data type from API: Strings
+  # Returns: String representing the year from the first date value
+  def year 
+    year = @sourceResource['date'][0]['begin'].split('-').first rescue nil
+    year && is_valid_string?(year, "year value for sourceResource.date.begin") ? year : nil
   end
 
-  def year
-    @sourceResource['date']['begin'].split('-').first rescue nil
-  end
-
-  # returns array with names
-  def location
+  # Expected data type from API: Strings 
+  # Returns: Array of Strings
+  def location 
     location = @sourceResource['spatial'].map do |loc|
-      l = loc['name']
+      l = loc['name'] rescue nil
     end if @sourceResource['spatial'].present?
-    Array location
+    is_array_of_strings?(Array(location), 'sourceResource.spatial.name') ? Array(location) : nil
   end
 
-  def coordinates
+  # Expected data type from API: Strings 
+  # Returns: Array of Arrays of Strings ( ie. [['80', '81']] )
+  def coordinates 
+    coordinates = nil
     if @sourceResource['spatial'].present?
-      @sourceResource['spatial'].map{ |l| l['coordinates'].split ',' rescue nil}.compact
+      coordinates = @sourceResource['spatial'].map{ |l| l['coordinates'].split ',' rescue nil }.compact
     end
+    coordinates && is_array_of_strings?(coordinates.flatten, 'sourceResource.spatial.coordinates') ? coordinates : nil
   end
 
-  def creator
-    Array(@sourceResource['creator']).join '; '
+  # Expected data type from API: String or Array of Strings
+  # Returns: String 
+  def creator 
+    is_array_of_strings?(Array(@sourceResource['creator']), 'sourceResource.creator') ? 
+      Array(@sourceResource['creator']).join('; ') : nil
   end
 
-  def subject
-    @sourceResource['subject'].map{|l| l['name']} if @sourceResource['subject']
+  # Expected data type from API: Strings
+  # Returns: Array of Strings
+  def subject 
+    subject = @sourceResource['subject'].map{|l| l['name'] rescue nil}
+    is_array_of_strings?(subject, 'sourceResource.subject.name') ? subject : nil
   end
 
+  # Expected data type from API: String or Array of Strings
+  # Returns: Array of Strings
   def type
-    @sourceResource['type']
+    type = Array(@sourceResource['type'])
+    is_array_of_strings?(type, 'sourceResource.type') ? type : nil
   end
 
-  def url
-    if @isShownAt.is_a? Array
-      return @isShownAt[0]
-    end
-    @isShownAt
+  # Expected data type from API: String
+  # Returns: String
+  def url 
+    url = @isShownAt.is_a?(Array) ? @isShownAt[0] : @isShownAt
+    is_valid_url?(url, 'isShownAt') ? url : nil
   end
 
-  def format
-    @sourceResource['format']
+  # Exptected data type from API: String or Array of Strings
+  # Returns: Array of Strings
+  def format 
+    format = Array(@sourceResource['format'])
+    is_array_of_strings?(format, 'sourceResource.format') ? format : nil
   end
 
-  def preview_image
-    @object
+  # Expected data type from API: String
+  # Returns: String 
+  def preview_image 
+    is_valid_url?(@object, 'object') ? @object : nil
   end
 
-  def data_provider
-    @dataProvider
+  # Expected data type from API: String
+  # Returns: String
+  def data_provider 
+    is_valid_string?(@dataProvider, 'dataProvider') ? @dataProvider : nil
   end
 
+  # Expected data type from API: String
+  # Returns: String
+  def intermediate_provider 
+    is_valid_string?(@intermediateProvider, 'intermediateProvider') ? @intermediateProvider : nil
+  end
+
+  # Returns: Array of Strings 
   def contributing_institution 
-    [@dataProvider, @intermediateProvider].compact
+    [data_provider, intermediate_provider].compact
   end
 
-  def provider
-    @provider
+  # Expected data type from API: String
+  # Returns: String 
+  def provider 
+    is_valid_string?(@provider, 'provider') ? @provider : nil
   end
 
+  # Expected data type from API: Integer
+  # Returns: Integer
   def score
     @score
   end
@@ -142,6 +212,32 @@ class Item
           doc[first_token].deep_merge! value
         end
       doc
+    end
+
+    def is_valid_string?(value, field_name)
+      return true if value.is_a? String 
+      log_error(@id, field_name, "String", value.class) and return false
+    end
+
+    def is_valid_url?(value, field_name)
+      return false if !is_valid_string?(value, field_name)
+      uri = URI.parse(value)
+      return true if uri.kind_of?(URI::HTTP) 
+      log_error(@id, field_name, "valid URL", "invalid URL") and return false
+    end
+
+    def is_array_of_strings?(value, field_name)
+      return false if !value.is_a? Array
+      strings = true
+      value.each { |x| strings = false if !x.is_a? String }
+      return true if strings
+      log_error(@id, field_name, "one or more Strings", "one or more non-String values") and return false
+    end
+
+    def log_error(id, field, expected_type, actual_type)      
+      if actual_type != NilClass
+        Rails.logger.error("Parse error for Item #{id} at #{field}: Expected #{expected_type} but got #{actual_type}.")
+      end
     end
 
 end
