@@ -195,8 +195,11 @@ class SavedListsController < ApplicationController
 
     def get_api_items(saved_items_positions, search_param)
       api_items = {}.tap do |hash|
-        DPLA::Items.by_ids(saved_items_positions.map { |p| p.saved_item.item_id }, {q: search_param})
-          .each { |item| hash[item.id] = item } rescue nil
+        saved_items_positions.each_slice(50) do |slice| 
+          conditions = {:q => search_param, :page_size => '50'}
+          DPLA::Items.by_ids(slice.map { |p| p.saved_item.item_id }, conditions)
+            .each { |item| hash[item.id] = item } rescue nil
+        end
       end
     end
 
