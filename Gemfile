@@ -30,6 +30,7 @@ gem "leaflet-rails", "~> 0.5.0"
 gem "leaflet-markercluster-rails", "~> 0.2.1"
 gem 'google-analytics-rails'
 gem 'meta-tags'
+gem 'turnout'
 
 group :development do
   gem 'thin'
