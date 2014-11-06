@@ -27,7 +27,7 @@ class Item
   end
 
   def description
-    description = Array(@sourceResource['description']).each do |x|
+    description = Array(@sourceResource['description']).compact.each do |x|
       if x !~ /[.,?!;:]$/
         x << "."
       end
