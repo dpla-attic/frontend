@@ -37,6 +37,8 @@ module ApplicationHelper
       else
         image_name
       end
+    elsif !!(image_name =~ /home-slide(.*)$/)
+      'slide-placeholder.jpg'
     else
       image_name
     end
