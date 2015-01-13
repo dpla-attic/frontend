@@ -50,4 +50,10 @@ widgets:
     twitter: https://twitter.com/exampleorg
     tumblr: http://exampleorg.tumblr.com/
     rss: http://dev.example.org/info/feed
-
+fog:
+  credentials:
+    provider: AWS
+    aws_access_key_id: changeme
+    aws_secret_access_key: changeme
+  directory: changeme
+  # public: true
