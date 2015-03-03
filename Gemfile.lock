@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:dpla/frontend-assets.git
-  revision: 77cacb97bb232925590d481a1cc86ad0251a8447
+  revision: 2dac687ef624ebec5799f09a870dce449aa056d9
   specs:
     dpla_frontend_assets (0.0.2)
 
