@@ -63,7 +63,17 @@ class Item
   end
 
   def created_date
-    @sourceResource['date']['displayDate'] rescue nil
+    dates = []
+    if @sourceResource['date'].is_a? Array
+      @sourceResource['date'].each do |d|
+        dates.push d['displayDate'] rescue nil
+      end
+    else
+      dates.push @sourceResource['date']['displayDate'] rescue nil
+    end
+    dates.compact
+    return nil if dates.empty?
+    dates
   end
 
   def year
