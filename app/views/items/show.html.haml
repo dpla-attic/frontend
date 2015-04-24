@@ -64,7 +64,7 @@
           .moduleSection
             .moduleLeft
               %h6 Created Date
-              %p= @item.created_date
+              %p= @item.created_date.first
               = link_to 'View on timeline »', timeline_path(anchor: "#{@item.year}/#{@item.id}")
             .moduleRight
               %img{:alt => "Timeline", :src => "/assets/moduleImg1.jpg"}/

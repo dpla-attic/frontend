@@ -13,6 +13,7 @@ class Item
     @hasView                = doc['hasView'] || {}
     @provider               = doc['provider']['name'] if doc['provider']
     @score                  = doc['score']
+    @date                   = @sourceResource['date'] || {}
     if @sourceResource['spatial'].present? and not @sourceResource['spatial'].is_a? Array
       @sourceResource['spatial'] = [ @sourceResource['spatial'] ]
     end
@@ -62,12 +63,29 @@ class Item
     statement.compact
   end
 
+  # returns an array of displayDate values
   def created_date
-    @sourceResource['date']['displayDate'] rescue nil
+    dates = []
+    if @date.is_a? Array
+      @date.each do |d|
+        dates.push d['displayDate'] rescue nil
+      end
+    else
+      dates.push @date['displayDate'] rescue nil
+    end
+    dates.compact
+    return nil if dates.empty?
+    dates
   end
 
   def year
-    @sourceResource['date']['begin'].split('-').first rescue nil
+    if @date.is_a? Array
+      year = @date.first['begin'].split('-').first rescue nil
+    else
+      year = @date['begin'].split('-').first rescue nil
+    end
+    return nil unless year =~ /\A[-]?[0-9]+\z/
+    year
   end
 
   # returns array with names
