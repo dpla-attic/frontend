@@ -17,7 +17,7 @@ ui:
         - sound
       video:
   maps:
-    center: [38, -93]
+    center: [36, -77]
     zoom:
       start: 4
       min:  4

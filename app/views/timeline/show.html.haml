@@ -10,8 +10,7 @@
     = render 'shared/refine_control'
 
     / Main container
-    - aside_collapsed = params[:controller] != 'search'
-    .timeContainer.decadesView{class: aside_collapsed ? 'widthL' : 'widthS'}
+    .timeContainer.decadesView{class: 'widthS'}
       %article.timeline#content{role: "main"}
         / Century timeline
         = render 'timeline_module'
