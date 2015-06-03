@@ -1,21 +1,22 @@
 / Search results block
 - if @search.count > 0
   .searchResults
-    %h4
+    %p
       Your search
       - if query.present?
         for
         %span= query
       returned
       = number_with_delimiter search.count, delimiter: ','
-      results.
-    - if 'map' == params[:controller]
-      %p.message Only results with location data are shown below.
-    - elsif 'timeline' == params[:controller]
-      %p.message Only results with time data are shown below.
-    - elsif 'bookshelf' == params[:controller]
-      %p.message Only book and periodical results are shown below.
-    = render 'shared/results/refined_by', search: search
+      - if 'map' == params[:controller]
+        results. Only results with location data are shown below.
+      - elsif 'timeline' == params[:controller]
+        results. Only results with time data are shown below.
+      - elsif 'bookshelf' == params[:controller]
+        books and periodicals.
+      -else
+        results.
+      = render 'shared/results/refined_by', search: search
 - else
   .searchResults.no-results#content{role: "main"}
     %h4
