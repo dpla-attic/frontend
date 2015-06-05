@@ -3428,7 +3428,7 @@ div.timeline-year {
 }
 
 .map article.moveOut, .slidePopOut.moveOut, .timeContainer.moveOut {
-    margin-right: -106%;
+    margin-right: -106% !important;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
     -o-transition: 0.3s ease;
@@ -3447,8 +3447,18 @@ div.timeline-year {
     transition: 0.3s ease;
 }
 
-.map article.widthS, .timeContainer.widthS {
+.timeContainer.widthS {
     width: 65.8201%;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.map article.widthS {
+    width: 100%;
+    margin-right: -34.1799%;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
     -o-transition: 0.3s ease;
@@ -4186,6 +4196,7 @@ aside { height: 100%; }
 
 .map article.widthS, .timeContainer.widthS {
     width: 100%;
+    margin: 0;
 }
 
 .mapBox { width: 280px; }

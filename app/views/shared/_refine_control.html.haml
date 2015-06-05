@@ -1,16 +1,7 @@
-- aside_collapsed = params[:controller] != 'search'
 .controls
-  - if aside_collapsed
-    .toggle
-      Show
-      %span.icon-arrow-thin-right{"aria-hidden" => "true"}
-    .toggle.mobile.Marticle
-      Show
-      %span.icon-arrow-thin-right{"aria-hidden" => "true"}
-  - else
-    .toggle
-      %span.icon-arrow-thin-left{"aria-hidden" => "true"}
-      Hide
-    .toggle.mobile.Marticle
-      %span.icon-arrow-thin-left{"aria-hidden" => "true"}
-      Hide
+  .toggle
+    %span.icon-arrow-thin-left{"aria-hidden" => "true"}
+    Hide
+  .toggle.mobile.Marticle
+    Refine search
+    %span.icon-arrow-thin-right{"aria-hidden" => "true"}
