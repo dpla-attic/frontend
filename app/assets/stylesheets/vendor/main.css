@@ -310,12 +310,6 @@ h4 span { font-family: 'source_sans_pro_semiboldRg', arial, sans-serif; }
 
 a:hover { text-decoration: underline; color: #2b2b2b; }
 
-.message {
-    display: inline-block;
-    border: 1px solid #bebebe;
-    padding: .3em .5em;
-    margin: .3em 1em 1em 0 !important;
-}
 .highlight {
     background: #ededed;
     padding: 1em !important;
@@ -1004,7 +998,7 @@ article .shareSave { margin: 0 0 3% 74.286%; }
 .searchResults a { color: #2795b6; margin-left: 8px; }
 .searchResults ul li a:hover { text-decoration: none; }
 
-.searchResults h4 { float: left; font-size: 1.2em; color: #2b2b2b; margin-right: 1em;}
+.searchResults p { float: left; font-size: 1.2em; color: #2b2b2b; margin-right: 1em;}
 
 .no-results h4 {
     float: none;
@@ -3434,7 +3428,7 @@ div.timeline-year {
 }
 
 .map article.moveOut, .slidePopOut.moveOut, .timeContainer.moveOut {
-    margin-right: -106%;
+    margin-right: -106% !important;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
     -o-transition: 0.3s ease;
@@ -3453,8 +3447,18 @@ div.timeline-year {
     transition: 0.3s ease;
 }
 
-.map article.widthS, .timeContainer.widthS {
+.timeContainer.widthS {
     width: 65.8201%;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+.map article.widthS {
+    width: 100%;
+    margin-right: -34.1799%;
     -webkit-transition: 0.3s ease;
     -moz-transition: 0.3s ease;
     -o-transition: 0.3s ease;
@@ -4192,6 +4196,7 @@ aside { height: 100%; }
 
 .map article.widthS, .timeContainer.widthS {
     width: 100%;
+    margin: 0;
 }
 
 .mapBox { width: 280px; }

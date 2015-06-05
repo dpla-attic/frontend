@@ -7,10 +7,10 @@
   %h1 Map
   = render 'shared/results/search_results', query: params[:q], search: @search
   - if @search.count > 0
+    %p Click on a circle to see items about that location.
     = render 'shared/refine_control'
 
-    - aside_collapses = params[:controller] != 'search'
-    %article#content{class: aside_collapses ? 'widthL' : 'widthS', role: "main"}
+    %article#content{class: 'widthS', role: "main"}
       .mapContainer
         .mobile-hover
         .mapFrame

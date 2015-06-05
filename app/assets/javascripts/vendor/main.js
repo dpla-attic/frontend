@@ -148,7 +148,7 @@ if ($('.shareSave').length) {
       $('aside').addClass('moveOut');
       $('.slidePopOut').addClass('moveIn');
       $('.map article, .timeContainer').addClass('widthL');
-      $('.toggle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
+      $('.toggle').html('Refine search <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
 
       $('aside').removeClass('moveIn');
       $('.slidePopOut').removeClass('moveOut');
@@ -170,7 +170,7 @@ if ($('.shareSave').length) {
   $('.toggle.Marticle').toggle( function() {
       $('aside').addClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveOut');
-      $('.toggle.Marticle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Hide');
+      $('.toggle.Marticle').html('<span aria-hidden="true" class="icon-arrow-thin-left"></span> Search results');
 
       $('aside').removeClass('moveOut');
       $('.map article, .timeContainer, .slidePopOut').removeClass('moveIn');
@@ -178,7 +178,7 @@ if ($('.shareSave').length) {
     function() {
       $('aside').addClass('moveOut');
       $('.map article, .timeContainer, .slidePopOut').addClass('moveIn');
-      $('.toggle.Marticle').html('Show <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
+      $('.toggle.Marticle').html('Refine search <span aria-hidden="true" class="icon-arrow-thin-right"></span>');
 
       $('aside').removeClass('moveIn');
       $('.map article, .timeContainer, .slidePopOut').removeClass('moveOut');
