@@ -16,7 +16,11 @@
         = render partial: 'matches'
         .search
           - @items.each do |item|
-            %section
+            -# data-* attributes are used in Google Analytics event tracking
+            %section{ data: { 'item-id' => item.id,
+                              'provider' => item.provider,
+                              'data-provider' => item.data_provider,
+                              'title' => item.title } }
               .searchRight
                 = link_to item_thumbnail(item, request), item_path(item.id, back_uri: request.url)
               .searchLeft

@@ -177,8 +177,8 @@ DPLAMap = L.Class.extend
           <h4><a href="#{ item_href }" target="_blank">#{ item_title }</a></h4>
           <p><span> #{ point.creator }</span></p>
           <p><span> #{ point.created_date }</span></p>
-
-          <a class="ViewObject" href="#{ point.url }" target="_blank">
+          <a class="ViewObject" href="#{ point.url }" target="_blank"
+             onclick="trackClickThroughEvent(this);">
             Get full #{ item_type } from #{ item_data_provider }
             <span class="icon-view-object" aria-hidden="true"></span>
           </a>
@@ -190,8 +190,13 @@ DPLAMap = L.Class.extend
           when point.type == "video" then window.default_images.video
           else default_images.text
         html +=
+          # data-* attributes are used in Google Analytics event tracking
           """
-            <div class="box-row">
+            <div class="box-row"
+                 data-item-id="#{ point.id }"
+                 data-provider="#{ point.provider }"
+                 data-data-provider="#{ point.data_provider }"
+                 data-title="#{ point.title }">
               <div class="box-right"><a href="#{ item_href }" target="_blank"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" data-default-src="#{ default_image }" /></a></div>
               <div class="box-left">#{ content }</div>
             </div>
@@ -409,6 +414,7 @@ DPLAMap = L.Class.extend
       lng: coordinates.shift()
       created_date: created_date || ''
       data_provider: data_provider || ''
+      provider: doc['provider.name'] || ''
 
 DPLAPopup = L.Popup.extend
   _initLayout: ->
