@@ -24,7 +24,7 @@ gem 'page_title_helper'
 gem 'dalli'
 gem 'httparty'
 gem 'elastictastic'
-gem 'devise'
+gem 'devise', '~> 2.0'
 gem 'rails_config'
 gem "leaflet-rails", "~> 0.5.0"
 gem "leaflet-markercluster-rails", "~> 0.2.1"
@@ -37,7 +37,7 @@ group :development do
   gem 'thin'
   gem 'capistrano-deploy', :require => false
   gem 'quiet_assets'
-  gem 'better_errors'
+  gem 'better_errors', '~> 1.0'
   gem 'binding_of_caller'
 end
 
