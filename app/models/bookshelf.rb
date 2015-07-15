@@ -10,6 +10,6 @@ require_dependency 'dpla/items'
 class Bookshelf < Search
 
   def conditions
-    { q: @term, facets: [], facet_size: 0 }.merge(@filters).merge(@args)
+    { q: @term }.merge(@filters).merge(@args)
   end
 end
