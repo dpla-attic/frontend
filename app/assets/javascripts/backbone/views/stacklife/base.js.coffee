@@ -3,6 +3,7 @@ DPLA.Views.Bookshelf = {}
 class DPLA.Views.Bookshelf.Base extends Backbone.View
   initialize: (options) ->
     super options
+    @options || (@options = options)
     @subviews = []
     @template = @template ? options.template
     @render()

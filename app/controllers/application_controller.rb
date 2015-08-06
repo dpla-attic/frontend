@@ -28,4 +28,8 @@ class ApplicationController < ActionController::Base
   def render_500
     render 'pages/error_500', status: 500
   end
+
+  def render_503
+    render nothing: true, status: 503
+  end
 end
