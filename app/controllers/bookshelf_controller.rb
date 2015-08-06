@@ -1,5 +1,6 @@
 class BookshelfController < ApplicationController
   helper_method :permitted_params
+  rescue_from Errors::PageLimitError, with: :render_503
 
   def show
     respond_to do |format|
