@@ -25,7 +25,7 @@ gem 'dalli'
 gem 'httparty'
 gem 'elastictastic'
 gem 'devise', '~> 2.0'
-gem 'rails_config'
+gem 'rails_config', '~> 0.4.0'
 gem "leaflet-rails", "~> 0.5.0"
 gem "leaflet-markercluster-rails", "~> 0.2.1"
 gem 'google-analytics-rails'
