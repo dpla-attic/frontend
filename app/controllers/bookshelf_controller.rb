@@ -6,6 +6,8 @@ class BookshelfController < ApplicationController
     respond_to do |format|
       format.json do
         # Bookshelf gives a list of books.
+        raise Errors::PageLimitError if \
+          params['page'].to_i > Settings.bookshelf.max_pages.to_i
         @search = Bookshelf.new *permitted_params.search
         @items = @search.result permitted_params.args
         render json: @items

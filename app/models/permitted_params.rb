@@ -27,10 +27,7 @@ class PermittedParams < Struct.new(:params)
   def args
     args = params.map do |key, value|
       case key
-      when 'page' then
-        raise Errors::PageLimitError \
-          if value.to_i > Settings.bookshelf.max_pages.to_i
-        [key, value]
+      when 'page'       then [key, value]
       when 'page_size'  then [key, value] if %w(10 20 50 100).include?(value)
       when 'sort_by'    then [key, value] if %w(title created).include?(value)
       when 'sort_order' then [key, value] if %w(asc desc).include?(value)
