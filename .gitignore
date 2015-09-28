@@ -39,3 +39,8 @@
 # Ignore unicorn configuration
 /config/unicorn.rb
 .DS_Store
+
+# Ignore Gemfile.lock because we don't use it with our
+# deployment strategy
+Gemfile.lock
+
