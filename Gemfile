@@ -35,7 +35,6 @@ gem 'fog'
 
 group :development do
   gem 'thin'
-  gem 'capistrano-deploy', :require => false
   gem 'quiet_assets'
   gem 'better_errors', '~> 1.0'
   gem 'binding_of_caller'
