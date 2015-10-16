@@ -16,6 +16,7 @@ ui:
       sound:
         - sound
       video:
+        - moving image
   maps:
     center: [36, -77]
     zoom:
