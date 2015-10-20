@@ -31,6 +31,17 @@
       %li= link_to "Metadata Application Profile", wordpress_path('/developers/map')
 
   %li.aboutMenu
+    = link_to wordpress_path '/education/' do
+      Education
+      %span.icon-arrow-thin-down{"aria-hidden" => "true"}
+    %ul
+      %li= link_to "Primary Source Sets", '/primary-source-sets'
+      %li= link_to "Education Advisory Committee", wordpress_path('/education/education-advisory-committee/')
+      %li= link_to "National History Day", wordpress_path('/education/national-history-day/')
+      %li= link_to "Education Collaborations", wordpress_path('/education/education-collaborations/')
+      %li= link_to "Outreach Materials", wordpress_path('/education/outreach-materials/')
+
+  %li.aboutMenu
     = link_to wordpress_path '/get-involved/' do
       Get Involved
       %span.icon-arrow-thin-down{"aria-hidden" => "true"}
