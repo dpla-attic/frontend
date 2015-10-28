@@ -26,6 +26,8 @@
                   %h4= item.title
                 %p
                   %span= item.creator
+                %p
+                  %span= item.created_date.join(', ')
                 %p= truncate item.description, length: 450
                 - if item.url.present?
                   = link_to item.url, class: 'ViewObject', target: :_blank do

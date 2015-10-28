@@ -7,6 +7,7 @@
     <% back_uri = encodeURIComponent(window.location.href); %>
     <a href="/item/<%= item.id %>?back_uri=<%= back_uri %>"><%= item.title %></a>
     <p><span><%= item.creator %></span></p>
+    <p><span><%= item.created_date %></span></p>
     <p><%= item.description %></p>
     <a href="<%= item.source %>" class="ViewObject" target="_blank">
       View Object

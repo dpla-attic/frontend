@@ -15,7 +15,7 @@ class Timeline < Search
     %w(
       id sourceResource.title isShownAt object
       sourceResource.type sourceResource.creator
-      sourceResource.description
+      sourceResource.description sourceResource.date
     )
   end
 

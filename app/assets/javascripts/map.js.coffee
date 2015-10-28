@@ -168,6 +168,8 @@ DPLAMap = L.Class.extend
           <h6> #{ point.type }</h6>
           <h4><a href="#{ item_href }" target="_blank">#{ item_title }</a></h4>
           <p><span> #{ point.creator }</span></p>
+          <p><span> #{ point.created_date }</span></p>
+
           <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
         """
       if point.thumbnail
@@ -379,6 +381,9 @@ DPLAMap = L.Class.extend
       coordinates = doc['sourceResource.spatial.coordinates'].split ','
     location = doc['sourceResource.spatial.name']
     location = [location] unless location instanceof Array
+    date = doc['sourceResource.date']
+    created_date = date['displayDate'] if typeof date isnt 'undefined'
+    created_date = created_date.join(', ') if _.isArray(created_date)
     point =
       id: doc.id
       title: doc['sourceResource.title'] || doc['id']
@@ -389,6 +394,7 @@ DPLAMap = L.Class.extend
       url: doc['isShownAt']
       lat: coordinates.shift()
       lng: coordinates.shift()
+      created_date: created_date || ''
 
 
 DPLAPopup = L.Popup.extend
