@@ -8,6 +8,13 @@ var presenter = {
 presenter.thumb = model.get('object') ?
                   model.get('object') :
                   window.default_preview_thumb;
+
+var created_date = (typeof sourceResource.date === 'undefined') ?
+                   '' : sourceResource.date.displayDate;
+
+presenter.created_date = Array.isArray(created_date) ?
+                         created_date.join(', ') : created_date
+
 _.each(['creator', 'title', 'description'], function(key) {
   presenter[key] = _.isArray(sourceResource[key]) ?
                    sourceResource[key].join(', ') :
@@ -22,6 +29,9 @@ _.each(['creator', 'title', 'description'], function(key) {
   <h2><a href="/item/<%= presenter.id %>"><%= presenter.title %></a></h2>
   <% if (presenter.creator) { %>
     <h3><%= presenter.creator %></h3>
+  <% } %>
+  <% if (presenter.created_date) { %>
+    <h3><%= presenter.created_date %></h3>
   <% } %>
 
   <p class="book-description"><%= presenter.description %></p>

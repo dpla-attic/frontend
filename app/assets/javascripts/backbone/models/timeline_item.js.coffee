@@ -6,6 +6,9 @@ class DPLA.Models.TimelineItem extends Backbone.Model
     description = doc['sourceResource.description'] || ''
     description = _.first(description) if _.isArray(description)
     description = description.substr(0, 200) + '...' if description.length > 200
+    date = doc['sourceResource.date']
+    created_date = date['displayDate'] if typeof date isnt 'undefined'
+    created_date = created_date.join(', ') if _.isArray(created_date)
     this.set
       id:          id
       type:        doc['sourceResource.type'] || ''
@@ -15,6 +18,7 @@ class DPLA.Models.TimelineItem extends Backbone.Model
       source:      doc['isShownAt'] || ''
       thumbnail:   doc['object']    || ''
       highlight:   false
+      created_date: created_date || ''
 
 class DPLA.Collections.TimelineItems extends Backbone.Collection
   requestByYear: (year, options = {}) ->
