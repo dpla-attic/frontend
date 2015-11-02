@@ -47,7 +47,7 @@ sudo apt-get install imagemagick libmagickwand-dev```
 
 4. Install necessary Ruby Gems
 
-    `bundle install --deployment --without dpla_branding production`
+    `bundle install --deployment`
 
 5. Install PostgreSQL
 
