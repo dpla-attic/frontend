@@ -25,7 +25,9 @@ _.each(['creator', 'title', 'description'], function(key) {
 <div class="book-preview">
   <a href="#/" class="toggle mobile">
     <span class="icon-arrow-thin-left" aria-hidden="true"></span>Back</a>
-  <img src="<%= presenter.thumb %>" class="cover_small" alt="">
+  <a href="/item/<%= presenter.id %>" class='book-image-link'>
+    <img src="<%= presenter.thumb %>" class="cover_small" alt="">
+  </a>
   <h2><a href="/item/<%= presenter.id %>"><%= presenter.title %></a></h2>
   <% if (presenter.creator) { %>
     <h3><%= presenter.creator %></h3>

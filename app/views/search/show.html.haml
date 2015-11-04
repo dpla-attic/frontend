@@ -17,7 +17,7 @@
           - @items.each do |item|
             %section
               .searchRight
-                = item_thumbnail(item)
+                = link_to item_thumbnail(item), item_path(item.id, back_uri: request.url)
               .searchLeft
                 %h6= item.type
                 - if item.id.present?
