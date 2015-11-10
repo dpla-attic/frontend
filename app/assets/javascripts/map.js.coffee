@@ -181,7 +181,7 @@ DPLAMap = L.Class.extend
         html +=
           """
             <div class="box-row">
-              <div class="box-right"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" data-default-src="#{ default_image }" /></div>
+              <div class="box-right"><a href="#{ item_href }" target="_blank"><img onerror="image_loading_error(this);" src="#{ point.thumbnail }" data-default-src="#{ default_image }" /></a></div>
               <div class="box-left">#{ content }</div>
             </div>
           """
