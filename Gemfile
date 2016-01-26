@@ -47,6 +47,11 @@ group :test, :development do
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'awesome_print'
+  gem 'pry'
+end
+
+group :test do
+  gem 'sqlite3'
 end
    
 group :production do
