@@ -47,6 +47,7 @@ group :test, :development do
   gem 'shoulda'
   gem 'shoulda-matchers'
   gem 'awesome_print'
+  gem 'pry'
 end
 
 group :test do
