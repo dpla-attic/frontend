@@ -1,0 +1,11 @@
+language: ruby
+bundler_args: "--without debug"
+
+script:
+- cp config/database.yml.example config/database.yml
+- cp config/settings.local.yml.example config/settings.yml
+- bundle exec rake db:migrate
+- bundle exec rake spec
+rvm:
+- 1.9.3-p547
+sudo: false

@@ -48,6 +48,10 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'awesome_print'
 end
+
+group :test do
+  gem 'sqlite3'
+end
    
 group :production do
   gem 'unicorn'
