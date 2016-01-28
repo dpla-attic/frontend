@@ -125,8 +125,10 @@ class Item
     @sourceResource['format']
   end
 
+  # @return [String, nil]  the preview image if it is a valid HTTP uri; nil otherwise
   def preview_image
-    @object
+    return @object if valid_http_uri?(@object)
+    nil
   end
 
   def data_provider
@@ -146,6 +148,12 @@ class Item
   end
 
   private
+
+    def valid_http_uri?(uri)
+      URI.parse(uri).kind_of?(URI::HTTP)
+    rescue URI::InvalidURIError
+      false
+    end
 
     def transform_dotted_keys(doc)
       doc.keys
