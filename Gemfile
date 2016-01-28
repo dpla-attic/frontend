@@ -48,6 +48,7 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'awesome_print'
   gem 'pry'
+  gem "codeclimate-test-reporter", group: :test, require: nil
 end
 
 group :test do
