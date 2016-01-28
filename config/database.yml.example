@@ -1,16 +1,15 @@
+
+test:
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+  database: db/test.sqlite3
+
 development:
   adapter: postgresql
   host: localhost
   encoding: unicode
   database: dpla_development
-  username:
-  password:
-
-test:
-  adapter: postgresql
-  host: localhost
-  encoding: unicode
-  database: dpla_test
   username:
   password:
 

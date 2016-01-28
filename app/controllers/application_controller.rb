@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :sanitize_back_uri!
   after_filter :set_cache_flag!
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from Exception, with: :render_500
@@ -9,6 +10,17 @@ class ApplicationController < ActionController::Base
       redirect_to :new_user_session
     else
       redirect_to :root if !current_user.is_admin?
+    end
+  end
+
+  ##
+  # Forbid the request if the back_uri parameter is being set to create
+  # offsite links.  The parameter is used in various views throughout the
+  # application.
+  def sanitize_back_uri!
+    if params[:back_uri].present?
+      ok = request.protocol + request.host
+      render nothing: true, status: 403 if !params[:back_uri].start_with? ok
     end
   end
 
