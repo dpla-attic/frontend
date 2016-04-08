@@ -125,9 +125,10 @@ class Item
     @sourceResource['format']
   end
 
-  # @return [String, nil]  the preview image if it is a valid HTTP uri; nil otherwise
+  # @return [String, nil]  link to DPLA thumbnail HTTPS proxy service if it is a
+  # valid HTTP uri; nil otherwise
   def preview_image
-    return @object if valid_http_uri?(@object)
+    return Settings.url.host + '/thumbp/' + @id if valid_http_uri?(@object)
     nil
   end
 
@@ -135,7 +136,7 @@ class Item
     @dataProvider
   end
 
-  def contributing_institution 
+  def contributing_institution
     [@dataProvider, @intermediateProvider].compact
   end
 
