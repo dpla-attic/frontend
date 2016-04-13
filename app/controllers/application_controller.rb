@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_filter :sanitize_back_uri!
   after_filter :set_cache_flag!
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
-  rescue_from Exception, with: :render_500
+  # rescue_from Exception, with: :render_500
 
   def authenticate_admin!
     if !user_signed_in?
