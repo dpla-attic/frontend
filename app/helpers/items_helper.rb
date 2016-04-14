@@ -34,7 +34,15 @@ module ItemsHelper
   def item_thumbnail(item)
     image_type = item_type_image(item)
     if item.preview_image.present?
-      image_tag item.preview_image, onerror: 'this.src=this.getAttribute("data-default-src");', data: { 'default-src' => asset_path(image_type) }
+      if request.ssl?
+        image_tag item.preview_image_ssl,
+                  onerror: 'this.src=this.getAttribute("data-default-src");',
+                  data: { 'default-src' => asset_path(image_type) }
+      else
+        image_tag item.preview_image,
+                  onerror: 'this.src=this.getAttribute("data-default-src");',
+                  data: { 'default-src' => asset_path(image_type) }
+      end
     else
       image_tag image_type
     end
