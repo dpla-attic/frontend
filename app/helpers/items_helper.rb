@@ -31,7 +31,7 @@ module ItemsHelper
     image_type
   end
 
-  def item_thumbnail(item)
+  def item_thumbnail(item, request)
     image_type = item_type_image(item)
     if item.preview_image.present?
       if request.ssl?
