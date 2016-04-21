@@ -46,7 +46,7 @@
                         View Object
                         %span.icon-view-object{"aria-hidden" => "true"}
                     .searchMiddle
-                      = item_thumbnail(position.item)
+                      = item_thumbnail(position.item, request)
                     .searchRight
                       - #lists = saved_item.saved_item_positions.includes(:saved_list).map { |p| p.saved_list }
                       - lists = position.neighbors.map { |p| p.saved_list }

@@ -41,7 +41,7 @@
               View Object
               %span.icon-view-object{"aria-hidden" => "true"}
           .searchMiddle
-            = item_thumbnail(position.item)
+            = item_thumbnail(position.item, request)
           -if @is_my_list
             .searchRight
               - position_value = position.position.to_i.zero? ? nil : position.position
