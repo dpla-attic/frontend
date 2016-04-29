@@ -16,7 +16,9 @@ module DPLA
     end
 
     def self.load(query)
-      response = self.get query, query_string_normalizer: -> s {s}
+      response = self.get query,
+                          query_string_normalizer: -> s {s},
+                          verify: Settings.api.verify_ssl
       Rails.logger.debug "API: Processing request #{response.request.uri}"
       if response.code != 200
         Rails.logger.info [
