@@ -30,3 +30,6 @@ ui:
     grid_level: [7, 18]
     page_size: 500
     popup_page_size: 50
+
+api:
+  verify_ssl: true
