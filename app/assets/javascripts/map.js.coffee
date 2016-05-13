@@ -55,10 +55,10 @@ DPLAMap = L.Class.extend
     this.map = L.map 'map',
       center: new L.LatLng(this.mapCenter.lat, this.mapCenter.lng)
       zoom: this.zoom.start
-      layers: L.tileLayer 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      layers: L.tileLayer 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         minZoom: this.zoom.min
         maxZoom: this.zoom.max
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+        attribution: 'Map data &copy; <a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
 
   # Perform JSONP request to DPLA API
   # Options:
