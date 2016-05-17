@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :sanitize_back_uri!
-  after_filter :set_cache_flag!
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from Exception, with: :render_500
 
@@ -21,15 +20,6 @@ class ApplicationController < ActionController::Base
     if params[:back_uri].present?
       ok = request.protocol + request.host
       render nothing: true, status: 403 if !params[:back_uri].start_with? ok
-    end
-  end
-
-  def set_cache_flag!
-    flag = Settings.session.logged_in_flag.to_sym
-    if current_user
-      cookies[flag] = { value: 1, httponly: true } if not cookies[flag]
-    else
-      cookies.delete flag
     end
   end
 
