@@ -16,6 +16,7 @@ class Timeline < Search
       id sourceResource.title isShownAt object
       sourceResource.type sourceResource.creator
       sourceResource.description sourceResource.date
+      dataProvider
     )
   end
 

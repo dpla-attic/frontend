@@ -31,7 +31,16 @@
                 %p= truncate item.description, length: 450
                 - if item.url.present?
                   = link_to item.url, class: 'ViewObject', target: :_blank do
-                    View Object
+                    Get full
+                    - if item.type.present? and item.type.is_a? String
+                      = item.type
+                    - else
+                      item
+                    from
+                    - if item.data_provider.present?
+                      = Array.wrap(item.data_provider).join(', ')
+                    - else
+                      contributing institution
                     %span.icon-view-object{"aria-hidden" => "true"}
     = render partial: 'shared/sidebar'
     #resultsBarBottom.resultsBar

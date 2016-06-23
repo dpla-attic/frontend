@@ -3,7 +3,8 @@ var sourceResource = model.get('sourceResource');
 var presenter = {
   id: model.get('id'),
   subjects: sourceResource.subject,
-  shown_at: model.get('isShownAt')
+  shown_at: model.get('isShownAt'),
+  type: sourceResource.type
 };
 presenter.thumb = model.get('object') ?
                   model.get('object') :
@@ -13,7 +14,13 @@ var created_date = (typeof sourceResource.date === 'undefined') ?
                    '' : sourceResource.date.displayDate;
 
 presenter.created_date = Array.isArray(created_date) ?
-                         created_date.join(', ') : created_date
+                         created_date.join(', ') : created_date;
+
+var data_provider = (typeof model.get('dataProvider') === 'undefined') ?
+                    '' : model.get('dataProvider');
+
+presenter.data_provider = Array.isArray(data_provider) ?
+                          data_provider.join(', ') : data_provider;
 
 _.each(['creator', 'title', 'description'], function(key) {
   presenter[key] = _.isArray(sourceResource[key]) ?
@@ -50,7 +57,22 @@ _.each(['creator', 'title', 'description'], function(key) {
   <% } %>
 
   <ul class="book-preview-actions">
-    <li><a href="<%= presenter.shown_at %>" target="_blank">View</a></li>
+    <li>
+      <a href="<%= presenter.shown_at %>" target="_blank">
+        Get full
+        <% if (typeof presenter.type === 'string' && presenter.type != '') { %>
+          <%= presenter.type %>
+        <% } else { %>
+          item
+        <% } %>
+        from
+        <% if (presenter.data_provider != '') { %>
+          <%= presenter.data_provider %>
+        <% } else { %>
+          contributing institution
+        <% } %>
+      </a>
+    </li>
     <% if (presenter.viewer_url) { %>
       <li><a href="<%= presenter.viewer_url %>">Read</a></li>
     <% } %>
