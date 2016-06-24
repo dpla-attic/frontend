@@ -12,8 +12,6 @@
         results. Only results with location data are shown below.
       - elsif 'timeline' == params[:controller]
         results. Only results with time data are shown below.
-      - elsif 'bookshelf' == params[:controller]
-        books and periodicals.
       -else
         results.
       = render 'shared/results/refined_by', search: search

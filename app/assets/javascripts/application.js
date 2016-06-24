@@ -9,7 +9,6 @@
 //= require vendor/jquery.jfeed.js
 //= require vendor/jquery.masonry.min.js
 //= require vendor/jquery.waypoints.min.js
-//= require vendor/stackview.js
 //= require vendor/main.js
 //= require vendor/plugins.js
 //= require vendor/touch.js
@@ -23,7 +22,6 @@
 //
 //= require search.js.coffee
 //= require timeline.js.coffee
-//= require bookshelf.js.coffee
 //= require spikes.js.coffee
 //= require common.js.coffee
 //= require map.js.coffee

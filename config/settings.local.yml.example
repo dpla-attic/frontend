@@ -57,5 +57,3 @@ fog:
     aws_secret_access_key: changeme
   directory: changeme
   # public: true
-bookshelf:
-  max_pages: 100
