@@ -1,8 +1,23 @@
 module ItemsHelper
+
+  ##
+  # Generate an HTML list for a metadata field.
+  #
+  # @param name [String] the name of the metadata field, as defined in the Item
+  # model.
+  #
+  # @param options [Hash]
+  #   :title = Display title for the metadata field (if different from name).
+  #   :facet = Name of the field as it is used as a facet in the API. If there
+  #            is a value for :facet, the values will be linked to a faceted
+  #            search query.
+  #
+  # @return [String] HTML
   def item_field(name, options = {}, &block)
-    value = @item.send name
-    value.reject!(&:blank?) if value.is_a? Array
+    value = [@item.send(name)].flatten
+    value.reject!(&:blank?)
     title = options[:title] || name.to_s.split('_').map(&:capitalize).join(' ')
+    facet = options[:facet]
 
     if value.present?
       content_tag(:ul) do
@@ -11,10 +26,16 @@ module ItemsHelper
           content_tag(:li) do
             block.call
           end
-        elsif value.is_a? Array
-          content_tag(:li, value.join("<br />").html_safe)
         else
-          content_tag(:li, value)
+          if facet.present?
+            content_tag(:li) do
+              value.map do |v|
+                link_to v, search_path(facet => v)
+              end.join("<br/>").html_safe
+            end
+          else
+            content_tag(:li, value.join("<br />").html_safe)
+          end
         end
       end
     end
