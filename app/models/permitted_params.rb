@@ -33,7 +33,9 @@ class PermittedParams < Struct.new(:params)
       when 'sort_order' then [key, value] if %w(asc desc).include?(value)
       end
     end
-    args.compact.inject({}) { |h, e| h[e.first.to_sym] = e.last; h }
+    args = args.compact.inject({}) { |h, e| h[e.first.to_sym] = e.last; h }
+    args[:page_size] = '20' unless args[:page_size].present?
+    args
   end
 
   def date_from_params(date, options = {})

@@ -11,7 +11,11 @@ module ResultManipulationHelper
         result.push [
           size,
           url_for(params.merge(page_size: size, page: nil)),
-          size.to_s == params[:page_size] ? {selected: :selected} : {}
+          if params[:page_size].present?
+            size.to_s == params[:page_size] ? { selected: :selected } : {}
+          else
+            size.to_s == '20' ? { selected: :selected } : {}
+          end
         ]
       end
     end
