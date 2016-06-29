@@ -153,6 +153,11 @@ class Item
     @score
   end
 
+  # @return [Array<String>]
+  def language
+    Array.wrap(@sourceResource['language']).map { |l| l['name'] }.compact
+  end
+
   private
 
     def valid_http_uri?(uri)
