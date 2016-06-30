@@ -938,13 +938,13 @@ article .shareSave { margin: 0 0 3% 74.286%; }
 .table li {
     float: left;
     list-style: none outside none;
-    width: 76.9%;
+    width: 70%;
 	margin: 0 0 5px;
 	line-height: 1.2em;
 }
 
 .table li:first-child {
-    width: 21.9%;
+    width: 28.8%;
     margin: 0 1.2% 0 0;
 }
 .table li a {
