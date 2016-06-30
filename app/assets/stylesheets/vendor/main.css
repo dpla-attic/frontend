@@ -929,7 +929,7 @@ article .shareSave { margin: 0 0 3% 74.286%; }
     overflow: hidden;
     padding: 10px 0 0;
 }
-.FeatureContent .table { padding-left: 29%; }
+.FeatureContent .table { overflow: hidden; }
 .table ul:first-child {
     border: none;
     padding: 0;
@@ -1203,7 +1203,7 @@ h6.open span {
 
 .desc-short, .desc-long { overflow: hidden; }
 .desc-long { display: none; }
-.desc-toggle { text-decoration: none !important; }
+.desc-toggle { text-decoration: none !important; display: block; }
 .desc-toggle:hover { cursor: pointer; }
 .desc-toggle span { font-size: .5em; }
 
