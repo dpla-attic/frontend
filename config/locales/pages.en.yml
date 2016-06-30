@@ -39,10 +39,6 @@ en:
       title: Map
       title_with_query: '“%{query}” - %{title}'
       map:
-  bookshelf:
-    show:
-      title: Bookshelf
-      title_with_query: '“%{query}” - %{title}'
   saved_searches:
     index:
       title: Saved Searches
