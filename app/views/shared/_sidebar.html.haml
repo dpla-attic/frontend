@@ -1,7 +1,6 @@
 %aside
   %h5 Refine search
-  - unless params[:controller] == 'bookshelf'
-    = render 'shared/sidebar/refine_by_type'
+  = render 'shared/sidebar/refine_by_type'
   = render 'shared/sidebar/refine_by_provider'
   = render 'shared/sidebar/refine_by_partner'
   - unless params[:controller] == 'timeline'
