@@ -38,7 +38,16 @@
             %h4= link_to position.item.title, item_path(position.item.id)
             %p= position.item.description
             = link_to position.item.url, target: :_blank, class:'ViewObject' do
-              View Object
+              Get full
+              - if position.item.type.present? and position.item.type.is_a? String
+                = position.item.type
+              - else
+                item
+              from
+              - if position.item.data_provider.present?
+                = Array.wrap(position.item.data_provider).join(', ')
+              - else
+                contributing institution
               %span.icon-view-object{"aria-hidden" => "true"}
           .searchMiddle
             = item_thumbnail(position.item, request)

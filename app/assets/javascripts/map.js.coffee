@@ -163,6 +163,12 @@ DPLAMap = L.Class.extend
       item_title = point.title
       if $.isArray(item_title)
         item_title = item_title[0]
+      item_type = 'item'
+      if typeof point.type == 'string' and point.type != ''
+        item_type = point.type
+      item_data_provider = 'contributing institution'
+      if point.data_provider != ''
+        item_data_provider = point.data_provider
       content =
         """
           <h6> #{ point.type }</h6>
@@ -170,7 +176,10 @@ DPLAMap = L.Class.extend
           <p><span> #{ point.creator }</span></p>
           <p><span> #{ point.created_date }</span></p>
 
-          <a class="ViewObject" href="#{ point.url }" target="_blank">View Object <span class="icon-view-object" aria-hidden="true"></span></a>
+          <a class="ViewObject" href="#{ point.url }" target="_blank">
+            Get full #{ item_type } from #{ item_data_provider }
+            <span class="icon-view-object" aria-hidden="true"></span>
+          </a>
         """
       if point.thumbnail
         default_image = switch
@@ -384,6 +393,8 @@ DPLAMap = L.Class.extend
     date = doc['sourceResource.date']
     created_date = date['displayDate'] if typeof date isnt 'undefined'
     created_date = created_date.join(', ') if _.isArray(created_date)
+    data_provider = doc['dataProvider']
+    data_provider = data_provider.join(', ') if _.isArray(data_provider)
     point =
       id: doc.id
       title: doc['sourceResource.title'] || doc['id']
@@ -395,7 +406,7 @@ DPLAMap = L.Class.extend
       lat: coordinates.shift()
       lng: coordinates.shift()
       created_date: created_date || ''
-
+      data_provider: data_provider || ''
 
 DPLAPopup = L.Popup.extend
   _initLayout: ->
