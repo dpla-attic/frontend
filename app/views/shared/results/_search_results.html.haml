@@ -9,9 +9,9 @@
       returned
       = number_with_delimiter search.count, delimiter: ','
       - if 'map' == params[:controller]
-        results. Only results with location data are shown below.
+        results with location coordinates.
       - elsif 'timeline' == params[:controller]
-        results. Only results with time data are shown below.
+        results with dates.
       -else
         results.
       = render 'shared/results/refined_by', search: search
