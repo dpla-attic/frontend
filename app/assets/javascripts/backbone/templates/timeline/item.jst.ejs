@@ -12,7 +12,18 @@
     <p><span><%= item.created_date %></span></p>
     <p><%= item.description %></p>
     <a href="<%= item.source %>" class="ViewObject" target="_blank">
-      View Object
+      Get full
+      <% if (typeof item.type === 'string' && item.type != '') { %>
+        <%= item.type %>
+      <% } else { %>
+        item
+      <% } %>
+      from
+      <% if (item.data_provider != '') { %>
+        <%= item.data_provider %>
+      <% } else { %>
+        contributing institution
+      <% } %>
       <span class="icon-view-object" aria-hidden="true"></span>
     </a>
   </div>

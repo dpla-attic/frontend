@@ -40,4 +40,35 @@ describe Item do
       end
     end
   end
+
+  describe '#language' do
+    it 'returns language' do
+      doc = { 'sourceResource' => { 'language' => [{ 'name' => 'x' }] } }
+      item = Item.new(doc)
+      expect(item.language).to match_array ['x']
+    end
+
+    it 'handles nil value for sourceResource' do
+      item = Item.new({})
+      expect(item.language).to match_array []
+    end
+
+    it 'handles nil value for language' do
+      doc = { 'sourceResource' => {} }
+      item = Item.new(doc)
+      expect(item.language).to match_array []
+    end
+
+    it 'handles nil value for language' do
+    doc = { 'sourceResource' => { 'language' => [{}] } }
+      item = Item.new(doc)
+      expect(item.language).to match_array []
+    end
+
+    it 'handles language if Hash' do
+      doc = { 'sourceResource' => { 'language' => { 'name' => 'x' } } }
+      item = Item.new(doc)
+      expect(item.language).to match_array ['x']
+    end
+  end
 end

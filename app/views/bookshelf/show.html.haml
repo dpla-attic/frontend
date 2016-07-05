@@ -1,27 +1,11 @@
-- page_title! t('.title_with_query', title: t('.title'), query: params[:q]) if params[:q].present?
-- set_meta_tags :og => {:description => "DPLA Bookshelf lets the user scroll a visual representation of a bookshelf that provides all the instantaneous power the digital world provides."}
-
 .layoutTwo.bookshelf.search-page
   = render 'shared/search_panel'
-  = render 'shared/aside_toggle'
 
-  %h1 Bookshelf
-  = render 'shared/results/search_results', query: params[:q], search: @search
-  - if @search.count > 0
-    .slidePopOut#content{role: "main"}
-      .waypoint-wrapper
-        %article.bookshelf-container
-          #resultsBarTop.resultsBar
-            %form.sortControl
-              %label
-                Sort by:
-                = select_tag 'sort_by', sort_by_options, class: 'sortList'
-            %a.toggle-infopanel{href: "#"} ?
-          .stack-wrapper
-            = image_tag 'bookshelf-loading.gif', class: 'bookshelf-loading'
-          .preview-wrapper
-    = render partial: 'shared/sidebar'
-
-  :javascript
-    window.is_refines_present = #{ refines_present? };
-    window.default_preview_thumb = "#{asset_path('icon-text.gif')}";
+  %h1 Bookshelf has been discontinued.
+  %p
+    You can still use
+    %a{:href => '/search/'}search,
+    %a{:href => '/map/'}map,
+    or
+    %a{:href => '/timeline/'}timeline
+    to find content in the DPLA.  We're sorry for any inconvenience.
