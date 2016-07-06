@@ -28,7 +28,7 @@
       .popBar
         .pagination
           .t-data-grid-pager
-            - pages = (partner_facets.count.to_f / 30).ceil
+            - pages = [(partner_facets.count.to_f / 30).ceil, 10].min
             - (1..pages).to_a.each do |page|
               - if page == 1
                 %span.current{data: {page: page}}= page
