@@ -770,24 +770,25 @@ aside .module span { color: #000; }
 
 .searchViews {
     float: left;
-    margin: 23px 0 0;
+    margin: 13px 0 0;
     width: 28%;
 }
 .searchViews span {
     float: left;
     color: #fff;
-    margin: 0 9% 0 0;
+    margin: 0;
 }
 .searchViews ul {
     float: left;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
-.searchViews li:first-child { margin: 0; }
 .searchViews li {
     float: left;
     list-style: none outside none;
-    margin: 0 0 0 12px;
+    margin: 0;
+    width: 33%;
 }
 .searchViews li span { color: #ccc; }
 .searchViews li.active span, .searchViews li:hover span {
@@ -799,24 +800,30 @@ aside .module span { color: #000; }
     transition: 0.3s ease;
 }
 .searchViews li.active span { cursor: text; }
+
 .searchViews a {
     display: block;
-    height: 17px;
-    width: 23px;
+    height: 46px;
+    position: relative;
 }
-
-.searchViews a.viewTwo {
-    height: 26px;
-    width: 14px;
-    margin-top: -4px;
+.searchViews a span {
+    position: absolute;
 }
-.searchViews a.viewThree {
-    height: 20px;
-    margin-top: -1px;
+.searchViews a span.icon-view-list {
+    left: 1px;
+    top: 4px;
 }
-.searchViews a.viewFour {
-    height: 20px;
-    margin-top: -3px;
+.searchViews a.viewTwo span.icon-view-map {
+    top: 0px;
+    left: 7px;
+}
+.searchViews a.viewThree span.icon-view-time {
+    top: 3px;
+    left: 11px;
+}
+.searchViews a span.icon-label {
+    left: 0;
+    bottom: 0;
 }
 
 .exibition-image {
@@ -3923,7 +3930,6 @@ body .container .upper-left h2 { font-size: 1.4em; }
 
 .searchViews {
     width: 56%;
-    margin-top: 23px;
 }
 .matches h4 {
     margin-bottom: 6px;
