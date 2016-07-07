@@ -53,7 +53,7 @@
           .pagination
             .t-data-grid-pager
               - if country_facets.count > 30
-                - pages = (country_facets.count.to_f / 30).ceil
+                - pages = [(country_facets.count.to_f / 30).ceil, 10].min
                 - (1..pages).to_a.each do |page|
                   - if page == 1
                     %span.current{data: {page: page}}= page
@@ -106,7 +106,7 @@
           .pagination
             .t-data-grid-pager
               - if state_facets.count > 30
-                - pages = (state_facets.count.to_f / 30).ceil
+                - pages = [(state_facets.count.to_f / 30).ceil, 10].min
                 - (1..pages).to_a.each do |page|
                   - if page == 1
                     %span.current{data: {page: page}}= page
@@ -131,7 +131,7 @@
         .pagination
           .t-data-grid-pager
             - if place_facets.count > 30
-              - pages = (place_facets.count.to_f / 30).ceil
+              - pages = [(place_facets.count.to_f / 30).ceil, 10].min
               - (1..pages).to_a.each do |page|
                 - if page == 1
                   %span.current{data: {page: page}}= page
@@ -157,7 +157,7 @@
         .pagination
           .t-data-grid-pager
             - if place_facets.count > 30
-              - pages = (place_facets.count.to_f / 30).ceil
+              - pages = [(place_facets.count.to_f / 30).ceil, 10].min
               - (1..pages).to_a.each do |page|
                 - if page == 1
                   %span.current{data: {page: page}}= page

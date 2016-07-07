@@ -8,12 +8,23 @@
         %span= query
       returned
       = number_with_delimiter search.count, delimiter: ','
+      - if search.count > 1
+        results
+      - else
+        result
       - if 'map' == params[:controller]
-        results with location coordinates.
+        with location coordinates
       - elsif 'timeline' == params[:controller]
-        results with dates.
-      -else
-        results.
+        with dates
+      - if provider_facets.present?
+        from
+        = "#{ 'over' if provider_facets.count >= 2000 }"
+        = "#{ number_with_delimiter provider_facets.count, delimiter: ',' }"
+        contributing
+        - if provider_facets.count > 1
+          institutions
+        - else
+          institution
       = render 'shared/results/refined_by', search: search
 - else
   .searchResults.no-results#content{role: "main"}

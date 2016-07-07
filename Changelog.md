@@ -1,3 +1,12 @@
+21.2.1 (7 Jul 2016)
+---
+* Allow search terms with apostrophes on map & timeline
+* Increase num of facets in popup filters
+* Include num of providers in search total message
+* Change discontinue message on bookshelf
+* Fix new view object message
+* Add main nav link to tech wiki
+
 21.2.0 (5 Jul 2016)
 ---
 * Discontinue bookshelf

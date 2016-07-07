@@ -15,6 +15,8 @@
       Get full
       <% if (typeof item.type === 'string' && item.type != '') { %>
         <%= item.type %>
+      <% } else if (_.isArray(item.type) && item.type.length == 1) { %>
+        <%= item.type[0] %>
       <% } else { %>
         item
       <% } %>

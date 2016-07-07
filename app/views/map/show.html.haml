@@ -24,7 +24,7 @@
 
 :javascript
   window.states   = #{@search.geocoded_states.to_json};
-  window.api_search_path = '#{@search.api_search_path}';
+  window.api_search_path = "#{@search.api_search_path}";
   window.app_search_path = '#{@search.app_search_path}';
   window.config = #{Settings.ui.maps.to_json};
   window.default_images = {

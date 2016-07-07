@@ -41,4 +41,22 @@ module ApplicationHelper
       image_name
     end
   end
+
+  def view_object_link(item)
+    return unless item.url.present?
+
+    type = Array.wrap(item.type)
+    data_provider = Array.wrap(item.data_provider)
+
+    type_name = 'item'
+    type_name = type.last if type.count == 1
+
+    ci_name = 'contributing institution'
+    ci_name = data_provider.join(', ') if data_provider.present?
+
+    link = link_to item.url, target: :_blank, class: 'ViewObject' do
+      "Get full #{type_name} from #{ci_name}" \
+      '<span class="icon-view-object" aria-hidden="true"></span>'.html_safe
+    end
+  end
 end
