@@ -11,18 +11,7 @@
       .contentBox
         = link_to @item.url, target: :_blank do
           = item_thumbnail(@item, request)
-        = link_to @item.url, target: :_blank, class:'ViewObject' do
-          Get full
-          - if @item.type.present? and @item.type.is_a? String
-            = @item.type
-          - else
-            item
-          from
-          - if @item.data_provider.present?
-            = Array.wrap(@item.data_provider).join(', ')
-          - else
-            contributing institution
-          %span.icon-view-object{"aria-hidden" => "true"}
+        = view_object_link(@item)
       .table
         = item_field :creator
         = item_field :created_date

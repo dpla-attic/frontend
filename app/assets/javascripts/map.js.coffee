@@ -166,6 +166,8 @@ DPLAMap = L.Class.extend
       item_type = 'item'
       if typeof point.type == 'string' and point.type != ''
         item_type = point.type
+      if $.isArray(point.type) && point.type.length == 1
+        item_type = point.type[0]
       item_data_provider = 'contributing institution'
       if point.data_provider != ''
         item_data_provider = point.data_provider
