@@ -1,3 +1,7 @@
+21.2.2 (7 Jul 2016)
+---
+* Fix typo in ebooks URL
+
 21.2.1 (7 Jul 2016)
 ---
 * Allow search terms with apostrophes on map & timeline
