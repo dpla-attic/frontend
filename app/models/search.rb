@@ -17,6 +17,7 @@ class Search
     results
   end
 
+  # @return [DPLA::Result]
   def result(args = {})
     items(args)
   end
