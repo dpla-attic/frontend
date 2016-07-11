@@ -1444,7 +1444,6 @@ aside .moduleSection p { margin: 0 0 10px; }
 
 .timeline .toggle {
     display: inline-block;
-    margin: 6px 0 10px;
 }
 .timeline aside {
     height: 100%;
@@ -2035,7 +2034,7 @@ input[type="checkbox"] {
     cursor: pointer;
     display: none;
     font-size: 16px;
-    margin: 0 0 20px;
+    margin: 6px 0 18px 0;
     padding: 7px 12px;
     width: auto;
 }
@@ -4114,7 +4113,6 @@ body .container .upper-left h2 { font-size: 1.4em; }
     width: 30%;
 }
 .search-page aside { margin: 0; }
-.search-page h1 { position: absolute; left: -999em; }
 .collection-detail h1 {
     position: static;}
 .searchRow { margin: 0 0 7px; }
@@ -4212,8 +4210,7 @@ aside { height: 100%; }
 .map iframe { height: 200px; }
 .mapContainer { position: relative; }
 .mobile-hover { height: 100%; position: absolute; width: 100%; z-index: 2; }
-.map .searchRow { margin: 0 0 5%; }
-.map .toggle { margin: 4% 0 5%; display: none; }
+.map .toggle { display: none; }
 .map .toggle.mobile { display: inline-block; }
 .map .toggle.Maside { display: none; }
 .map .pagination { width: 100%; }
