@@ -1,3 +1,10 @@
+21.2.3 (20 Jul 2016)
+---
+* Add direct links from homepage slideshow images
+* Make header display consistent across mobile search interfaces
+* Increase apps per page to 60
+* Add icon labels for search, map, and timeline
+
 21.2.2 (7 Jul 2016)
 ---
 * Fix typo in ebooks URL
