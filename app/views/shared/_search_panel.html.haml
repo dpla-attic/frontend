@@ -5,20 +5,19 @@
   .searchRowRight
     - if %w(timeline search map).include? params[:controller]
       .searchViews
-        %span View:
         %ul
           %li{class: params[:controller] == 'search' && 'active'}
             = link_to search_path(params.except(:controller, :action)) do
               %span.icon-view-list{"aria-hidden" => "true", :title => "List"}
-              %span.visuallyhidden List
+              %span.icon-label List
           %li{class: params[:controller] == 'map' && 'active'}
             = link_to map_path(params.except(:controller, :action)), class: 'viewTwo' do
               %span.icon-view-map{"aria-hidden" => "true", :title => "Map"}
-              %span.visuallyhidden Map
+              %span.icon-label Map
           %li{class: params[:controller] == 'timeline' && 'active'}
             = link_to timeline_path(params.except(:controller, :action)), class: 'viewThree' do
               %span.icon-view-time{"aria-hidden" => "true", :title => "Timeline"}
-              %span.visuallyhidden Timeline
+              %span.icon-label Timeline
     %a.search-btn{:href => ""}
       %span.icon-mag-glass{"aria-hidden" => "true"}
       %span.visuallyhidden Search

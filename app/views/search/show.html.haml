@@ -4,10 +4,11 @@
 .layoutTwo.search-page
   = render 'shared/search_panel'
   = render 'shared/share_save'
-  = render 'shared/aside_toggle'
   %h1 Search Results
   = render 'shared/results/search_results', query: params[:q], search: @search
   - if @search.count > 0
+    = render 'shared/aside_toggle'
+
     .slidePopOut#content{role: "main"}
       #resultsBarTop.resultsBar
         = render partial: 'paginator'

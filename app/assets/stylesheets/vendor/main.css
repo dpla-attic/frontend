@@ -770,24 +770,25 @@ aside .module span { color: #000; }
 
 .searchViews {
     float: left;
-    margin: 23px 0 0;
+    margin: 13px 0 0;
     width: 28%;
 }
 .searchViews span {
     float: left;
     color: #fff;
-    margin: 0 9% 0 0;
+    margin: 0;
 }
 .searchViews ul {
     float: left;
     margin: 0;
     padding: 0;
+    width: 100%;
 }
-.searchViews li:first-child { margin: 0; }
 .searchViews li {
     float: left;
     list-style: none outside none;
-    margin: 0 0 0 12px;
+    margin: 0;
+    width: 33%;
 }
 .searchViews li span { color: #ccc; }
 .searchViews li.active span, .searchViews li:hover span {
@@ -799,24 +800,30 @@ aside .module span { color: #000; }
     transition: 0.3s ease;
 }
 .searchViews li.active span { cursor: text; }
+
 .searchViews a {
     display: block;
-    height: 17px;
-    width: 23px;
+    height: 46px;
+    position: relative;
 }
-
-.searchViews a.viewTwo {
-    height: 26px;
-    width: 14px;
-    margin-top: -4px;
+.searchViews a span {
+    position: absolute;
 }
-.searchViews a.viewThree {
-    height: 20px;
-    margin-top: -1px;
+.searchViews a span.icon-view-list {
+    left: 1px;
+    top: 4px;
 }
-.searchViews a.viewFour {
-    height: 20px;
-    margin-top: -3px;
+.searchViews a.viewTwo span.icon-view-map {
+    top: 0px;
+    left: 7px;
+}
+.searchViews a.viewThree span.icon-view-time {
+    top: 3px;
+    left: 11px;
+}
+.searchViews a span.icon-label {
+    left: 0;
+    bottom: 0;
 }
 
 .exibition-image {
@@ -1444,7 +1451,6 @@ aside .moduleSection p { margin: 0 0 10px; }
 
 .timeline .toggle {
     display: inline-block;
-    margin: 6px 0 10px;
 }
 .timeline aside {
     height: 100%;
@@ -2035,7 +2041,7 @@ input[type="checkbox"] {
     cursor: pointer;
     display: none;
     font-size: 16px;
-    margin: 0 0 20px;
+    margin: 6px 0 18px 0;
     padding: 7px 12px;
     width: auto;
 }
@@ -3923,7 +3929,6 @@ body .container .upper-left h2 { font-size: 1.4em; }
 
 .searchViews {
     width: 56%;
-    margin-top: 23px;
 }
 .matches h4 {
     margin-bottom: 6px;
@@ -4114,7 +4119,6 @@ body .container .upper-left h2 { font-size: 1.4em; }
     width: 30%;
 }
 .search-page aside { margin: 0; }
-.search-page h1 { position: absolute; left: -999em; }
 .collection-detail h1 {
     position: static;}
 .searchRow { margin: 0 0 7px; }
@@ -4212,8 +4216,7 @@ aside { height: 100%; }
 .map iframe { height: 200px; }
 .mapContainer { position: relative; }
 .mobile-hover { height: 100%; position: absolute; width: 100%; z-index: 2; }
-.map .searchRow { margin: 0 0 5%; }
-.map .toggle { margin: 4% 0 5%; display: none; }
+.map .toggle { display: none; }
 .map .toggle.mobile { display: inline-block; }
 .map .toggle.Maside { display: none; }
 .map .pagination { width: 100%; }
