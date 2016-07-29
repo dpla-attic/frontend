@@ -1,3 +1,8 @@
+21.2.5 (29 Jul 2016)
+---
+* Fix URL metadata field display and typo
+* Remove jst.ejs comment that was hindering asset compliation
+
 21.2.4 (29 Jul 2016)
 ---
 * Auto-link metadata values in item view
