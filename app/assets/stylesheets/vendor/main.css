@@ -2425,6 +2425,9 @@ aside h5 { margin: 5px 0 1em; }
     font: 0.800em/1em 'source_sans_pro_semiboldRg', arial, sans-serif;
     display: block;
 }
+.items-controller.show-action li .ViewObject {
+    font: inherit;
+}
 .ViewObject:hover {
 	text-decoration: none;
 }
