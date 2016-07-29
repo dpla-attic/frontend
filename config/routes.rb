@@ -11,6 +11,8 @@ DplaPortal::Application.routes.draw do
 
   get '/item/:id', to: 'items#show', as: 'item', format: 'html'
   get '/item/:id.json', to: 'items#show', as: 'item_json', format: 'json'
+  post '/items/next'
+  post '/items/previous'
 
   resources :subjects, only: :index
   resources :partners, only: :index

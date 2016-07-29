@@ -22,6 +22,8 @@ module DPLA
 
     alias limit_value limit
 
+    # total number of search results
+    # this overrides the normal count method for an Array
     def count
       @count || 0
     end
@@ -40,6 +42,34 @@ module DPLA
 
     def last_page?
       current_page >= total_pages
+    end
+
+    ##
+    # Get the position of the next item in the DPLA::Result, given the current
+    # item's position.
+    # Returns nil if there is no next result.
+    # Positions are zero-based, so the first position in a result is 0.
+    #
+    # @param Integer
+    # @return Integer || nil
+    def position_after(index)
+      current_position = start.to_i + index
+      return (current_position + 1) if count > (current_position + 1)
+      return nil
+    end
+
+    ##
+    # Get the position of the previous item in the DPLA::Result, given the
+    # current item's position.
+    # Returns nil if there is no previous result.
+    # Positions are zero-based, so the first position in a result is 0.
+    #
+    # @param Integer
+    # @return Integer || nil
+    def position_before(index)
+      current_position = start.to_i + index
+      return (current_position - 1) if current_position > 0
+      return nil
     end
   end
 end
