@@ -15,14 +15,19 @@
       %article
         = render partial: 'matches'
         .search
-          - @items.each do |item|
-            %section
+          - @items.each_with_index do |item, index|
+            -# data-* attributes are used in Google Analytics event tracking
+            %section{ data: { 'item-id' => item.id,
+                              'provider' => item.provider,
+                              'data-provider' => item.data_provider,
+                              'title' => item.title } }
+
               .searchRight
-                = link_to item_thumbnail(item, request), item_path(item.id, back_uri: request.url)
+                = link_to item_thumbnail(item, request), item_path(item.id, back_uri: request.url, next: @items.position_after(index), previous: @items.position_before(index))
               .searchLeft
                 %h6= Array.wrap(item.type).join(', ')
                 - if item.id.present?
-                  %h4= link_to item.title || item.id, item_path(item.id, back_uri: request.url)
+                  %h4= link_to item.title || item.id, item_path(item.id, back_uri: request.url, next: @items.position_after(index), previous: @items.position_before(index))
                 - else
                   %h4= item.title
                 %p

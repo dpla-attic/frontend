@@ -1,4 +1,11 @@
 %ul.shareSave
+  - if 'items' == params[:controller]
+    - if @previous.present?
+      %li.btn
+        = link_to '« Previous', items_previous_path(position: @previous, back_uri: params[:back_uri]), method: :post
+    - if @next.present?
+      %li.btn
+        = link_to 'Next »', items_next_path(position: @next, back_uri: params[:back_uri]), method: :post
   %li.btn
     - if 'search' == params[:controller]
       = link_to "Save", saved_searches_path(params.except(:controller, :action)), method: :post

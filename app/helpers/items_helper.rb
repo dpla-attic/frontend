@@ -34,7 +34,11 @@ module ItemsHelper
               end.join("<br/>").html_safe
             end
           else
-            content_tag(:li, value.join("<br />").html_safe)
+            content_tag(:li) do
+              value.map do |v|
+                Rinku.auto_link(v, :urls, 'target="_blank"')
+              end.join("<br />").html_safe
+            end
           end
         end
       end

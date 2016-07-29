@@ -1,3 +1,10 @@
+21.2.4 (29 Jul 2016)
+---
+* Auto-link metadata values in item view
+* Add menu link to Searching DPLA
+* Add previous/next buttons in itemview
+* Track clickthrough events to provider pages
+
 21.2.3 (20 Jul 2016)
 ---
 * Add direct links from homepage slideshow images

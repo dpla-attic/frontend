@@ -17,6 +17,7 @@ class Search
     results
   end
 
+  # @return [DPLA::Result]
   def result(args = {})
     items(args)
   end
@@ -80,7 +81,7 @@ class Search
       id sourceResource.title isShownAt object
       sourceResource.type sourceResource.creator
       sourceResource.spatial.name sourceResource.spatial.coordinates
-      sourceResource.date dataProvider
+      sourceResource.date provider.name dataProvider
     )
     conditions = DPLA::Conditions.new({ q: @term }.merge(@filters).merge(fields: fields))
     "#{api_base_path}/items?#{conditions}#{api_key}"
