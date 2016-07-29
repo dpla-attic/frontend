@@ -34,6 +34,7 @@ gem 'turnout'
 gem 'net-ssh', '~> 2.1'
 gem 'fog', '~> 1.34'
 gem 'fog-google', '~> 0.0.7'
+gem 'rinku', '~> 2.0'
 
 group :development do
   gem 'thin'

@@ -71,4 +71,18 @@ describe Item do
       expect(item.language).to match_array ['x']
     end
   end
+
+  describe '#rights' do
+    it 'handles multiple values' do
+      doc = { 'sourceResource' => { 'rights' => ['X', 'Y'] } }
+      item = Item.new(doc)
+      expect(item.rights).to match_array ['X', 'Y']
+    end
+
+    it 'downcases first character of URLs' do
+      doc = { 'sourceResource' => { 'rights' => 'Http://Example.com' } }
+      item = Item.new(doc)
+      expect(item.rights).to match_array ['http://Example.com']
+    end
+  end
 end

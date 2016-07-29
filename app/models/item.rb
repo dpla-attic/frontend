@@ -48,8 +48,16 @@ class Item
     end
   end
 
+  # @return [Array<String>]
+  # downcase first letter if rights statement is URI
   def rights
-    @sourceResource['rights']
+    Array.wrap(@sourceResource['rights']).map do |rights|
+      if valid_http_uri?(rights)
+        rights[0, 1].downcase + rights[1..-1]
+      else
+        rights
+      end
+    end
   end
 
   #returns and array of statements
@@ -160,25 +168,24 @@ class Item
 
   private
 
-    def valid_http_uri?(uri)
-      URI.parse(uri).kind_of?(URI::HTTP)
-    rescue URI::InvalidURIError
-      false
-    end
+  def valid_http_uri?(uri)
+    URI.parse(uri).kind_of?(URI::HTTP)
+  rescue URI::InvalidURIError
+    false
+  end
 
-    def transform_dotted_keys(doc)
-      doc.keys
-        .select { |k| k.index('.') }
-        .select { |k| k =~ /^(sourceResource|object)/ }
-        .each do |k|
-          value = doc.delete k
-          tokens = k.split '.'
-          first_token = tokens.shift
-          tokens.reverse.each { |t| value = {t => value} }
-          doc[first_token] ||= {}
-          doc[first_token].deep_merge! value
-        end
-      doc
-    end
-
+  def transform_dotted_keys(doc)
+    doc.keys
+      .select { |k| k.index('.') }
+      .select { |k| k =~ /^(sourceResource|object)/ }
+      .each do |k|
+        value = doc.delete k
+        tokens = k.split '.'
+        first_token = tokens.shift
+        tokens.reverse.each { |t| value = {t => value} }
+        doc[first_token] ||= {}
+        doc[first_token].deep_merge! value
+      end
+    doc
+  end
 end
