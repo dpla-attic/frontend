@@ -22,6 +22,7 @@ class DPLA.Models.TimelineItem extends Backbone.Model
       highlight:   false
       created_date:  created_date || ''
       data_provider: data_provider || ''
+      provider:    doc['provider.name'] || ''
 
 class DPLA.Collections.TimelineItems extends Backbone.Collection
   requestByYear: (year, options = {}) ->

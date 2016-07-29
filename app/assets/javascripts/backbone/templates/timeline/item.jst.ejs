@@ -1,4 +1,9 @@
-<section class="<%= item.highlight ? 'highlight' : '' %>">
+<%# data-* attributes are used in Google Analytics event tracking %>
+<section class="<%= item.highlight ? 'highlight' : '' %>"
+         data-item-id="<%= item.id %>"
+         data-provider="<%= item.provider %>"
+         data-data-provider="<%= item.data_provider %>"
+         data-title="<%= item.title %>">
   <% back_uri = encodeURIComponent(window.location.href); %>
   <div class="sectionRight">
     <a href="/item/<%= item.id %>?back_uri=<%= back_uri %>">
