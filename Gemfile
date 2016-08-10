@@ -15,7 +15,7 @@ end
 gem 'haml'
 gem 'haml-rails'
 gem 'simple_form'
-gem 'breadcrumbs_on_rails'
+gem 'breadcrumbs_on_rails', '~> 2.3'
 gem 'kaminari'
 gem 'navigasmic'
 gem 'carrierwave'
