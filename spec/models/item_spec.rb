@@ -39,6 +39,13 @@ describe Item do
         expect(item.preview_image).to be_nil
       end
     end
+
+    context 'with multiple objects' do
+      let(:value) { ['http://bar.com/foo', 'http://bar.com/bat'] }
+      let(:ret) { 'http://bar.com/foo' }
+
+      it_behaves_like 'an item with an object'
+    end
   end
 
   describe '#language' do
