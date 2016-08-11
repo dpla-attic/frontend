@@ -30,12 +30,19 @@ $(function(){
  * Relies on data-* attributes embedded in the HTML of the page.
  */
 var trackItemViewEvent = function(){
-  var item = $("[data-item-id]");
-  var category = "View Item : " + item.attr("data-provider");
-  var action = item.attr("data-data-provider");
-  var label = item.attr("data-item-id") + " : " + item.attr("data-title");
+  /* 
+   * 'ga' must be defined for a signal to be sent to Google Analtyics.
+   * It is set by the google analtyics rails gem if valid tracker is present.
+   */
+  if (typeof ga !== 'undefined') {
 
-  ga('send', 'event', category, action, label);
+    var item = $("[data-item-id]");
+    var category = "View Item : " + item.attr("data-provider");
+    var action = item.attr("data-data-provider");
+    var label = item.attr("data-item-id") + " : " + item.attr("data-title");
+
+    ga('send', 'event', category, action, label);
+  }
 }
 
 /* 
@@ -44,10 +51,16 @@ var trackItemViewEvent = function(){
  * Relies on data-* attributes belonging to a parent of the given object.
  */
 var trackClickThroughEvent = function(obj){
-  var item = $(obj).parents("[data-item-id]");
-  var category = "Click Through : " + item.attr("data-provider");
-  var action = item.attr("data-data-provider");
-  var label = item.attr("data-item-id") + " : " + item.attr("data-title");
+  /* 
+   * 'ga' must be defined for a signal to be sent to Google Analtyics.
+   * It is set by the google analtyics rails gem if valid tracker is present.
+   */
+  if (typeof ga !== 'undefined') {
+    var item = $(obj).parents("[data-item-id]");
+    var category = "Click Through : " + item.attr("data-provider");
+    var action = item.attr("data-data-provider");
+    var label = item.attr("data-item-id") + " : " + item.attr("data-title");
 
-  ga('send', 'event', category, action, label, {'transport': 'beacon'});
+    ga('send', 'event', category, action, label, {'transport': 'beacon'});
+  }
 }
