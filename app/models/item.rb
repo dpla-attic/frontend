@@ -136,7 +136,8 @@ class Item
   # @return [String, nil]  link to DPLA thumbnail HTTPS proxy service if it is a
   # valid HTTP uri; nil otherwise
   def preview_image
-    return @object if valid_http_uri?(@object)
+    object = Array.wrap(@object).first
+    return object if valid_http_uri?(object)
     nil
   end
 

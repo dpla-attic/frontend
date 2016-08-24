@@ -1,3 +1,10 @@
+21.2.6 (24 Aug 2016)
+---
+* Pin breadcrumbs_on_rails gem to v2.3
+* Handle multiple thumbnails for a single item
+* Handle missing Google Analytics tracker
+* Change gif it up link in main menu
+
 21.2.5 (29 Jul 2016)
 ---
 * Fix URL metadata field display and typo
