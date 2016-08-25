@@ -1,3 +1,7 @@
+21.2.7 (25 Aug 2016)
+---
+* Pin gems to tiny versions
+
 21.2.6 (24 Aug 2016)
 ---
 * Pin breadcrumbs_on_rails gem to v2.3
