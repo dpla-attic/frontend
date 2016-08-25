@@ -11,6 +11,13 @@ module DPLA
     private
 
     def transform(conditions)
+      # When is `conditions' not an array or hash?  It seems that it should
+      # always be one or the other, based on what I see elsewhere in the
+      # code. It can be an array of IDs when called by DPLA::Items.by_ids.
+      # It is usually a Hash.  The default case would ideally raise an
+      # exception or assert that `conditions' has a `#to_s' method for
+      # `encode_uri'.  --Mark B
+      #
       case conditions
       when Array
         encode_uri(conditions.map { |i| i }.join(' OR '))
@@ -18,6 +25,8 @@ module DPLA
         conditions = convert_conditions(conditions)
         transform_hash(conditions)
       else
+        # This appears to be unreachable, but `conditions' has to have a
+        # `#to_s' method or `#encode_uri' will raise an exception.
         encode_uri(conditions)
       end
     end
@@ -67,8 +76,9 @@ module DPLA
       end
     end
 
+
     def transform_hash(conditions)
-      [].tap do |query|
+      ["exact_field_match=true"].tap do |query|
         conditions.each do |key, value|
           next unless value.present?
           comma_separated = [:facets, :fields].include?(key.to_sym)
@@ -83,6 +93,9 @@ module DPLA
     end
 
     def encode_uri(value)
+       # It is not clear why characters matching URI::PATTERN::UNRESERVED are
+       # declared unsafe below, but one might assume it's because those
+       # characters could be used to subvert an Elasticsearch search.
        URI.encode(value.to_s, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
     end
   end
