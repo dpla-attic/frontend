@@ -142,7 +142,8 @@ class Item
   end
 
   def preview_image_ssl
-    return "//#{Settings.url.host}/thumb/#{@id}" if valid_http_uri?(@object)
+    object = Array.wrap(@object).first
+    return "//#{Settings.url.host}/thumb/#{@id}" if valid_http_uri?(object)    
     nil
   end
 
