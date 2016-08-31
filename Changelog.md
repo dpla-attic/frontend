@@ -1,3 +1,8 @@
+21.3.0 (31 Aug 2016)
+---
+* Handle multiple objects in ssl item preview
+* Use API's new `exact_field_match` for better facets
+
 21.2.7 (25 Aug 2016)
 ---
 * Pin gems to tiny versions
