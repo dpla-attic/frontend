@@ -1,3 +1,7 @@
+21.3.1 (13 Sep 2016)
+---
+* Change dplafest main menu link
+
 21.3.0 (31 Aug 2016)
 ---
 * Handle multiple objects in ssl item preview
