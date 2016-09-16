@@ -1,3 +1,7 @@
+21.3.2 (16 Sep 2016)
+---
+* Add GIF IT UP Slider to top
+
 21.3.1 (13 Sep 2016)
 ---
 * Change dplafest main menu link
