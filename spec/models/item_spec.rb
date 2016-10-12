@@ -85,11 +85,5 @@ describe Item do
       item = Item.new(doc)
       expect(item.rights).to match_array ['X', 'Y']
     end
-
-    it 'downcases first character of URLs' do
-      doc = { 'sourceResource' => { 'rights' => 'Http://Example.com' } }
-      item = Item.new(doc)
-      expect(item.rights).to match_array ['http://Example.com']
-    end
   end
 end
