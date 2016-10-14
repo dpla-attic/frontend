@@ -51,13 +51,7 @@ class Item
   # @return [Array<String>]
   # downcase first letter if rights statement is URI
   def rights
-    Array.wrap(@sourceResource['rights']).map do |rights|
-      if valid_http_uri?(rights)
-        rights[0, 1].downcase + rights[1..-1]
-      else
-        rights
-      end
-    end
+    Array.wrap(@sourceResource['rights'])
   end
 
   #returns and array of statements
