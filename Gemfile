@@ -32,7 +32,8 @@ gem 'google-analytics-rails', '~> 1.1.0'
 gem 'meta-tags', '~> 2.2.0'
 gem 'turnout', '~> 2.3.1'
 gem 'net-ssh', '~> 2.9.4'
-gem 'rinku', '~> 2.0'
+# rinku versions greater than 2.0.0 require ruby >= 2.0.0
+gem 'rinku', '2.0.0'
 gem 'json', '~> 1.8.3'
 gem 'fog', '~> 1.38.0'
 # We don't use those two gems but need to pin them explicitly because of
