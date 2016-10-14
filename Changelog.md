@@ -1,3 +1,8 @@
+21.3.3 (14 Oct 2016)
+---
+* Pin rinku gem to version 2.0.0
+* Do not downcase first letter of rights statement URLs
+
 21.3.2 (16 Sep 2016)
 ---
 * Add GIF IT UP Slider to top
