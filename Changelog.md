@@ -1,3 +1,7 @@
+21.4.0 (21 Oct 2016)
+---
+* Swap Gif It Up carousel image for Pres Elections image
+
 21.3.3 (14 Oct 2016)
 ---
 * Pin rinku gem to version 2.0.0
