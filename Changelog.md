@@ -1,3 +1,8 @@
+21.4.1 (24 Oct 2016)
+---
+* Reverse the ordering of carousel images so that the
+  Battle on the Ballot image is first.
+
 21.4.0 (21 Oct 2016)
 ---
 * Swap Gif It Up carousel image for Pres Elections image
