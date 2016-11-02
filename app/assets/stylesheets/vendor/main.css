@@ -606,17 +606,6 @@ header .active a { border-bottom: 3px solid #2795b6; }
             .thumbs-list a {text-decoration: none;}
              .thumbs-list a img {border: 2px solid transparent;}
              .thumbs-list a:hover img { border-color: #808080; }
-            .exhibition-overview .leftSide {color: #818285;}
-            .exhibition-overview .leftSide section {
-                background-color: #ededed;
-                margin: 0 0 1em 0;
-            }
-                .exhibition-overview .leftSide section .caption {padding: .75em;}
-            .exhibition-overview .leftSide h5 {
-                color: #2b2b2b;
-                font-size: 100%;
-                margin: 1.5em 0 .5em 0;
-            }
 
             /* Maintain even theme rows */
             .overview.six .thumbs-list li.four, .overview.eight .thumbs-list li.five {
@@ -1795,8 +1784,7 @@ input[type="checkbox"] {
     width: 93.93872%;
 }
 .leftSide > img,
-.leftSide > section,
-.exhibition-overview .leftSide > section {margin-top: 3px;}
+.leftSide > section {margin-top: 3px;}
 
 
 .rightSide {
@@ -2396,7 +2384,7 @@ aside h5 { margin: 5px 0 1em; }
 
 .search {
     clear: both;
-    margin: 0;
+    margin: 84px 0 0 0;
 }
 .search section {
     border-top: 1px solid #bebebe;
@@ -3735,7 +3723,7 @@ article.overview .description {
 .rightSide {
     width: 100%;
 }
-.app-detail .rightSide, .app-detail .leftSide, .collection-detail .rightSide, .collection-detail .leftSide, .exhibition-overview .rightSide {width: auto; float: none; }
+.app-detail .rightSide, .app-detail .leftSide, .collection-detail .rightSide, .collection-detail .leftSide {width: auto; float: none; }
 body .container article h1, body .container .upper-section h1 {padding: 0;}
 
 #resultsBarBottom {
@@ -4111,6 +4099,9 @@ body .container .upper-left h2 { font-size: 1.4em; }
 .searchRowLeft { display: none; }
 .searchRowRight { width: 97.33953%; }
 .close { display: none; }
+.search {
+    margin: 20px 0 0 0;
+}
 .search section {
     padding-top: 5%;
 }
