@@ -13,7 +13,6 @@
       #resultsBarTop.resultsBar
         = render partial: 'paginator'
       %article
-        = render partial: 'matches'
         .search
           - @items.each_with_index do |item, index|
             -# data-* attributes are used in Google Analytics event tracking

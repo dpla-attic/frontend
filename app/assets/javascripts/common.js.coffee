@@ -11,7 +11,7 @@ jQuery ->
   if $('input#searchField').val().length == 0
     $('input#searchField').focus()
 
-  $('#more_subjects, #more_locations, #more_types, #more_providers, #more_partners, #more_languages, #more_exhibitions').on 'click', '.pagination a', ->
+  $('#more_subjects, #more_locations, #more_types, #more_providers, #more_partners, #more_languages').on 'click', '.pagination a', ->
     parent = $(this).parents('.popBar').parent()
     current = parent.find '.pagination .current'
     unless current.text() == $(this).text()
