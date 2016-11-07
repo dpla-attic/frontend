@@ -1,3 +1,7 @@
+21.4.2 (7 Nov 2016)
+---
+* Remove code to search elasticsearch for exhibitions
+
 21.4.1 (24 Oct 2016)
 ---
 * Reverse the ordering of carousel images so that the
