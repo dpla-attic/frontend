@@ -1,3 +1,7 @@
+21.5.0 (10 Nov 2016)
+---
+* Add canonical tag to item pages
+
 21.4.2 (7 Nov 2016)
 ---
 * Remove code to search elasticsearch for exhibitions
