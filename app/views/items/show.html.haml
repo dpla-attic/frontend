@@ -1,5 +1,7 @@
 - page_title! @item.title
 - set_meta_tags :og => item_ogp_meta(@item)
+- set_meta_tags :canonical => request.original_url.split(/\?/)[0]
+
 .layout
   = render 'shared/search_panel'
   = render 'shared/share_save'
