@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 3.2.17'
+gem 'rake', '~> 11.3.0'
 gem 'pg', '~> 0.18.4', :require => 'pg'
 
 group :assets do
