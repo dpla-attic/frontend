@@ -1,3 +1,7 @@
+21.5.1 (9 Dec 2016)
+---
+* Pin rake gem
+
 21.5.0 (10 Nov 2016)
 ---
 * Add canonical tag to item pages
