@@ -1091,9 +1091,16 @@ article .shareSave { margin: 0 0 3% 74.286%; }
 }
 .more a { padding: 0 0 0 7%; }
 
-
-
-
+div.rights_statement {
+    margin-bottom: 1em;
+}
+div.rights_statement:last-child {
+    margin-bottom: inherit;
+}
+div.rights_statement a {
+    display: block;
+    margin-top: 5px;
+}
 
 
 
