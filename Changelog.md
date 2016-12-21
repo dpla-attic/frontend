@@ -1,3 +1,8 @@
+21.5.2 (21 Dec 2016)
+---
+* Update bunlder for Travis tests
+* Add rightsstatement.org metadata to item page
+
 21.5.1 (9 Dec 2016)
 ---
 * Pin rake gem
