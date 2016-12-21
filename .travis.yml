@@ -12,3 +12,7 @@ sudo: false
 addons:
     code_climate:
         repo_token: cdf26a4bea16a6cf03275316e208edeb0aff96ebf3c937fd02943401c6f759c6
+
+before_install:
+  - gem install bundler
+  - bundle --version
