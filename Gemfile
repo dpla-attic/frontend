@@ -40,6 +40,8 @@ gem 'fog', '~> 1.38.0'
 # the fog metagem dependencies
 gem 'fog-google', '~> 0.0.7'
 gem 'fog-profitbricks', '~> 0.0.5'
+# nokogiri-1.7.0 requires ruby version >= 2.1.0
+gem 'nokogiri', '< 1.7.0'
 
 group :development do
   gem 'thin', '~> 1.7.0'
