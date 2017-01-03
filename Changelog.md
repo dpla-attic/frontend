@@ -1,3 +1,7 @@
+21.5.3 (3 Jan 2017)
+---
+* Pin nokogiri gem version
+
 21.5.2 (21 Dec 2016)
 ---
 * Update bunlder for Travis tests
