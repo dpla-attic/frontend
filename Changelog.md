@@ -1,3 +1,8 @@
+21.5.4 (17 Jan 2017)
+---
+* Update copyright years
+* Add homepage slide for DPLAfest 2017
+
 21.5.3 (3 Jan 2017)
 ---
 * Pin nokogiri gem version

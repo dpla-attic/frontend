@@ -104,4 +104,4 @@ License
 --------
 This application is released under an AGPLv3 license.
 
-* Copyright Digital Public Library of America, 2015
+* Copyright Digital Public Library of America, 2015 -- 2017
