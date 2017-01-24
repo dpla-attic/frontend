@@ -52,7 +52,6 @@
         = item_field :type, facet: :type
         = item_field :subject, facet: :subject
         = item_field :language, facet: :language
-        = item_field :rights
         -if @item.standardized_rights_statement.present?
           =item_field :standardized_rights_statement do
             - @item.standardized_rights_statement.each do |srs|
@@ -60,6 +59,7 @@
                 %div.rights_statement
                   = RIGHTS_STATEMENTS[srs]['definition']
                   = link_to srs, srs
+        = item_field :rights
         = item_field :url, title: 'URL' do
           = link_to @item.url, @item.url, target: :_blank, class: 'ViewObject'
 
