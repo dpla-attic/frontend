@@ -1,3 +1,7 @@
+21.5.5 (24 Jan 2017)
+---
+* Change rights display
+
 21.5.4 (17 Jan 2017)
 ---
 * Update copyright years
