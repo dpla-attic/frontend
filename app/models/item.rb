@@ -51,6 +51,12 @@ class Item
   # @return [Array<String>]
   # downcase first letter if rights statement is URI
   def rights
+    # This conditional is a temporary fix for NYPL rights.  It returns a general
+    # rights statement only in absence of a standarized rights statement.
+    # This should be removed one the NYPL mapping is fixed.
+    return if provider == "The New York Public Library" && 
+        standardized_rights_statement.present?
+
     Array.wrap(@sourceResource['rights'])
   end
 
