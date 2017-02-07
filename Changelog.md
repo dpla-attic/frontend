@@ -1,3 +1,7 @@
+21.5.6 (7 Feb 2017)
+---
+* Temporary fix for NYPL rights statements
+
 21.5.5 (24 Jan 2017)
 ---
 * Change rights display
