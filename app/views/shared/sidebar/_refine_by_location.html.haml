@@ -31,8 +31,8 @@
     - if country_facets.present? or place_facets.present?
       .more= link_to 'More »', '#more_locations', class: 'inline cboxElement'
 
-// Popup
 - content_for :colorbox do
+  / Popup
   #more_locations.inline_content
     %h1 Locations
     %ul.tabs
@@ -81,7 +81,7 @@
                       - if us_refined
                         %span{style: 'float:left;'} United States
                       - else
-                        = link_to 'United States', refine_path(:country, 'United States')
+                        %a{href: "./timeline?#{refine_path_qs(:country, 'United States')}"} United States
                       - if us_facet
                         %span= us_facet.last
                     - us_facet = us_refined = nil
@@ -91,7 +91,7 @@
                     - if name.present?
                       - next if name == 'United States'
                       %li
-                        = link_to name, refine_path(:country, name)
+                        %a{href: "./timeline?#{refine_path_qs(:country, name)}"}= name
                         %span= count
 
       #states
@@ -123,7 +123,7 @@
                     - name, count = facet.shift, facet.shift
                     - if name.present?
                       %li
-                        = link_to name, refine_path(:state, name)
+                        %a{href: "./timeline?#{refine_path_qs(:state, name)}"}= name
                         %span= count
 
     #places_num.viewport
@@ -149,7 +149,7 @@
                   - name, count = facet.shift, facet.shift
                   - if name.present?
                     %li
-                      = link_to name, refine_path(:place, name)
+                      %a{href: "./timeline?#{refine_path_qs(:place, name)}"}= name
                       %span= count
 
     #places_az.viewport
@@ -174,5 +174,5 @@
                   - name, count = facet.shift, facet.shift
                   - if name.present?
                     %li
-                      = link_to name, refine_path(:place, name)
+                      %a{href: "./timeline?#{refine_path_qs(:place, name)}"}= name
                       %span= count

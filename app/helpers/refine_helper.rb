@@ -1,9 +1,23 @@
 module RefineHelper
+
+  # Return a Hash of parameters for ActionView::Helpers::UrlHelper#link_to
+  # The parameters either merge the given parameter with the existing ones or
+  # remove the given parameter if `remove: true` is in the options hash.
   def refine_path(area, value, options = {})
     existing_refine = params[area] || []
     existing_refine = Array(existing_refine)
     refine_params = options.delete(:remove).present? ? existing_refine - [value] : existing_refine + [value]
     params.merge(options).deep_merge(area => refine_params.uniq, page: nil)
+  end
+
+  # Return a querystring string value for the parameters in refine_path.
+  # The controller, action, and page parameters are excluded.
+  # For creating self-referential links with HAML %a elements that are faster
+  # to construct than calls to ActionView::Helpers::UrlHelper#link_to.
+  def refine_path_qs(*args)
+    refine_path(*args)
+      .reject {|k,v| ['controller', 'action', 'page'].include?(k)}
+      .to_query
   end
 
   def refines_present?
