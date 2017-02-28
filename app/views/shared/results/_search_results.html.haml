@@ -18,7 +18,7 @@
         with dates
       - if provider_facets.present?
         from
-        = "#{ 'over' if provider_facets.count >= 2000 }"
+        = "#{ 'over' if provider_facets.count >= 300 }"
         = "#{ number_with_delimiter provider_facets.count, delimiter: ',' }"
         contributing
         - if provider_facets.count > 1
