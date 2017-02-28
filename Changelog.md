@@ -1,3 +1,7 @@
+21.6.7 (28 Feb 2017)
+---
+* Improve response times of various facets
+
 21.5.6 (7 Feb 2017)
 ---
 * Temporary fix for NYPL rights statements
