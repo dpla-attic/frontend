@@ -4,7 +4,20 @@
 /[if IE 8]    <html class="no-js lt-ie9 ie8">
 / [if gt IE 8] <!--> <html class="no-js"> <!--
 %head
-  = display_meta_tags :charset => "utf-8", :content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible", :description => "", :viewport => "width=device-width", :twitter => {:card => "summary", :site => "@dpla", :domain => "dp.la"}, :og => {:title => page_title, :image => "http://dp.la/apple-touch-icon-144x144-precomposed.png", :description => "The Digital Public Library of America brings together the riches of America’s libraries, archives, and museums, and makes them freely available to the world.", :type => "website", :url => "#{request.protocol}#{request.host_with_port}#{request.fullpath}"}
+  = display_meta_tags :charset => "utf-8",
+                      :content => "IE=edge,chrome=1",
+                      "http-equiv" => "X-UA-Compatible",
+                      :description => "",
+                      :viewport => "width=device-width",
+                      :referrer => "origin-when-cross-origin",
+                      :twitter => { :card => "summary",
+                                    :site => "@dpla",
+                                    :domain => "dp.la" },
+                      :og => {  :title => page_title,
+                                :image => "http://dp.la/apple-touch-icon-144x144-precomposed.png",
+                                :description => "The Digital Public Library of America brings together the riches of America’s libraries, archives, and museums, and makes them freely available to the world.",
+                                :type => "website",
+                                :url => "#{request.protocol}#{request.host_with_port}#{request.fullpath}" }
   %title= page_title
   = stylesheet_link_tag    "application", media: "all"
   = branding_stylesheets
