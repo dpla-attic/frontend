@@ -1,3 +1,7 @@
+21.6.8 (2 Mar 2017)
+---
+* Add meta referrer tag
+
 21.6.7 (28 Feb 2017)
 ---
 * Improve response times of various facets
