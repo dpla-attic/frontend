@@ -1,3 +1,7 @@
+21.6.10 (21 Mar 2017)
+---
+* Display creative commons statements
+
 21.6.9 (15 Mar 2017)
 ---
 * Remove Events from Get Involved menu
