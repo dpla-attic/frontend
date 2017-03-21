@@ -19,7 +19,7 @@
         = link_to @item.url, target: :_blank, class: 'ViewObject' do
           = item_thumbnail(@item, request)
         - @item.standardized_rights_statement.each do |srs|
-          - if RIGHTS_STATEMENTS[srs].present?
+          - if srs.include? 'rightsstatements.org'
             = link_to(image_tag(RIGHTS_STATEMENTS[srs]['image_path'], alt: RIGHTS_STATEMENTS[srs]['label']), srs)
         = view_object_link(@item)
       .table
@@ -55,10 +55,10 @@
         -if @item.standardized_rights_statement.present?
           =item_field :standardized_rights_statement do
             - @item.standardized_rights_statement.each do |srs|
-              - if RIGHTS_STATEMENTS[srs].present?
-                %div.rights_statement
+              %div.rights_statement
+                - if srs.include? 'rightsstatements.org'
                   = RIGHTS_STATEMENTS[srs]['definition']
-                  = link_to srs, srs
+                = link_to srs, srs
         = item_field :rights
         = item_field :url, title: 'URL' do
           = link_to @item.url, @item.url, target: :_blank, class: 'ViewObject'
