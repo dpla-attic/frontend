@@ -60,15 +60,17 @@ class Item
     Array.wrap(@sourceResource['rights'])
   end
 
-  #returns and array of statements
+  # returns an array of statements
+  # only returns statements in the RIGHTS_STATEMENTS dictionary
+  # @see rights_statements.yml and rails_config.rb
   def standardized_rights_statement
-    statement = [@edmRights]
+    statement = Array.wrap(@edmRights)
     if @hasView.is_a? Array
       @hasView.each { |view| statement.push( view['edmRights'] ) }
     else
       statement.push @hasView['edmRights']
     end
-    statement.compact
+    statement.compact.delete_if { |s| RIGHTS_STATEMENTS.keys.exclude? s }
   end
 
   # returns an array of displayDate values

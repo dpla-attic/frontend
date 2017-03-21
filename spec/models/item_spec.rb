@@ -86,4 +86,14 @@ describe Item do
       expect(item.rights).to match_array ['X', 'Y']
     end
   end
+
+  describe '#standardized_rights_statement' do
+    it 'returns only statements in RIGHTS_STATEMENTS dictionary' do
+      valid_statement = "https://creativecommons.org/publicdomain/zero/1.0/"
+      doc = { 'rights' => ['invalid statement', valid_statement] }
+      item = Item.new(doc)
+      expect(item.standardized_rights_statement)
+        .to match_array [valid_statement]
+    end
+  end
 end
