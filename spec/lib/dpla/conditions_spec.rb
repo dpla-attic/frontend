@@ -39,7 +39,9 @@ describe DPLA::Conditions do
       }
       result = @conditions.instance_eval{ transform_hash(conditions) }
       expect(result)
-        .to eq("exact_field_match=true&q=love&facets=sourceResource.type," +
+        .to eq("provider.name=Digital%20Commonwealth&" +
+               "object=*ark.digitalcommonwealth.org*&" +
+               "q=love&facets=sourceResource.type," +
                "admin.contributingInstitution&page_size=150")
     end
 
@@ -52,14 +54,18 @@ describe DPLA::Conditions do
       }
       result = @conditions.instance_eval{ transform_hash(conditions) }
       expect(result)
-        .to eq("exact_field_match=true&q=meh&provider=X&" +
+        .to eq("provider.name=Digital%20Commonwealth&" +
+               "object=*ark.digitalcommonwealth.org*&" +
+               "q=meh&provider=X&" +
                "facets=sourceResource.type&page_size=150")
     end
 
     it "uri encodes a string" do
       conditions = {:q => "red wagon"}
       result = @conditions.instance_eval{ transform_hash(conditions) }
-      expect(result).to eq ("exact_field_match=true&q=red%20wagon")
+      expect(result).to eq ("provider.name=Digital%20Commonwealth&" +
+                            "object=*ark.digitalcommonwealth.org*&" +
+                            "q=red%20wagon")
     end
 
   end

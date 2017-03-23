@@ -9,7 +9,7 @@ describe Search do
   	  result = @model.conditions
   	  expect(result[:q]).to eq("finch")
   	  expect(result[:facets]).to match_array(["subject", "language", "type", "provider", 
-  	  	"partner", "country", "state", "place"])
+  	  	"country", "state", "place"])
   	end
 
   	it "returns correct conditions with filter param" do

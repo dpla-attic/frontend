@@ -32,6 +32,8 @@ module DPLA
     end
 
     # Convert conditions aliases
+    # For demo purposes, no partner condition as we are only pulling from
+    # Digital Commonwealth.
     def convert_conditions(conditions)
       {}.tap do |result|
         conditions.each do |key, value|
@@ -41,7 +43,6 @@ module DPLA
           when 'type'     then result['sourceResource.type'] = value
           when 'spec_type' then result['sourceResource.specType'] = value
           when 'provider' then result['admin.contributingInstitution'] = value
-          when 'partner'  then result['provider.name'] = value
           when 'country'  then result['sourceResource.spatial.country'] = value
           when 'state'    then result['sourceResource.spatial.state'] = value
           when 'place'    then result['sourceResource.spatial.name'] = value
@@ -78,7 +79,11 @@ module DPLA
 
 
     def transform_hash(conditions)
-      ["exact_field_match=true"].tap do |query|
+      # For demo purposes, limit provider to Digital Commonwealth and object to
+      # IIIF images served rom ark.digitalcommonwealth.org
+      dc_params = ["provider.name=Digital%20Commonwealth",
+                   "object=*ark.digitalcommonwealth.org*" ]
+      dc_params.tap do |query|
         conditions.each do |key, value|
           next unless value.present?
           comma_separated = [:facets, :fields].include?(key.to_sym)

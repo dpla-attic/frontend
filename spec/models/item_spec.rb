@@ -48,6 +48,47 @@ describe Item do
     end
   end
 
+  describe "#mainfest" do
+    before(:each) do
+      allow(item).to receive(:manifest).and_call_original
+    end
+
+    shared_examples 'an item with an object' do
+      let(:item) { Item.new({"object" => value}) }
+
+      it 'returns the expected mainfest URI' do
+        expect(item.manifest).to eq(ret)
+      end
+    end
+
+    context 'with a valid HTTP edm:object' do
+      let(:value) { 'http://example.com/thumbnail' }
+      let(:ret) { 'http://example.com/manifest' }
+      it_behaves_like 'an item with an object'
+    end
+
+    context 'with a invalid URI value for edm:object' do
+      let(:value) { '_:b3f3f2f0' }
+      let(:ret) { nil }
+      it_behaves_like 'an item with an object'
+    end
+
+    context 'without an object' do
+      let(:item) { Item.new({"isShownAt" => "http://bar.com/foo"}) }
+
+      it 'returns nil when there is no object' do
+        expect(item.manifest).to be_nil
+      end
+    end
+
+    context 'with multiple objects' do
+      let(:value) { ['http://bar.com/thumbnail', 'http://bat.com/thumbnail'] }
+      let(:ret) { 'http://bar.com/manifest' }
+
+      it_behaves_like 'an item with an object'
+    end
+  end
+
   describe '#language' do
     it 'returns language' do
       doc = { 'sourceResource' => { 'language' => [{ 'name' => 'x' }] } }

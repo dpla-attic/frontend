@@ -149,6 +149,18 @@ class Item
     nil
   end
 
+  ##
+  # Extrapolate IIIF manifest from thumbnail URL.
+  # Assumes all thumbnail URLs end in '/thumbnail'.
+  # Assumes all IIIF mainfests are identical to thumbnail URLs except they end
+  # in '/manifest' instead of '/thumbnail'.
+  def manifest
+    if preview_image.present?
+      return preview_image.gsub(/thumbnail$/, 'manifest')
+    end
+    nil
+  end
+
   def data_provider
     @dataProvider
   end
