@@ -70,7 +70,7 @@ class Item
     else
       statement.push @hasView['edmRights']
     end
-    statement.compact.delete_if { |s| RIGHTS_STATEMENTS.keys.exclude? s }
+    statement.compact
   end
 
   # returns an array of displayDate values
