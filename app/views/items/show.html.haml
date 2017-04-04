@@ -8,6 +8,17 @@
   %h1= @item.title || @item.id
   - if @item.titles.present?
     %h4= @item.titles.join(', ')
+
+  -# Assumes that the universal viewer app has a config file at /config.json
+  .uv{ data: { 'locale' => "en-GB:English (GB),cy-GB:Cymraeg",
+               'config' => "/config.json",
+               'uri' => @item.manifest } }
+
+  -# TODO: change src to DPLA implementation of universal viewer.
+  %script{ type: "text/javascript",
+           id: "embedUV", 
+           src: "http://universalviewer.io/uv/lib/embed.js" }
+
   -# data-* attributes are used in Google Analytics event tracking
   %article#content{ role: "main",
                     data: { 'item-id' => @item.id,
@@ -15,13 +26,6 @@
                             'data-provider' => @item.data_provider,
                             'title' => @item.title } }
     .FeatureContent
-      .contentBox
-        = link_to @item.url, target: :_blank, class: 'ViewObject' do
-          = item_thumbnail(@item, request)
-        - @item.standardized_rights_statement.each do |srs|
-          - if rs_statement?(srs)
-            = link_to(image_tag(RIGHTS_STATEMENTS[srs]['image_path'], alt: RIGHTS_STATEMENTS[srs]['label']), srs)
-        = view_object_link(@item)
       .table
         = item_field :creator
         = item_field :created_date

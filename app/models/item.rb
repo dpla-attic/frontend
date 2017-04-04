@@ -156,7 +156,8 @@ class Item
   # in '/manifest' instead of '/thumbnail'.
   def manifest
     if preview_image.present?
-      return preview_image.gsub(/thumbnail$/, 'manifest')
+      id = preview_image.match(/([^\/]*)\/thumbnail\/?$/)[1]
+      return "https://www.digitalcommonwealth.org/search/commonwealth:#{id}/manifest"
     end
     nil
   end

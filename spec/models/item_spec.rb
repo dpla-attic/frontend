@@ -54,7 +54,7 @@ describe Item do
     end
 
     shared_examples 'an item with an object' do
-      let(:item) { Item.new({"object" => value}) }
+      let(:item) { Item.new({ "object" => value }) }
 
       it 'returns the expected mainfest URI' do
         expect(item.manifest).to eq(ret)
@@ -62,8 +62,12 @@ describe Item do
     end
 
     context 'with a valid HTTP edm:object' do
-      let(:value) { 'http://example.com/thumbnail' }
-      let(:ret) { 'http://example.com/manifest' }
+      let(:value) { 'http://example.com/1234/thumbnail' }
+
+      let(:ret) do
+        'https://www.digitalcommonwealth.org/search/commonwealth:1234/manifest'
+      end
+
       it_behaves_like 'an item with an object'
     end
 
@@ -74,7 +78,7 @@ describe Item do
     end
 
     context 'without an object' do
-      let(:item) { Item.new({"isShownAt" => "http://bar.com/foo"}) }
+      let(:item) { Item.new({ "isShownAt" => "http://bar.com/foo" }) }
 
       it 'returns nil when there is no object' do
         expect(item.manifest).to be_nil
@@ -82,8 +86,11 @@ describe Item do
     end
 
     context 'with multiple objects' do
-      let(:value) { ['http://bar.com/thumbnail', 'http://bat.com/thumbnail'] }
-      let(:ret) { 'http://bar.com/manifest' }
+      let(:value) { ['http://bar.com/1234/thumbnail', 'http://bat.com/1234/thumbnail'] }
+
+      let(:ret) do
+        'https://www.digitalcommonwealth.org/search/commonwealth:1234/manifest'
+      end
 
       it_behaves_like 'an item with an object'
     end
