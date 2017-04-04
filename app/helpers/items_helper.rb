@@ -94,4 +94,29 @@ module ItemsHelper
     end
     ogp
   end
+
+  ##
+  # Return all permitted standardized rights statements.
+  # @return Array
+  def permitted_srs(item)
+    item.standardized_rights_statement.delete_if do |srs|
+      !(rs_statement?(srs) || cc_statement?(srs))
+    end
+  end
+
+  ##
+  # Return true if given rights statement is included in the
+  # rightsstatement.org URIs listed in `rightsstatements.yml`.
+  def rs_statement?(rights_statement)
+    return true if RIGHTS_STATEMENTS.keys.include? rights_statement
+    false
+  end
+
+  ##
+  # Return true if given rights statement includes substring
+  # "creativecommons.org".
+  def cc_statement?(rights_statement)
+    return true if rights_statement.include? "creativecommons.org"
+    false
+  end
 end
