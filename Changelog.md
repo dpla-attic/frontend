@@ -1,3 +1,7 @@
+21.6.11 (4 Apr 2017)
+---
+* Fix display of creative commons statements
+
 21.6.10 (21 Mar 2017)
 ---
 * Display creative commons statements
