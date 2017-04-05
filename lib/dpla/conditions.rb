@@ -82,7 +82,8 @@ module DPLA
       # For demo purposes, limit provider to Digital Commonwealth and object to
       # IIIF images served rom ark.digitalcommonwealth.org
       dc_params = ["provider.name=Digital%20Commonwealth",
-                   "object=*ark.digitalcommonwealth.org*" ]
+                   "object=*ark.digitalcommonwealth.org*",
+                   "sourceResource.type=image+OR+text"]
       dc_params.tap do |query|
         conditions.each do |key, value|
           next unless value.present?

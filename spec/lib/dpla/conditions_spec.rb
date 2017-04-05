@@ -41,8 +41,10 @@ describe DPLA::Conditions do
       expect(result)
         .to eq("provider.name=Digital%20Commonwealth&" +
                "object=*ark.digitalcommonwealth.org*&" +
-               "q=love&facets=sourceResource.type," +
-               "admin.contributingInstitution&page_size=150")
+               "sourceResource.type=image+OR+text&" +
+               "q=love&" +
+               "facets=sourceResource.type,admin.contributingInstitution&" +
+               "page_size=150")
     end
 
     it "converts a hash with field values into a string" do
@@ -56,6 +58,7 @@ describe DPLA::Conditions do
       expect(result)
         .to eq("provider.name=Digital%20Commonwealth&" +
                "object=*ark.digitalcommonwealth.org*&" +
+               "sourceResource.type=image+OR+text&" +
                "q=meh&provider=X&" +
                "facets=sourceResource.type&page_size=150")
     end
@@ -65,6 +68,7 @@ describe DPLA::Conditions do
       result = @conditions.instance_eval{ transform_hash(conditions) }
       expect(result).to eq ("provider.name=Digital%20Commonwealth&" +
                             "object=*ark.digitalcommonwealth.org*&" +
+                            "sourceResource.type=image+OR+text&" +
                             "q=red%20wagon")
     end
 
