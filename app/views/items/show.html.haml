@@ -10,14 +10,14 @@
     %h4= @item.titles.join(', ')
 
   -# Assumes that the universal viewer app has a config file at /config.json
-  .uv{ data: { 'locale' => "en-GB:English (GB),cy-GB:Cymraeg",
-               'config' => "/config.json",
+  .uv{ data: { 'locale' => "en-GB:English (GB)",
+               'config' => "/uv-config.json",
                'uri' => @item.manifest } }
 
   -# TODO: change src to DPLA implementation of universal viewer.
   %script{ type: "text/javascript",
            id: "embedUV", 
-           src: "https://universalviewer.io/vendor/uv/lib/embed.js" }
+           src: "/uv/lib/embed.js" }
 
   -# data-* attributes are used in Google Analytics event tracking
   %article#content{ role: "main",
