@@ -15,7 +15,7 @@
   "pagingOptionEnabled": true,
   "pessimisticAccessControl": false,
   "preserveViewport": false,
-  "rightPanelEnabled": true,
+  "rightPanelEnabled": false,
   "saveUserSettings": false,
   "clickToZoomEnabled": true,
   "searchWithinEnabled": true,
