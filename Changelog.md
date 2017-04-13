@@ -1,3 +1,8 @@
+21.6.12 (13 Apr 2017)
+---
+* Turn off asset debugging in development
+* Reduce facet sizes again
+
 21.6.11 (4 Apr 2017)
 ---
 * Fix display of creative commons statements
