@@ -78,13 +78,6 @@
           = text_field_tag :searchField, params[:q], placeholder: 'Search the Library', name: "q"
           = submit_tag 'Search', class: 'searchBtn', name: nil
     %section.right
-      .row.yellow
-        %a{:href => exhibitions_path}
-          .box
-            %h2 Exhibitions
-            %h6 View all »
-          .image
-            = image_tag "home-exhibitions.jpg"
       .row.blue
         %a{:href => map_path}
           .box
