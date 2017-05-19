@@ -1,3 +1,7 @@
+21.6.13 (19 May 2017)
+---
+* Change images in homepage slideshow
+
 21.6.12 (13 Apr 2017)
 ---
 * Turn off asset debugging in development
