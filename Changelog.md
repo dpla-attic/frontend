@@ -1,3 +1,8 @@
+21.6.14 (31 May 2017)
+---
+* Add family research link to main menu
+* Change item ID in homepage slideshow
+
 21.6.13 (19 May 2017)
 ---
 * Change images in homepage slideshow
