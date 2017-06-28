@@ -37,37 +37,36 @@ other operating systems.
 
 2. Download sources
 
-    ```git clone https://github.com/dpla/frontend.git dpla-frontend
-cd dpla-frontend```
+    `git clone https://github.com/dpla/frontend.git dpla-frontend
+cd dpla-frontend`
 
 3. Install Ruby & related dependencies
 
-    ```sudo apt-get install ruby ruby-dev build-essential
-sudo apt-get install imagemagick libmagickwand-dev```
+    `sudo apt-get install ruby ruby-dev build-essential
+sudo apt-get install imagemagick libmagickwand-dev`
 
 4. Install necessary Ruby Gems
 
     `bundle install --deployment`
 
 5. Install PostgreSQL
-
+    
     `sudo apt-get postgresql-common, postgresql, pgadmin3`
 
 6. Configure PostgreSQL & create development database
 
-    ```sudo -u postgres psql postgres
-psql (9.1.10)
-Type "help" for help.
-postgres=# pwd
-postgres-# \password postgres```
+    `sudo -u postgres psql postgres psql (9.1.10)`
+    `Type "help" for help.`
+    `postgres=# pwd`
+    `postgres-# \password postgres`
 
-ie enter the command `\password postgres` at the `postgres-#` prompt
+i.e. enter the command `\password postgres` at the `postgres-#` prompt
 
 After entering the new password twice, press ctrl/D to exit.
 
 Now create the development database:
 
-    sudo -u postgres createdb dpla_development
+`sudo -u postgres createdb dpla_development`
 
 Finally, copy `config/database.yml.example` to `config/database.yml` and edit
 it to provide your username, password, and database for the `development`
