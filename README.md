@@ -107,3 +107,8 @@ License
 This application is released under an AGPLv3 license.
 
 * Copyright Digital Public Library of America, 2015 -- 2017
+
+
+[<img src="browserstack-logo-600x315.png" width="300" alt="" />](http://browserstack.com/)
+
+We use BrowserStack to test this code in as many different devices and platforms as we can.
