@@ -27,6 +27,9 @@
   = analytics_init if GoogleAnalytics.valid_tracker?
 -# body class names make each page identifiable by controller and action
 %body{class: "#{controller_name}-controller #{action_name}-action"}
+  %div{style: "padding: 1rem; text-align: center; background-color: rgb(249, 186, 63);font-size: 1.25rem;font-weight: bold;"}
+    We are building a new website.
+    %a{href: "//beta.dp.la", style: "color: rgb(153, 0, 0); text-decoration: underline;"} Check it out!
   %ul.jump-links
     %li
       %a{:href => "#top-nav", "accesskey" => "1"} Go to top navigation
