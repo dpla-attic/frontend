@@ -1,3 +1,8 @@
+21.7.0 (25 Jan 2017)
+---
+* Add new website banner
+* Add browserstack to README
+
 21.6.14 (31 May 2017)
 ---
 * Add family research link to main menu
